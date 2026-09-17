@@ -1,36 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek - 50K Family ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+<title>Malek 50k Attendance</title>
 <style>
-body{margin:0;font-family:'Poppins',sans-serif;background:#0a0a0a;color:white;text-align:center;overflow-x:hidden}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:radial-gradient(circle at center,#1f1f1f,#000);padding:20px}
-h1{font-size:3.5rem;margin:0;background:linear-gradient(90deg,#ffcc00,#ff006a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.count{font-size:6rem;font-weight:800;margin:20px 0}
-.btn{padding:15px 35px;background:#ff006a;border:none;border-radius:30px;color:white;font-size:1.2rem;font-weight:600;cursor:pointer;box-shadow:0 0 20px #ff006a}
-.card{margin:20px;background:#141414;padding:20px;border-radius:15px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#eef4ff;padding:12px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.date{font-weight:bold;font-size:18px}
+.stats{display:flex;gap:8px;justify-content:center;margin:12px 0}
+.stat{background:white;padding:8px 16px;border-radius:20px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+.search{width:100%;padding:14px;border-radius:12px;border:1px solid #ccc;font-size:16px;margin-bottom:16px}
+.card{background:white;padding:16px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;margin-bottom:12px}
+input{width:100%;padding:14px;margin:6px 0;border-radius:12px;border:1px solid #ccc;font-size:16px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:18px;font-weight:bold;color:white;cursor:pointer;margin-top:10px}
+.btn-add{background:#0a2a6b}
+.btn-row{display:flex;gap:10px;margin-top:12px}
+.btn-present{background:#1ea75d;flex:1}
+.btn-absent{background:#e11d2f;flex:1}
+.btn-excel{background:#0ea5e9;margin-top:12px}
+.list{margin-top:16px}
+.item{background:white;display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:12px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.item button{padding:6px 12px;border:none;border-radius:8px;color:white;font-weight:bold}
+.p-btn{background:#1ea75d} .a-btn{background:#e11d2f}
 </style>
 </head>
 <body>
-<div class="hero">
-<h1>Thank You For 50K!</h1>
-<div class="count">50,000 ❤️</div>
-<p>Malek Family - This is just the beginning!</p>
-<button class="btn" onclick="celebrate()">Celebrate 🎉</button>
+<div class="top"><div class="date" id="date"></div></div>
+<div class="stats">
+<div class="stat">মোট:<span id="total">0</span></div>
+<div class="stat" style="color:green">P:<span id="present">0</span></div>
+<div class="stat" style="color:red">A:<span id="absent">0</span></div>
+</div>
+<input class="search" id="search" placeholder="Search নাম / রোল..." oninput="render()">
 <div class="card">
-<h2>Malek 50K Special</h2>
-<p>আপনাদের ভালোবাসায় আজ আমরা 50K পরিবার! সবাইকে অনেক অনেক ভালোবাসা!</p>
+<h2>নতুন শিক্ষার্থী যোগ করুন</h2>
+<input id="name" placeholder="নাম">
+<input id="roll" placeholder="রোল">
+<input id="mobile" placeholder="অভিভাবকের মোবাইল 01...">
+<button class="btn btn-add" onclick="addStudent()">+ যোগ করো</button>
+<div class="btn-row">
+<button class="btn btn-present" onclick="sendSMS('present')">✉️ উপস্থিত SMS</button>
+<button class="btn btn-absent" onclick="sendSMS('absent')">✉️ অনুপস্থিত SMS</button>
 </div>
+<button class="btn btn-excel" onclick="downloadExcel()">Excel Download</button>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<div class="list" id="list"></div>
 <script>
-function celebrate(){
- confetti({particleCount:200,spread:90,origin:{y:0.6}});
+let students=JSON.parse(localStorage.getItem('malek50k')||'[]');
+function save(){localStorage.setItem('malek50k',JSON.stringify(students)); updateCounts();}
+function addStudent(){
+let n=name.value.trim(), r=roll.value.trim(), m=mobile.value.trim();
+if(!n||!r){alert('নাম ও রোল দিন');return}
+students.push({id:Date.now(),name:n,roll:r,mobile:m,status:''});
+name.value=roll.value=mobile.value=''; save(); render();
 }
-setTimeout(()=>celebrate(),800);
+function updateCounts(){
+total.textContent=students.length;
+present.textContent=students.filter(s=>s.status==='P').length;
+absent.textContent=students.filter(s=>s.status==='A').length;
+let d=new Date(); date.textContent=d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+function render(){
+let q=search.value.toLowerCase(); let html='';
+students.filter(s=>s.name.toLowerCase().includes(q)||s.roll.includes(q)).forEach(s=>{
+html+=`<div class="item"><div><b>${s.name}</b> (${s.roll})<br><small>${s.mobile}</small></div><div><button class="${s.status==='P'?'p-btn':'p-btn'}" style="opacity:${s.status==='P'?'1':'0.4'}" onclick="mark(${s.id},'P')">P</button> <button class="${s.status==='A'?'a-btn':'a-btn'}" style="opacity:${s.status==='A'?'1':'0.4'}" onclick="mark(${s.id},'A')">A</button> <button onclick="del(${s.id})" style="background:#ccc;color:black">✕</button></div></div>`;
+});
+list.innerHTML=html; updateCounts();
+}
+function mark(id,st){let s=students.find(x=>x.id===id); s.status=st; save(); render();}
+function del(id){if(confirm('ডিলিট করবেন?')){students=students.filter(x=>x.id!==id); save(); render();}}
+function sendSMS(type){
+let list=students.filter(s=>type==='present'?s.status==='P':s.status==='A');
+if(!list.length){alert('কোন শিক্ষার্থী নেই');return}
+let msg=type==='present'?'আপনার সন্তান আজ উপস্থিত।':'আপনার সন্তান আজ অনুপস্থিত।';
+let numbers=list.map(s=>s.mobile).filter(Boolean).join(',');
+if(numbers) window.location.href=`sms:${numbers}?body=${encodeURIComponent(msg)}`;
+else alert(msg+'\n'+list.map(s=>s.name).join(', '));
+}
+function downloadExcel(){
+let csv='Name,Roll,Mobile,Status\n'+students.map(s=>`${s.name},${s.roll},${s.mobile},${s.status}`).join('\n');
+let a=document.createElement('a'); a.href='data:text/csv,'+encodeURIComponent(csv); a.download='attendance.csv'; a.click();
+}
+render();
 </script>
 </body>
 </html>
