@@ -2,83 +2,152 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Malek 50K Attendance</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MALEK 50K ATTENDANCE</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif}
-body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px}
-.logo-wrap{width:370px;max-width:92%;border-radius:26px;border:4px solid #ffd700;box-shadow:0 0 30px rgba(255,215,0,.6);overflow:hidden;margin-top:10px;background:#0a2342}
-.logo-wrap img{width:100%;display:block}
-.card{background:#fff;width:100%;max-width:390px;border-radius:26px;padding:28px 20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.4)}
-.card h2{text-align:center;font-size:30px;color:#111}
-.sub{text-align:center;color:#6b7280;font-size:14px;font-weight:700;letter-spacing:1.5px;margin:6px 0 18px}
-select,input,textarea{width:100%;padding:16px 18px;border-radius:18px;border:1.5px solid #d1d5db;font-size:17px;margin:8px 0;outline:none;background:white}
-.btn-login{width:100%;padding:16px;border-radius:18px;border:none;background:#0f2d5a;color:white;font-size:17px;font-weight:700;margin-top:10px;cursor:pointer}
-#main{display:none;background:#eef2ff;min-height:100vh;width:100%;position:fixed;top:0;left:0;z-index:9999;padding:12px;overflow:auto}
-.college-head{background:white;border-radius:16px;padding:14px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.1);border:2px solid #ffd700;margin-bottom:12px}
-.college-head h2{color:#0a2342;font-size:20px}.college-head p{color:#666;font-size:13px;margin-top:4px}
-.b{width:100%;padding:13px;border-radius:12px;border:none;margin:5px 0;font-weight:bold;cursor:pointer}
-.b-dark{background:#0a2342;color:white}.b-purple{background:#7c5cff;color:white}
-.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.row button{flex:1;min-width:90px;padding:12px;border-radius:10px;border:none;color:white;font-weight:bold}
-.bp{background:#16a34a}.ba{background:#ef4444}.bl{background:#f59e0b}.b-blue{background:#0ea5e9;color:white}.b-black{background:#222;color:white}
-table{width:100%;background:white;border-radius:12px;margin-top:12px;border-collapse:collapse}
-th,td{padding:9px;text-align:center;border-bottom:1px solid #eee;font-size:13px}
-.circle{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;margin:2px;border:none;cursor:pointer}
-.p{background:#16a34a;color:white;border:2px solid #000}.a{background:#ef4444;color:white;border:2px solid #000}.l{background:#f59e0b;color:white;border:2px solid #000}.inactive{background:#e5e7eb;color:#555}
-.edit{width:40px;height:32px;border:none;border-radius:7px;margin:2px}.e-edit{background:#fde047}.e-del{background:#fecaca}
-.broadcast{background:white;border-radius:14px;padding:12px;margin-top:14px;border:2px dashed #7c5cff}
+*{font-family:'Hind Siliguri',sans-serif;box-sizing:border-box}
+body{margin:0;background:#f1f5f9}
+.top{padding:15px;text-align:center;background:#fff;border-bottom:3px solid #ffcc00}
+.top h1{margin:0;font-size:28px}.top h1 span{color:#ffcc00}
+.card{background:#fff;margin:12px;border-radius:12px;padding:12px;box-shadow:0 2px 8px #0001}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.b{padding:10px 14px;border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer}
+.b-blue{background:#2563eb}.b-green{background:#16a34a}.b-red{background:#dc2626}.b-yellow{background:#eab308;color:#000}.b-black{background:#111827}.b-purple{background:#7c3aed}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px}
+.count div{background:#fff;padding:12px;border-radius:10px;text-align:center;box-shadow:0 2px 5px #0001}
+.count b{font-size:22px;display:block}
+table{width:100%;border-collapse:collapse} th,td{border:1px solid #e5e7eb;padding:8px;text-align:center} th{background:#111827;color:#fff}
+.st-P{background:#dcfce7;color:#166534;font-weight:700}.st-A{background:#fee2e2;color:#991b1b;font-weight:700}.st-L{background:#fef9c3;color:#854d0e;font-weight:700}
+input,select{padding:10px;border:1px solid #d1d5db;border-radius:8px;width:100%}
+#loginPage{height:100vh;display:flex;align-items:center;justify-content:center;background:#f1f5f9}
+.loginBox{background:#fff;padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center}
 </style>
 </head>
 <body>
 
-<!-- উপরে আপনার ছবি লোগো -->
-<div class="logo-wrap" id="topLogo"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" alt="Malek Logo"></div>
-
-<div id="loginBox" class="card">
-<h2>🔐 শিক্ষক লগইন</h2>
-<div class="sub">MALEK ATTENDANCE</div>
-<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>৯ম শ্রেণি</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
-<input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
-<button class="btn-login" onclick="doLogin()">✅ লগইন - MALEK ATTENDANCE</button>
-</div>
-
-<div id="main">
-<!-- ভিতরে কলেজের নাম - যেটা বলছিলেন মামা -->
-<div class="college-head">
+<div id="loginPage">
+<div class="loginBox">
 <h2>🏛️ মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</h2>
-<p>📋 <span id="showClass"></span> - হাজিরা প্যানেল | Engineered by Mohammad Abdul Malek</p>
+<p>১০ম শ্রেণি - হাজিরা প্যানেল</p>
+<select id="loginClass"><option>৬ষ্ঠ</option><option>৭ম</option><option>৮ম</option><option>৯ম</option><option selected>১০ম</option></select><br><br>
+<input id="loginPass" type="password" placeholder="পাসওয়ার্ড দিন (1234)"><br><br>
+<button class="b b-blue" style="width:100%" onclick="doLogin()">প্রবেশ করুন</button>
+<p style="font-size:12px;color:gray">Engineered by Mohammad Abdul Malek</p>
+</div>
 </div>
 
-<input id="sname" style="width:100%;padding:12px;margin:5px 0;border-radius:10px;border:1px solid #ccc" placeholder="ছাত্রের নাম">
-<input id="sroll" style="width:100%;padding:12px;margin:5px 0;border-radius:10px;border:1px solid #ccc" placeholder="রোল">
-<input id="smobile" style="width:100%;padding:12px;margin:5px 0;border-radius:10px;border:1px solid #ccc" placeholder="মোবাইল 01...">
-<button class="b b-dark" onclick="addOne()">+ একজন যোগ</button>
-<button class="b b-purple" onclick="bulk()">📋 আনলিমিটেড বাল্ক যোগ (২০০ জন)</button>
-<div class="row"><button class="bp" onclick="smsAll('P')">✉️ P SMS</button><button class="ba" onclick="smsAll('A')">✉️ A SMS</button><button class="bl" onclick="smsAll('L')">✉️ L SMS</button></div>
-<div class="row"><button class="b-blue" onclick="downloadExcel()">📊 Excel Download</button><button class="b-black" onclick="window.print()">🖨️ প্রিন্ট</button></div>
-
-<div class="broadcast">
-<h4 style="text-align:center;color:#7c5cff">📢 সবাইকে মেসেজ / নোটিশ পাঠান</h4>
-<textarea id="broadMsg" rows="2" placeholder="নোটিশ লিখুন..."></textarea>
-<button class="b" style="background:#16a34a;color:white" onclick="sendBroadcast()">📤 সবাইকে পাঠান</button>
+<div id="mainPage" style="display:none">
+<div class="top">
+<h1>MALEK <span>50K ATTENDANCE</span></h1>
+<div style="font-weight:700">🏛️ মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ | <span id="showClass"></span> | 📅 <input type="date" id="attDate" style="width:160px;display:inline-block" onchange="render()"></div>
 </div>
 
-<table><thead><tr><th>শ্রেণি</th><th>রোল</th><th>নাম</th><th>P/A/L</th><th>Edit</th></tr></thead><tbody id="list"></tbody></table>
-<button class="b b-dark" style="margin-top:14px;background:#555" onclick="location.reload()">🔙 লগআউট</button>
+<div class="count">
+<div><small>মোট ছাত্র</small><b id="cTotal">0</b></div>
+<div><small>✅ উপস্থিত</small><b id="cP" style="color:#16a34a">0</b></div>
+<div><small>❌ অনুপস্থিত</small><b id="cA" style="color:#dc2626">0</b></div>
+<div><small>⚠️ পলাতক</small><b id="cL" style="color:#eab308">0</b></div>
+</div>
+
+<div class="card row">
+<button class="b b-blue" onclick="addOne()">+ একজন</button>
+<button class="b b-black" onclick="addBulk()">বাল্ক যোগ</button>
+<input id="searchBox" placeholder="🔍 নাম/রোল দিয়ে খুঁজুন" style="max-width:200px" oninput="render()">
+<button class="b b-green" onclick="sendSMS('P')">P SMS</button>
+<button class="b b-red" onclick="sendSMS('A')">A SMS</button>
+<button class="b b-yellow" onclick="sendSMS('L')">L SMS</button>
+<button class="b b-black" onclick="exportExcel()">Excel</button>
+<button class="b b-purple" onclick="monthlyReport()">📅 মাসিক রিপোর্ট</button>
+<button class="b b-black" onclick="window.print()">🖨️ প্রিন্ট</button>
+</div>
+
+<div class="card">
+<table>
+<thead><tr><th>রোল</th><th>নাম</th><th>মোবাইল</th><th>হাজিরা</th><th>অ্যাকশন</th></tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
 </div>
 
 <script>
-let students=JSON.parse(localStorage.getItem('malek50k_final')||'[]');
-function doLogin(){let c=loginClass.value,p=loginPass.value;if(!c){alert('শ্রেণি সিলেক্ট করুন');return}if(p!=='1234'){alert('পাসওয়ার্ড 1234');return}showClass.innerText=c;loginBox.style.display='none';topLogo.style.display='none';main.style.display='block';render();}
-function save(){localStorage.setItem('malek50k_final',JSON.stringify(students));render();}
-function addOne(){let cls=loginClass.value,n=sname.value.trim(),r=sroll.value.trim(),m=smobile.value.trim();if(!n||!r){alert('নাম ও রোল দিন');return}students.push({class:cls,roll:r,name:n,mobile:m,status:'P'});sname.value='';sroll.value='';smobile.value='';save();}
-function render(){let tb=list;tb.innerHTML='';let cls=loginClass.value;students.filter(s=>s.class==cls).forEach(s=>{let i=students.indexOf(s);tb.innerHTML+=`<tr><td>${s.class}</td><td>${s.roll}</td><td><b>${s.name}</b><br><small>${s.mobile}</small></td><td><button class="circle ${s.status=='P'?'p':'inactive'}" onclick="students[${i}].status='P';save()">P</button><button class="circle ${s.status=='A'?'a':'inactive'}" onclick="students[${i}].status='A';save()">A</button><button class="circle ${s.status=='L'?'l':'inactive'}" onclick="students[${i}].status='L';save()">L</button></td><td><button class="edit e-edit" onclick="editS(${i})">✏️</button><button class="edit e-del" onclick="if(confirm('ডিলিট?')){students.splice(${i},1);save()}">🗑️</button></td></tr>`});}
-function editS(i){let n=prompt('নাম:',students[i].name);if(n)students[i].name=n;let r=prompt('রোল:',students[i].roll);if(r)students[i].roll=r;let m=prompt('মোবাইল:',students[i].mobile);if(m!==null)students[i].mobile=m;save();}
-function bulk(){let d=prompt('প্রতি লাইনে: রোল,নাম,মোবাইল');if(!d)return;d.split('\n').forEach(l=>{let a=l.split(',');if(a[0]&&a[1])students.push({class:loginClass.value,roll:a[0].trim(),name:a[1].trim(),mobile:(a[2]||'').trim(),status:'P'})});save();}
-function smsAll(t){let cls=loginClass.value;let lis=students.filter(s=>s.class==cls&&s.status==t);if(!lis.length){alert(t+' কেউ নেই');return}let msg=prompt(t+' এর জন্য মেসেজ:');if(!msg)return;alert(lis.length+' জনকে SMS: '+msg);}
-function downloadExcel(){let cls=loginClass.value;let lis=students.filter(s=>s.class==cls);let csv='Class,Roll,Name,Mobile,Status\n'+lis.map(s=>`${s.class},${s.roll},${s.name},${s.mobile},${s.status}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=cls+'_attendance.csv';a.click();}
-function sendBroadcast(){let m=broadMsg.value.trim();if(!m){alert('মেসেজ লিখুন');return}let cls=loginClass.value;let lis=students.filter(s=>s.class==cls);alert(lis.length+' জনকে পাঠানো হলো:\n'+m);broadMsg.value='';}
+let students=JSON.parse(localStorage.getItem('malek_students')||'[]');
+let attendance=JSON.parse(localStorage.getItem('malek_attendance')||'{}');
+
+document.getElementById('attDate').valueAsDate=new Date();
+
+function doLogin(){
+if(document.getElementById('loginPass').value!='1234'){alert('পাসওয়ার্ড ভুল! 1234 দিন');return}
+document.getElementById('loginPage').style.display='none';
+document.getElementById('mainPage').style.display='block';
+document.getElementById('showClass').innerText=document.getElementById('loginClass').value+' শ্রেণি';
+render();
+}
+function save(){localStorage.setItem('malek_students',JSON.stringify(students));localStorage.setItem('malek_attendance',JSON.stringify(attendance));render();}
+function getDate(){return document.getElementById('attDate').value}
+function addOne(){
+let roll=prompt('রোল:'), name=prompt('নাম:'), mobile=prompt('মোবাইল:');
+if(!roll||!name)return;
+students.push({roll,name,mobile,class:document.getElementById('loginClass').value});
+save();
+}
+function addBulk(){
+let txt=prompt('এভাবে লিখুন:\n1,রহিম,017...\n2,করিম,018...');
+if(!txt)return;
+txt.split('\n').forEach(l=>{
+let [roll,name,mobile]=l.split(',');
+if(roll&&name)students.push({roll:roll.trim(),name:name.trim(),mobile:(mobile||'').trim(),class:document.getElementById('loginClass').value});
+});save();
+}
+function mark(roll,status){
+let d=getDate();
+if(!attendance[d])attendance[d]={};
+attendance[d][roll]=status;
+save();
+}
+function render(){
+let cls=document.getElementById('loginClass').value;
+let d=getDate();
+let q=document.getElementById('searchBox').value.toLowerCase();
+let filtered=students.filter(s=>s.class==cls && (s.name.toLowerCase().includes(q)||s.roll.includes(q)));
+let tbody=document.getElementById('tbody');tbody.innerHTML='';
+let cT=filtered.length,cP=0,cA=0,cL=0;
+filtered.forEach(s=>{
+let st=(attendance[d]&&attendance[d][s.roll])||'-';
+if(st=='P')cP++;else if(st=='A')cA++;else if(st=='L')cL++;
+let clsSt=st=='P'?'st-P':st=='A'?'st-A':st=='L'?'st-L':'';
+tbody.innerHTML+=`<tr><td>${s.roll}</td><td>${s.name}</td><td>${s.mobile}</td><td class="${clsSt}"><button class="b b-green" style="padding:4px 8px" onclick="mark('${s.roll}','P')">P</button> <button class="b b-red" style="padding:4px 8px" onclick="mark('${s.roll}','A')">A</button> <button class="b b-yellow" style="padding:4px 8px" onclick="mark('${s.roll}','L')">L</button> <b> ${st}</b></td><td><button onclick="del('${s.roll}')">❌</button></td></tr>`;
+});
+document.getElementById('cTotal').innerText=cT;
+document.getElementById('cP').innerText=cP;
+document.getElementById('cA').innerText=cA;
+document.getElementById('cL').innerText=cL;
+}
+function del(roll){if(confirm('ডিলিট করবেন?')){students=students.filter(s=>s.roll!=roll);save();}}
+function sendSMS(type){
+let d=getDate();let list=students.filter(s=>attendance[d]&&attendance[d][s.roll]==type);
+if(!list.length){alert('কেউ নেই');return}
+alert(type+' SMS লিস্ট:\n'+list.map(s=>s.name+' - '+s.mobile).join('\n'));
+}
+function exportExcel(){
+let d=getDate();let rows=[['রোল','নাম','মোবাইল','হাজিরা','তারিখ']];
+students.forEach(s=>{rows.push([s.roll,s.name,s.mobile,(attendance[d]&&attendance[d][s.roll])||'-',d])});
+let csv=rows.map(r=>r.join(',')).join('\n');
+let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv]));a.download=`attendance_${d}.csv`;a.click();
+}
+function monthlyReport(){
+let month=prompt('মাস লিখুন (YYYY-MM) যেমন 2026-09','2026-09');
+if(!month)return;
+let cls=document.getElementById('loginClass').value;
+let filtered=students.filter(s=>s.class==cls);
+let rep=`🏛️ মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ\n📅 মাসিক রিপোর্ট: ${month}\nশ্রেণি: ${cls}\n\n`;
+filtered.forEach(s=>{
+let p=0,a=0,l=0;
+Object.keys(attendance).forEach(dt=>{if(dt.startsWith(month)){let st=attendance[dt][s.roll];if(st=='P')p++;else if(st=='A')a++;else if(st=='L')l++;}});
+rep+=`রোল ${s.roll} - ${s.name} - P:${p} A:${a} L:${l}\n`;
+});
+let w=window.open('','','width=500,height=600');w.document.write(`<pre style="font-family:Hind Siliguri;padding:15px;white-space:pre-wrap">${rep}\n\nEngineered by Mohammad Abdul Malek</pre><button onclick="window.print()">প্রিন্ট</button>`);
+}
 </script>
 </body>
 </html>
