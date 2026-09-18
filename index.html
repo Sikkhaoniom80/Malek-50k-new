@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Malek 50K Attendance</title>
+<title>Malek 50K - Momotaj Uddin College</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif}
@@ -27,64 +27,71 @@ th,td{padding:9px;text-align:center;border-bottom:1px solid #eee;font-size:13px}
 .p{background:#16a34a;color:white;border:2px solid #000}.a{background:#ef4444;color:white;border:2px solid #000}.l{background:#f59e0b;color:white;border:2px solid #000}.inactive{background:#e5e7eb;color:#666;border:none}
 .edit{width:38px;height:32px;border:none;border-radius:6px;margin:2px;cursor:pointer}.e-edit{background:#fde047}.e-del{background:#fecaca}
 .broadcast{background:white;border-radius:14px;padding:12px;margin-top:14px;border:2px dashed #7c5cff}
-.college{background:#0a2342;color:#ffd700;padding:10px;border-radius:10px;text-align:center;font-size:15px;font-weight:700;margin-bottom:10px;border:2px solid #ffd700}
+.college{background:#0a2342;color:#ffd700;padding:12px;border-radius:12px;text-align:center;font-size:16px;font-weight:700;margin-bottom:10px;border:2px solid #ffd700;line-height:1.4}
+.stat{display:flex;gap:6px;margin:8px 0}.stat div{background:white;padding:10px;border-radius:10px;flex:1;text-align:center;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 </style>
 </head>
 <body>
 
+<!-- প্রথম পাতা - আপনার ওই লোগোটা মামা, একটুও চেঞ্জ করি নাই -->
 <img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" id="topLogo">
 
 <div id="loginBox" class="card">
 <h2>🔐 শিক্ষক লগইন</h2>
 <div class="sub">MALEK ATTENDANCE</div>
-<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
+<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>একাদশ শ্রেণি</option><option>দ্বাদশ শ্রেণি</option></select>
 <input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
 <button class="btn-login" onclick="doLogin()">✅ লগইন - MALEK ATTENDANCE</button>
 </div>
 
+<!-- ভিতরের প্যানেল -->
 <div id="main">
-<div class="college">🏫 মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+<div class="college">🏫 মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ<br><small style="font-size:12px;color:#fff">MALEK 50K Attendance System</small></div>
 <h3 style="text-align:center;color:#0a2342">📋 <span id="showClass"></span> - হাজিরা প্যানেল</h3>
 
-<input type="date" id="attDate" class="m-input">
-<input type="text" id="searchBox" class="m-input" placeholder="🔍 নাম/রোল দিয়ে খুঁজুন..." onkeyup="render()">
+<div style="background:white;border-radius:12px;padding:10px;margin-top:8px">
+<div style="display:flex;gap:6px"><div style="flex:1"><label style="font-weight:bold;font-size:12px">📅 তারিখ:</label><input type="date" id="attDate" class="m-input"></div><div style="flex:1"><label style="font-weight:bold;font-size:12px">🔍 খুঁজুন:</label><input type="text" id="searchBox" class="m-input" placeholder="নাম/রোল..." onkeyup="render()"></div></div>
+<div style="display:flex;gap:6px"><button class="b b-dark" style="flex:1;font-size:12px;padding:8px" onclick="showAllList()">📋 সব দেখুন</button><button class="b b-purple" style="flex:1;font-size:12px;padding:8px" onclick="hideList()">🙈 লিস্ট লুকান</button></div>
+</div>
 
 <input id="sname" class="m-input" placeholder="ছাত্রের নাম">
-<input id="sroll" class="m-input" placeholder="রোল">
-<input id="smobile" class="m-input" placeholder="মোবাইল 01...">
+<div style="display:flex;gap:6px"><input id="sroll" class="m-input" placeholder="রোল" style="flex:1"><input id="smobile" class="m-input" placeholder="মোবাইল 01..." style="flex:1"></div>
 <button class="b b-dark" onclick="addOne()">+ একজন যোগ</button>
 <button class="b b-purple" onclick="bulk()">📋 আনলিমিটেড বাল্ক যোগ (২০০ জন)</button>
 
-<div class="row"><button class="bp" onclick="showAll()">📋 সব দেখুন</button><button class="ba" onclick="hideAll()">🙈 লুকান</button></div>
-<div class="row"><button class="bp" onclick="smsAll('P')">✉️ P SMS</button><button class="ba" onclick="smsAll('A')">✉️ A SMS</button><button class="bl" onclick="smsAll('L')">✉️ L SMS</button></div>
-<div class="row"><button class="b-blue" onclick="downloadExcel()" style="flex:1">📊 Excel Download</button><button class="b-black" onclick="window.print()" style="flex:1">🖨️ প্রিন্ট</button></div>
+<div class="stat"><div>মোট<br><span id="totalCount">0</span></div><div style="color:green">P<br><span id="pCount">0</span></div><div style="color:red">A<br><span id="aCount">0</span></div><div style="color:orange">L<br><span id="lCount">0</span></div></div>
+
+<div class="row"><button class="bp" onclick="allPresent()">✅ সবাই P</button><button class="ba" onclick="smsAll('A')">✉️ A SMS</button><button class="bl" onclick="smsAll('L')">✉️ L SMS</button></div>
+<div class="row"><button class="bp" onclick="smsAll('P')">✉️ P SMS</button><button class="b-blue" onclick="downloadExcel()">📊 Excel</button><button class="b-black" onclick="window.print()">🖨️ প্রিন্ট</button></div>
 
 <div class="broadcast">
-<h4 style="text-align:center;color:#7c5cff">📢 সবাইকে মেসেজ / নোটিশ পাঠান</h4>
-<textarea id="broadMsg" rows="2" placeholder="যেমন: আগামীকাল স্কুল বন্ধ, সবাইকে জানানো হলো..."></textarea>
-<button class="b b-green" onclick="sendBroadcast()">📤 সবাইকে পাঠান (SMS/WhatsApp)</button>
+<h4 style="text-align:center;color:#7c5cff">📢 নোটিশ - মমতাজ উদ্দিন কলেজ</h4>
+<textarea id="broadMsg" rows="2" placeholder="যেমন: আগামীকাল কলেজ বন্ধ..."></textarea>
+<button class="b b-green" onclick="sendBroadcast()">📤 সবাইকে পাঠান</button>
 <button class="b b-purple" onclick="sendBroadType('A')">শুধু অনুপস্থিতদের পাঠান</button>
 </div>
 
 <table><thead><tr><th>শ্রেণি</th><th>রোল</th><th>নাম</th><th>P/A/L</th><th>Edit</th></tr></thead><tbody id="list"></tbody></table>
 <button class="b b-dark" style="margin-top:14px;background:#555" onclick="location.reload()">🔙 লগআউট</button>
+<div style="text-align:center;margin-top:10px;color:#666;font-size:11px">মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ © MALEK 50K</div>
 </div>
 
 <script>
 let students=JSON.parse(localStorage.getItem('malek50k_full')||'[]');
-let show=false;
-function doLogin(){let c=loginClass.value,p=loginPass.value;if(!c){alert('শ্রেণি সিলেক্ট করুন');return}if(p!=='1234'){alert('পাসওয়ার্ড 1234');return}showClass.innerText=c;loginBox.style.display='none';topLogo.style.display='none';main.style.display='block';document.getElementById('attDate').value=new Date().toISOString().split('T')[0];render();}
+let showList=false;
+function doLogin(){let c=loginClass.value,p=loginPass.value;if(!c){alert('শ্রেণি সিলেক্ট করুন মামা');return}if(p!=='1234'){alert('পাসওয়ার্ড 1234 মামা');return}showClass.innerText=c;loginBox.style.display='none';topLogo.style.display='none';main.style.display='block';document.getElementById('attDate').value=new Date().toISOString().split('T')[0];showList=false;render();}
 function save(){localStorage.setItem('malek50k_full',JSON.stringify(students));render();}
-function addOne(){let cls=loginClass.value,n=sname.value.trim(),r=sroll.value.trim(),m=smobile.value.trim();if(!n||!r){alert('নাম ও রোল দিন');return}students.push({class:cls,roll:r,name:n,mobile:m,status:'P'});sname.value='';sroll.value='';smobile.value='';show=true;save();}
-function showAll(){show=true;render();}
-function hideAll(){show=false;render();}
-function render(){let tbody=document.getElementById('list');tbody.innerHTML='';let cls=loginClass.value;let q=searchBox.value.toLowerCase();if(!show && q==''){tbody.innerHTML='<tr><td colspan="5" style="padding:20px;color:#666">🔍 সার্চ করুন বা 📋 সব দেখুন বাটনে চাপুন মামা<br><small>সাথে সাথে লিস্ট আসবে না</small></td></tr>';return}let list=students.filter(s=>s.class==cls && (q=='' || s.name.toLowerCase().includes(q) || s.roll.includes(q)));list.forEach(s=>{let idx=students.indexOf(s);tbody.innerHTML+=`<tr><td>${s.class}</td><td>${s.roll}</td><td><b>${s.name}</b><br><small>${s.mobile}</small></td><td><button class="circle ${s.status=='P'?'p':'inactive'}" onclick="students[${idx}].status='P';save()">P</button><button class="circle ${s.status=='A'?'a':'inactive'}" onclick="students[${idx}].status='A';save()">A</button><button class="circle ${s.status=='L'?'l':'inactive'}" onclick="students[${idx}].status='L';save()">L</button></td><td><button class="edit e-edit" onclick="editS(${idx})">✏️</button><button class="edit e-del" onclick="if(confirm('ডিলিট?')){students.splice(${idx},1);save()}">🗑️</button></td></tr>`});}
+function addOne(){let cls=loginClass.value,n=sname.value.trim(),r=sroll.value.trim(),m=smobile.value.trim();if(!n||!r){alert('নাম ও রোল দিন মামা');return}students.push({id:Date.now(),class:cls,roll:r,name:n,mobile:m,status:'P'});sname.value='';sroll.value='';smobile.value='';showList=true;save();}
+function showAllList(){showList=true;render();}
+function hideList(){showList=false;render();}
+function render(){let tbody=document.getElementById('list');tbody.innerHTML='';let cls=loginClass.value;let q=document.getElementById('searchBox').value.toLowerCase();let filtered=students.filter(s=>s.class==cls);let searchFiltered=filtered.filter(s=>s.name.toLowerCase().includes(q) || s.roll.toLowerCase().includes(q));let p=0,a=0,l=0;filtered.forEach(s=>{if(s.status=='P')p++;else if(s.status=='A')a++;else if(s.status=='L')l++;});document.getElementById('totalCount').innerText=filtered.length;document.getElementById('pCount').innerText=p;document.getElementById('aCount').innerText=a;document.getElementById('lCount').innerText=l;if(!showList && q==''){tbody.innerHTML='<tr><td colspan="5" style="padding:25px;color:#6b7280">🔍 মামা সার্চ করুন বা <b>📋 সব দেখুন</b> বাটনে ক্লিক করুন<br><small>সাথে সাথে লিস্ট দেখাবে না</small></td></tr>';return}let toShow=q!=''?searchFiltered:filtered;if(toShow.length==0){tbody.innerHTML='<tr><td colspan="5" style="padding:20px;color:#666">কোনো ছাত্র পাওয়া যায়নি মামা</td></tr>';return}toShow.forEach(s=>{let idx=students.indexOf(s);tbody.innerHTML+=`<tr><td>${s.class}</td><td>${s.roll}</td><td><b>${s.name}</b><br><small>${s.mobile}</small></td><td><button class="circle ${s.status=='P'?'p':'inactive'}" onclick="students[${idx}].status='P';save()">P</button><button class="circle ${s.status=='A'?'a':'inactive'}" onclick="students[${idx}].status='A';save()">A</button><button class="circle ${s.status=='L'?'l':'inactive'}" onclick="students[${idx}].status='L';save()">L</button></td><td><button class="edit e-edit" onclick="editS(${idx})">✏️</button><button class="edit e-del" onclick="if(confirm('ডিলিট করবেন মামা?')){students.splice(${idx},1);save()}">🗑️</button></td></tr>`});}
 function editS(i){let n=prompt('নাম:',students[i].name);if(n)students[i].name=n;let r=prompt('রোল:',students[i].roll);if(r)students[i].roll=r;let m=prompt('মোবাইল:',students[i].mobile);if(m!==null)students[i].mobile=m;save();}
-function bulk(){let d=prompt('প্রতি লাইনে: রোল,নাম,মোবাইল');if(!d)return;d.split('\n').forEach(l=>{let a=l.split(',');if(a[0]&&a[1])students.push({class:loginClass.value,roll:a[0].trim(),name:a[1].trim(),mobile:(a[2]||'').trim(),status:'P'})});show=true;save();}
-function smsAll(t){let cls=loginClass.value;let list=students.filter(s=>s.class==cls&&s.status==t);if(!list.length){alert(t+' কেউ নেই');return}let msg=prompt(t+' স্ট্যাটাসের জন্য মেসেজ:',t=='P'?'আপনার সন্তান আজ উপস্থিত - মমতাজ উদ্দিন কলেজ':t=='A'?'আপনার সন্তান আজ অনুপস্থিত।':'আপনার সন্তান আজ ছুটিতে।');if(!msg)return;alert(list.length+' জনকে SMS পাঠানো হলো: '+msg);}
-function downloadExcel(){let cls=loginClass.value;let list=students.filter(s=>s.class==cls);let csv='College,Class,Roll,Name,Mobile,Status,Date\n'+list.map(s=>`Momotaj Uddin Business Management College,${s.class},${s.roll},${s.name},${s.mobile},${s.status},${attDate.value}`).join('\n');let blob=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=cls+'_Momotaj_College.csv';a.click();}
-function sendBroadcast(){let msg=broadMsg.value.trim();if(!msg){alert('মেসেজ লিখুন');return}let cls=loginClass.value;let list=students.filter(s=>s.class==cls);if(!list.length){alert('এই শ্রেণিতে ছাত্র নেই');return}alert(list.length+' জনকে নোটিশ পাঠানো হলো মমতাজ উদ্দিন কলেজ থেকে:\n'+msg);broadMsg.value='';}
-function sendBroadType(type){let msg=broadMsg.value.trim();if(!msg){alert('মেসেজ লিখুন');return}let cls=loginClass.value;let list=students.filter(s=>s.class==cls&&s.status==type);alert(list.length+' জন '+type+' ছাত্রকে পাঠানো হলো:\n'+msg);}
+function bulk(){let d=prompt('মামা প্রতি লাইনে: রোল,নাম,মোবাইল\nযেমন:\n101,রহিম,017...\n102,করিম,018...');if(!d)return;d.split('\n').forEach(l=>{let a=l.split(',');if(a[0]&&a[1])students.push({id:Date.now()+Math.random(),class:loginClass.value,roll:a[0].trim(),name:a[1].trim(),mobile:(a[2]||'').trim(),status:'P'})});showList=true;save();}
+function allPresent(){let cls=loginClass.value;students.forEach(s=>{if(s.class==cls)s.status='P'});save();}
+function smsAll(t){let cls=loginClass.value;let list=students.filter(s=>s.class==cls&&s.status==t);if(!list.length){alert(t+' কেউ নেই মামা');return}let msg=prompt(t+' এর জন্য মেসেজ - মমতাজ উদ্দিন কলেজ:',t=='P'?'আপনার সন্তান আজ উপস্থিত। - মমতাজ উদ্দিন কলেজ':t=='A'?'আপনার সন্তান আজ অনুপস্থিত। - মমতাজ উদ্দিন কলেজ':'আপনার সন্তান আজ ছুটিতে।');if(!msg)return;alert(list.length+' জনকে SMS পাঠানো হলো মামা:\n'+msg);}
+function downloadExcel(){let cls=loginClass.value;let date=document.getElementById('attDate').value;let list=students.filter(s=>s.class==cls);let csv='College,Class,Roll,Name,Mobile,Status,Date\n'+list.map(s=>`"Momotaj Uddin Business Management College","${s.class}","${s.roll}","${s.name}","${s.mobile}","${s.status}","${date}"`).join('\n');let blob=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=cls+'_Momotaj_College_'+date+'.csv';a.click();}
+function sendBroadcast(){let msg=broadMsg.value.trim();if(!msg){alert('মেসেজ লিখুন মামা');return}let cls=loginClass.value;let list=students.filter(s=>s.class==cls);if(!list.length){alert('এই শ্রেণিতে ছাত্র নেই মামা');return}alert('মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ থেকে\n'+list.length+' জনকে নোটিশ পাঠানো হলো:\n'+msg);broadMsg.value='';}
+function sendBroadType(type){let msg=broadMsg.value.trim();if(!msg){alert('মেসেজ লিখুন মামা');return}let cls=loginClass.value;let list=students.filter(s=>s.class==cls&&s.status==type);if(!list.length){alert(type+' কেউ নেই');return}alert(list.length+' জন '+type+' ছাত্রকে মমতাজ উদ্দিন কলেজ থেকে পাঠানো হলো:\n'+msg);}
 </script>
 </body>
 </html>
