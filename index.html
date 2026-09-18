@@ -3,24 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek 50K Celebration</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<title>Malek 50K Attendance</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#071a33;color:white;font-family:'Hind Siliguri',sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;flex-direction:column;text-align:center;padding:20px}
-.logo-box{width:300px;height:300px;border-radius:50%;border:8px solid #ffd700;box-shadow:0 0 40px #ffd700,0 0 80px #ffaa00;overflow:hidden;background:#000}
-.logo-box img{width:100%;height:100%;object-fit:cover;object-position:center 35%;transform:scale(1.8);transform-origin:center 70%}
-h1{margin-top:30px;font-size:42px;color:#ffd700;text-shadow:0 0 15px gold}
-p{font-size:20px;margin-top:10px;opacity:0.9}
-.gold{color:#ffd700;font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0;font-family:SolaimanLipi,sans-serif}
+body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px;color:white}
+.hero{width:380px;max-width:96%;border-radius:22px;box-shadow:0 0 30px gold;margin-top:10px;border:3px solid gold;min-height:200px;background:#112a4d}
+h1{color:#ffd700;font-size:36px;margin-top:20px;text-align:center}
+.sub{color:#ffdd88;letter-spacing:2px;font-size:13px;margin-top:5px}
+.box{width:100%;max-width:390px;margin-top:20px}
+select,input{width:100%;padding:15px;border-radius:12px;border:none;font-size:17px;margin:7px 0}
+button{width:100%;max-width:390px;padding:15px;border-radius:12px;border:none;background:gold;font-size:19px;font-weight:700;margin-top:10px;color:#0a2342;cursor:pointer}
+#mainPage{display:none;background:#eef2ff;color:#222;min-height:100vh;width:100%;padding:12px;position:fixed;top:0;left:0;overflow:auto}
+.main-input{width:100%;padding:12px;margin:5px 0;border-radius:10px;border:1px solid #ccc;background:white;font-size:15px}
+.btn{width:100%;padding:12px;border-radius:10px;border:none;margin:5px 0;font-weight:bold;cursor:pointer}
+.btn-dark{background:#0a2342;color:white}
+.btn-purple{background:#7c5cff;color:white}
+.row{display:flex;gap:6px;margin-top:8px}
+.bp{background:#16a34a;color:white;flex:1;padding:10px;border-radius:8px;border:none}
+.ba{background:#ef4444;color:white;flex:1;padding:10px;border-radius:8px;border:none}
+.bl{background:#f59e0b;color:white;flex:1;padding:10px;border-radius:8px;border:none}
+table{width:100%;background:white;border-radius:10px;margin-top:12px;border-collapse:collapse}
+th,td{padding:8px;text-align:center;border-bottom:1px solid #eee;font-size:13px}
+.circle{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;margin:2px;border:none;cursor:pointer}
+.p{background:#16a34a;color:white}.a{background:#ef4444;color:white}.l{background:#f59e0b;color:white}.inactive{background:#e5e7eb;color:#666}
 </style>
 </head>
 <body>
-<div class="logo-box">
-<img src="Screenshot_2026-09-18-11-00-35-601_com.whatsapp.jpg">
+<div id="loginPage" style="display:flex;flex-direction:column;align-items:center;width:100%">
+<img class="hero" src="Messenger_creation_89BBF939-7C66-4B0D-B70D-3387D3D3740D.jpeg" onerror="this.src='https://via.placeholder.com/380x200?text=MALEK+50K'" alt="Logo">
+<h1>৫০কে হাজিরা</h1>
+<div class="sub">MALEK 50K ATTENDANCE • SCHOOL • COLLEGE</div>
+<div class="box">
+<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>১১শ শ্রেণি</option><option>১২শ শ্রেণি</option></select>
+<input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
+<button onclick="doLogin()">লগইন করুন</button>
 </div>
-<h1>MALEK 50K</h1>
-<p><span class="gold">School Attendance</span> College Celebration</p>
-<p style="margin-top:20px;font-size:16px">অভিনন্দন মালেক স্যার 🎉</p>
+<div style="margin-top:15px;color:#ffdd88;font-size:11px;text-align:center">Engineered by Mohammad Abdul Malek<br>01912427294</div>
+</div>
+
+<div id="mainPage">
+<h3 style="text-align:center;color:#0a2342">📋 <span id="showClass"></span> - হাজিরা</h3>
+<input id="sname" class="main-input" placeholder="ছাত্রের নাম">
+<input id="sroll" class="main-input" placeholder="রোল">
+<input id="smobile" class="main-input" placeholder="মোবাইল 01...">
+<button class="btn btn-dark" onclick="addOne()">+ একজন যোগ</button>
+<button class="btn btn-purple" onclick="bulk()">📋 আনলিমিটেড বাল্ক যোগ</button>
+<div class="row"><button class="bp" onclick="smsAll('P')">P SMS</button><button class="ba" onclick="smsAll('A')">A SMS</button><button class="bl" onclick="smsAll('L')">L SMS</button></div>
+<table><thead><tr><th>শ্রেণি</th><th>রোল</th><th>নাম</th><th>P/A/L</th></tr></thead><tbody id="list"></tbody></table>
+<button class="btn btn-dark" style="margin-top:12px;background:#666" onclick="location.reload()">🔙 লগআউট</button>
+</div>
+
+<script>
+let students=JSON.parse(localStorage.getItem('malek50k_final')||'[]');
+function doLogin(){
+ let c=document.getElementById('loginClass').value;
+ let p=document.getElementById('loginPass').value;
+ if(!c) return alert('শ্রেণি সিলেক্ট করুন');
+ if(p!=='1234') return alert('পাসওয়ার্ড ভুল! 1234 দিন');
+ document.getElementById('showClass').innerText=c;
+ document.getElementById('loginPage').style.display='none';
+ document.getElementById('mainPage').style.display='block';
+ render();
+}
+function save(){localStorage.setItem('malek50k_final',JSON.stringify(students));render();}
+function addOne(){
+ let cls=document.getElementById('loginClass').value;
+ let n=document.getElementById('sname').value,r=document.getElementById('sroll').value,m=document.getElementById('smobile').value;
+ if(!n||!r) return alert('নাম ও রোল দিন');
+ students.push({class:cls,roll:r,name:n,mobile:m,status:'P'});
+ sname.value='';sroll.value='';smobile.value='';save();
+}
+function render(){
+ let tbody=document.getElementById('list');tbody.innerHTML='';
+ let cls=document.getElementById('loginClass').value;
+ let filtered = students.filter(s=>s.class==cls);
+ filtered.forEach((s)=>{
+  let idx = students.indexOf(s);
+  tbody.innerHTML+=`<tr><td>${s.class}</td><td>${s.roll}</td><td><b>${s.name}</b><br><small>${s.mobile}</small></td><td><button class="circle ${s.status=='P'?'p':'inactive'}" onclick="students[${idx}].status='P';save()">P</button><button class="circle ${s.status=='A'?'a':'inactive'}" onclick="students[${idx}].status='A';save()">A</button><button class="circle ${s.status=='L'?'l':'inactive'}" onclick="students[${idx}].status='L';save()">L</button></td></tr>`;
+ });
+}
+function bulk(){
+ let d=prompt('প্রতি লাইনে: রোল,নাম,মোবাইল\nউদাহরণ:\n1,রহিম,017...\n2,করিম,018...');
+ if(!d) return;
+ d.split('\n').forEach(l=>{
+  let a=l.split(',');if(a[0]&&a[1])students.push({class:document.getElementById('loginClass').value,roll:a[0].trim(),name:a[1].trim(),mobile:(a[2]||'').trim(),status:'P'})
+ });save();
+}
+function smsAll(type){
+ let cls=document.getElementById('loginClass').value;
+ let list = students.filter(s=>s.class==cls && s.status==type);
+ if(list.length==0) return alert(type+' কেউ নাই');
+ alert(list.length+' জনকে '+type+' SMS লিস্ট তৈরি হলো');
+}
+</script>
 </body>
 </html>
