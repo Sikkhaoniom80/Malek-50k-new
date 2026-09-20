@@ -27,18 +27,18 @@ input{width:100%;box-sizing:border-box;padding:11px;margin:6px 0;border:1px soli
 </head>
 <body>
 
-<!-- ১ম পাতা - তোমার ছবি সহ -->
-<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" id="topLogo">
-<div id="loginBox" class="card">
-<h2>🔐 শিক্ষক লগইন</h2><div class="sub">MALEK ATTENDANCE</div>
-<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
-<input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
-<button class="btn-login" onclick="alert('লগইন: '+loginClass.value)">🔐 লগইন করুন - MALEK ATTENDANCE</button>
-<p style="text-align:center;margin-top:10px;font-size:12px;color:#888">পাসওয়ার্ড: 1234</p>
+<!-- ১ম পাতা - তোমার ছবির ওয়েলকাম পাতা -->
+<div id="welcomePage" class="page active">
+  <div class="header" style="padding:60px 15px 80px 15px">
+    <h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1>
+    <p style="color:#ffde59">Digital Attendance</p>
+    <p style="color:white;font-size:14px;font-weight:normal">মালেক স্যার - নবম শ্রেণী</p>
+    <div style="margin-top:35px">
+      <button class="yellow-btn" style="background:#ffde59;font-size:18px" onclick="openDashboard()">🔓 প্রবেশ করুন</button>
+      <p style="color:#ffffffa3;font-size:12px;margin-top:10px">mamun...80.github.io</p>
+    </div>
+  </div>
 </div>
-
-</body>
-</html>
 
 <!-- ২য় পাতা - ড্যাশবোর্ড -->
 <div id="firstPage" class="page">
