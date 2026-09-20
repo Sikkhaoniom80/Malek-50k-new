@@ -1,153 +1,106 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Malek 50K</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Hind Siliguri,sans-serif;background:#f0f2f5}
-.header{background:#0f3d2e;color:white;padding:25px 15px 50px 15px;text-align:center;border-radius:0 0 25px 25px}
-.header h1{margin:0;font-size:22px;line-height:32px}
-.header p{color:#ffde59;font-weight:bold;font-size:18px;margin:5px 0}
-.card{background:white;margin:-25px 12px 15px;border-radius:18px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-.yellow-btn{background:#ffcc00;width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer}
-.page{display:none}.page.active{display:block}
-.attendance{display:flex;gap:8px;margin:10px 0}
-.att-box{flex:1;background:#fff;text-align:center;padding:12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
-.sms-btns{display:flex;gap:8px}
-.sms-btns button{flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold;cursor:pointer}
-.green{background:#16a34a}.orange{background:#ea580c}.yellow{background:#eab308;color:#000!important}
-.blue{background:#2563eb}.darkgreen{background:#0f3d2e}
-.student-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee}
-.btn-edit{background:#2196F3;color:white;border:none;padding:5px 10px;border-radius:6px}
-.btn-del{background:#ef4444;color:white;border:none;padding:5px 10px;border-radius:6px;margin-left:5px}
-input{width:100%;box-sizing:border-box;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:8px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif}
+body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px}
+.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.5);margin-top:10px}
+.card{background:#fff;width:100%;max-width:380px;border-radius:24px;padding:26px 20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+.card h2{text-align:center;font-size:28px;color:#111}
+.sub{text-align:center;color:#6b7280;font-size:13px;font-weight:700;margin:4px 0 16px;letter-spacing:1px}
+select,input{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid #d1d5db;font-size:16px;margin:7px 0;background:white;outline:none}
+.btn-login{width:100%;padding:14px;border-radius:14px;border:none;background:#0f2d5a;color:white;font-size:16px;font-weight:700;margin-top:8px;cursor:pointer}
+#main{display:none;background:#eef2ff;width:100%;min-height:100vh;position:fixed;top:0;left:0;z-index:9999;overflow-y:auto;padding:10px;padding-bottom:160px}
+.college{background:#0a2342;color:#ffd700;padding:12px;border-radius:14px;text-align:center;font-weight:700;border:2px solid #ffd700;margin-bottom:8px}
+.m-input{width:100%;padding:12px;border-radius:12px;border:1.5px solid #cbd5e1;margin:5px 0;background:white;font-size:15px}
+#list{max-height:52vh;overflow-y:auto;border:2px solid #0a2342;border-radius:14px;padding:6px;background:#f8fafc}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin:10px 0}
+.stat{background:white;padding:10px;border-radius:12px;text-align:center;border:2px solid #0a2342}.stat b{font-size:20px;display:block}
+.student-card{display:flex;justify-content:space-between;align-items:center;background:white;padding:12px;border-radius:12px;margin:6px 0;border:1px solid #ddd}
+.b{width:100%;padding:13px;border-radius:12px;border:none;color:white;font-weight:700;margin:5px 0;cursor:pointer}
+.box{background:white;padding:14px;border-radius:14px;margin:12px 0;border:1px solid #ddd;position:sticky;bottom:10px;box-shadow:0 -4px 15px rgba(0,0,0,.15)}
+.btn-p,.btn-a,.btn-l{width:42px;height:38px;border-radius:8px;border:none;color:white;font-weight:700}.btn-p{background:#16a34a}.btn-a{background:#ef4444}.btn-l{background:#f59e0b}
+.active{outline:3px solid #000}.inactive{opacity:.35}
+.sms-area{display:flex;gap:6px;margin:8px 0}.sms-area button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:700;color:white}
 </style>
 </head>
 <body>
 
-<!-- ১ম পাতা - তোমার ছবির ওয়েলকাম পাতা -->
-<div id="welcomePage" class="page active">
-  <div class="header" style="padding:60px 15px 80px 15px">
-    <h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1>
-    <p style="color:#ffde59">Digital Attendance</p>
-    <p style="color:white;font-size:14px;font-weight:normal">মালেক স্যার - নবম শ্রেণী</p>
-    <div style="margin-top:35px">
-      <button class="yellow-btn" style="background:#ffde59;font-size:18px" onclick="openDashboard()">🔓 প্রবেশ করুন</button>
-      <p style="color:#ffffffa3;font-size:12px;margin-top:10px">mamun...80.github.io</p>
-    </div>
-  </div>
+<!-- ========== প্রথম পাতা - একদম আগের মতো, কোন চেঞ্জ নাই ========== -->
+<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" id="topLogo">
+<div id="loginBox" class="card">
+<h2>🔐 শিক্ষক লগইন</h2><div class="sub">MALEK ATTENDANCE</div>
+<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
+<input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
+<button class="btn-login" onclick="doLogin()">🔐 লগইন করুন - MALEK ATTENDANCE</button>
+<p style="text-align:center;margin-top:10px;font-size:12px;color:#888">পাসওয়ার্ড: 1234</p>
 </div>
 
-<!-- ২য় পাতা - ড্যাশবোর্ড -->
-<div id="firstPage" class="page">
-  <div class="header">
-    <h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1>
-    <p>শ্রেণী: নবম</p>
-    <button onclick="goWelcome()" style="margin-top:8px;background:#ffffff33;color:white;border:1px solid #fff;padding:5px 12px;border-radius:20px">⬅️ হোম</button>
-  </div>
-  <div class="card">
-    <button class="yellow-btn" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা (সম্পূর্ণ তালিকা দেখুন)</button>
-    <h3>📅 উপস্থিতি</h3>
-    <div class="attendance">
-      <div class="att-box"><small>মোট</small><br><b id="total" style="font-size:22px">0</b></div>
-      <div class="att-box"><small>উপস্থিত</small><br><b id="present" style="font-size:22px;color:green">0</b></div>
-      <div class="att-box"><small>অনুপস্থিত</small><br><b id="absent" style="font-size:22px;color:red">0</b></div>
-    </div>
-    <h3>📢 নোটিশ বোর্ড</h3>
-    <input type="text" id="noticeText" placeholder="এখানে নোটিশ লিখুন...">
-    <h3>💬 SMS পাঠান - ৩ টা</h3>
-    <div class="sms-btns">
-      <button class="green" onclick="sendSMS('present')">Present SMS</button>
-      <button class="orange" onclick="sendSMS('absent')">Absent SMS</button>
-      <button class="yellow" onclick="sendSMS('notice')">Notice SMS</button>
-    </div>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button class="green" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="exportExcel()">⬇️ Excel Export</button>
-      <button class="blue" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="monthlyReport()">📊 Monthly Report</button>
-    </div>
-  </div>
+<!-- ========== দ্বিতীয় পাতা ========== -->
+<div id="main">
+<div class="college">🏫 মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ<br><small style="color:#fff;font-size:11px">Digital Attendance</small></div>
+<h3 style="text-align:center;color:#0a2342">📋 <span id="showClass"></span> - হাজিরা প্যানেল</h3>
+<div style="display:flex;gap:6px"><div style="flex:1"><small>📅 তারিখ:</small><input type="date" id="attDate" class="m-input"></div><div style="flex:1"><small>🔍 খুঁজুন:</small><input type="text" id="searchBox" class="m-input" placeholder="নাম/রোল" onkeyup="render()"></div></div>
+<div class="stats"><div class="stat"><b id="tTotal">0</b><small>মোট</small></div><div class="stat"><b id="tPresent" style="color:#16a34a">0</b><small>P</small></div><div class="stat"><b id="tAbsent" style="color:#ef4444">0</b><small>A</small></div><div class="stat"><b id="tLate" style="color:#f59e0b">0</b><small>L</small></div></div>
+
+<!-- নতুন নোটিশ + ৩ টা SMS মামা -->
+<div style="background:white;padding:12px;border-radius:12px;border:1px solid #ddd;margin:8px 0">
+<b>📢 নোটিশ বোর্ড</b>
+<input id="noticeText" class="m-input" placeholder="এখানে নোটিশ লিখুন...">
+<div class="sms-area">
+<button style="background:#16a34a" onclick="sendSMS('present')">Present SMS</button>
+<button style="background:#ef4444" onclick="sendSMS('absent')">Absent SMS</button>
+<button style="background:#eab308;color:#000" onclick="sendSMS('notice')">Notice SMS</button>
+</div>
 </div>
 
-<!-- ৩য় পাতা - তালিকা -->
-<div id="secondPage" class="page">
-  <div class="header" style="padding-bottom:20px">
-    <h2 style="margin:0">শিক্ষার্থীর তালিকা</h2>
-    <button onclick="goFirst()" style="margin-top:10px;background:white;color:#0f3d2e;border:none;padding:6px 15px;border-radius:20px;font-weight:bold">⬅️ ড্যাশবোর্ড</button>
-  </div>
-  <div class="card">
-    <button class="yellow-btn" onclick="showTab('list')">📋 সম্পূর্ণ তালিকা দেখুন</button>
-    <button class="yellow-btn" style="margin-top:10px;background:#dcfce7" onclick="showTab('add')">➕ শিক্ষার্থী যোগ করুন</button>
-    <div id="listTab" style="margin-top:15px"><div id="studentList"></div></div>
-    <div id="addTab" style="display:none;margin-top:15px">
-      <h3>নতুন শিক্ষার্থী যোগ</h3>
-      <input type="text" id="sName" placeholder="শিক্ষার্থীর নাম">
-      <input type="text" id="sRoll" placeholder="রোল নম্বর">
-      <input type="text" id="sMobile" placeholder="মোবাইল (01XXXXXXXXX)">
-      <button onclick="addStudent()" style="width:100%;padding:12px;background:#16a34a;color:white;border:none;border-radius:8px;margin-top:8px;font-weight:bold">যোগ করুন</button>
-    </div>
-  </div>
+<div id="list"></div>
+
+<div class="box">
+<b>➕ নাম-রোল-মোবাইল যোগ</b>
+<input id="sname" class="m-input" placeholder="ছাত্রের নাম">
+<div style="display:flex;gap:6px"><input id="sroll" class="m-input" placeholder="রোল"><input id="smobile" class="m-input" placeholder="মোবাইল"></div>
+<button class="b" style="background:#0a2342" onclick="addOne()">+ যোগ করুন</button>
+</div>
+<button class="b" style="background:#555" onclick="location.reload()">🔙 লগআউট</button>
 </div>
 
 <script>
-let students = JSON.parse(localStorage.getItem('students9')||'[]');
-let attendance = JSON.parse(localStorage.getItem('att9')||'{}');
-function openDashboard(){welcomePage.classList.remove('active');firstPage.classList.add('active');updateCounts();}
-function goWelcome(){firstPage.classList.remove('active');welcomePage.classList.add('active');}
-function openStudentPage(){firstPage.classList.remove('active');secondPage.classList.add('active');render();}
-function goFirst(){secondPage.classList.remove('active');firstPage.classList.add('active');updateCounts();}
-function showTab(t){listTab.style.display=t=='list'?'block':'none';addTab.style.display=t=='add'?'block':'none';}
-function addStudent(){
- let n=sName.value.trim(), r=sRoll.value.trim(), m=sMobile.value.trim();
- if(!n||!r) return alert('নাম ও রোল দিন');
- students.push({name:n,roll:r,mobile:m});
- localStorage.setItem('students9',JSON.stringify(students));
- sName.value='';sRoll.value='';sMobile.value='';render();showTab('list');
-}
-function render(){
- let list=document.getElementById('studentList');list.innerHTML='';
- if(students.length==0) list.innerHTML='<p style="color:gray">কোনো শিক্ষার্থী নেই</p>';
- students.forEach((s,i)=>{
-  let checked = attendance[i]=='absent'?'':'checked';
-  list.innerHTML+=`<div class="student-row"><div><input type="checkbox" ${checked} onchange="toggleAtt(${i},this.checked)"> <b>${s.name}</b> (রোল:${s.roll})<br><small>${s.mobile||''}</small></div><div><button class="btn-edit" onclick="editS(${i})">✏️</button><button class="btn-del" onclick="delS(${i})">🗑️</button></div></div>`;
- });
- updateCounts();
-}
-function toggleAtt(i,isPresent){attendance[i]=isPresent?'present':'absent';localStorage.setItem('att9',JSON.stringify(attendance));updateCounts();}
-function updateCounts(){
- let p=0;students.forEach((_,i)=>{if(attendance[i]!=='absent') p++;});
- let tot=students.length;let ab=tot-p;
- document.getElementById('total').innerText=tot;document.getElementById('present').innerText=p;document.getElementById('absent').innerText=ab;
-}
-function delS(i){if(confirm('ডিলিট করবে?')){students.splice(i,1);delete attendance[i];localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));render();}}
-function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null) return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile||'');students[i]={...s,name:n,roll:r,mobile:m};localStorage.setItem('students9',JSON.stringify(students));render();}
-function exportExcel(){
- if(students.length==0) return alert('তালিকা খালি');
- let data=students.map((s,i)=>({নাম:s.name,রোল:s.roll,মোবাইল:s.mobile||'',উপস্থিতি:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত'}));
- let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"নবম");XLSX.writeFile(wb,"Class9.xlsx");
-}
-function monthlyReport(){alert('মোট '+students.length+' জন, আজ উপস্থিত '+(document.getElementById('present').innerText)+' জন');}
+let students=JSON.parse(localStorage.getItem('malek_final_permanent')||'[]');
+let attendance=JSON.parse(localStorage.getItem('malek_att_permanent')||'{}');
+function doLogin(){let c=loginClass.value,p=loginPass.value;if(!c){alert('শ্রেণি সিলেক্ট করুন');return}if(p!='1234'){alert('1234');return}showClass.innerText=c;loginBox.style.display='none';topLogo.style.display='none';main.style.display='block';attDate.value=new Date().toISOString().split('T')[0];render();}
+function save(){localStorage.setItem('malek_final_permanent',JSON.stringify(students));localStorage.setItem('malek_att_permanent',JSON.stringify(attendance));render();}
+function addOne(){let cls=loginClass.value,n=sname.value.trim(),r=sroll.value.trim(),m=smobile.value.trim();if(!n||!r){alert('নাম রোল দিন');return}students.push({class:cls,roll:r,name:n,mobile:m});sname.value='';sroll.value='';smobile.value='';save();}
+function getStatus(i,d){return (attendance[d]&&attendance[d][i])||''}
+function render(){let cls=loginClass.value,q=searchBox.value.toLowerCase(),date=attDate.value;let all=students.map((s,i)=>({...s,idx:i})).filter(s=>s.class==cls);tTotal.innerText=all.length;tPresent.innerText=all.filter(s=>getStatus(s.idx,date)=='P').length;tAbsent.innerText=all.filter(s=>getStatus(s.idx,date)=='A').length;tLate.innerText=all.filter(s=>getStatus(s.idx,date)=='L').length;let div=list;div.innerHTML='';all.filter(s=>q==''||s.name.toLowerCase().includes(q)||s.roll.includes(q)).forEach(s=>{let st=getStatus(s.idx,date);div.innerHTML+=`<div class="student-card"><div><b>${s.name}</b><br><small>রোল:${s.roll} | ${s.mobile||''}</small></div><div style="display:flex;gap:4px"><button class="btn-p ${st=='P'?'active':'inactive'}" onclick="mark(${s.idx},'P')">P</button><button class="btn-a ${st=='A'?'active':'inactive'}" onclick="mark(${s.idx},'A')">A</button><button class="btn-l ${st=='L'?'active':'inactive'}" onclick="mark(${s.idx},'L')">L</button></div></div>`;});}
+function mark(i,s){let d=attDate.value;if(!attendance[d])attendance[d]={};attendance[d][i]=s;save();}
+attDate.addEventListener('change',render);
 
-// ৩ টা SMS - তোমার চাওয়া
+// ৩ টা SMS - শুধু কলেজের নাম
 function sendSMS(type){
  let notice=document.getElementById('noticeText').value.trim();
- if(students.length==0) return alert('কোনো শিক্ষার্থী নেই');
+ let cls=loginClass.value; let date=attDate.value;
+ let all=students.map((s,i)=>({...s,idx:i})).filter(s=>s.class==cls);
+ if(all.length==0) return alert('এই ক্লাসে ছাত্র নেই');
  let targets;
- if(type=='notice') targets=students;
- else if(type=='present') targets=students.filter((_,i)=> attendance[i]!=='absent');
- else targets=students.filter((_,i)=> attendance[i]=='absent');
- if(targets.length==0) return alert('কেউ নেই');
- let numbers = targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);
- if(numbers.length==0) return alert('মোবাইল নম্বর নেই');
- let dateStr = new Date().toLocaleDateString('bn-BD');
- let msg = type=='present'? `আজ ${dateStr} উপস্থিত আছে। ${notice} - Malek 50k`
-           : type=='absent'? `আজ ${dateStr} অনুপস্থিত। ${notice} - Malek 50k`
-           : `📢 নোটিশ: ${notice}\nতারিখ: ${dateStr}\n- Malek 50k - মমতাজউদ্দিন কলেজ`;
- let numberString = numbers.join(';');
- window.location.href = `sms:${numberString}?body=${encodeURIComponent(msg)}`;
+ if(type=='notice') targets=all;
+ else if(type=='present') targets=all.filter(s=>getStatus(s.idx,date)=='P');
+ else if(type=='absent') targets=all.filter(s=>getStatus(s.idx,date)=='A');
+ else targets=[];
+ if(targets.length==0) return alert(type=='present'?'কেউ উপস্থিত নেই':type=='absent'?'কেউ অনুপস্থিত নেই':'ছাত্র নেই');
+ let numbers=targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);
+ if(numbers.length==0) return alert('মোবাইল নম্বর পাইনি');
+ let dateStr = new Date(date).toLocaleDateString('bn-BD');
+ let msg='';
+ if(type=='present') msg=`আজ ${dateStr} তারিখে কলেজে উপস্থিত আছে।\n${notice}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
+ else if(type=='absent') msg=`আজ ${dateStr} তারিখে কলেজে অনুপস্থিত।\n${notice}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
+ else msg=`📢 নোটিশ: ${notice}\nতারিখ: ${dateStr}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
+ let numberString=numbers.join(';');
+ window.location.href=`sms:${numberString}?body=${encodeURIComponent(msg)}`;
 }
-render();
 </script>
 </body>
 </html>
