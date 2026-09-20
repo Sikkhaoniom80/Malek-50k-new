@@ -24,12 +24,11 @@ select,input{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid 
 .box{background:white;padding:14px;border-radius:14px;margin:12px 0;border:1px solid #ddd;position:sticky;bottom:10px;box-shadow:0 -4px 15px rgba(0,0,0,.15)}
 .btn-p,.btn-a,.btn-l{width:42px;height:38px;border-radius:8px;border:none;color:white;font-weight:700}.btn-p{background:#16a34a}.btn-a{background:#ef4444}.btn-l{background:#f59e0b}
 .active{outline:3px solid #000}.inactive{opacity:.35}
-.sms-area{display:flex;gap:6px;margin:8px 0}.sms-area button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:700;color:white}
 </style>
 </head>
 <body>
 
-!-- ========== প্রথম পাতা - একদম আগের মতো, কোন চেঞ্জ নাই মামা ========== -->
+<!-- ========== প্রথম পাতা - একদম আগের মতো, কোন চেঞ্জ নাই মামা ========== -->
 <img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" id="topLogo">
 <div id="loginBox" class="card">
 <h2>🔐 শিক্ষক লগইন</h2><div class="sub">MALEK ATTENDANCE</div>
@@ -39,23 +38,12 @@ select,input{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid 
 <p style="text-align:center;margin-top:10px;font-size:12px;color:#888">পাসওয়ার্ড: 1234</p>
 </div>
 
-<!-- ========== দ্বিতীয় পাতা ========== -->
+<!-- ========== দ্বিতীয় পাতা - শুধু এইটা চেঞ্জ হবে মামা ========== -->
 <div id="main">
-<div class="college">🏫 মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ<br><small style="color:#fff;font-size:11px">Digital Attendance</small></div>
+<div class="college">🏫 মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ<br><small style="color:#fff;font-size:11px">MALEK 50K Attendance</small></div>
 <h3 style="text-align:center;color:#0a2342">📋 <span id="showClass"></span> - হাজিরা প্যানেল</h3>
 <div style="display:flex;gap:6px"><div style="flex:1"><small>📅 তারিখ:</small><input type="date" id="attDate" class="m-input"></div><div style="flex:1"><small>🔍 খুঁজুন:</small><input type="text" id="searchBox" class="m-input" placeholder="নাম/রোল" onkeyup="render()"></div></div>
 <div class="stats"><div class="stat"><b id="tTotal">0</b><small>মোট</small></div><div class="stat"><b id="tPresent" style="color:#16a34a">0</b><small>P</small></div><div class="stat"><b id="tAbsent" style="color:#ef4444">0</b><small>A</small></div><div class="stat"><b id="tLate" style="color:#f59e0b">0</b><small>L</small></div></div>
-
-<!-- নতুন নোটিশ + ৩ টা SMS মামা -->
-<div style="background:white;padding:12px;border-radius:12px;border:1px solid #ddd;margin:8px 0">
-<b>📢 নোটিশ বোর্ড</b>
-<input id="noticeText" class="m-input" placeholder="এখানে নোটিশ লিখুন...">
-<div class="sms-area">
-<button style="background:#16a34a" onclick="sendSMS('present')">Present SMS</button>
-<button style="background:#ef4444" onclick="sendSMS('absent')">Absent SMS</button>
-<button style="background:#eab308;color:#000" onclick="sendSMS('notice')">Notice SMS</button>
-</div>
-</div>
 
 <div id="list"></div>
 
@@ -78,29 +66,6 @@ function getStatus(i,d){return (attendance[d]&&attendance[d][i])||''}
 function render(){let cls=loginClass.value,q=searchBox.value.toLowerCase(),date=attDate.value;let all=students.map((s,i)=>({...s,idx:i})).filter(s=>s.class==cls);tTotal.innerText=all.length;tPresent.innerText=all.filter(s=>getStatus(s.idx,date)=='P').length;tAbsent.innerText=all.filter(s=>getStatus(s.idx,date)=='A').length;tLate.innerText=all.filter(s=>getStatus(s.idx,date)=='L').length;let div=list;div.innerHTML='';all.filter(s=>q==''||s.name.toLowerCase().includes(q)||s.roll.includes(q)).forEach(s=>{let st=getStatus(s.idx,date);div.innerHTML+=`<div class="student-card"><div><b>${s.name}</b><br><small>রোল:${s.roll} | ${s.mobile||''}</small></div><div style="display:flex;gap:4px"><button class="btn-p ${st=='P'?'active':'inactive'}" onclick="mark(${s.idx},'P')">P</button><button class="btn-a ${st=='A'?'active':'inactive'}" onclick="mark(${s.idx},'A')">A</button><button class="btn-l ${st=='L'?'active':'inactive'}" onclick="mark(${s.idx},'L')">L</button></div></div>`;});}
 function mark(i,s){let d=attDate.value;if(!attendance[d])attendance[d]={};attendance[d][i]=s;save();}
 attDate.addEventListener('change',render);
-
-// ৩ টা SMS - শুধু কলেজের নাম
-function sendSMS(type){
- let notice=document.getElementById('noticeText').value.trim();
- let cls=loginClass.value; let date=attDate.value;
- let all=students.map((s,i)=>({...s,idx:i})).filter(s=>s.class==cls);
- if(all.length==0) return alert('এই ক্লাসে ছাত্র নেই');
- let targets;
- if(type=='notice') targets=all;
- else if(type=='present') targets=all.filter(s=>getStatus(s.idx,date)=='P');
- else if(type=='absent') targets=all.filter(s=>getStatus(s.idx,date)=='A');
- else targets=[];
- if(targets.length==0) return alert(type=='present'?'কেউ উপস্থিত নেই':type=='absent'?'কেউ অনুপস্থিত নেই':'ছাত্র নেই');
- let numbers=targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);
- if(numbers.length==0) return alert('মোবাইল নম্বর পাইনি');
- let dateStr = new Date(date).toLocaleDateString('bn-BD');
- let msg='';
- if(type=='present') msg=`আজ ${dateStr} তারিখে কলেজে উপস্থিত আছে।\n${notice}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
- else if(type=='absent') msg=`আজ ${dateStr} তারিখে কলেজে অনুপস্থিত।\n${notice}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
- else msg=`📢 নোটিশ: ${notice}\nতারিখ: ${dateStr}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
- let numberString=numbers.join(';');
- window.location.href=`sms:${numberString}?body=${encodeURIComponent(msg)}`;
-}
 </script>
 </body>
 </html>
