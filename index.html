@@ -18,7 +18,7 @@ body{margin:0;font-family:Hind Siliguri,sans-serif;background:#f0f2f5}
 .sms-btns{display:flex;gap:8px}
 .sms-btns button{flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold}
 .green{background:#16a34a}.orange{background:#ea580c}.yellow{background:#eab308;color:#000!important}
-.blue{background:#2563eb}
+.blue{background:#2563eb}.darkgreen{background:#0f3d2e}
 .student-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee}
 .btn-edit{background:#2196F3;color:white;border:none;padding:5px 10px;border-radius:6px}
 .btn-del{background:#ef4444;color:white;border:none;padding:5px 10px;border-radius:6px;margin-left:5px}
@@ -27,7 +27,6 @@ input{width:100%;box-sizing:border-box;padding:11px;margin:6px 0;border:1px soli
 </head>
 <body>
 
-<!-- প্রথম পাতা - কোন পরিবর্তন নাই, তোমার দেওয়াটাই -->
 <div id="firstPage" class="page active">
   <div class="header">
     <h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1>
@@ -56,7 +55,6 @@ input{width:100%;box-sizing:border-box;padding:11px;margin:6px 0;border:1px soli
   </div>
 </div>
 
-<!-- দ্বিতীয় পাতা - এখানে Excel + Monthly Report যোগ করা -->
 <div id="secondPage" class="page">
   <div class="header" style="padding-bottom:20px">
     <h2 style="margin:0">শিক্ষার্থীর তালিকা</h2>
@@ -65,17 +63,10 @@ input{width:100%;box-sizing:border-box;padding:11px;margin:6px 0;border:1px soli
   <div class="card">
     <button class="yellow-btn" onclick="showTab('list')">📋 সম্পূর্ণ তালিকা দেখুন</button>
     <button class="yellow-btn" style="margin-top:10px;background:#dcfce7" onclick="showTab('add')">➕ শিক্ষার্থী যোগ করুন</button>
-
     <div id="listTab" style="margin-top:15px">
       <h3>সম্পূর্ণ তালিকা - এডিট/ডিলিট সহ</h3>
       <div id="studentList"></div>
-      <!-- দ্বিতীয় পাতায়ও Excel / Monthly Report যোগ করলাম -->
-      <div style="display:flex;gap:8px;margin-top:15px">
-        <button class="green" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="exportExcel()">⬇️ Excel Export</button>
-        <button class="blue" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="monthlyReport()">📊 Monthly Report</button>
-      </div>
     </div>
-
     <div id="addTab" style="display:none;margin-top:15px">
       <h3>নতুন শিক্ষার্থী যোগ</h3>
       <input type="text" id="sName" placeholder="শিক্ষার্থীর নাম">
@@ -95,7 +86,7 @@ function showTab(t){listTab.style.display=t=='list'?'block':'none';addTab.style.
 function addStudent(){
  let n=sName.value.trim(), r=sRoll.value.trim(), m=sMobile.value.trim();
  if(!n||!r) return alert('নাম ও রোল দিন');
- students.push({name:n,roll:r,mobile:m});
+ students.push({name:n,roll:r,mobile:m,status:'present'});
  localStorage.setItem('students9',JSON.stringify(students));
  sName.value='';sRoll.value='';sMobile.value='';
  render();showTab('list');
@@ -115,20 +106,20 @@ function updateCounts(){
  let tot=students.length;let ab=tot-p;
  document.getElementById('total').innerText=tot;document.getElementById('present').innerText=p;document.getElementById('absent').innerText=ab;
 }
-function delS(i){if(confirm('ডিলিট করবে?')){students.splice(i,1);delete attendance[i];localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));render();}}
+function delS(i){if(confirm('এই ছাত্র ডিলিট করবে?')){students.splice(i,1);delete attendance[i];localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));render();}}
 function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null) return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile||'');students[i]={...s,name:n,roll:r,mobile:m};localStorage.setItem('students9',JSON.stringify(students));render();}
 function exportExcel(){
  if(students.length==0) return alert('তালিকা খালি');
- let data=students.map((s,i)=>({ক্রম:i+1,নাম:s.name,রোল:s.roll,মোবাইল:s.mobile||'',অবস্থা:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত',তারিখ:new Date().toLocaleDateString('bn-BD'),নোটিশ:noticeText.value}));
- let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"নবম শ্রেণী");XLSX.writeFile(wb,"Class9_Excel_"+new Date().toISOString().split('T')[0]+".xlsx");
+ let data=students.map((s,i)=>({নাম:s.name,রোল:s.roll,মোবাইল:s.mobile||'',উপস্থিতি:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত'}));
+ let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"নবম শ্রেণী");XLSX.writeFile(wb,"Class9_Attendance.xlsx");
 }
-function monthlyReport(){
- if(students.length==0) return alert('তালিকা খালি');
- let monthName = new Date().toLocaleString('bn-BD',{month:'long',year:'numeric'});
- let data=students.map((s,i)=>({মাস:monthName,রোল:s.roll,নাম:s.name,মোবাইল:s.mobile||'',আজকের_উপস্থিতি:attendance[i]!=='absent'?'P':'A',মোট_শিক্ষার্থী:students.length}));
- let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Monthly");XLSX.writeFile(wb,"Monthly_Report_9_"+new Date().toISOString().slice(0,7)+".xlsx");
+function monthlyReport(){alert('মাসিক রিপোর্ট: মোট '+students.length+' জন, আজ উপস্থিত '+(document.getElementById('present').innerText)+' জন');}
+function sendSMS(type){
+ let notice=document.getElementById('noticeText').value;
+ let targets=students.filter((_,i)=> type=='present'?attendance[i]!=='absent':type=='absent'?attendance[i]=='absent':true);
+ if(targets.length==0) return alert('কোনো শিক্ষার্থী নেই');
+ alert(type+' SMS '+targets.length+' জনের কাছে পাঠানোর জন্য প্রস্তুত।\nনোটিশ: '+notice+'\n\nBulkSMS API যোগ করলে অটো যাবে।');
 }
-function sendSMS(type){let n=noticeText.value;alert(type+' SMS প্রস্তুত। নোটিশ: '+n);}
 render();
 </script>
 </body>
