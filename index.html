@@ -1,17 +1,153 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+body{margin:0;font-family:Hind Siliguri,sans-serif;background:#f0f2f5}
+.header{background:#0f3d2e;color:white;padding:25px 15px 50px 15px;text-align:center;border-radius:0 0 25px 25px}
+.header h1{margin:0;font-size:22px}
+.header p{color:#ffde59;font-weight:bold;font-size:18px}
+.card{background:white;margin:-25px 12px 15px;border-radius:18px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.yellow-btn{background:#ffcc00;width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer}
+.page{display:none}.page.active{display:block}
+.attendance{display:flex;gap:8px;margin:10px 0}
+.att-box{flex:1;background:#fff;text-align:center;padding:12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.sms-btns{display:flex;gap:8px}
+.sms-btns button{flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold}
+.green{background:#16a34a}.orange{background:#ea580c}.yellow{background:#eab308;color:#000!important}
+.blue{background:#2563eb}.darkgreen{background:#0f3d2e}
+.student-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee}
+.btn-edit{background:#2196F3;color:white;border:none;padding:5px 10px;border-radius:6px}
+.btn-del{background:#ef4444;color:white;border:none;padding:5px 10px;border-radius:6px;margin-left:5px}
+input{width:100%;box-sizing:border-box;padding:11px;margin:6px 0;border:1px solid #ccc;border-radius:8px}
+</style>
+</head>
+<body>
+
+<div id="firstPage" class="page active">
+  <div class="header">
+    <h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1>
+    <p>শ্রেণী: নবম</p>
+  </div>
+  <div class="card">
+    <button class="yellow-btn" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা (সম্পূর্ণ তালিকা দেখুন - শিক্ষার্থী যোগ করুন)</button>
+    <h3>📅 উপস্থিতি</h3>
+    <div class="attendance">
+      <div class="att-box"><small>মোট</small><br><b id="total" style="font-size:22px">0</b><br><small>মোট শিক্ষার্থী</small></div>
+      <div class="att-box"><small>উপস্থিত</small><br><b id="present" style="font-size:22px;color:green">0</b></div>
+      <div class="att-box"><small>অনুপস্থিত</small><br><b id="absent" style="font-size:22px;color:red">0</b></div>
+    </div>
+    <h3>📢 নোটিশ বোর্ড</h3>
+    <input type="text" id="noticeText" placeholder="এখানে নোটিশ লিখুন...">
+    <h3>💬 SMS পাঠান</h3>
+    <div class="sms-btns">
+      <button class="green" onclick="sendSMS('present')">Present SMS</button>
+      <button class="orange" onclick="sendSMS('absent')">Absent SMS</button>
+      <button class="yellow" onclick="sendSMS('notice')">Notice SMS</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="green" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="exportExcel()">⬇️ Excel Export</button>
+      <button class="blue" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="monthlyReport()">📊 Monthly Report</button>
+    </div>
+  </div>
+</div>
+
+<div id="secondPage" class="page">
+  <div class="header" style="padding-bottom:20px">
+    <h2 style="margin:0">শিক্ষার্থীর তালিকা</h2>
+    <button onclick="goFirst()" style="margin-top:10px;background:white;color:#0f3d2e;border:none;padding:6px 15px;border-radius:20px;font-weight:bold">⬅️ প্রথম পাতা</button>
+  </div>
+  <div class="card">
+    <button class="yellow-btn" onclick="showTab('list')">📋 সম্পূর্ণ তালিকা দেখুন</button>
+    <button class="yellow-btn" style="margin-top:10px;background:#dcfce7" onclick="showTab('add')">➕ শিক্ষার্থী যোগ করুন</button>
+    <div id="listTab" style="margin-top:15px">
+      <h3>সম্পূর্ণ তালিকা - এডিট/ডিলিট সহ</h3>
+      <div id="studentList"></div>
+    </div>
+    <div id="addTab" style="display:none;margin-top:15px">
+      <h3>নতুন শিক্ষার্থী যোগ</h3>
+      <input type="text" id="sName" placeholder="শিক্ষার্থীর নাম">
+      <input type="text" id="sRoll" placeholder="রোল নম্বর">
+      <input type="text" id="sMobile" placeholder="অভিভাবকের মোবাইল (01XXXXXXXXX)">
+      <button onclick="addStudent()" style="width:100%;padding:12px;background:#16a34a;color:white;border:none;border-radius:8px;margin-top:8px;font-weight:bold">যোগ করুন</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let students = JSON.parse(localStorage.getItem('students9')||'[]');
+let attendance = JSON.parse(localStorage.getItem('att9')||'{}');
+function openStudentPage(){firstPage.classList.remove('active');secondPage.classList.add('active');render();}
+function goFirst(){secondPage.classList.remove('active');firstPage.classList.add('active');updateCounts();}
+function showTab(t){listTab.style.display=t=='list'?'block':'none';addTab.style.display=t=='add'?'block':'none';}
+function addStudent(){
+ let n=sName.value.trim(), r=sRoll.value.trim(), m=sMobile.value.trim();
+ if(!n||!r) return alert('নাম ও রোল দিন');
+ students.push({name:n,roll:r,mobile:m,status:'present'});
+ localStorage.setItem('students9',JSON.stringify(students));
+ sName.value='';sRoll.value='';sMobile.value='';
+ render();showTab('list');
+}
+function render(){
+ let list=document.getElementById('studentList');list.innerHTML='';
+ if(students.length==0) list.innerHTML='<p style="color:gray">কোনো শিক্ষার্থী নেই</p>';
+ students.forEach((s,i)=>{
+  let checked = attendance[i]=='absent'?'':'checked';
+  list.innerHTML+=`<div class="student-row"><div><input type="checkbox" ${checked} onchange="toggleAtt(${i},this.checked)"> <b>${s.name}</b> (রোল:${s.roll})</div><div><button class="btn-edit" onclick="editS(${i})">✏️</button><button class="btn-del" onclick="delS(${i})">🗑️</button></div></div>`;
+ });
+ updateCounts();
+}
+function toggleAtt(i,isPresent){attendance[i]=isPresent?'present':'absent';localStorage.setItem('att9',JSON.stringify(attendance));updateCounts();}
+function updateCounts(){
+ let p=0;students.forEach((_,i)=>{if(attendance[i]!=='absent') p++;});
+ let tot=students.length;let ab=tot-p;
+ document.getElementById('total').innerText=tot;document.getElementById('present').innerText=p;document.getElementById('absent').innerText=ab;
+}
+function delS(i){if(confirm('এই ছাত্র ডিলিট করবে?')){students.splice(i,1);delete attendance[i];localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));render();}}
+function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null) return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile||'');students[i]={...s,name:n,roll:r,mobile:m};localStorage.setItem('students9',JSON.stringify(students));render();}
+function exportExcel(){
+ if(students.length==0) return alert('তালিকা খালি');
+ let data=students.map((s,i)=>({নাম:s.name,রোল:s.roll,মোবাইল:s.mobile||'',উপস্থিতি:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত'}));
+ let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"নবম শ্রেণী");XLSX.writeFile(wb,"Class9_Attendance.xlsx");
+}
+function monthlyReport(){alert('মাসিক রিপোর্ট: মোট '+students.length+' জন, আজ উপস্থিত '+(document.getElementById('present').innerText)+' জন');}
+
+// ===== তিনটা SMS ফিক্স - এটাই শুধু যোগ করেছি =====
 function sendSMS(type){
  let notice=document.getElementById('noticeText').value.trim();
  if(students.length==0) return alert('কোনো শিক্ষার্থী নেই');
+
  let targets;
- if(type=='notice') targets=students;
- else if(type=='present') targets=students.filter((_,i)=> attendance[i]!=='absent');
- else targets=students.filter((_,i)=> attendance[i]=='absent');
- if(targets.length==0) return alert('কেউ নেই');
+ if(type=='notice'){
+   targets = students;
+ } else if(type=='present'){
+   targets = students.filter((_,i)=> attendance[i]!=='absent');
+ } else {
+   targets = students.filter((_,i)=> attendance[i]=='absent');
+ }
+ if(targets.length==0) return alert(type+' তালিকা খালি');
+
  let numbers = targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);
- if(numbers.length==0) return alert('মোবাইল নম্বর নেই');
+ if(numbers.length==0) return alert('মোবাইল নম্বর পাইনি! শিক্ষার্থী যোগ করার সময় মোবাইল নম্বর দিন');
+
  let dateStr = new Date().toLocaleDateString('bn-BD');
- let msg = type=='present'? `আজ ${dateStr} তারিখে কলেজে উপস্থিত আছে।\n${notice}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`
-           : type=='absent'? `আজ ${dateStr} তারিখে কলেজে অনুপস্থিত।\n${notice}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`
-           : `📢 নোটিশ: ${notice}\nতারিখ: ${dateStr}\n- মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ`;
+ let msg;
+ if(type=='present'){
+   msg = `আজ ${dateStr} তারিখে কলেজে উপস্থিত আছে।\n${notice}\n- Malek 50k`;
+ } else if(type=='absent'){
+   msg = `আজ ${dateStr} তারিখে কলেজে অনুপস্থিত।\n${notice}\n- Malek 50k`;
+ } else {
+   msg = `📢 নোটিশ: ${notice}\nতারিখ: ${dateStr}\n- Malek 50k - মমতাজউদ্দিন কলেজ`;
+ }
+
+ // সব নাম্বার একসাথে যাবে - Notice হলে সবাইকে একসাথে
  let numberString = numbers.join(';');
  window.location.href = `sms:${numberString}?body=${encodeURIComponent(msg)}`;
 }
+render();
+</script>
+</body>
+</html>
