@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Malek 50K - Roll Fixed</title>
+<title>Malek 50K - Final 1-12 Class</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
@@ -22,18 +22,30 @@ input,select{width:100%;padding:12px;margin:6px 0;border:1.5px solid #ccc;border
 </head>
 <body>
 
-<!-- ১ম পাতা: লগইন + লোগো -->
 <div id="p1" class="page active">
 <img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg">
 <div class="card">
 <h2 style="text-align:center">🔐 শিক্ষক লগইন</h2>
-<select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
+<select id="loginClass">
+<option value="">শ্রেণি সিলেক্ট করুন</option>
+<option>১ম শ্রেণি</option>
+<option>২য় শ্রেণি</option>
+<option>৩য় শ্রেণি</option>
+<option>৪র্থ শ্রেণি</option>
+<option>৫ম শ্রেণি</option>
+<option>৬ষ্ঠ শ্রেণি</option>
+<option>৭ম শ্রেণি</option>
+<option>৮ম শ্রেণি</option>
+<option>৯ম শ্রেণি</option>
+<option>১০ম শ্রেণি</option>
+<option>১১শ শ্রেণি</option>
+<option>১২শ শ্রেণি</option>
+</select>
 <input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
 <button onclick="doLogin()" style="width:100%;padding:14px;border:none;border-radius:12px;background:#0f2d5a;color:white;font-weight:bold;margin-top:8px">লগইন করুন</button>
 </div>
 </div>
 
-<!-- ২য় পাতা: ড্যাশবোর্ড -->
 <div id="p2" class="page" style="background:#f0f2f5">
 <div class="header"><h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1><p id="classNameShow" style="color:#ffde59;font-weight:bold">শ্রেণী: নবম</p></div>
 <div class="card">
@@ -45,7 +57,6 @@ input,select{width:100%;padding:12px;margin:6px 0;border:1.5px solid #ccc;border
 </div>
 </div>
 
-<!-- ৩য় পাতা: তালিকা -->
 <div id="p3" class="page" style="background:#f0f2f5">
 <div class="header" style="padding-bottom:20px"><h2>শিক্ষার্থীর তালিকা</h2><button onclick="goP2()" style="margin-top:10px;background:white;color:#0f3d2e;border:none;padding:6px 15px;border-radius:20px;font-weight:bold">⬅️ ড্যাশবোর্ড</button></div>
 <div class="card"><button class="yellow-btn" onclick="showTab('list')">📋 সম্পূর্ণ তালিকা (রোল ক্রমানুসারে)</button><button class="yellow-btn" style="margin-top:8px;background:#dcfce7" onclick="showTab('add')">➕ শিক্ষার্থী যোগ করুন</button>
@@ -57,31 +68,4 @@ input,select{width:100%;padding:12px;margin:6px 0;border:1.5px solid #ccc;border
 <script>
 let students=JSON.parse(localStorage.getItem('students9')||'[]');
 let attendance=JSON.parse(localStorage.getItem('att9')||'{}');
-function doLogin(){if(loginClass.value==''||loginPass.value!='1234'){alert('শ্রেণি ও পাসওয়ার্ড 1234 দিন');return;}classNameShow.innerText='শ্রেণী: '+loginClass.value;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));p2.classList.add('active');updateCounts();}
-function goP1(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));p1.classList.add('active');}
-function goP2(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));p2.classList.add('active');updateCounts();}
-function goP3(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));p3.classList.add('active');render();}
-function showTab(t){listTab.style.display=t=='list'?'block':'none';addTab.style.display=t=='add'?'block':'none';}
-function addStudent(){let n=sName.value.trim(),r=sRoll.value.trim(),m=sMobile.value.trim();if(!n||!r)return alert('নাম ও রোল দিন');students.push({name:n,roll:r,mobile:m});localStorage.setItem('students9',JSON.stringify(students));sName.value='';sRoll.value='';sMobile.value='';render();showTab('list');}
-
-// ★ রোল ক্রমানুসারে সাজানোর ফিক্স এখানে ★
-function render(){
- students.sort((a,b)=> parseInt(a.roll) - parseInt(b.roll) );
- let list=document.getElementById('studentList');list.innerHTML='';
- if(students.length==0)list.innerHTML='<p style="color:gray">কোনো শিক্ষার্থী নেই</p>';
- students.forEach((s,i)=>{
-  let checked=attendance[i]=='absent'?'':'checked';
-  list.innerHTML+=`<div class="student-row"><div><input type="checkbox" ${checked} onchange="toggleAtt(${i},this.checked)"> <b>${s.name}</b> (রোল:${s.roll})</div><div><button style="background:#2196F3;color:white;border:none;padding:6px 10px;border-radius:6px" onclick="editS(${i})">✏️</button><button style="background:#ef4444;color:white;border:none;padding:6px 10px;border-radius:6px;margin-left:4px" onclick="delS(${i})">🗑️</button></div></div>`;
- });
- updateCounts();
-}
-function toggleAtt(i,isP){attendance[i]=isP?'present':'absent';localStorage.setItem('att9',JSON.stringify(attendance));updateCounts();}
-function updateCounts(){let p=0;students.forEach((_,i)=>{if(attendance[i]!=='absent')p++;});total.innerText=students.length;present.innerText=p;absent.innerText=students.length-p;}
-function delS(i){if(confirm('ডিলিট করবে?')){students.splice(i,1);delete attendance[i];localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));render();}}
-function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null)return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile||'');students[i]={...s,name:n,roll:r,mobile:m};localStorage.setItem('students9',JSON.stringify(students));render();}
-function exportExcel(){if(students.length==0)return alert('খালি');let data=students.map((s,i)=>({নাম:s.name,রোল:s.roll,মোবাইল:s.mobile||'',উপস্থিতি:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত'}));let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Sheet");XLSX.writeFile(wb,"Attendance.xlsx");}
-function sendSMS(type){let notice=noticeText.value.trim();let targets=type=='notice'?students:type=='present'?students.filter((_,i)=>attendance[i]!=='absent'):students.filter((_,i)=>attendance[i]=='absent');let nums=targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);if(nums.length==0)return alert('মোবাইল নাই');let msg=type=='present'?`উপস্থিত: ${notice}`:type=='absent'?`অনুপস্থিত: ${notice}`:`নোটিশ: ${notice}`;window.location.href=`sms:${nums.join(';')}?body=${encodeURIComponent(msg)}`;}
-render();
-</script>
-</body>
-</html>
+function doLogin(){if(loginClass.value==''||loginPass.value!='1234'){alert('শ্রেণি ও পাসওয়ার্ড 1234 দিন');return;}classNameShow.innerText='
