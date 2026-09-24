@@ -25,3 +25,79 @@ body{background:#0d1b4a;color:white;font-family:sans-serif;margin:0;padding-bott
     <div style="background:black;color:white;margin-top:10px;padding:8px;border-radius:10px;font-size:13px">
       Engineered by Mohammad Abdul Malek<br><span style="color:gold">01912427294</span><br>sikkhaoniom80.github.io
     </div>
+  </div>
+  <div class="card">
+    <h2>🔓 মালিক লগইন</h2>
+    <input id="phone" placeholder="01XXXXXXXXX" style="width:70%;padding:10px"><button class="btn" style="width:25%" onclick="showPage(2)">Next</button>
+    <h3>📊 Dashboard</h3>
+    <div style="background:#dbeafe;border-radius:10px;padding:10px">মোট প্রতিষ্ঠান: ৫০ টা | আজ লগইন: ২০ টা</div>
+    <button class="btn" onclick="showPage(2)">পরবর্তী ➡️ ২নং পেজ</button>
+  </div>
+</div>
+
+<!-- ========== ২নং - ১ম থেকে ১২শ + প্যাডের পুরো ছবি ========== -->
+<div id="page2" class="hidden">
+  <div id="header2" class="header-pad" style="margin:15px;background:white;color:black;padding:20px;border-radius:15px;text-align:center">এখানে প্যাড আপলোড করলে পুরো ছবি আসবে</div>
+  <div class="card">
+    <h2>🔰 শ্রেণী নির্বাচন (১ম-১২শ) - ২য় পেজ থেকেই</h2>
+    <div class="grid3">
+      <button class="btn" onclick="selectClass('১ম')">১ম</button>
+      <button class="btn" onclick="selectClass('২য়')">২য়</button>
+      <button class="btn" onclick="selectClass('৩য়')">৩য়</button>
+      <button class="btn" onclick="selectClass('৪র্থ')">৪র্থ</button>
+      <button class="btn" onclick="selectClass('৫ম')">৫ম</button>
+      <button class="btn" onclick="selectClass('৬ষ্ঠ')">৬ষ্ঠ</button>
+      <button class="btn" onclick="selectClass('৭ম')">৭ম</button>
+      <button class="btn" onclick="selectClass('৮ম')">৮ম</button>
+      <button class="btn" onclick="selectClass('৯ম')">৯ম</button>
+      <button class="btn" onclick="selectClass('১০ম')">১০ম</button>
+      <button class="btn" style="background:#16a34a;color:white" onclick="selectClass('১১শ')">১১শ</button>
+      <button class="btn" style="background:#16a34a;color:white" onclick="selectClass('১২শ')">১২শ</button>
+    </div>
+    <p style="background:#fef9c3;padding:8px;border-radius:10px;text-align:center">✅ নির্বাচিত: <b id="selectedClassShow">কোনো শ্রেণী সিলেক্ট করেননি</b></p>
+    <h3>প্যাডের ছবি আপলোড (উড/পুরো প্যাড)</h3>
+    <div style="border:2px dashed blue;padding:15px;text-align:center;border-radius:15px">
+      <input type="file" id="padUpload" accept="image/*" onchange="uploadPad(event)">
+    </div>
+    <button class="btn" style="background:#22c55e;color:white;margin-top:10px" onclick="goToPage3()">লগইন ➡️ ৩নং</button>
+  </div>
+</div>
+
+<!-- ========== ৩নং ========== -->
+<div id="page3" class="hidden">
+  <div id="header3" class="header-pad" style="margin:15px"></div>
+  <div class="card">
+    <h3>শ্রেণী: <span id="classShow3">-</span> | তারিখ: <span id="date"></span></h3>
+    <textarea id="noticeText" placeholder="নোটিশ লিখুন..." style="width:100%;padding:10px"></textarea>
+    <button class="btn" style="background:#22c55e;color:white" onclick="downloadExcel()">Excel ডাউনলোড</button>
+    <button class="btn" onclick="sendSMS('present')">Present SMS</button>
+    <button class="btn" onclick="sendSMS('absent')">Absent SMS</button>
+    <button class="btn" onclick="sendSMS('notice')">Notice SMS</button>
+    <button class="btn" onclick="showPage(4)">৪নং পেজ ➡️</button>
+  </div>
+</div>
+
+<!-- ========== ৪নং - ২টা ঘর ========== -->
+<div id="page4" class="hidden">
+  <div id="header4" class="header-pad" style="margin:15px"></div>
+  <div class="card" style="background:#1e293b;color:white"><h3>শ্রেণী: <span id="classShow4">-</span> শিক্ষার্থী যোগ</h3><div id="studentList">লিস্ট আসবে</div></div>
+  <div class="card" style="background:#1e293b;color:white"><h3>ফলাফলের জন্য</h3><div>মোট: <span id="total">0</span></div></div>
+</div>
+
+<script>
+let students=[{name:"রহিম",mobile:"01900000000"},{name:"করিম",mobile:"01900000001"}];
+let attendance=['present','absent'];
+let currentClass=localStorage.getItem("selected_class")||"";
+
+function selectClass(c){currentClass=c;localStorage.setItem("selected_class",c);document.getElementById("selectedClassShow").innerText=c+" শ্রেণী";document.getElementById("classShow3").innerText=c;document.getElementById("classShow4").innerText=c;}
+function uploadPad(e){let r=new FileReader();r.onload=function(){localStorage.setItem("college_pad_full",r.result);document.getElementById("header2").innerHTML=`<img src="${r.result}">`;document.getElementById("header3").innerHTML=`<img src="${r.result}">`;document.getElementById("header4").innerHTML=`<img src="${r.result}">`;};r.readAsDataURL(e.target.files[0]);}
+function showPage(n){let pad=localStorage.getItem("college_pad_full");if(pad){document.getElementById("header2").innerHTML=`<img src="${pad}">`;document.getElementById("header3").innerHTML=`<img src="${pad}">`;document.getElementById("header4").innerHTML=`<img src="${pad}">`;}let cls=localStorage.getItem("selected_class");if(cls){selectClass(cls);}["page1","page2","page3","page4"].forEach(id=>document.getElementById(id).classList.add("hidden"));document.getElementById("page"+n).classList.remove("hidden");}
+function goToPage3(){if(!localStorage.getItem("selected_class")){alert("আগে ১ম-১২শ শ্রেণী সিলেক্ট করুন!");return;}showPage(3);}
+function downloadExcel(){let data=students.map((s,i)=>({নাম:s.name,হাজিরা:attendance[i]||'absent',শ্রেণী:currentClass}));let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Sheet");XLSX.writeFile(wb,currentClass+"_Attendance.xlsx");}
+function sendSMS(type){let notice=document.getElementById('noticeText').value.trim();let targets=type=='notice'?students:type=='present'?students.filter((_,i)=>attendance[i]!=='absent'):students.filter((_,i)=>attendance[i]=='absent');let nums=targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);if(nums.length==0)return alert('মোবাইল নাই');let msg=type=='present'?`উপস্থিত: ${notice}`:type=='absent'?`অনুপস্থিত: ${notice}`:`নোটিশ: ${notice}`;window.location.href=`sms:${nums.join(';')}?body=${encodeURIComponent(msg)}`;}
+document.getElementById("date").innerText=new Date().toLocaleDateString('bn-BD');
+if(currentClass) selectClass(currentClass);
+let p=localStorage.getItem("college_pad_full");if(p){document.getElementById("header2").innerHTML=`<img src="${p}">`;document.getElementById("header3").innerHTML=`<img src="${p}">`;document.getElementById("header4").innerHTML=`<img src="${p}">`;}
+</script>
+</body>
+</html>
