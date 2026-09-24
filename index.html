@@ -1,49 +1,47 @@
 <!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Malek 50K - Fixed 1 No Password Only</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Malek Attendance</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif}
-body{background:#0a2342;min-height:100vh}
-.page{display:none}.page.active{display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
-.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.6);overflow:hidden}
-.card{background:#fff;width:100%;max-width:420px;border-radius:24px;padding:20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.35)}
-.cbtn{padding:14px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold;cursor:pointer}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-</style>
-</head>
-<body>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px;font-family:sans-serif}
+.logo{width:360px;max-width:92%;border-radius:20px;border:3px solid #ffd700;box-shadow:0 0 25px gold;overflow:hidden}
+.logo img{width:100%;display:block}
+.card{background:#fff;width:100%;max-width:400px;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.input{width:100%;padding:13px;border:2px solid #0a2342;border-radius:12px;font-size:16px}
+.btn{width:100%;padding:13px;background:#0a2342;color:#fff;border:none;border-radius:12px;font-weight:bold;margin-top:10px;font-size:16px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.stat div{background:#e8f0ff;padding:10px;border-radius:10px;font-size:13px}
+</style></head><body>
 
-<!-- ১নং ফিক্সড 🔒 শুধু পাসওয়ার্ড -->
-<div id="p1" class="page active">
-<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg">
+<div class="logo"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg"></div>
+
 <div class="card">
-<h2 style="text-align:center;color:#0a2342">🔐 মালিক লগইন</h2>
-<p style="text-align:center;font-weight:bold;margin:8px 0;color:gray">পাসওয়ার্ড দিন</p>
+<h3 style="text-align:center">🔐 মালিক লগইন</h3>
+<p style="text-align:center;font-size:13px;margin:6px 0">পাসওয়ার্ড দিন</p>
+<input id="p" class="input" type="password" placeholder="পাসওয়ার্ড: 1234">
+<button class="btn" onclick="login()">পরবর্তী ➡️ ২নং পেজ (১ম-১২শ শ্রেণী)</button>
+<button onclick="resetP()" style="width:100%;margin-top:8px;padding:9px;background:#f1f5f9;border:1px dashed #0a2342;border-radius:10px;font-size:12px">🔑 পাসওয়ার্ড পরিবর্তন / রিসেট</button>
 
-<input id="passInput" type="password" placeholder="পাসওয়ার্ড: 1234" style="width:100%;padding:14px;border:2px solid #0a2342;border-radius:12px;font-size:16px">
-
-<button onclick="doLogin()" style="width:100%;margin-top:12px;padding:14px;background:#0a2342;color:white;border:none;border-radius:12px;font-weight:bold;font-size:16px">লগইন ➡️ ২নং পেজ (১ম-১২শ)</button>
-
-<button onclick="resetPass()" style="width:100%;margin-top:8px;padding:10px;background:#f1f5f9;border:1px dashed #0a2342;border-radius:10px;font-size:13px">🔑 পাসওয়ার্ড পরিবর্তন / রিসেট</button>
-
-<h3 style="margin-top:18px">📊 ড্যাশবোর্ড পরিসংখ্যান</h3>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
-<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>মোট প্রতিষ্ঠান:</small><br><b>৫০ টা</b></div>
-<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>আজ লগইন:</small><br><b>২০ টা</b></div>
-<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>অফলাইন:</small><br><b>৩০ টা</b></div>
-<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>পেমেন্ট বাকি:</small><br><b>৫ টা</b></div>
+<h4 style="margin-top:14px;font-size:14px">📊 ড্যাশবোর্ড পরিসংখ্যান</h4>
+<div class="stat">
+<div>🏢 মোট প্রতিষ্ঠান:<br><b>৫০ টা</b></div>
+<div>👤 আজ লগইন:<br><b>২০ টা</b></div>
+<div>📶 অফলাইন:<br><b>৩০ টা</b></div>
+<div>💰 পেমেন্ট বাকি:<br><b>৫ টা</b></div>
+</div>
+<p style="text-align:center;color:gray;font-size:10px;margin-top:10px">Engineered by Mohammad Abdul Malek<br>01912427294 | sikkhaoniom80.github.io<br>বর্তমান পাস: <b id="sp"></b></p>
 </div>
 
-<p style="text-align:center;color:gray;font-size:11px;margin-top:10px">বর্তমান পাসওয়ার্ড: <span id="showPass" style="color:#0a2342;font-weight:bold"></span><br>Engineered by Mohammad Abdul Malek - 01912427294</p>
-</div>
-</div>
-
-<!-- ২নং পেজ - ১ম থেকে ১২শ -->
-<div id="p2" class="page" style="background:#f0f2f5">
-<div style="background:#0f3d2e;color:white;padding:20px;text-align:center;border-radius:0 0 25px 25px;width:100%"><h2>শ্রেণী নির্বাচন</h2><p id="classShow2" style="color:#ffde59">১ম-১২শ থেকে সিলেক্ট করুন</p></div>
-<div class="card">
-<div class="grid3">
-<button class="cbtn" onclick="sel('১ম শ্রেণি')">১ম</button><button class="cbtn"
+<script>
+if(!localStorage.getItem('mp')) localStorage.setItem('mp','1234');
+document.getElementById('sp').innerText=localStorage.getItem('mp');
+function login(){
+ if(document.getElementById('p').value.trim() !== localStorage.getItem('mp')){alert('ভুল পাসওয়ার্ড! বর্তমান: '+localStorage.getItem('mp'));return;}
+ location.href='class.html'; // ২নং পেজে যাবে
+}
+function resetP(){
+ let o=prompt('পুরাতন পাসওয়ার্ড:'); if(o!==localStorage.getItem('mp')){alert('মিলেনি!');return;}
+ let n=prompt('নতুন পাসওয়ার্ড (৪ সংখ্যা):'); if(!n||n.length<4){alert('৪ সংখ্যা দিন');return;}
+ localStorage.setItem('mp',n.trim()); document.getElementById('sp').innerText=n; alert('✅ নতুন পাস: '+n);
+}
+</script>
+</body></html>
