@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>চূড়ান্ত প্রতিবেদন</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#efe8d9;font-family:'Hind Siliguri',sans-serif;display:flex;justify-content:center}
+.wrap{width:100%;max-width:430px;background:#fdfaf3;min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,.2)}
+.top-head{background:#0f2f1f;color:#fff;text-align:center;padding:22px 14px;border-radius:0 0 24px 24px}
+.top-head h1{font-size:23px;line-height:1.3;font-weight:800}
+.top-head p{color:#ffeb7a;margin-top:6px;font-weight:700;font-size:15px}
+.card{background:#fff;border-radius:16px;margin:12px;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.title-yellow{background:#ffde59;display:inline-block;padding:6px 14px;border-radius:20px;font-weight:800;font-size:14px;margin-bottom:10px}
+.pad-banner{background:#f7ecd0;border:1.5px solid #d6c28f;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center}
+.pad-banner img{width:54px;height:54px;border-radius:50%;border:2px solid #0f2f1f;object-fit:cover}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;font-weight:700;margin-top:10px;color:#444}
+.meta-row span{background:#f3f3f3;padding:3px 8px;border-radius:20px}
+.present-absent{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.box{border-radius:14px;padding:10px;background:#fff;border:1px solid #e5e5e5}
+.box-head{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:20px;font-weight:800;font-size:13px;color:#fff;margin-bottom:8px}
+.bg-green{background:#0e8a3c}.bg-red{background:#d93a2b}
+.box ul{list-style:none;font-size:13px;line-height:1.9;font-weight:600}
+.notice{background:#fff3c5;border-radius:12px;padding:10px;text-align:center;margin-top:12px;font-weight:700;font-size:13px;border:1px dashed #c9a93a}
+.btn{width:100%;padding:13px;border:none;border-radius:14px;font-size:15px;font-weight:800;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-family:'Hind Siliguri'}
+.btn-wp{background:#0e8a3c;color:#fff}.btn-print{background:#ffcc00;color:#000}.btn-excel{background:#1a5dba;color:#fff}.btn-sms{background:#0e8a3c;color:#fff}.btn-abs{background:#e85a1a;color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+<!-- উপরে নাম + শ্রেণি -->
+<div class="top-head">
+<h1 id="collegeName">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</h1>
+<p id="className">শ্রেণী: ১০ম শ্রেণি</p>
+</div>
+
+<div style="padding:10px">
+<div class="card">
+<div class="title-yellow">📄 চূড়ান্ত প্রতিবেদন ও WhatsApp পাঠানো</div>
+
+<!-- প্যাডের ৫ তথ্য অটো আসবে ২ নং পাতা থেকে -->
+<div class="pad-banner">
+<img id="cLogo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
+<div>
+<div id="cBN" style="font-weight:800;font-size:14px">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+<div id="cEN" style="font-size:11px;color:#c00000;font-weight:700">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
+<div style="font-size:11px;margin-top:3px">স্থাপিত: ২০০৫ • কলেজ কোড: <span id="cCode">১০৮২</span> • EIIN: <span id="cEiin">132332</span> • সীতাকুণ্ড, চট্টগ্রাম</div>
+</div>
+</div>
+
+<div class="meta-row">
+<span>📅 তারিখ: <span id="today">২৪ সেপ্টেম্বর, ২০২৪</span></span>
+<span style="color:#0e8a3c">✅ উপস্থিত: <span id="pCount">2</span></span>
+<span style="color:#d93a2b">❌ অনুপস্থিত: <span id="aCount">53</span></span>
+<span>📋 মোট: <span id="tCount">55</span></span>
+</div>
+
+<div class="present-absent">
+<div class="box">
+<div class="box-head bg-green">✅ উপস্থিত (2)</div>
+<ul id="pList">
+<li>• রহিম উদ্দিন - রোল ০৫</li>
+<li>• সাদিয়া আক্তার - রোল ১২</li>
+</ul>
+</div>
+<div class="box">
+<div class="box-head bg-red">❌ অনুপস্থিত (53)</div>
+<ul id="aList">
+<li>• করিম - রোল ০১</li>
+<li>• জামাল - রোল ০২</li>
+<li>• ফাতেমা - রোল ০৩</li>
+<li>• নাসির - রোল ০৪</li>
+<li>• হাসান - রোল ০৬</li>
+<li>... আরও ৪৮ জন</li>
+</ul>
+</div>
+</div>
+
+<div class="notice">📢 নোটিশ:<br>আজ ক্লাস টেস্ট হবে</div>
+
+<button class="btn btn-wp" onclick="sendWP()">🟢 WhatsApp এ পাঠান</button>
+<button class="btn btn-print" onclick="window.print()">🖨️ প্রিন্ট করুন / PDF</button>
+<button class="btn btn-excel" onclick="downloadExcel()">📊 Excel ডাউনলোড</button>
+<button class="btn btn-sms" onclick="alert('Present SMS পাঠানো হলো')">📞 Present SMS পাঠান</button>
+<button class="btn btn-abs" onclick="alert('Absent SMS পাঠানো হলো')">📩 Absent SMS পাঠান</button>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<button class="btn" style="background:#0e2f5a;color:#fff" onclick="location.href='class.html'">← ২য় পেজ</button>
+<button class="btn" style="background:#fff;border:1.5px solid #0e2f5a" onclick="logout()">লগআউট</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+// ২ নং পাতা থেকে ৫ তথ্য অটো লোড
+function loadCollege(){
+ let code = new URLSearchParams(location.search).get('code') || localStorage.getItem('loggedCollege');
+ let cls = localStorage.getItem('loggedClass') || '১০ম শ্রেণি';
+ if(!code){ code=Object.keys(JSON.parse(localStorage.getItem('allColleges')||'{}'))[0]; }
+ let all = JSON.parse(localStorage.getItem('allColleges')||'{}');
+ if(all[code]){
+  document.getElementById('cBN').innerText = all[code].nameBN;
+  document.getElementById('collegeName').innerText = all[code].nameBN;
+  document.getElementById('cLogo').src = all[code].logo;
+  document.getElementById('cCode').innerText = code;
+  document.getElementById('cEiin').innerText = all[code].eiin;
+  document.getElementById('cEN').innerText = all[code].nameEN || '';
+ }
+ document.getElementById('className').innerText = 'শ্রেণী: '+cls;
+ // আজকের তারিখ
+ let d=new Date(); let months=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
+ document.getElementById('today').innerText = d.getDate()+' '+months[d.getMonth()]+', '+d.getFullYear();
+}
+function sendWP(){
+ let name=document.getElementById('cBN').innerText;
+ let text=`*${name}*%0A📅 তারিখ: ${document.getElementById('today').innerText}%0A✅ উপস্থিত: 2 জন%0A❌ অনুপস্থিত: 53 জন%0A📋 মোট: 55 জন`;
+ window.open('https://wa.me/?text='+text,'_blank');
+}
+function downloadExcel(){
+ let csv="নাম,রোল,অবস্থা\nরহিম উদ্দিন,05,উপস্থিত\nসাদিয়া আক্তার,12,উপস্থিত\n";
+ let blob=new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download="attendance.csv"; a.click();
+}
+function logout(){localStorage.removeItem('loggedCollege'); location.href='class.html';}
+loadCollege();
+</script>
+</body>
+</html>
