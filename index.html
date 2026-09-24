@@ -1,31 +1,52 @@
-<!-- ========== ১নং পেজ ফিক্সড 🔒 - এটা কখনো চেঞ্জ করবেন না ========== -->
-<div id="p1" class="page active">
-  <img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" style="width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.5);margin-top:10px">
-  <div class="card" style="background:#fff;width:100%;max-width:420px;border-radius:24px;padding:20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.35);text-align:center">
-    <h2 style="text-align:center;color:#0a2342">🔐 শিক্ষক লগইন</h2>
-    <p style="text-align:center;color:gray;font-size:13px;margin:8px 0">
-      Engineered by Mohammad Abdul Malek<br>
-      <span style="color:#0a2342;font-weight:bold">01912427294</span><br>
-      sikkhaoniom80.github.io
-    </p>
-    <!-- ১নং এ শ্রেণী নাই, শুধু পাসওয়ার্ড -->
-    <input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234" style="width:100%;padding:12px;margin:10px 0;border:1.5px solid #ccc;border-radius:10px">
-    <button onclick="goToP2()" style="width:100%;padding:14px;border:none;border-radius:12px;background:#0f2d5a;color:white;font-weight:bold;font-size:16px;cursor:pointer">
-      লগইন করুন ➡️ ২নং পেজ
-    </button>
+<!-- ========== ১নং পেজ ফিক্সড 🔒 ২নং ছবির মতো OTP ডিজাইন ========== -->
+<div id="p1" class="page active" style="background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px">
+  <!-- লোগো -->
+  <div style="width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.6);overflow:hidden;margin-top:10px">
+    <img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" style="width:100%;display:block">
+  </div>
+
+  <!-- সাদা কার্ড -->
+  <div style="background:white;width:100%;max-width:420px;border-radius:24px;padding:20px;margin-top:18px;box-shadow:0 12px 35px rgba(0,0,0,.4)">
+    
+    <h2 style="text-align:center;color:#0a2342;font-size:22px">🔐 মালিক লগইন - OTP</h2>
+    <p style="text-align:center;color:#333;margin:5px 0 12px 0;font-weight:bold">মোবাইল নম্বর লিখুন</p>
+    
+    <div style="display:flex;gap:8px;align-items:center;background:#f1f5f9;border:1.5px solid #cbd5e1;border-radius:12px;padding:6px 8px">
+      <span style="background:white;border-right:1px solid #ccc;padding:8px 10px;border-radius:8px;font-weight:bold;color:#555">+880</span>
+      <input id="phone" placeholder="01XXXXXXXXX" style="flex:1;border:none;background:transparent;padding:10px;font-size:15px;outline:none">
+      <button onclick="goToP2()" style="background:#ffcc00;border:none;padding:10px 14px;border-radius:10px;font-weight:bold;cursor:pointer">OTP পাঠান</button>
+    </div>
+
+    <!-- ড্যাশবোর্ড পরিসংখ্যান -->
+    <h3 style="margin-top:18px;color:#0a2342;font-size:18px">📊 ড্যাশবোর্ড পরিসংখ্যান</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+        <div style="font-size:24px">🏢</div>
+        <div><small>মোট প্রতিষ্ঠান:</small><br><b>৫০ টা</b></div>
+      </div>
+      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+        <div style="font-size:24px">👤</div>
+        <div><small>আজ লগইন:</small><br><b>২০ টা</b></div>
+      </div>
+      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+        <div style="font-size:24px">📶</div>
+        <div><small>অফলাইন:</small><br><b>৩০ টা</b></div>
+      </div>
+      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
+        <div style="font-size:24px">💰</div>
+        <div><small>পেমেন্ট বাকি:</small><br><b>৫ টা</b></div>
+      </div>
+    </div>
+
+    <button onclick="goToP2()" style="width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;background:#0a2342;color:white;font-weight:bold;font-size:16px;cursor:pointer">পরবর্তী ➡️ ২নং পেজ (১ম-১২শ শ্রেণী)</button>
+    
+    <p style="text-align:center;color:gray;font-size:12px;margin-top:10px">Engineered by Mohammad Abdul Malek<br>01912427294 | sikkhaoniom80.github.io</p>
   </div>
 </div>
 
 <script>
 function goToP2(){
-  let pass = document.getElementById('loginPass').value.trim();
-  if(pass != '1234' && pass != '১২৩৪'){
-    alert('পাসওয়ার্ড 1234 দিন');
-    return;
-  }
-  // ১নং থেকে ২নং এ যাবে
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('p2').classList.add('active');
 }
 </script>
-<!-- ========== ১নং ফিক্সড শেষ ========== -->
