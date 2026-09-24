@@ -1,53 +1,59 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>২য় পেজ - প্রতিষ্ঠান সেটআপ</title>
-<style>
-body{background:#0a2342;margin:0;padding:10px;display:flex;justify-content:center;font-family:sans-serif}
-.box{background:#fff;width:100%;max-width:430px;border-radius:18px;padding:14px;box-shadow:0 8px 20px rgba(0,0,0,.4)}
-h3{text-align:center;color:#0a2342;margin:5px 0}
-.input{width:100%;padding:11px;border:1.5px solid #0a2342;border-radius:10px;margin:6px 0;font-size:15px;box-sizing:border-box}
-.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;margin:6px 0;cursor:pointer;font-size:15px}
-.btn-yellow{background:#ffcc00;color:#000}
-.btn-navy{background:#0a2342;color:#fff}
-.list{font-size:13px;background:#eef4ff;padding:8px;margin:4px 0;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
-.small{font-size:11px;color:gray;text-align:center;margin:6px 0}
-.stat{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}
-.stat div{background:#fff8cc;padding:8px;border-radius:8px;font-size:12px;text-align:center;border:1px solid #ffcc00}
-</style>
-</head>
-<body>
-<div class="box">
-<h3>🏫 ২য় পেজ - প্রতিষ্ঠান যোগ করুন</h3>
-<p class="small">এখানে যতগুলো যোগ করবেন, ১ম পেজে মোট প্রতিষ্ঠান অটো বাড়বে</p>
+<div class="whiteCard" style="background:#fff;border-radius:20px;padding:16px;margin-top:10px">
 
-<div class="stat">
-<div>মোট সেভ<br><b id="total">0 টা</b></div>
-<div>লিংক<br><b id="link">0 টা</b></div>
+<!-- ১। কলেজ কোড -->
+<label class="label">কলেজ কোড</label>
+<input id="code" class="inputBox" value="50017" readonly style="background:#f0f0f0;font-weight:700">
+
+<!-- ২। পাসওয়ার্ড -->
+<label class="label">পাসওয়ার্ড দিন</label>
+<div style="position:relative">
+<input id="pass" type="password" class="inputBox" placeholder="••••••••" style="padding-right:90px">
+<span onclick="toggle()" style="position:absolute;right:70px;top:13px;cursor:pointer">👁️</span>
+<span onclick="resetPass()" style="position:absolute;right:10px;top:11px;background:#e6f0ff;padding:4px 6px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;color:#0a2342">রিসেট</span>
 </div>
 
-<input id="code" class="input" placeholder="Ins Code: যেমন 50017">
-<input id="bn" class="input" placeholder="বাংলা নাম: যেমন সরকারি কলেজ">
-<input id="en" class="input" placeholder="English Name (Optional)">
-<input id="eiin" class="input" placeholder="EIIN (Optional)">
+<!-- ৩। শ্রেণী -->
+<label class="label">শ্রেণী নির্বাচন করুন</label>
+<select id="classSelect" class="inputBox">
+<option value="">-- শ্রেণী বেছে নিন --</option>
+<option>১ম শ্রেণী</option>
+<option>২য় শ্রেণী</option>
+<option>৩য় শ্রেণী</option>
+<option>৪র্থ শ্রেণী</option>
+<option>৫ম শ্রেণী</option>
+<option>৬ষ্ঠ শ্রেণী</option>
+<option>৭ম শ্রেণী</option>
+<option>৮ম শ্রেণী</option>
+<option>৯ম শ্রেণী</option>
+<option>১০ম শ্রেণী</option>
+<option>১১শ শ্রেণী</option>
+<option>১২শ শ্রেণী</option>
+</select>
 
-<button class="btn btn-yellow" onclick="save()">💾 সেভ করুন</button>
-<button class="btn btn-navy" onclick="location.href='index.html'">← ১ম পেজে যান - দেখুন অটো বেড়েছে</button>
-<button class="btn" style="background:#eee" onclick="location.href='login.html'">→ ৩য় পেজে যান (১০০ কলেজ লগইন)</button>
+<!-- ৪। লগইন -->
+<button class="yellowBtn" onclick="login()" style="width:100%;padding:14px;background:#ffcc00;border:none;border-radius:14px;font-weight:700;font-size:18px;margin-top:16px;box-shadow:0 4px 0 #c9a000;cursor:pointer">🔐 লগইন</button>
 
-<hr style="margin:12px 0">
-<h4 style="font-size:14px;margin:5px 0">📋 সেভ করা তালিকা:</h4>
-<div id="list"></div>
-
-<button class="btn" style="background:#ffdddd;color:#900;margin-top:10px" onclick="clearAll()">🗑️ সব ডিলিট করুন</button>
-
+<p style="text-align:center;font-size:11px;margin-top:8px;color:#666">পাসওয়ার্ড ভুলে গেলে রিসেট চাপুন</p>
 </div>
 
 <script>
-function save(){
- let c=code.value.trim();
- let b=bn.value.trim();
- if(!c ||!b){alert('Code ও বাংলা নাম লিখুন!');return;}
- let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
- all[c]={nameBN:b,nameEN:en.value.trim()||b,eiin:ei
+function toggle(){ let p=document.getElementById('pass'); p.type=p.type=='password'?'text':'password'; }
+function resetPass(){
+ let c=document.getElementById('code').value;
+ let old=prompt('পুরাতন পাসওয়ার্ড:'); 
+ if(old!=localStorage.getItem('pass_'+c)){ alert('ভুল পাসওয়ার্ড'); return; }
+ let np=prompt('নতুন পাসওয়ার্ড:'); 
+ if(np){ localStorage.setItem('pass_'+c,np); alert('নতুন পাসওয়ার্ড: '+np); }
+}
+function login(){
+ let c=document.getElementById('code').value;
+ let p=document.getElementById('pass').value;
+ let cls=document.getElementById('classSelect').value;
+ if(!p || !cls){ alert('পাসওয়ার্ড আর শ্রেণী দিন'); return; }
+ let saved=localStorage.getItem('pass_'+c);
+ if(!saved){ localStorage.setItem('pass_'+c,p); } // প্রথমবার ফিক্সড
+ else if(p!=saved){ alert('ভুল পাসওয়ার্ড!'); return; }
+ localStorage.setItem('currentClass',cls);
+ location.href='dashboard.html?code='+c+'&class='+cls;
+}
+</script>
