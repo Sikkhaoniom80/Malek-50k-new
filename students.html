@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>৪র্থ পেজ - শিক্ষার্থী + ফলাফল</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}.wrap{max-width:460px;width:100%;background:#fdfaf3;min-height:100vh;padding-bottom:20px}.pad{background:#fff8dc;border:2px solid #d6c28f;margin:10px;border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center}.pad img{width:52px;height:52px;border-radius:50%}.card{background:#fff;margin:10px;border-radius:12px;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}.row{display:flex;gap:6px}input,select{width:100%;padding:9px;border:1.5px solid #ccc;border-radius:8px;font-family:'Hind Siliguri'}table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}th{background:#ffde59;padding:6px}td{padding:6px;border-bottom:1px solid #eee;text-align:center}.sub{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.btn{padding:11px;border:none;border-radius:10px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer;flex:1}.btn-y{background:#ffcc00}.btn-d{background:#0a2342;color:#fff}.btn-g{background:#0e8a3c;color:#fff}</style>
+</head><body><div class="wrap">
+<!-- উপরে ৫ প্যাডের তথ্য -->
+<div class="pad"><img id="logo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"><div><b id="bn">মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ</b><br><b id="en" style="color:#a00;font-size:11px">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</b><br><small>স্থাপিত: ২০০৫ • কোড: 50017 • EIIN: 132332 • সীতাকুণ্ড, চট্টগ্রাম</small></div></div>
+
+<div class="card"><h4>👥 শিক্ষার্থী যোগ</h4><div class="row"><input id="sName" placeholder="নাম লিখুন"><input id="sRoll" placeholder="রোল" style="max-width:70px"><button class="btn btn-y" style="max-width:60px" onclick="addS()">+ যোগ</button></div><table><thead><tr><th>ক্রম</th><th>নাম</th><th>রোল</th><th>✖</th></tr></thead><tbody id="sList"></tbody></table></div>
+
+<div class="card"><h4>📊 ফলাফল সিট (১২ বিষয়)</h4><select id="sel"></select><div class="sub" id="grid"></div><div style="margin-top:8px;font-weight:800">মোট: <span id="tot">0</span>/1200 • গ্রেড: <span id="gr">-</span></div><button class="btn btn-g" style="width:100%;margin-top:8px" onclick="saveR()">✓ সেভ করুন</button><table><thead><tr><th>রোল</th><th>নাম</th><th>GPA</th><th>মোট</th></tr></thead><tbody id="rList"></tbody></table></div>
+
+<!-- নিচে - লগআউট বাদ, শুধু ৩য় পেজে যাওয়ার চিহ্ন -->
+<div style="display:flex;gap:8px;padding:12px">
+<button class="btn btn-d" onclick="location.href='class.html'">২য় পেজ</button>
+<button class="btn btn-y" onclick="location.href='report.html'">← ৩য় পেজে যান</button>
+</div>
+</div>
+<script>
+let CODE=localStorage.getItem('loggedCollege')||'50017';let subs=["বাংলা","ইংরেজি","ICT","হিসাব","ব্যবসায়","ফিন্যান্স","বাংলা২","ইংরেজি২","পরিসংখ্যান","অর্থনীতি","উৎপাদন","বাজার"];let g=document.getElementById('grid');subs.forEach((s,i)=>{g.innerHTML+=`<div style="background:#fffaf0;border:1px solid #e6d8a0;border-radius:6px;padding:5px"><label style="font-size:10px">${i+1}.${s}</label><input id="m${i}" type="number" placeholder="0-100" oninput="calc()"></div>`;});
+function gr(m){if(m>=80)return"A+";if(m>=70)return"A";if(m>=60)return"A-";if(m>=50)return"B";if(m>=40)return"C";if(m>=33)return"D";return"F";}
+function calc(){let t=0;for(let i=0;i<12;i++)t+=parseInt(document.getElementById('m'+i).value||0);document.getElementById('tot').innerText=t;document.getElementById('gr').innerText=gr(t/12||0);}
+function getS(){return JSON.parse(localStorage.getItem('students_'+CODE)||'[{"name":"আরিফ","roll":"R-001"},{"name":"সুমাইয়া","roll":"R-002"}]');}
+function render(){let a=getS();let tb=document.getElementById('sList');tb.innerHTML='';let sel=document.getElementById('sel');sel.innerHTML='<option>ছাত্র নির্বাচন</option>';a.forEach((s,i)=>{tb.innerHTML+=`<tr><td>${i+1}</td><td>${s.name}</td><td>${s.roll}</td><td><button onclick="delS(${i})">❌</button></td></tr>`;sel.innerHTML+=`<option value="${s.roll}">${s.roll}-${s.name}</option>`;});let res=JSON.parse(localStorage.getItem('results_'+CODE)||'[]');let rb=document.getElementById('rList');rb.innerHTML='';res.forEach(r=>{rb.innerHTML+=`<tr><td>${r.roll}</td><td>${r.name}</td><td>${r.gpa}</td><td>${r.total}</td></tr>`;});}
+function addS(){let n=document.getElementById('sName').value.trim(),r=document.getElementById('sRoll').value.trim();if(!n)return alert('নাম লিখুন');let a=getS();a.push({name:n,roll:r||'R-00'+(a.length+1)});localStorage.setItem('students_'+CODE,JSON.stringify(a));render();}
+function delS(i){let a=getS();a.splice(i,1);localStorage.setItem('students_'+CODE,JSON.stringify(a));render();}
+function saveR(){let roll=document.getElementById('sel').value;let s=getS().find(x=>x.roll==roll);if(!s)return alert('ছাত্র সিলেক্ট করুন');let t=0;for(let i=0;i<12;i++)t+=parseInt(document.getElementById('m'+i).value||0);let gp=document.getElementById('gr').innerText;let arr=JSON.parse(localStorage.getItem('results_'+CODE)||'[]');arr.push({roll,name:s.name,gpa:gp,total:t});localStorage.setItem('results_'+CODE,JSON.stringify(arr));render();}
+render();
+</script></body></html>
