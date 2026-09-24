@@ -1,43 +1,71 @@
-<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pad Login</title>
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Class Select</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#0a2a5e;display:flex;justify-content:center;padding:15px;font-family:sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0a2a5e;display:flex;justify-content:center;padding:12px;font-family:sans-serif}
 .phone{width:100%;max-width:400px}
-.topBox{display:none;background:#fff;border-radius:18px;padding:10px;text-align:center;border:3px solid #ffcc00;margin-bottom:15px}
-.topBox img{width:100%;max-height:160px;object-fit:contain}
-.upload{background:#d9e8ff;border:2.5px dashed #0a2a5e;border-radius:16px;padding:20px;text-align:center}
-.camBtn{width:100%;padding:14px;background:#ffcc00;border:2px solid #0a2a5e;border-radius:12px;font-weight:900;font-size:18px;cursor:pointer;margin-top:10px}
-.inputWrap{position:relative;margin-top:14px}input{width:100%;padding:14px 40px 14px 14px;border:2px solid #0a2a5e;border-radius:12px;font-size:15px}
-.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer}
-.change{display:block;text-align:right;font-size:12px;color:#fff;text-decoration:underline;margin-top:6px;cursor:pointer}
-.mainBtn{width:100%;padding:13px;background:#ffcc00;border:none;border-radius:12px;font-weight:900;font-size:18px;margin-top:12px;cursor:pointer}
+.top{background:#fff;border:3px solid #ffcc00;border-radius:16px;padding:10px;text-align:center;margin-bottom:14px}
+.top img{width:100%;max-height:150px;object-fit:contain}
+.card{background:#fff;border-radius:16px;padding:14px}
+.inputWrap{position:relative;margin-top:10px}input{width:100%;padding:12px 40px 12px 12px;border:2px solid #0a2a5e;border-radius:10px}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer}
+.change{display:block;text-align:right;font-size:12px;color:#0a2a5e;text-decoration:underline;margin-top:4px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.cBtn{padding:14px;background:#ffcc00;border:2px solid #0a2a5e;border-radius:12px;font-weight:900;font-size:17px;cursor:pointer}
+.cBtn:active{transform:scale(0.96)}
+.logout{width:100%;margin-top:14px;padding:10px;background:#fff;border:2px solid red;border-radius:10px;color:red;font-weight:700;cursor:pointer}
 </style></head><body>
 <div class="phone">
-<div class="topBox" id="topBox"><img id="prev"><p id="cName" style="font-weight:900;color:#0a2a5e;margin-top:5px"></p><small style="color:green">✅ প্যাড পাওয়া গেছে</small></div>
 
-<div class="upload">
-<div id="upText"><div style="font-size:38px">📷</div><b>প্যাডের ছবি আপলোড করুন<br>(নাম+লোগো সহ)</b></div>
-<button class="camBtn" onclick="document.getElementById('file').click()">📷 ক্যামেরা + 🖼️ গ্যালারি</button>
-<input type="file" id="file" hidden accept="image/*">
+<div class="top" id="topBox">
+<img id="padImg" src="">
+<p id="collegeName" style="font-weight:900;margin-top:6px;color:#0a2a5e"></p>
+<p style="font-size:12px;color:green">✅ লগইন সফল</p>
 </div>
 
-<div class="inputWrap"><input id="pass" type="password" placeholder="নিজে পাসওয়ার্ড তৈরি করুন"><span class="eye" onclick="let p=document.getElementById('pass');p.type=p.type==='password'?'text':'password'">👁️</span></div>
+<div class="card">
+<b>🔐 প্রতিষ্ঠানের পাসওয়ার্ড</b>
+<div class="inputWrap"><input id="pass" type="password" placeholder="পাসওয়ার্ড দিন"><span class="eye" onclick="let p=document.getElementById('pass');p.type=p.type==='password'?'text':'password'">👁️</span></div>
 <span class="change" onclick="resetPass()">পাসওয়ার্ড পরিবর্তন / রিসেট</span>
-<button class="mainBtn" onclick="go('reg')">রেজিস্ট্রেশন করুন</button>
-<button class="mainBtn" onclick="go('login')">লগইন করুন</button>
+
+<hr style="margin:12px 0">
+<b>📚 শ্রেণী নির্বাচন করুন (১-১২)</b>
+<div class="grid">
+<button class="cBtn" onclick="goClass(1)">১ম শ্রেণী</button>
+<button class="cBtn" onclick="goClass(2)">২য় শ্রেণী</button>
+<button class="cBtn" onclick="goClass(3)">৩য় শ্রেণী</button>
+<button class="cBtn" onclick="goClass(4)">৪র্থ শ্রেণী</button>
+<button class="cBtn" onclick="goClass(5)">৫ম শ্রেণী</button>
+<button class="cBtn" onclick="goClass(6)">৬ষ্ঠ শ্রেণী</button>
+<button class="cBtn" onclick="goClass(7)">৭ম শ্রেণী</button>
+<button class="cBtn" onclick="goClass(8)">৮ম শ্রেণী</button>
+<button class="cBtn" onclick="goClass(9)">৯ম শ্রেণী</button>
+<button class="cBtn" onclick="goClass(10)">১০ম শ্রেণী</button>
+<button class="cBtn" onclick="goClass(11)">১১শ শ্রেণী</button>
+<button class="cBtn" onclick="goClass(12)">১২শ শ্রেণী</button>
 </div>
+
+<button class="logout" onclick="localStorage.clear();location.href='index.html'">লগআউট</button>
+</div>
+</div>
+
 <script>
-const file=document.getElementById('file');
-file.onchange=e=>{
- const f=e.target.files[0]; if(!f) return;
- const u=URL.createObjectURL(f);
- document.getElementById('prev').src=u;
- document.getElementById('topBox').style.display='block';
- document.getElementById('cName').innerText=f.name.split('.')[0].toUpperCase();
- localStorage.setItem('padImage',u);
- document.getElementById('upText').innerHTML=`<img src="${u}" style="width:100%;max-height:130px;object-fit:contain"><br><b style="color:green">✅ ${f.name.split('.')[0]}</b>`;
-};
-function go(type){
- const pass=document.getElementById('pass').value.trim();
- if(document.getElementById('topBox').style.display==='none'){alert('আগে প্যাড আপলোড করুন');return;}
- if(!pass){alert('পাসওয়ার্ড লিখুন');return;}
- if(type==='reg'){
+// ১ নং পেজ থেকে প্যাড আনা
+const img=localStorage.getItem('padImage');
+if(!img){alert('আগে প্যাড আপলোড করুন');location.href='index.html';}
+document.getElementById('padImg').src=img;
+
+function goClass(c){
+ const p=document.getElementById('pass').value.trim();
+ const saved=localStorage.getItem('userPass');
+ if(!p){alert('পাসওয়ার্ড দিন');return;}
+ if(p!==saved){alert('ভুল পাসওয়ার্ড!');return;}
+ localStorage.setItem('selectedClass',c);
+ location.href='form.html'; // ৩ নং পেজে যাবে
+}
+function resetPass(){
+ const s=localStorage.getItem('userPass'); if(!s){alert('পাসওয়ার্ড নাই');return;}
+ const o=prompt('পুরাতন পাসওয়ার্ড:'); if(o!==s){alert('ভুল');return;}
+ const n=prompt('নতুন পাসওয়ার্ড:'); if(!n)return;
+ localStorage.setItem('userPass',n); alert('নতুন পাসওয়ার্ড: '+n);
+}
+</script>
+</body></html>
