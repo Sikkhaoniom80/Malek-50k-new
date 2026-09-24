@@ -17,19 +17,16 @@
 <div class="card">
 <h3 style="text-align:center">🔐 মালিক লগইন</h3>
 <p style="text-align:center;font-size:13px;margin:8px 0;color:#555">পাসওয়ার্ড দিন</p>
-
 <input id="p" class="input" type="password" placeholder="••••">
-
 <button class="btn" onclick="login()">🔐 লগইন করুন</button>
-
 <button onclick="resetP()" style="width:100%;margin-top:10px;padding:10px;background:#fff;border:1.5px dashed #0a2342;border-radius:10px;font-size:13px;cursor:pointer">🔑 পাসওয়ার্ড পরিবর্তন / রিসেট</button>
 
 <h4 style="margin-top:16px;font-size:14px">📊 ড্যাশবোর্ড পরিসংখ্যান</h4>
 <div class="stat">
-<div>🏢 মোট প্রতিষ্ঠান:<br><b>৫০ টা</b></div>
-<div>👤 আজ লগইন:<br><b>২০ টা</b></div>
-<div>📶 অফলাইন:<br><b>৩০ টা</b></div>
-<div>💰 পেমেন্ট বাকি:<br><b>৫ টা</b></div>
+<div>🏢 মোট প্রতিষ্ঠান:<br><b id="totalIns">০ টা</b></div>
+<div>👤 আজ লগইন:<br><b id="todayLogin">০ টা</b></div>
+<div>📶 অফলাইন:<br><b id="offline">০ টা</b></div>
+<div>💰 পেমেন্ট বাকি:<br><b id="due">০ টা</b></div>
 </div>
 
 <p style="text-align:center;color:gray;font-size:10px;margin-top:12px">Engineered by Mohammad Abdul Malek<br>01912427294 | sikkhaoniom80.github.io<br>বর্তমান পাস: <b id="sp"></b></p>
@@ -39,13 +36,31 @@
 if(!localStorage.getItem('mp')) localStorage.setItem('mp','1234');
 document.getElementById('sp').innerText=localStorage.getItem('mp');
 
+function updateStats(){
+ let all = JSON.parse(localStorage.getItem('allColleges')||'{}');
+ let total = Object.keys(all).length;
+ let todayData = JSON.parse(localStorage.getItem('todayLogins')||'null');
+ let loginCount = 0;
+ let todayStr = new Date().toDateString();
+ if(todayData && todayData.date === todayStr){
+   loginCount = todayData.list ? todayData.list.length : 0;
+ }
+ let offline = total - loginCount;
+ if(offline < 0) offline = 0;
+
+ document.getElementById('totalIns').innerText = total + ' টা';
+ document.getElementById('todayLogin').innerText = loginCount + ' টা';
+ document.getElementById('offline').innerText = offline + ' টা';
+ document.getElementById('due').innerText = '৫ টা';
+}
+updateStats();
+
 function login(){
  if(document.getElementById('p').value.trim() !== localStorage.getItem('mp')){
    alert('ভুল পাসওয়ার্ড! বর্তমান: '+localStorage.getItem('mp'));return;
  }
  location.href='class.html';
 }
-
 function resetP(){
  let o=prompt('পুরাতন পাসওয়ার্ড দিন:'); 
  if(o===null) return;
@@ -54,7 +69,7 @@ function resetP(){
  if(!n||n.length<4){alert('৪ সংখ্যা দিন');return;}
  localStorage.setItem('mp',n.trim()); 
  document.getElementById('sp').innerText=n.trim(); 
- alert('✅ পাসওয়ার্ড পরিবর্তন হয়েছে! নতুন পাস: '+n);
+ alert('✅ পাসওয়ার্ড পরিবর্তন হয়েছে!');
 }
 </script>
 </body></html>
