@@ -2,102 +2,107 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MALEK 50K - ATTENDANCE</title>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<title>Malek 50K - Final Alada Class</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-body{background:#0d1b4a;color:white;font-family:sans-serif;margin:0;padding-bottom:30px}
-.card{background:white;color:black;border-radius:20px;margin:15px;padding:15px}
-.gold{border:4px solid gold;border-radius:20px;padding:10px;text-align:center;background:#0d1b4a;margin:15px}
-.btn{background:#facc15;color:black;padding:12px;border-radius:12px;border:none;width:100%;margin:5px 0;font-weight:bold}
-.header-pad img{width:100%;border-radius:15px;border:3px solid gold}
-.hidden{display:none}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif}
+body{background:#0a2342;min-height:100vh}
+.page{display:none}.page.active{display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
+.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.5);margin-top:10px}
+.card{background:#fff;width:100%;max-width:420px;border-radius:24px;padding:20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+.header{background:#0f3d2e;color:white;padding:25px 15px 50px 15px;text-align:center;border-radius:0 0 25px 25px;width:100%}
+.yellow-btn{background:#ffcc00;width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;font-size:15px;cursor:pointer}
+.attendance{display:flex;gap:8px;margin:10px 0}.att-box{flex:1;background:#fff;text-align:center;padding:12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.sms-btns{display:flex;gap:8px}.sms-btns button{flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold}
+.green{background:#16a34a}.orange{background:#ea580c}.yellow{background:#eab308;color:#000!important}.blue{background:#2563eb}
+.student-row{display:flex;justify-content:space-between;align-items:center;padding:12px 10px;border-bottom:1px solid #eee;gap:10px}
+input,select{width:100%;padding:12px;margin:6px 0;border:1.5px solid #ccc;border-radius:10px;font-size:15px}
 </style>
 </head>
 <body>
 
-<!-- ========== ১নং ফিক্সড - লোগো কখনো চেঞ্জ হবে না 🔒 ========== -->
-<div id="page1">
-  <div class="gold">
-    <div style="width:200px;height:200px;background:radial-gradient(#ffec8b,#d4a017);border-radius:50%;margin:auto;display:flex;align-items:center;justify-content:center;color:#0d1b4a;font-weight:900;line-height:1.2;border:4px solid gold">
-      MALEK<br>50K<br>ATTENDANCE<br>SCHOOL COLLEGE
-    </div>
-    <div style="background:black;color:white;margin-top:10px;padding:8px;border-radius:10px;font-size:13px">
-      Engineered by Mohammad Abdul Malek<br><span style="color:gold">01912427294</span><br>sikkhaoniom80.github.io
-    </div>
-  </div>
-  <div class="card">
-    <h2>🔓 মালিক লগইন</h2>
-    <input id="phone" placeholder="01XXXXXXXXX" style="width:70%;padding:10px"><button class="btn" style="width:25%" onclick="showPage(2)">Next</button>
-    <h3>📊 Dashboard</h3>
-    <div style="background:#dbeafe;border-radius:10px;padding:10px">মোট প্রতিষ্ঠান: ৫০ টা | আজ লগইন: ২০ টা</div>
-    <button class="btn" onclick="showPage(2)">পরবর্তী ➡️ ২নং পেজ</button>
-  </div>
+<div id="p1" class="page active">
+<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg">
+<div class="card">
+<h2 style="text-align:center">🔐 শিক্ষক লগইন</h2>
+<select id="loginClass">
+<option value="">শ্রেণি সিলেক্ট করুন</option>
+<option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>১১শ শ্রেণি</option><option>১২শ শ্রেণি</option>
+</select>
+<input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
+<button onclick="doLogin()" style="width:100%;padding:14px;border:none;border-radius:12px;background:#0f2d5a;color:white;font-weight:bold;margin-top:8px">লগইন করুন</button>
+</div>
 </div>
 
-<!-- ========== ২নং - ১ম থেকে ১২শ + প্যাডের পুরো ছবি ========== -->
-<div id="page2" class="hidden">
-  <div id="header2" class="header-pad" style="margin:15px;background:white;color:black;padding:20px;border-radius:15px;text-align:center">এখানে প্যাড আপলোড করলে পুরো ছবি আসবে</div>
-  <div class="card">
-    <h2>🔰 শ্রেণী নির্বাচন (১ম-১২শ) - ২য় পেজ থেকেই</h2>
-    <div class="grid3">
-      <button class="btn" onclick="selectClass('১ম')">১ম</button>
-      <button class="btn" onclick="selectClass('২য়')">২য়</button>
-      <button class="btn" onclick="selectClass('৩য়')">৩য়</button>
-      <button class="btn" onclick="selectClass('৪র্থ')">৪র্থ</button>
-      <button class="btn" onclick="selectClass('৫ম')">৫ম</button>
-      <button class="btn" onclick="selectClass('৬ষ্ঠ')">৬ষ্ঠ</button>
-      <button class="btn" onclick="selectClass('৭ম')">৭ম</button>
-      <button class="btn" onclick="selectClass('৮ম')">৮ম</button>
-      <button class="btn" onclick="selectClass('৯ম')">৯ম</button>
-      <button class="btn" onclick="selectClass('১০ম')">১০ম</button>
-      <button class="btn" style="background:#16a34a;color:white" onclick="selectClass('১১শ')">১১শ</button>
-      <button class="btn" style="background:#16a34a;color:white" onclick="selectClass('১২শ')">১২শ</button>
-    </div>
-    <p style="background:#fef9c3;padding:8px;border-radius:10px;text-align:center">✅ নির্বাচিত: <b id="selectedClassShow">কোনো শ্রেণী সিলেক্ট করেননি</b></p>
-    <h3>প্যাডের ছবি আপলোড (উড/পুরো প্যাড)</h3>
-    <div style="border:2px dashed blue;padding:15px;text-align:center;border-radius:15px">
-      <input type="file" id="padUpload" accept="image/*" onchange="uploadPad(event)">
-    </div>
-    <button class="btn" style="background:#22c55e;color:white;margin-top:10px" onclick="goToPage3()">লগইন ➡️ ৩নং</button>
-  </div>
+<div id="p2" class="page" style="background:#f0f2f5">
+<div class="header"><h1>মমতাজউদ্দিন বিজনেস<br>ম্যানেজমেন্ট কলেজ</h1><p id="classNameShow" style="color:#ffde59;font-weight:bold">শ্রেণী:</p></div>
+<div class="card">
+<button class="yellow-btn" onclick="goP3()">👥 শিক্ষার্থীর তালিকা</button>
+<div class="attendance"><div class="att-box"><small>মোট</small><br><b id="total" style="font-size:22px">0</b></div><div class="att-box"><small>উপস্থিত</small><br><b id="present" style="font-size:22px;color:green">0</b></div><div class="att-box"><small>অনুপস্থিত</small><br><b id="absent" style="font-size:22px;color:red">0</b></div></div>
+<input id="noticeText" placeholder="নোটিশ লিখুন...">
+<div class="sms-btns"><button class="green" onclick="sendSMS('present')">Present SMS</button><button class="orange" onclick="sendSMS('absent')">Absent SMS</button><button class="yellow" onclick="sendSMS('notice')">Notice SMS</button></div>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="green" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="exportExcel()">Excel</button><button class="blue" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="goP1()">Logout</button></div>
+</div>
 </div>
 
-<!-- ========== ৩নং ========== -->
-<div id="page3" class="hidden">
-  <div id="header3" class="header-pad" style="margin:15px"></div>
-  <div class="card">
-    <h3>শ্রেণী: <span id="classShow3">-</span> | তারিখ: <span id="date"></span></h3>
-    <textarea id="noticeText" placeholder="নোটিশ লিখুন..." style="width:100%;padding:10px"></textarea>
-    <button class="btn" style="background:#22c55e;color:white" onclick="downloadExcel()">Excel ডাউনলোড</button>
-    <button class="btn" onclick="sendSMS('present')">Present SMS</button>
-    <button class="btn" onclick="sendSMS('absent')">Absent SMS</button>
-    <button class="btn" onclick="sendSMS('notice')">Notice SMS</button>
-    <button class="btn" onclick="showPage(4)">৪নং পেজ ➡️</button>
-  </div>
+<div id="p3" class="page" style="background:#f0f2f5">
+<div class="header" style="padding-bottom:20px"><h2>শিক্ষার্থীর তালিকা</h2><button onclick="goP2()" style="margin-top:10px;background:white;color:#0f3d2e;border:none;padding:6px 15px;border-radius:20px;font-weight:bold">⬅️ ড্যাশবোর্ড</button></div>
+<div class="card"><button class="yellow-btn" onclick="showTab('list')">📋 সম্পূর্ণ তালিকা (রোল ক্রমানুসারে)</button><button class="yellow-btn" style="margin-top:8px;background:#dcfce7" onclick="showTab('add')">➕ শিক্ষার্থী যোগ করুন</button>
+<div id="listTab" style="margin-top:12px"><div id="studentList"></div></div>
+<div id="addTab" style="display:none;margin-top:12px"><input id="sName" placeholder="নাম"><input id="sRoll" placeholder="রোল"><input id="sMobile" placeholder="মোবাইল 01..."><button onclick="addStudent()" style="width:100%;padding:12px;background:#16a34a;color:white;border:none;border-radius:8px;margin-top:8px;font-weight:bold">যোগ করুন</button></div>
 </div>
-
-<!-- ========== ৪নং - ২টা ঘর ========== -->
-<div id="page4" class="hidden">
-  <div id="header4" class="header-pad" style="margin:15px"></div>
-  <div class="card" style="background:#1e293b;color:white"><h3>শ্রেণী: <span id="classShow4">-</span> শিক্ষার্থী যোগ</h3><div id="studentList">লিস্ট আসবে</div></div>
-  <div class="card" style="background:#1e293b;color:white"><h3>ফলাফলের জন্য</h3><div>মোট: <span id="total">0</span></div></div>
 </div>
 
 <script>
-let students=[{name:"রহিম",mobile:"01900000000"},{name:"করিম",mobile:"01900000001"}];
-let attendance=['present','absent'];
-let currentClass=localStorage.getItem("selected_class")||"";
+let currentClass = localStorage.getItem('currentClass') || '';
+let students = [];
+let attendance = {};
 
-function selectClass(c){currentClass=c;localStorage.setItem("selected_class",c);document.getElementById("selectedClassShow").innerText=c+" শ্রেণী";document.getElementById("classShow3").innerText=c;document.getElementById("classShow4").innerText=c;}
-function uploadPad(e){let r=new FileReader();r.onload=function(){localStorage.setItem("college_pad_full",r.result);document.getElementById("header2").innerHTML=`<img src="${r.result}">`;document.getElementById("header3").innerHTML=`<img src="${r.result}">`;document.getElementById("header4").innerHTML=`<img src="${r.result}">`;};r.readAsDataURL(e.target.files[0]);}
-function showPage(n){let pad=localStorage.getItem("college_pad_full");if(pad){document.getElementById("header2").innerHTML=`<img src="${pad}">`;document.getElementById("header3").innerHTML=`<img src="${pad}">`;document.getElementById("header4").innerHTML=`<img src="${pad}">`;}let cls=localStorage.getItem("selected_class");if(cls){selectClass(cls);}["page1","page2","page3","page4"].forEach(id=>document.getElementById(id).classList.add("hidden"));document.getElementById("page"+n).classList.remove("hidden");}
-function goToPage3(){if(!localStorage.getItem("selected_class")){alert("আগে ১ম-১২শ শ্রেণী সিলেক্ট করুন!");return;}showPage(3);}
-function downloadExcel(){let data=students.map((s,i)=>({নাম:s.name,হাজিরা:attendance[i]||'absent',শ্রেণী:currentClass}));let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Sheet");XLSX.writeFile(wb,currentClass+"_Attendance.xlsx");}
+function loadData(){
+  if(!currentClass) return;
+  students = JSON.parse(localStorage.getItem('students_'+currentClass) || '[]');
+  attendance = JSON.parse(localStorage.getItem('att_'+currentClass) || '{}');
+}
+function saveData(){
+  localStorage.setItem('students_'+currentClass, JSON.stringify(students));
+  localStorage.setItem('att_'+currentClass, JSON.stringify(attendance));
+  localStorage.setItem('currentClass', currentClass);
+}
+function doLogin(){
+  let cls=document.getElementById('loginClass').value;
+  let pass=document.getElementById('loginPass').value.trim();
+  if(!cls){alert('শ্রেণী সিলেক্ট করুন');return;}
+  if(pass!='1234' && pass!='১২৩৪'){alert('পাসওয়ার্ড 1234');return;}
+  currentClass=cls;
+  loadData();
+  document.getElementById('classNameShow').innerText='শ্রেণী: '+cls;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p2').classList.add('active');
+  updateCounts();
+}
+function goP1(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p1').classList.add('active');}
+function goP2(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p2').classList.add('active');updateCounts();}
+function goP3(){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p3').classList.add('active');render();}
+function showTab(t){document.getElementById('listTab').style.display=t=='list'?'block':'none';document.getElementById('addTab').style.display=t=='add'?'block':'none';}
+function addStudent(){let n=document.getElementById('sName').value.trim(),r=document.getElementById('sRoll').value.trim(),m=document.getElementById('sMobile').value.trim();if(!n||!r)return alert('নাম ও রোল দিন');students.push({name:n,roll:r,mobile:m});saveData();document.getElementById('sName').value='';document.getElementById('sRoll').value='';document.getElementById('sMobile').value='';render();showTab('list');}
+function render(){
+ students.sort((a,b)=>parseInt(a.roll)-parseInt(b.roll));
+ let list=document.getElementById('studentList');list.innerHTML='';
+ if(students.length==0)list.innerHTML='<p style="color:gray;text-align:center">কোনো শিক্ষার্থী নেই</p>';
+ students.forEach((s,i)=>{
+  let checked=attendance[i]=='absent'?'':'checked';
+  list.innerHTML+=`<div class="student-row"><div><input type="checkbox" ${checked} onchange="toggleAtt(${i},this.checked)"> <b>${s.name}</b> (রোল:${s.roll})</div><div><button style="background:#2196F3;color:white;border:none;padding:6px 10px;border-radius:6px" onclick="editS(${i})">✏️</button><button style="background:#ef4444;color:white;border:none;padding:6px 10px;border-radius:6px;margin-left:4px" onclick="delS(${i})">🗑️</button></div></div>`;
+ });
+ updateCounts();
+}
+function toggleAtt(i,isP){attendance[i]=isP?'present':'absent';saveData();updateCounts();}
+function updateCounts(){let p=0;students.forEach((_,i)=>{if(attendance[i]!=='absent')p++;});document.getElementById('total').innerText=students.length;document.getElementById('present').innerText=p;document.getElementById('absent').innerText=students.length-p;}
+function delS(i){if(confirm('ডিলিট করবে?')){students.splice(i,1);delete attendance[i];saveData();render();}}
+function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null)return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile||'');students[i]={...s,name:n,roll:r,mobile:m};saveData();render();}
+function exportExcel(){if(students.length==0)return alert('খালি');let data=students.map((s,i)=>({নাম:s.name,রোল:s.roll,মোবাইল:s.mobile||'',উপস্থিতি:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত'}));let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Sheet");XLSX.writeFile(wb,currentClass+"_Attendance.xlsx");}
 function sendSMS(type){let notice=document.getElementById('noticeText').value.trim();let targets=type=='notice'?students:type=='present'?students.filter((_,i)=>attendance[i]!=='absent'):students.filter((_,i)=>attendance[i]=='absent');let nums=targets.map(s=>(s.mobile||'').trim()).filter(m=>m.length>=11);if(nums.length==0)return alert('মোবাইল নাই');let msg=type=='present'?`উপস্থিত: ${notice}`:type=='absent'?`অনুপস্থিত: ${notice}`:`নোটিশ: ${notice}`;window.location.href=`sms:${nums.join(';')}?body=${encodeURIComponent(msg)}`;}
-document.getElementById("date").innerText=new Date().toLocaleDateString('bn-BD');
-if(currentClass) selectClass(currentClass);
-let p=localStorage.getItem("college_pad_full");if(p){document.getElementById("header2").innerHTML=`<img src="${p}">`;document.getElementById("header3").innerHTML=`<img src="${p}">`;document.getElementById("header4").innerHTML=`<img src="${p}">`;}
+if(currentClass){loadData();}
 </script>
 </body>
 </html>
