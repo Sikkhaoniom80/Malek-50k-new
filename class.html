@@ -1,82 +1,55 @@
 <!DOCTYPE html>
-<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>প্যাড তৈরি - ৫ টা জিনিস</title>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>প্যাড তৈরি - ২য় পেজ</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{background:#0a2342;padding:10px;display:flex;justify-content:center;font-family:'Hind Siliguri',sans-serif}
-.box{background:#fff;max-width:450px;width:100%;border-radius:16px;padding:12px}
-.input{width:100%;padding:11px;border:1.5px solid #0a2342;border-radius:10px;margin:6px 0;box-sizing:border-box}
-.btn{width:100%;padding:13px;background:#ffcc00;border:none;border-radius:10px;font-weight:800;font-size:16px;margin:6px 0;cursor:pointer}
-.preview{border:2px dashed #0a3d8f;border-radius:10px;padding:5px;margin:10px 0;background:#f9fbff}
-.pad{display:flex;align-items:center;gap:10px;background:#fff;border-bottom:2.5px solid #0a3d8f;padding:8px 6px}
-.pad img{width:62px;height:62px;border-radius:50%;object-fit:cover;border:1px solid #ddd}
-.pad h2{font-size:15px;color:#0a3d8f;margin:0;line-height:1.1}
-.pad h3{font-size:12.5px;color:#c00000;margin:1px 0 0 0}
-.pad p{font-size:11px;margin:3px 0 0 0;font-weight:600}
-</style></head><body>
-<div class="box">
-<h3 style="text-align:center">🎨 প্যাড তৈরি - ৫ টা জিনিস লাগবে</h3>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a2342;font-family:'Hind Siliguri',sans-serif;display:flex;justify-content:center;padding:0}
+.wrap{width:100%;max-width:430px;background:#fff;min-height:100vh;padding:12px}
+.pad{border:2px dashed #0e3d8f;border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center;background:#fff}
+.pad img{width:62px;height:62px;border-radius:50%;border:2px solid #0e3d8f;object-fit:cover;background:#fff}
+.p-bn{font-size:15px;font-weight:700;color:#000;line-height:1.2}
+.p-en{font-size:13px;font-weight:700;color:#c00000;margin-top:2px;text-transform:uppercase;line-height:1.1}
+.p-info{font-size:11px;font-weight:600;margin-top:3px}
+.lbl{font-size:14px;font-weight:700;margin:16px 0 6px;color:#000}
+.inp{width:100%;padding:12px;border:1.8px solid #0e2f5a;border-radius:12px;font-size:15px;outline:none;font-family:'Hind Siliguri'}
+.inp:focus{border-color:#ffcc00}
+.file-box{width:100%;padding:10px;border:1.8px solid #0e2f5a;border-radius:12px;display:flex;align-items:center;gap:8px}
+.btn-yellow{width:100%;padding:15px;background:#ffcc00;border:none;border-radius:14px;font-size:18px;font-weight:800;margin-top:16px;cursor:pointer;box-shadow:0 4px 0 #d4a800}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn-dark{padding:14px;background:#0e2f5a;color:#fff;border:none;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer}
+.btn-green{padding:14px;background:#00a859;color:#fff;border:none;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer}
+.list{margin-top:14px;font-size:14px;font-weight:600}
+.item{background:#f0f0ff;padding:9px 12px;border-radius:10px;margin-top:6px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
 
-<div class="preview">
-<div style="font-size:11px;text-align:center;color:gray">👇 লাইভ প্রিভিউ (আপনার ছবির মতো)</div>
-<div class="pad" id="padPreview">
-<img id="pLogo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
+<div class="pad">
+<img id="prevLogo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
 <div>
-<p style="font-size:7px;text-align:center;margin:0">❝ইকরা বিসমি রাব্বিক❞</p>
-<h2 id="pBn">মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ</h2>
-<h3 id="pEn">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</h3>
-<p>■ EIIN : <span id="pEiin">132332</span> &nbsp; ■ Ins. Code: <span id="pCode">50017</span></p>
+<div class="p-bn" id="prevBN">মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+<div class="p-en" id="prevEN">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
+<div class="p-info">■ EIIN : <span id="prevEIIN">132332</span> &nbsp; ■ Ins. Code: <span id="prevCODE">50017</span></div>
 </div>
 </div>
+
+<div class="lbl">📷 ১। লোগো আপলোড (গোল নীল লোগো)</div>
+<div class="file-box">
+<input type="file" id="logoFile" accept="image/*" onchange="loadLogo(event)">
 </div>
 
-<label style="font-size:13px;font-weight:700">📷 ১। লোগো আপলোড (গোল নীল লোগো)</label>
-<input type="file" id="logoFile" class="input" accept="image/*" onchange="loadLogo(event)">
+<div class="lbl">২। বাংলা নাম</div>
+<input id="bnName" class="inp" value="মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ" oninput="document.getElementById('prevBN').innerText=this.value">
 
-<label style="font-size:13px;font-weight:700">২। বাংলা নাম</label>
-<input id="bn" class="input" value="মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ" oninput="live()">
+<div class="lbl">৩। English নাম</div>
+<input id="enName" class="inp" value="MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE" oninput="document.getElementById('prevEN').innerText=this.value">
 
-<label style="font-size:13px;font-weight:700">৩। English নাম</label>
-<input id="en" class="input" value="MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE" oninput="live()">
+<div class="lbl">৪। EIIN</div>
+<input id="eiin" class="inp" value="132332" oninput="document.getElementById('prevEIIN').innerText=this.value">
 
-<label style="font-size:13px;font-weight:700">৪। EIIN</label>
-<input id="eiin" class="input" value="132332" oninput="live()">
-
-<label style="font-size:13px;font-weight:700">৫। Ins. Code</label>
-<input id="ins" class="input" value="50017" oninput="live()">
-
-<button class="btn" onclick="savePad()">💾 প্যাড তৈরি করুন / সেভ করুন</button>
-<button class="btn" style="background:#0a2342;color:#fff" onclick="location.href='index.html'">← ১ম পেজে দেখুন</button>
-
-<div id="list" style="margin-top:10px"></div>
-</div>
-
-<script>
-let logoData="https://cdn-icons-png.flaticon.com/512/2232/2232688.png";
-function loadLogo(e){
- let r=new FileReader();
- r.onload=function(){logoData=r.result;document.getElementById('pLogo').src=logoData;};
- r.readAsDataURL(e.target.files[0]);
-}
-function live(){
- document.getElementById('pBn').innerText=document.getElementById('bn').value;
- document.getElementById('pEn').innerText=document.getElementById('en').value;
- document.getElementById('pEiin').innerText=document.getElementById('eiin').value;
- document.getElementById('pCode').innerText=document.getElementById('ins').value;
-}
-function savePad(){
- let code=document.getElementById('ins').value.trim();
- if(!code){alert('Ins Code দিন!');return;}
- let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
- all[code]={nameBN:bn.value,nameEN:en.value,eiin:eiin.value,logo:logoData};
- localStorage.setItem('allColleges',JSON.stringify(all));
- alert('✅ '+code+' সেভ! এখন লগইন পেজে এই প্যাড অটো আসবে!');
- show();
-}
-function show(){
- let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
- let h='';for(let k in all){h+=`<div style="font-size:12px;background:#eef;padding:6px;margin:3px 0;border-radius:6px">✅ ${k} - ${all[k].nameBN}</div>`}
- document.getElementById('list').innerHTML='মোট: '+Object.keys(all).length+' টা<br>'+h;
-}
-show();
-</script>
-</body></html>
+<div class="lbl">৫। Ins. Code
