@@ -1,52 +1,49 @@
-<!-- ========== ১নং পেজ ফিক্সড 🔒 ২নং ছবির মতো OTP ডিজাইন ========== -->
-<div id="p1" class="page active" style="background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:15px">
-  <!-- লোগো -->
-  <div style="width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.6);overflow:hidden;margin-top:10px">
-    <img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" style="width:100%;display:block">
-  </div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Malek 50K - Fixed 1 No Password Only</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Hind Siliguri',sans-serif}
+body{background:#0a2342;min-height:100vh}
+.page{display:none}.page.active{display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
+.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;box-shadow:0 0 25px rgba(255,215,0,.6);overflow:hidden}
+.card{background:#fff;width:100%;max-width:420px;border-radius:24px;padding:20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+.cbtn{padding:14px;background:#ffcc00;border:none;border-radius:10px;font-weight:bold;cursor:pointer}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+</style>
+</head>
+<body>
 
-  <!-- সাদা কার্ড -->
-  <div style="background:white;width:100%;max-width:420px;border-radius:24px;padding:20px;margin-top:18px;box-shadow:0 12px 35px rgba(0,0,0,.4)">
-    
-    <h2 style="text-align:center;color:#0a2342;font-size:22px">🔐 মালিক লগইন - OTP</h2>
-    <p style="text-align:center;color:#333;margin:5px 0 12px 0;font-weight:bold">মোবাইল নম্বর লিখুন</p>
-    
-    <div style="display:flex;gap:8px;align-items:center;background:#f1f5f9;border:1.5px solid #cbd5e1;border-radius:12px;padding:6px 8px">
-      <span style="background:white;border-right:1px solid #ccc;padding:8px 10px;border-radius:8px;font-weight:bold;color:#555">+880</span>
-      <input id="phone" placeholder="01XXXXXXXXX" style="flex:1;border:none;background:transparent;padding:10px;font-size:15px;outline:none">
-      <button onclick="goToP2()" style="background:#ffcc00;border:none;padding:10px 14px;border-radius:10px;font-weight:bold;cursor:pointer">OTP পাঠান</button>
-    </div>
+<!-- ১নং ফিক্সড 🔒 শুধু পাসওয়ার্ড -->
+<div id="p1" class="page active">
+<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg">
+<div class="card">
+<h2 style="text-align:center;color:#0a2342">🔐 মালিক লগইন</h2>
+<p style="text-align:center;font-weight:bold;margin:8px 0;color:gray">পাসওয়ার্ড দিন</p>
 
-    <!-- ড্যাশবোর্ড পরিসংখ্যান -->
-    <h3 style="margin-top:18px;color:#0a2342;font-size:18px">📊 ড্যাশবোর্ড পরিসংখ্যান</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
-      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
-        <div style="font-size:24px">🏢</div>
-        <div><small>মোট প্রতিষ্ঠান:</small><br><b>৫০ টা</b></div>
-      </div>
-      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
-        <div style="font-size:24px">👤</div>
-        <div><small>আজ লগইন:</small><br><b>২০ টা</b></div>
-      </div>
-      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
-        <div style="font-size:24px">📶</div>
-        <div><small>অফলাইন:</small><br><b>৩০ টা</b></div>
-      </div>
-      <div style="background:#e6f0ff;border:1px solid #cbd5e1;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center">
-        <div style="font-size:24px">💰</div>
-        <div><small>পেমেন্ট বাকি:</small><br><b>৫ টা</b></div>
-      </div>
-    </div>
+<input id="passInput" type="password" placeholder="পাসওয়ার্ড: 1234" style="width:100%;padding:14px;border:2px solid #0a2342;border-radius:12px;font-size:16px">
 
-    <button onclick="goToP2()" style="width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;background:#0a2342;color:white;font-weight:bold;font-size:16px;cursor:pointer">পরবর্তী ➡️ ২নং পেজ (১ম-১২শ শ্রেণী)</button>
-    
-    <p style="text-align:center;color:gray;font-size:12px;margin-top:10px">Engineered by Mohammad Abdul Malek<br>01912427294 | sikkhaoniom80.github.io</p>
-  </div>
+<button onclick="doLogin()" style="width:100%;margin-top:12px;padding:14px;background:#0a2342;color:white;border:none;border-radius:12px;font-weight:bold;font-size:16px">লগইন ➡️ ২নং পেজ (১ম-১২শ)</button>
+
+<button onclick="resetPass()" style="width:100%;margin-top:8px;padding:10px;background:#f1f5f9;border:1px dashed #0a2342;border-radius:10px;font-size:13px">🔑 পাসওয়ার্ড পরিবর্তন / রিসেট</button>
+
+<h3 style="margin-top:18px">📊 ড্যাশবোর্ড পরিসংখ্যান</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>মোট প্রতিষ্ঠান:</small><br><b>৫০ টা</b></div>
+<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>আজ লগইন:</small><br><b>২০ টা</b></div>
+<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>অফলাইন:</small><br><b>৩০ টা</b></div>
+<div style="background:#e6f0ff;padding:12px;border-radius:12px"><small>পেমেন্ট বাকি:</small><br><b>৫ টা</b></div>
 </div>
 
-<script>
-function goToP2(){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p2').classList.add('active');
-}
-</script>
+<p style="text-align:center;color:gray;font-size:11px;margin-top:10px">বর্তমান পাসওয়ার্ড: <span id="showPass" style="color:#0a2342;font-weight:bold"></span><br>Engineered by Mohammad Abdul Malek - 01912427294</p>
+</div>
+</div>
+
+<!-- ২নং পেজ - ১ম থেকে ১২শ -->
+<div id="p2" class="page" style="background:#f0f2f5">
+<div style="background:#0f3d2e;color:white;padding:20px;text-align:center;border-radius:0 0 25px 25px;width:100%"><h2>শ্রেণী নির্বাচন</h2><p id="classShow2" style="color:#ffde59">১ম-১২শ থেকে সিলেক্ট করুন</p></div>
+<div class="card">
+<div class="grid3">
+<button class="cbtn" onclick="sel('১ম শ্রেণি')">১ম</button><button class="cbtn"
