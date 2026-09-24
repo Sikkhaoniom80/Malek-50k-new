@@ -1,96 +1,27 @@
-<!-- ========== ২নং পেজ - শ্রেণী ১ম থেকে ১২শ + প্যাড আপলোড ========== -->
-<div id="page2" class="hidden">
-  <div id="header2" class="header-pad" style="margin:20px">এখানে প্যাড আপলোড করলে পুরো ছবি আসবে</div>
-  
-  <div class="card">
-    <h2>🔰 শ্রেণী নির্বাচন করুন (১ম - ১২শ)</h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0">
-      <button class="btn" onclick="selectClass('১ম')">১ম শ্রেণী</button>
-      <button class="btn" onclick="selectClass('২য়')">২য় শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৩য়')">৩য় শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৪র্থ')">৪র্থ শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৫ম')">৫ম শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৬ষ্ঠ')">৬ষ্ঠ শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৭ম')">৭ম শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৮ম')">৮ম শ্রেণী</button>
-      <button class="btn" onclick="selectClass('৯ম')">৯ম শ্রেণী</button>
-      <button class="btn" onclick="selectClass('১০ম')">১০ম শ্রেণী</button>
-      <button class="btn" style="background:#0d5c2f;color:white" onclick="selectClass('১১শ')">১১শ শ্রেণী</button>
-      <button class="btn" style="background:#0d5c2f;color:white" onclick="selectClass('১২শ')">১২শ শ্রেণী</button>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MALEK 50K - ATTENDANCE</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+body{background:#0d1b4a;color:white;font-family:sans-serif;margin:0;padding-bottom:30px}
+.card{background:white;color:black;border-radius:20px;margin:15px;padding:15px}
+.gold{border:4px solid gold;border-radius:20px;padding:10px;text-align:center;background:#0d1b4a;margin:15px}
+.btn{background:#facc15;color:black;padding:12px;border-radius:12px;border:none;width:100%;margin:5px 0;font-weight:bold}
+.header-pad img{width:100%;border-radius:15px;border:3px solid gold}
+.hidden{display:none}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+</style>
+</head>
+<body>
+
+<!-- ========== ১নং ফিক্সড - লোগো কখনো চেঞ্জ হবে না 🔒 ========== -->
+<div id="page1">
+  <div class="gold">
+    <div style="width:200px;height:200px;background:radial-gradient(#ffec8b,#d4a017);border-radius:50%;margin:auto;display:flex;align-items:center;justify-content:center;color:#0d1b4a;font-weight:900;line-height:1.2;border:4px solid gold">
+      MALEK<br>50K<br>ATTENDANCE<br>SCHOOL COLLEGE
     </div>
-    
-    <p style="background:#fef3c7;padding:8px;border-radius:10px;text-align:center">✅ নির্বাচিত শ্রেণী: <b id="selectedClassShow">এখনো নির্বাচন করেননি</b></p>
-
-    <h3>প্রতিষ্ঠানের প্যাড আপলোড</h3>
-    <div style="border:2px dashed blue;padding:20px;text-align:center;border-radius:15px">
-      <input type="file" id="padUpload" accept="image/*" onchange="uploadPad(event)"><br>প্যাডের ছবি আপলোড করুন (পুরো প্যাড)
+    <div style="background:black;color:white;margin-top:10px;padding:8px;border-radius:10px;font-size:13px">
+      Engineered by Mohammad Abdul Malek<br><span style="color:gold">01912427294</span><br>sikkhaoniom80.github.io
     </div>
-    
-    <input id="pass" placeholder="পাসওয়ার্ড তৈরি করুন" type="password" style="width:100%;margin-top:10px;padding:12px;border-radius:10px">
-    
-    <button class="btn" style="background:#22c55e;color:white;margin-top:15px" onclick="goToPage3()">লগইন করুন ➡️ ৩নং পেজে যান</button>
-  </div>
-</div>
-
-<script>
-let currentClass = ""; // গ্লোবাল
-
-function selectClass(cls){
-  currentClass = cls;
-  localStorage.setItem("selected_class", cls);
-  document.getElementById("selectedClassShow").innerText = cls + " শ্রেণী";
-  // ৩,৪ নং এ অটো দেখানোর জন্য
-  if(document.getElementById("classShow3")) document.getElementById("classShow3").innerText = cls;
-  if(document.getElementById("classShow4")) document.getElementById("classShow4").innerText = cls;
-  // alert("✅ "+cls+" শ্রেণী নির্বাচিত");
-}
-
-function goToPage3(){
-  if(!currentClass && !localStorage.getItem("selected_class")){
-    alert("⚠️ আগে ১ম থেকে ১২শ শ্রেণী নির্বাচন করুন!");
-    return;
-  }
-  showPage(3);
-}
-
-function showPage(n){
-  let pad = localStorage.getItem("college_pad_full");
-  let cls = localStorage.getItem("selected_class") || currentClass;
-  
-  if(pad){
-    document.getElementById("header2").innerHTML = `<img src="${pad}" style="width:100%;border-radius:15px">`;
-    document.getElementById("header3").innerHTML = `<img src="${pad}" style="width:100%;border-radius:15px">`;
-    document.getElementById("header4").innerHTML = `<img src="${pad}" style="width:100%;border-radius:15px">`;
-  }
-  // শ্রেণী ৩,৪ নং এ অটো
-  if(cls){
-    currentClass = cls;
-    if(document.getElementById("classShow3")) document.getElementById("classShow3").innerText = cls;
-    if(document.getElementById("classShow4")) document.getElementById("classShow4").innerText = cls;
-    if(document.getElementById("selectedClassShow")) document.getElementById("selectedClassShow").innerText = cls + " শ্রেণী";
-  }
-  
-  document.getElementById("page1").classList.add("hidden");
-  document.getElementById("page2").classList.add("hidden");
-  document.getElementById("page3").classList.add("hidden");
-  document.getElementById("page4").classList.add("hidden");
-  document.getElementById("page"+n).classList.remove("hidden");
-}
-</script>
-
-<!-- ৩নং পেজে শ্রেণী দেখান -->
-<div id="page3" class="hidden">
-  <div id="header3"></div>
-  <div class="card">
-    <h3>শ্রেণী: <span id="classShow3" style="color:#0d5c2f">-</span></h3>
-    <!-- বাকি রিপোর্ট... -->
-  </div>
-</div>
-
-<!-- ৪নং পেজেও শ্রেণী দেখান -->
-<div id="page4" class="hidden">
-  <div id="header4"></div>
-  <div class="card">
-    <h3>শ্রেণী: <span id="classShow4" style="color:#0d5c2f">-</span> - শিক্ষার্থী তালিকা</h3>
-  </div>
-</div>
