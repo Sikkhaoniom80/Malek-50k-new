@@ -1,5 +1,52 @@
-<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Class</title><style>body{background:#0a2a5e;display:flex;flex-direction:column;align-items:center;padding:12px;margin:0}.top{background:#fff;width:100%;max-width:420px;border-radius:18px;padding:10px;text-align:center;border:3px solid #ffcc00}.top img{width:100%;max-height:130px;object-fit:contain}.card{background:#fff;width:100%;max-width:420px;border-radius:22px;padding:16px;margin-top:12px;text-align:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.c{background:#ffcc00;border-radius:12px;padding:18px;font-weight:900;cursor:pointer}</style></head><body>
-<div class="top"><img id="pad"><p id="cn" style="font-weight:900;color:#0a2a5e"></p></div>
-<div class="card"><h3>শ্রেণী নির্বাচন করুন</h3><div class="grid"><div class="c">১ম</div><div class="c">২য়</div><div class="c">৩য়</div><div class="c">৪র্থ</div><div class="c">৫ম</div><div class="c">৬ষ্ঠ</div><div class="c">৭ম</div><div class="c">৮ম</div><div class="c">৯ম</div><div class="c">১০ম</div><div class="c">১১শ</div><div class="c">১২শ</div></div></div>
-<script>document.getElementById('pad').src=localStorage.getItem('padImage')||'';document.getElementById('cn').innerText=localStorage.getItem('college')||'কলেজ';</script>
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>প্রতিষ্ঠান লগইন</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0a2a5e;min-height:100vh;display:flex;justify-content:center;padding:15px;font-family:sans-serif}
+.phone{width:100%;max-width:400px}
+.topBox{width:100%;background:#fff;border-radius:18px;padding:10px;text-align:center;border:3px solid #ffcc00;display:none}
+.topBox img{width:100%;max-height:150px;object-fit:contain}
+.card{background:#fff;border-radius:22px;padding:20px 16px;text-align:center;margin-top:15px}
+.card h2{color:#0a2a5e;font-size:22px;font-weight:900;margin-bottom:14px}
+.upload{background:#d9e8ff;border:2.5px dashed #0a2a5e;border-radius:16px;padding:18px}
+.btns{display:flex;gap:10px;margin-top:12px}
+.btns button{flex:1;padding:12px;border:2px solid #0a2a5e;border-radius:10px;font-weight:900;cursor:pointer}
+.btns button:first-child{background:#0a2a5e;color:#fff}.btns button:last-child{background:#ffcc00;color:#000}
+.sample{margin:10px auto 0;background:#fff;border:1px solid #ccc;border-radius:6px;width:120px;padding:6px;font-size:10px}
+.inputWrap{position:relative;margin-top:16px}input{width:100%;padding:14px 45px 14px 14px;border:2px solid #0a2a5e;border-radius:12px;font-size:15px}
+.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer}
+.change{color:#0a2a5e;font-size:13px;text-align:right;margin-top:6px;text-decoration:underline;display:block}
+.mainBtn{width:100%;padding:13px;background:#ffcc00;border:none;border-radius:12px;font-weight:900;font-size:18px;margin-top:12px}
+</style></head><body>
+<div class="phone">
+<div class="topBox" id="topBox"><img id="padPreview"><p id="cName" style="font-weight:900;color:#0a2a5e"></p><small style="color:green">✅ প্যাড পাওয়া গেছে</small></div>
+<div class="card">
+<h2>প্রতিষ্ঠানের প্যাড দিয়ে লগইন</h2>
+<div class="upload">
+<div id="upText"><div style="font-size:32px">📷</div><b>প্যাডের ছবি আপলোড করুন<br>(নাম+লোগো সহ)</b><div class="sample">ABC COLLEGE<br>Official Letterhead</div></div>
+<div class="btns">
+<button onclick="document.getElementById('fileInput').click()">📷 ক্যামেরা + গ্যালারি</button>
+</div>
+<!-- capture বাদ দিলে ক্যামেরা+গ্যালারি ২টাই আসবে -->
+<input type="file" id="fileInput" hidden accept="image/*">
+</div>
+<div class="inputWrap"><input id="pass" type="password" placeholder="পাসওয়ার্ড তৈরি করুন"><span class="eye" onclick="document.getElementById('pass').type=document.getElementById('pass').type==='password'?'text':'password'">👁️</span></div>
+<span class="change">পাসওয়ার্ড পরিবর্তন</span>
+<button class="mainBtn" onclick="register()">রেজিস্ট্রেশন করুন</button>
+<button class="mainBtn" onclick="login()">লগইন করুন</button>
+<p style="font-size:12px;margin-top:12px;color:#666">sikkhaoniom80.github.io</p>
+</div>
+</div>
+<script>
+const fileInput=document.getElementById('fileInput'), padPreview=document.getElementById('padPreview'), topBox=document.getElementById('topBox'), upText=document.getElementById('upText');
+fileInput.onchange=e=>{
+ const f=e.target.files[0]; if(!f) return;
+ const url=URL.createObjectURL(f);
+ padPreview.src=url; topBox.style.display='block';
+ document.getElementById('cName').innerText=f.name.split('.')[0].toUpperCase();
+ upText.innerHTML=`<img src="${url}" style="width:100%;max-height:110px;object-fit:contain"><br><b style="color:green">✅ ${f.name.split('.')[0]}</b>`;
+ localStorage.setItem('padImage',url);
+};
+function register(){ if(topBox.style.display==='none'){alert('আগে প্যাড আপলোড করুন');return;} alert('রেজিস্ট্রেশন সফল'); }
+function login(){ if(topBox.style.display==='none'){alert('আগে প্যাড আপলোড করুন');return;} location.href='class.html'; }
+</script>
 </body></html>
