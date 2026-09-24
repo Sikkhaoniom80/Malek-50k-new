@@ -1,22 +1,59 @@
 <!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MALEK 50K</title>
+<title>প্রতিষ্ঠান লগইন</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px;font-family:sans-serif}
-.logo{width:380px;max-width:95%;border-radius:24px;overflow:hidden;border:3px solid #ffd700}.logo img{width:100%;display:block}
-.card{background:#fff;width:100%;max-width:420px;border-radius:28px;padding:18px;margin-top:16px}
-.upload{border:2.5px dashed #0a2342;background:#dbeaff;border-radius:18px;padding:18px;text-align:center;cursor:pointer}
-.input{width:100%;padding:14px;border:2px solid #0a2342;border-radius:12px;margin-top:12px;font-size:16px}
-.btn{width:100%;padding:14px;background:#ffcc00;border:none;border-radius:12px;font-weight:900;margin-top:10px;font-size:18px;cursor:pointer}
+*{margin:0;padding:0;box-sizing:border-box}body{background:#0a2a5e;min-height:100vh;display:flex;justify-content:center;padding:15px;font-family:sans-serif}
+.phone{width:100%;max-width:400px}
+.topBox{width:100%;background:#fff;border-radius:18px;padding:12px;text-align:center;min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;border:3px solid #ffcc00;display:none}
+.topBox img{width:100%;max-height:140px;object-fit:contain}
+.topBox p{font-weight:900;color:#0a2a5e;margin-top:6px}
+.card{background:#fff;border-radius:22px;padding:20px 16px;text-align:center;margin-top:15px}
+.card h2{color:#0a2a5e;font-size:22px;font-weight:900;margin-bottom:14px}
+.upload{background:#d9e8ff;border:2.5px dashed #0a2a5e;border-radius:16px;padding:18px;cursor:pointer}
+.sample{margin:10px auto 0;background:#fff;border:1px solid #ccc;border-radius:6px;width:110px;padding:6px;font-size:10px}
+.inputWrap{position:relative;margin-top:16px}input{width:100%;padding:14px 45px 14px 14px;border:2px solid #0a2a5e;border-radius:12px;font-size:15px}
+.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer}
+.change{color:#0a2a5e;font-size:13px;text-align:right;margin-top:6px;text-decoration:underline;display:block}
+.btn{width:100%;padding:13px;background:#ffcc00;border:none;border-radius:12px;font-weight:900;font-size:18px;margin-top:12px;cursor:pointer}
 </style></head><body>
-<div class="logo"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg"></div>
-<div class="card">
-<h3 style="text-align:center;color:#0a2342">প্রতিষ্ঠানের প্যাড দিয়ে লগইন</h3>
-<div class="upload" onclick="document.getElementById('pad1').click()">
-<div style="font-size:32px">📷</div><b>প্যাডের ছবি আপলোড করুন<br>(নাম+লোগো সহ)</b>
-<input type="file" id="pad1" hidden accept="image/*"></div>
-<input id="pass" class="input" type="password" placeholder="পাসওয়ার্ড তৈরি করুন">
-<button class="btn" onclick="localStorage.setItem('mp',document.getElementById('pass').value); location.href='class.html'">রেজিস্ট্রেশন করুন</button>
-<button class="btn" onclick="location.href='class.html'">লগইন করুন</button>
-<p style="text-align:center;font-size:11px;margin-top:8px">৫০ টি প্রতিষ্ঠানের জন্য<br>sikkhaoniom80.github.io</p>
+<div class="phone">
+
+<!-- উপরে MALEK থাকবে না, শুধু আপলোডের পর কলেজ আসবে -->
+<div class="topBox" id="topBox">
+<img id="padPreview">
+<p id="collegeName">College Name</p>
+<small style="color:green">✅ প্যাড সনাক্ত হয়েছে</small>
 </div>
+
+<div class="card">
+<h2>প্রতিষ্ঠানের প্যাড দিয়ে লগইন</h2>
+<div class="upload" onclick="document.getElementById('padFile').click()">
+<div id="upText"><div style="font-size:32px">📷</div><b>প্যাডের ছবি আপলোড করুন<br>(নাম+লোগো সহ)</b><div class="sample">ABC COLLEGE<br>Official Letterhead</div></div>
+<input type="file" id="padFile" hidden accept="image/*" capture="environment">
+</div>
+
+<div class="inputWrap">
+<input id="pass" type="password" placeholder="পাসওয়ার্ড তৈরি করুন">
+<span class="eye" onclick="document.getElementById('pass').type=document.getElementById('pass').type==='password'?'text':'password'">👁️</span>
+</div>
+<span class="change">পাসওয়ার্ড পরিবর্তন</span>
+<button class="btn" onclick="register()">রেজিস্ট্রেশন করুন</button>
+<button class="btn" onclick="login()">লগইন করুন</button>
+<p style="font-size:12px;margin-top:10px">৫০ টি প্রতিষ্ঠানের জন্য<br>sikkhaoniom80.github.io</p>
+</div>
+</div>
+
+<script>
+const padFile=document.getElementById('padFile'), padPreview=document.getElementById('padPreview'), topBox=document.getElementById('topBox'), upText=document.getElementById('upText');
+padFile.onchange=e=>{
+ const f=e.target.files[0]; if(!f) return;
+ const url=URL.createObjectURL(f);
+ padPreview.src=url;
+ topBox.style.display='flex';
+ document.getElementById('collegeName').innerText=f.name.split('.')[0].toUpperCase();
+ upText.innerHTML=`<img src="${url}" style="width:100%;max-height:100px;object-fit:contain"><br><b style="color:green">✅ আপলোড হয়েছে</b>`;
+ localStorage.setItem('padImage',url);
+};
+function register(){ if(topBox.style.display==='none'){alert('আগে প্যাড আপলোড করুন');return;} alert('রেজিস্ট্রেশন সফল'); }
+function login(){ if(topBox.style.display==='none'){alert('আগে প্যাড আপলোড করুন');return;} location.href='class.html'; }
+</script>
 </body></html>
