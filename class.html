@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MALEK 50K</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px;font-family:sans-serif}
+.logo{width:380px;max-width:95%;border-radius:24px;overflow:hidden;border:3px solid #ffd700}.logo img{width:100%;display:block}
+.card{background:#fff;width:100%;max-width:420px;border-radius:28px;padding:18px;margin-top:16px}
+.upload{border:2.5px dashed #0a2342;background:#dbeaff;border-radius:18px;padding:18px;text-align:center;cursor:pointer}
+.input{width:100%;padding:14px;border:2px solid #0a2342;border-radius:12px;margin-top:12px;font-size:16px}
+.btn{width:100%;padding:14px;background:#ffcc00;border:none;border-radius:12px;font-weight:900;margin-top:10px;font-size:18px;cursor:pointer}
+</style></head><body>
+<div class="logo"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg"></div>
+<div class="card">
+<h3 style="text-align:center;color:#0a2342">প্রতিষ্ঠানের প্যাড দিয়ে লগইন</h3>
+<div class="upload" onclick="document.getElementById('pad1').click()">
+<div style="font-size:32px">📷</div><b>প্যাডের ছবি আপলোড করুন<br>(নাম+লোগো সহ)</b>
+<input type="file" id="pad1" hidden accept="image/*"></div>
+<input id="pass" class="input" type="password" placeholder="পাসওয়ার্ড তৈরি করুন">
+<button class="btn" onclick="localStorage.setItem('mp',document.getElementById('pass').value); location.href='class.html'">রেজিস্ট্রেশন করুন</button>
+<button class="btn" onclick="location.href='class.html'">লগইন করুন</button>
+<p style="text-align:center;font-size:11px;margin-top:8px">৫০ টি প্রতিষ্ঠানের জন্য<br>sikkhaoniom80.github.io</p>
+</div>
+</body></html>
