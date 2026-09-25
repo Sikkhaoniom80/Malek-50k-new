@@ -1,69 +1,77 @@
 <!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>সরাসরি উপরে লিখুন - 12345 বাদ</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}.w{max-width:460px;width:100%;background:#fdfaf3;min-height:100vh;padding:10px}
-.top{border:3px dashed #0a3a6b;border-radius:16px;padding:14px;background:#fff;display:flex;gap:12px;align-items:flex-start}
-.top img{width:64px;height:64px;border-radius:50%;border:2px solid #0a3a6b;cursor:pointer}
-.edit{border:1.5px dashed #ffb703;background:#fffef0;border-radius:8px;padding:8px 10px;margin:5px 0;min-height:42px;outline:none;font-weight:700}
-.edit:empty:before{content:attr(data-ph);color:#888;font-weight:400}
-.edit:focus{background:#ffffcc;border-color:#0e8a3c}
-.box{background:#fff;margin:12px 0;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer;margin-top:10px;font-size:15px}.y{background:#ffcc00}.g{background:#0e8a3c;color:#fff}.d{background:#0a2342;color:#fff}
+<title>অরিজিনাল ব্যানার - সব পরিবর্তন</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&family=Noto+Serif+Bengali:wght@700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}
+.w{max-width:560px;width:100%;padding:12px;min-height:100vh}
+/* আপনার ছবির মতো হুবহু ব্যানার */
+.banner{background:#f1f2ff;border:1px solid #b8c1ff;display:flex;align-items:center;gap:14px;padding:10px 14px}
+.logo{width:68px;height:68px;object-fit:contain;cursor:pointer;flex-shrink:0;border-radius:50%;border:1px solid #0a3a6b}
+.info{flex:1;line-height:1.25}
+.bn{font-family:'Noto Serif Bengali';color:#0a2e7a;font-size:18px;font-weight:800;letter-spacing:.2px;outline:none;border:1px dashed transparent;padding:3px 6px;border-radius:4px;min-height:26px}
+.en{color:#cc0000;font-size:15px;font-weight:800;letter-spacing:.5px;outline:none;border:1px dashed transparent;padding:3px 6px;border-radius:4px;margin-top:1px;min-height:22px}
+.meta{display:flex;gap:24px;margin-top:5px;font-weight:700;color:#0a2e7a;font-size:13px}
+.meta div{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;background:#0a2e7a;display:inline-block}
+.val{outline:none;border:1px dashed transparent;padding:2px 6px;border-radius:4px;min-width:60px;background:#fff8}
+.edit:focus{background:#ffffb8;border-color:#ff9900}
+.hint{text-align:center;color:#0e8a3c;font-weight:700;font-size:13px;margin:8px 0}
+.card{background:#fff;border-radius:16px;padding:14px;margin-top:10px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;font-family:'Hind Siliguri';margin:5px 0}.y{background:#ffcc00}.g{background:#0e8a3c;color:#fff}.d{background:#0a2342;color:#fff}
+input{display:none}
 </style></head><body><div class="w">
 
-<!-- উপরে সরাসরি এড করার জায়গা - 12345 বাদ -->
-<div class="top">
-<img id="L" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" onclick="document.getElementById('file').click()">
-<div style="flex:1">
-<div id="bn" class="edit" contenteditable="true" data-ph="১। বাংলা নাম এখানে লিখুন (মমতাজ উদ্দীন...)" oninput="saveAuto()"></div>
-<div id="en" class="edit" contenteditable="true" data-ph="২। English নাম এখানে লিখুন" oninput="saveAuto()"></div>
-<div style="display:flex;gap:6px"><div id="eiin" class="edit" style="flex:1" contenteditable="true" data-ph="৩। EIIN No" oninput="saveAuto()"></div><div id="code" class="edit" style="flex:1" contenteditable="true" data-ph="৪। Code: 50017" oninput="saveAuto()"></div></div>
-<small style="color:#0e8a3c;font-weight:700">👆 এখানে ক্লিক করে সরাসরি লিখুন - অটো সেভ</small>
+<!-- হুবহু আপনার ছবির মতো, কিন্তু ৫টাই এডিট হবে -->
+<div class="banner">
+<img id="logo" class="logo" src="/mnt/data/wa_image_6145195911921207667" onclick="document.getElementById('file').click()" title="লোগো বদলাতে ক্লিক করুন">
+<div class="info">
+<div id="bn" class="bn edit" contenteditable="true" oninput="auto()">মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+<div id="en" class="en edit" contenteditable="true" oninput="auto()">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
+<div class="meta">
+<div><span class="dot"></span> EIIN : <span id="eiin" class="val edit" contenteditable="true" oninput="auto()">132332</span></div>
+<div><span class="dot"></span> Ins. Code: <span id="code" class="val edit" contenteditable="true" oninput="auto()">50017</span></div>
 </div>
 </div>
-
-<input type="file" id="file" accept="image/*" style="display:none">
-
-<div class="box">
-<h3 style="text-align:center;margin-bottom:8px">📝 প্রতিষ্ঠানের তথ্য</h3>
-<p style="text-align:center;color:#666;font-size:13px">উপরে সরাসরি লিখুন, নিচে শুধু সেভ বাটন</p>
-<button class="btn y" onclick="saveFinal()">💾 সেভ করুন</button>
-<button class="btn g" onclick="go()">➡️ ৩য় পেজে যান - রিপোর্ট</button>
-<div style="display:flex;gap:8px;margin-top:8px"><button class="btn d" onclick="location.href='index.html'">← ১ম পেজ</button><button class="btn" style="border:2px solid #0a2342;background:#fff" onclick="location.href='report.html'">রিপোর্ট →</button></div>
 </div>
 
-<div id="msg" style="text-align:center;padding:10px;color:#0e8a3c;font-weight:800"></div>
+<div class="hint">👆 উপরের ৫টা ঘরে ক্লিক করে সব বদলাতে পারবেন - লোগো, বাংলা, English, EIIN, Code - অটো সেভ হবে</div>
 
+<div class="card">
+<button class="btn y" onclick="save()">💾 সেভ করুন</button>
+<button class="btn g" onclick="location.href='report.html'">➡️ ৩য় পেজ - রিপোর্ট (ডাইনামিক)</button>
+<div style="display:flex;gap:10px"><button class="btn d" style="flex:1" onclick="location.href='index.html'">← ১ম পেজ</button><button class="btn" style="flex:1;background:#fff;border:2px solid #0a2342" onclick="location.href='student.html'">ছাত্র পেজ →</button></div>
+</div>
+
+<input type="file" id="file" accept="image/*">
 </div>
 <script>
-let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
 function load(){
-let c=localStorage.getItem('loggedCollege')||Object.keys(all)[0];
-if(c && all[c]){
-document.getElementById('bn').innerText=all[c].bn||all[c].nameBN||'';
-document.getElementById('en').innerText=all[c].en||all[c].nameEN||'';
-document.getElementById('eiin').innerText=all[c].eiin||'';
-document.getElementById('code').innerText=all[c].code||'';
-document.getElementById('L').src=all[c].logo||'https://cdn-icons-png.flaticon.com/512/2232/2232688.png';
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
+let cur=localStorage.getItem('loggedCollege')||'50017';
+if(all[cur]){
+document.getElementById('bn').innerText=all[cur].bn||'মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ';
+document.getElementById('en').innerText=all[cur].en||'MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE';
+document.getElementById('eiin').innerText=all[cur].eiin||'132332';
+document.getElementById('code').innerText=all[cur].code||'50017';
+if(all[cur].logo)document.getElementById('logo').src=all[cur].logo;
 }
 }
-function saveAuto(){
+function auto(){
 let bn=document.getElementById('bn').innerText.trim();
 let en=document.getElementById('en').innerText.trim();
 let eiin=document.getElementById('eiin').innerText.trim();
-let code=document.getElementById('code').innerText.trim()||'50017';
-let logo=document.getElementById('L').src;
-let obj={bn:bn,en:en,nameBN:bn,nameEN:en,eiin:eiin,code:code,logo:logo,pass:'1234'};
-let a=JSON.parse(localStorage.getItem('allColleges')||'{}');
-a[code]=obj;
-localStorage.setItem('allColleges',JSON.stringify(a));
+let code=document.getElementById('code').innerText.trim();
+let logo=document.getElementById('logo').src;
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
+let old=localStorage.getItem('loggedCollege');
+if(old && old!==code && all[old]) delete all[old];
+all[code]={...(all[code]||{}),bn:bn,nameBN:bn,en:en,nameEN:en,eiin:eiin,code:code,logo:logo,pass:'1234'};
+localStorage.setItem('allColleges',JSON.stringify(all));
 localStorage.setItem('loggedCollege',code);
-document.getElementById('msg').innerText='✅ অটো সেভ হয়েছে: '+bn;
 }
-function saveFinal(){saveAuto();alert('✅ সেভ হয়েছে! এখন রিপোর্টে যান');}
-function go(){saveAuto();location.href='report.html';}
+function save(){auto();alert('✅ সেভ হয়েছে মামা!\nবাংলা: '+document.getElementById('bn').innerText+'\nEnglish: '+document.getElementById('en').innerText+'\nEIIN:'+document.getElementById('eiin').innerText+' Code:'+document.getElementById('code').innerText);}
 document.getElementById('file').addEventListener('change',e=>{
-let r=new FileReader();r.onload=()=>{document.getElementById('L').src=r.result;saveAuto();};r.readAsDataURL(e.target.files[0]);
+let r=new FileReader();r.onload=()=>{document.getElementById('logo').src=r.result;auto();};r.readAsDataURL(e.target.files[0]);
 });
 load();
 </script></body></html>
