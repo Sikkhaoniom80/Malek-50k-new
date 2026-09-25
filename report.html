@@ -1,30 +1,32 @@
 <!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>রিপোর্ট - ডাইনামিক লিস্ট</title>
+<title>রিপোর্ট - SMS + 4th Page</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#fdf6e3;font-family:'Hind Siliguri';display:flex;justify-content:center}
-.w{max-width:520px;width:100%;min-height:100vh;background:#fdf6e3;padding-bottom:20px}
+.w{max-width:520px;width:100%;min-height:100vh;background:#fdf6e3;padding-bottom:90px;position:relative}
 .banner{background:#eef0ff;border:2px solid #c5ccff;border-radius:14px;display:flex;align-items:center;gap:12px;padding:12px 14px;margin:10px}
 .logo{width:64px;height:64px;object-fit:contain;border-radius:50%;border:1.5px solid #0a3a6b}
-.bn{color:#0a2e7a;font-size:16px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.en{color:#cc0000;font-size:13px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bn{color:#0a2e7a;font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.en{color:#cc0000;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .meta{display:flex;gap:16px;margin-top:5px;font-weight:700;color:#0a2e7a;font-size:12px}
 .dot{width:9px;height:9px;background:#0a2e7a;display:inline-block;margin-right:4px}
 .card{background:#fff;border-radius:18px;padding:14px;margin:10px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
 .total{background:#fff3c2;border-radius:12px;padding:12px;text-align:center;font-weight:800;font-size:18px;margin:12px 0}
 .lists{display:flex;gap:10px}
-.box{flex:1;border-radius:14px;padding:10px;min-height:140px}
-.box.g{background:#e8f5e9;border:2px solid #a5d6a7}
-.box.r{background:#ffebee;border:2px solid #ef9a9a}
+.box{flex:1;border-radius:14px;padding:10px;min-height:120px}
+.box.g{background:#e8f5e9;border:2px solid #a5d6a7}.box.r{background:#ffebee;border:2px solid #ef9a9a}
 .box h3{font-size:15px;font-weight:800;padding:8px;border-radius:10px;text-align:center}
 .g h3{background:#a5d6a7;color:#1b5e20}.r h3{background:#ef9a9a;color:#b71c1c}
-.list{font-size:14px;font-weight:600;margin-top:8px;line-height:1.7;max-height:300px;overflow:auto}
-.notice{background:#fff8d6;border-radius:12px;padding:12px;text-align:center;font-weight:800;margin:10px}
-.btn{width:calc(100% - 20px);padding:14px;border:none;border-radius:14px;font-weight:800;font-size:16px;margin:6px 10px;font-family:'Hind Siliguri';cursor:pointer}
-.btn.g2{background:#0e8a3c;color:#fff}.btn.y{background:#ffcc00}.btn.b{background:#0d47a1;color:#fff}
+.list{font-size:14px;font-weight:600;margin-top:8px;line-height:1.6}
+.notice{background:#fff8d6;border-radius:12px;padding:12px;margin:10px}
+.notice input{width:100%;border:1px dashed #ff9900;border-radius:8px;padding:10px;font-family:'Hind Siliguri';font-weight:700;font-size:16px;outline:none;background:#fff;text-align:center}
+.btn{width:calc(100% - 20px);padding:14px;border:none;border-radius:14px;font-weight:800;font-size:16px;margin:6px 10px;font-family:'Hind Siliguri';cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.g{background:#0e8a3c;color:#fff}.btn.y{background:#ffcc00}.btn.b{background:#0d47a1;color:#fff}
+.btn.sms-g{background:#dcf8c6;border:2px solid #25d366;color:#075e54}.btn.sms-r{background:#ffe0e0;border:2px solid #ff4444;color:#b71c1c}
+.next{position:fixed;bottom:15px;right:15px;width:60px;height:60px;background:#0a2342;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:99;border:3px solid #fff}
+.next:active{transform:scale(0.9)}
 </style></head><body><div class="w">
 
-<!-- শুধু প্যাড - উপরের কালো ব্যানার বাদ -->
 <div class="banner">
 <img id="logo" class="logo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
 <div style="flex:1;min-width:0">
@@ -38,80 +40,56 @@
 <div style="font-size:20px;font-weight:800">📊 উপস্থিতি রিপোর্ট (অটো)</div>
 <div id="totalBar" class="total">মোট: 0 • উপস্থিত: 0 • অনুপস্থিত: 0</div>
 <div class="lists">
-<div class="box g"><h3>✅ উপস্থিত - <span id="pCount">0</span> জন</h3><div id="pList" class="list">লোড হচ্ছে...</div></div>
-<div class="box r"><h3>❌ অনুপস্থিত - <span id="aCount">0</span> জন</h3><div id="aList" class="list">লোড হচ্ছে...</div></div>
+<div class="box g"><h3>✅ উপস্থিত - <span id="pCount">0</span> জন</h3><div id="pList" class="list">ছাত্র তালিকায় ছাত্র যোগ করুন</div></div>
+<div class="box r"><h3>❌ অনুপস্থিত - <span id="aCount">0</span> জন</h3><div id="aList" class="list">ছাত্র তালিকায় ছাত্র যোগ করুন</div></div>
 </div>
 </div>
 
-<div class="notice">📢 নোটিশ: <span id="notice" contenteditable="true" style="outline:none">আজ ক্লাস টেস্ট হবে</span></div>
+<!-- নোটিশ ঘর ফাঁকা -->
+<div class="notice">
+<div style="font-weight:800;text-align:center;margin-bottom:6px">📢 নোটিশ:</div>
+<input id="notice" type="text" placeholder="নোটিশ লিখুন... (ফাঁকা থাকবে)">
+</div>
 
-<button class="btn g2" onclick="sendWA()">🟢 WhatsApp এ পাঠান</button>
+<button class="btn g" onclick="sendWA()">🟢 WhatsApp এ পাঠান</button>
+<button class="btn sms-g" onclick="sendSMS('present')">📱 Present SMS পাঠান</button>
+<button class="btn sms-r" onclick="sendSMS('absent')">📱 Absent SMS পাঠান</button>
 <button class="btn y" onclick="window.print()">🖨️ প্রিন্ট করুন / PDF</button>
 <button class="btn b" onclick="downloadExcel()">📊 Excel ডাউনলোড</button>
 
+<!-- ৪র্থ পেজে যাওয়ার তীর -->
+<div class="next" onclick="location.href='page4.html'" title="৪র্থ পেজ">→</div>
+
 </div>
 <script>
-function loadAll(){
- // কলেজ প্যাড
- let allC=JSON.parse(localStorage.getItem('allColleges')||'{}');
- let cur=localStorage.getItem('loggedCollege')||localStorage.getItem('secondPageLoginCode')||'50017';
- let c=allC[cur];
- if(c){
-  document.getElementById('bn').innerText=c.bn||c.nameBN||'মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ';
-  document.getElementById('en').innerText=c.en||c.nameEN||'MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE';
-  document.getElementById('eiin').innerText=c.eiin||'132331';
-  document.getElementById('code').innerText=c.code||'50017';
-  if(c.logo) document.getElementById('logo').src=c.logo;
- }
-
- // ছাত্র ডাটা - সব জায়গা থেকে খুঁজবে, ফিক্সড না
- let list=[];
- try{
-  let a1=JSON.parse(localStorage.getItem('allStudents')||'{}');
-  if(a1[cur] && a1[cur].length) list=a1[cur];
-  else if(a1['50017'] && a1['50017'].length) list=a1['50017'];
- }catch(e){}
- if(!list.length){
-  try{ let s=JSON.parse(localStorage.getItem('students')||'[]'); if(s.length) list=s; }catch(e){}
- }
- if(!list.length){
-  try{ let s=JSON.parse(localStorage.getItem('studentsList')||'[]'); if(s.length) list=s; }catch(e){}
- }
- // আরেকটা কমন কী
- if(!list.length){
-  try{ let s=JSON.parse(localStorage.getItem('attendance')||'[]'); if(s.length) list=s; }catch(e){}
- }
-
- // যদি এখনো না পায়, টেস্ট ডাটা দেখাবে না - 0 থাকবে না, মেসেজ দেখাবে
- let total=list.length;
- let present=list.filter(x=> x.present===true || x.status==='present' || x.attendance==='present' || x.isPresent===true);
- let absent=list.filter(x=>!present.includes(x));
-
- document.getElementById('totalBar').innerText=`মোট: ${total} • উপস্থিত: ${present.length} • অনুপস্থিত: ${absent.length}`;
- document.getElementById('pCount').innerText=present.length;
- document.getElementById('aCount').innerText=absent.length;
-
- if(total===0){
-  document.getElementById('pList').innerHTML='ছাত্র তালিকায় ছাত্র যোগ করুন';
-  document.getElementById('aList').innerHTML='ছাত্র তালিকায় ছাত্র যোগ করুন';
- } else {
-  document.getElementById('pList').innerHTML=present.length?present.map((s,i)=>`${i+1}. ${s.name||s.studentName||'নাম নেই'} ${s.roll?' - '+s.roll:''}`).join('<br>'):'কেউ নেই';
-  document.getElementById('aList').innerHTML=absent.length?absent.map((s,i)=>`${i+1}. ${s.name||s.studentName||'নাম নেই'} ${s.roll?' - '+s.roll:''}`).join('<br>'):'কেউ নেই';
- }
- window._list=list; window._present=present; window._absent=absent;
+function load(){
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');let cur=localStorage.getItem('loggedCollege')||'50017';let c=all[cur];
+if(c){document.getElementById('bn').innerText=c.bn||'';document.getElementById('en').innerText=c.en||'';document.getElementById('eiin').innerText=c.eiin||'';document.getElementById('code').innerText=c.code||'';if(c.logo)document.getElementById('logo').src=c.logo;}
+let allS=JSON.parse(localStorage.getItem('allStudents')||'{}');let list=allS[cur]||JSON.parse(localStorage.getItem('studentsList')||'[]');
+let total=list.length;let present=list.filter(x=>x.present);let absent=list.filter(x=>!x.present);
+document.getElementById('totalBar').innerText=`মোট: ${total} • উপস্থিত: ${present.length} • অনুপস্থিত: ${absent.length}`;
+document.getElementById('pCount').innerText=present.length;document.getElementById('aCount').innerText=absent.length;
+document.getElementById('pList').innerHTML=present.length?present.map((s,i)=>`${i+1}. ${s.name||''}`).join('<br>'):'ছাত্র তালিকায় ছাত্র যোগ করুন';
+document.getElementById('aList').innerHTML=absent.length?absent.map((s,i)=>`${i+1}. ${s.name||''}`).join('<br>'):'ছাত্র তালিকায় ছাত্র যোগ করুন';
+window._p=present;window._a=absent;
+let n=localStorage.getItem('todayNotice');if(n)document.getElementById('notice').value=n;
 }
 function sendWA(){
- let msg=`*${document.getElementById('bn').innerText}*\n${document.getElementById('totalBar').innerText}\n\n✅ উপস্থিত: ${(window._present||[]).map(s=>s.name).join(', ')}\n❌ অনুপস্থিত: ${(window._absent||[]).map(s=>s.name).join(', ')}\n\n📢 ${document.getElementById('notice').innerText}`;
- window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+let msg=`*${document.getElementById('bn').innerText}*\n${document.getElementById('totalBar').innerText}\n\n📢 ${document.getElementById('notice').value||'কোন নোটিশ নেই'}`;
+window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+function sendSMS(type){
+let list=type==='present'?window._p:window._a;
+let title=type==='present'?'উপস্থিত':'অনুপস্থিত';
+let names=(list||[]).map(s=>s.name||'').join(', ')||'কেউ নেই';
+let notice=document.getElementById('notice').value||'';
+let msg=`${document.getElementById('bn').innerText}\n${title} (${list.length} জন): ${names}\nনোটিশ: ${notice}`;
+window.open('sms:?body='+encodeURIComponent(msg),'_blank');
 }
 function downloadExcel(){
- let rows=[['নাম','রোল','অবস্থা']];
- (window._present||[]).forEach(s=>rows.push([s.name||'',s.roll||'','উপস্থিত']));
- (window._absent||[]).forEach(s=>rows.push([s.name||'',s.roll||'','অনুপস্থিত']));
- let csv=rows.map(r=>r.join(',')).join('\n');
- let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='report.csv';a.click();
+let csv='নাম,রোল,অবস্থা\n';(window._p||[]).forEach(s=>csv+=`${s.name||''},${s.roll||''},উপস্থিত\n`);(window._a||[]).forEach(s=>csv+=`${s.name||''},${s.roll||''},অনুপস্থিত\n`);
+let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='report.csv';a.click();
 }
-let n=localStorage.getItem('todayNotice'); if(n) document.getElementById('notice').innerText=n;
-document.getElementById('notice').addEventListener('input',function(){localStorage.setItem('todayNotice',this.innerText);});
-loadAll();
+document.getElementById('notice').addEventListener('input',function(){localStorage.setItem('todayNotice',this.value);});
+load();
 </script></body></html>
