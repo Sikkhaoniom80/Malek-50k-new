@@ -1,145 +1,108 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek 50K - Final</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Attendance - 3 Page Final - 100 College Editable</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
-body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
-.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;margin-top:10px}
-.card-login{background:#fff;width:100%;max-width:380px;border-radius:24px;padding:26px 20px;margin-top:16px;box-shadow:0 12px 35px rgba(0,0,0,.35)}
-.page{display:none;width:100%;max-width:480px}.page.active{display:flex;flex-direction:column;align-items:center;width:100%}
-.header{background:#0f3d2e;color:white;padding:25px 15px 50px;text-align:center;border-radius:0 0 25px 25px;width:100%}
-.card{background:white;margin:-25px 12px 15px;border-radius:18px;padding:15px;width:100%}
-.yellow-btn{background:#ffcc00;width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;cursor:pointer}
-.attendance{display:flex;gap:8px;margin:10px 0}.att-box{flex:1;background:#fff;text-align:center;padding:12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
-.sms-btns{display:flex;gap:8px}.sms-btns button{flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold}
-.green{background:#16a34a}.orange{background:#ea580c}.yellow{background:#eab308;color:#000!important}.blue{background:#2563eb}
-.student-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee}
-.filter-tabs{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}.filter-tabs button{flex:1;min-width:70px;padding:10px 6px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:13px}
-.btn-active{outline:3px solid #0f3d2e}
-select,input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #ccc;font-size:16px;margin:6px 0;background:white}
-#boxNameBn:focus,#boxNameEn:focus,#boxEIIN:focus,#boxIns:focus{border:1px dashed yellow!important;background:#ffffcc;color:#0f2d5a!important}
+*{font-family:'Hind Siliguri',sans-serif;box-sizing:border-box}
+body{margin:0;background:#0a3d2e;max-width:480px;margin:auto;min-height:100vh}
+.page{display:none;min-height:100vh;background:#0a3d2e;padding-bottom:20px}
+.page.active{display:block}
+.college-box{background:#fff;border-radius:14px;padding:8px 12px;display:flex;align-items:center;gap:10px;margin:10px 12px 10px;box-shadow:0 3px 10px rgba(0,0,0,0.2)}
+.college-box img{width:56px;height:56px;border-radius:50%;border:3px solid #ffcc00;flex-shrink:0;object-fit:cover;cursor:pointer}
+.college-text{flex:1;overflow:hidden;min-width:0}
+.c-name-bn{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;color:#102a69;line-height:1.2;cursor:text;border:1px dashed transparent;border-radius:4px}
+.c-name-bn:focus{border-color:#ffcc00;background:#fffbe6;outline:none}
+.c-name-en{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;color:#d00000;margin-top:2px;cursor:text;border:1px dashed transparent}
+.c-name-en:focus{border-color:#ffcc00;background:#fffbe6;outline:none}
+.c-eiin{font-size:10px;color:#333;margin-top:2px;font-weight:600;white-space:nowrap}
+.c-eiin span{border:1px dashed transparent;border-radius:3px;padding:0 4px;cursor:text}
+.c-eiin span:focus{border-color:#ffcc00;background:#fffbe6;outline:none}
+.section-title{color:#fff;padding:0 14px;margin:14px 0 8px;font-size:16px;font-weight:700}
+.yellow-main-btn{background:#ffcc00;color:#000;border:none;width:calc(100% - 24px);margin:10px 12px;padding:13px;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 3px 0 #c49a00}
+.cards{display:flex;gap:8px;padding:0 12px}
+.card{background:#fff;flex:1;text-align:center;padding:14px 6px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
+.card b{font-size:18px;display:block;margin-top:4px}
+.notice-board{background:#fff;margin:12px;border-radius:12px;padding:12px}
+.notice-board input{width:100%;padding:12px 14px;border-radius:24px;border:1.5px solid #ccc;margin-top:8px;outline:none}
+.sms-btns{display:flex;gap:8px;padding:0 12px}
+.sms-btns button{flex:1;padding:14px 6px;border:none;border-radius:10px;font-weight:700;font-size:13px;color:#fff;cursor:pointer}
+.bg-green{background:#16a34a}.bg-orange{background:#ea580c}.bg-yellow{background:#ffcc00;color:#000!important}
+.page3-title{color:#fff;text-align:center;font-size:22px;font-weight:800;margin:6px 0 8px}
+.back-btn{background:#fff;color:#000;border:none;padding:6px 16px;border-radius:20px;font-weight:700;margin:0 auto 10px;display:flex;align-items:center;gap:6px;cursor:pointer}
+.add-box{background:#eafff1;border:2px dashed #16a34a;margin:0 12px 10px;padding:12px;border-radius:12px;text-align:center;font-weight:700;cursor:pointer}
+.tabs{display:flex;gap:7px;padding:0 12px 8px}
+.tabs button{flex:1;padding:10px 4px;border:none;border-radius:10px;color:#fff;font-weight:700;font-size:13px;line-height:1.2;cursor:pointer}
+.tab-active{outline:3px solid #fff;outline-offset:-2px}
+.result-btn{background:#9333ea;color:#fff;width:calc(100% - 24px);margin:0 12px 10px;padding:12px;border:none;border-radius:12px;font-weight:700;cursor:pointer}
+.student-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid #eee;background:#fff;margin:0 12px}
+.stu-actions{display:flex;gap:6px}.icon-btn{width:36px;height:30px;border:1px solid #ccc;border-radius:6px;background:#f5f5f5;cursor:pointer}
+.hint{font-size:10px;color:#fff;opacity:0.8;text-align:center;margin-top:4px}
 </style>
 </head>
 <body>
-<img class="logo" id="topLogo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" onerror="this.style.display='none'">
-<div id="loginPage" class="card-login">
-<h2 style="text-align:center">🔐 শিক্ষক লগইন</h2>
-<select id="loginClass">
-<option value="">শ্রেণি সিলেক্ট করুন</option>
-<option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>একাদশ শ্রেণি</option><option>দ্বাদশ শ্রেণি</option>
-</select>
-<input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
-<button style="width:100%;padding:14px;border:none;border-radius:14px;background:#0f2d5a;color:white;font-weight:700;margin-top:8px" onclick="doLogin()">🔐 লগইন করুন</button>
-</div>
-
-<!-- ২য় পাতা - ড্যাশবোর্ড - পেডের ভিতরেই পরিবর্তন -->
-<div id="firstPage" class="page">
-  <div class="header" style="padding:10px 10px 35px">
-    <!-- এই ঘটটুকুর ভিতরেই সব চেঞ্জ হবে -->
-    <div id="collegeBox" style="background:white;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;border:2px solid #ffcc00;text-align:left">
-      <div onclick="logoInput.click()" style="cursor:pointer;text-align:center;min-width:75px">
-        <img id="boxLogo" src="" style="width:65px;height:65px;border-radius:50%;border:2px solid #0f2d5a;object-fit:cover;background:white">
-        <div style="font-size:9px;color:blue">লোগো চেঞ্জ</div>
-        <input type="file" id="logoInput" accept="image/*" style="display:none" onchange="changeBoxLogo(this)">
-      </div>
-      <div style="flex:1">
-        <div id="boxNameBn" contenteditable="true" onblur="saveBox()" oninput="saveBox()" style="font-weight:bold;font-size:14px;color:#0f2d5a;outline:none">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
-        <div id="boxNameEn" contenteditable="true" onblur="saveBox()" oninput="saveBox()" style="font-weight:bold;font-size:10px;color:#cc0000;outline:none">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
-        <div style="display:flex;gap:10px;margin-top:4px;font-size:11px;color:#333">
-          <span>EIIN: <b><span id="boxEIIN" contenteditable="true" onblur="saveBox()" oninput="saveBox()" style="outline:none">132332</span></b></span>
-          <span>Code: <b><span id="boxIns" contenteditable="true" onblur="saveBox()" oninput="saveBox()" style="outline:none">50017</span></b></span>
-        </div>
-      </div>
+<div id="page2" class="page active">
+  <div class="college-box">
+    <label for="logoInput" style="margin:0;cursor:pointer"><img id="logo2" src="https://via.placeholder.com/80?text=Logo"></label>
+    <div class="college-text">
+      <div id="bnName" class="c-name-bn" contenteditable="true">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+      <div id="enName" class="c-name-en" contenteditable="true">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
+      <div class="c-eiin">EIIN: <span id="eiin" contenteditable="true">132332</span> | Code: <span id="code" contenteditable="true">50017</span></div>
     </div>
-    <p id="boxStatus" style="color:#ffcc00;font-size:12px;height:12px;margin:5px 0 0"></p>
-    <p style="margin:8px 0 0">শ্রেণী: <span id="showClass"></span> | <small>"ইকরা বিসমি রাব্বিক"</small></p>
   </div>
-  <div class="card">
-    <button class="yellow-btn" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা (৪ ট্যাব - সম্পূর্ণ তালিকা)</button>
-    <h3>📅 উপস্থিতি</h3>
-    <div class="attendance"><div class="att-box"><small>মোট</small><br><b id="total">0</b></div><div class="att-box"><small>উপস্থিত</small><br><b id="present" style="color:green">0</b></div><div class="att-box"><small>অনুপস্থিত</small><br><b id="absent" style="color:red">0</b></div></div>
-    <h3>📢 নোটিশ বোর্ড</h3><input type="text" id="noticeText" placeholder="এখানে নোটিশ লিখুন...">
-    <h3>💬 SMS পাঠান</h3>
-    <div class="sms-btns"><button class="green" onclick="sendSMS('present')">Present SMS</button><button class="orange" onclick="sendSMS('absent')">Absent SMS</button><button class="yellow" onclick="sendSMS('notice')">Notice SMS</button></div>
-    <div style="display:flex;gap:8px;margin-top:12px"><button class="green" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="exportExcel()">⬇️ Excel Export</button><button class="blue" style="flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold" onclick="monthlyReport2()">📊 Monthly Report</button></div>
-    <div id="monthlyDiv2" style="display:none;overflow:auto;margin-top:12px;border:2px solid #2563eb;border-radius:12px;padding:10px;background:#f8fafc"></div>
-    <button onclick="location.reload()" style="width:100%;margin-top:12px;padding:10px;background:#555;color:white;border:none;border-radius:10px">🔙 লগআউট</button>
+  <div class="hint">↑ নাম / EIIN এ ক্লিক করে এডিট করুন - ১০০ প্রতিষ্ঠানের জন্য</div>
+  <button class="yellow-main-btn" onclick="showPage('page3')">👥 শিক্ষার্থীর তালিকা (৫ ট্যাব - সম্পূর্ণ তালিকা)</button>
+  <div class="section-title">📅 উপস্থিতি</div>
+  <div class="cards">
+    <div class="card">মোট <b id="totalCount">4</b></div>
+    <div class="card">উপস্থিত <b style="color:#16a34a" id="presentCount">4</b></div>
+    <div class="card">অনুপস্থিত <b style="color:#ef4444" id="absentCount">0</b></div>
+  </div>
+  <div class="notice-board"><b>📢 নোটিশ বোর্ড</b><input id="noticeInput" placeholder="এখানে নোটিশ লিখুন..."></div>
+  <div class="section-title">💬 SMS পাঠান</div>
+  <div class="sms-btns">
+    <button class="bg-green">Present<br>SMS</button>
+    <button class="bg-orange">Absent SMS</button>
+    <button class="bg-yellow">Notice SMS</button>
   </div>
 </div>
-
-<!-- ৩য় পাতা - ৪ ট্যাব + ফলাফল শীট -->
-<div id="secondPage" class="page">
-  <div class="header" style="padding-bottom:20px">
-    <div style="background:white;color:#0f2d5a;border-radius:10px;padding:8px;display:flex;align-items:center;gap:8px;text-align:left">
-      <img id="boxLogo3" style="width:50px;height:50px;border-radius:50%;border:2px solid gold;object-fit:cover">
-      <div>
-        <div id="boxNameBn3" style="font-weight:bold;font-size:12px"></div>
-        <div id="boxNameEn3" style="font-size:9px;color:#cc0000;font-weight:bold"></div>
-        <div style="font-size:10px"><span id="boxEIIN3"></span> | <span id="boxIns3"></span></div>
-      </div>
+<div id="page3" class="page">
+  <div class="college-box">
+    <img id="logo3" src="https://via.placeholder.com/80?text=Logo">
+    <div class="college-text">
+      <div id="bnName3" class="c-name-bn" style="pointer-events:none">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+      <div id="enName3" class="c-name-en" style="pointer-events:none">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
+      <div class="c-eiin" style="pointer-events:none">EIIN: <span id="eiin3">132332</span> | Code: <span id="code3">50017</span></div>
     </div>
-    <h2 style="margin:10px 0 0">শিক্ষার্থীর তালিকা</h2><button onclick="goFirst()" style="margin-top:10px;background:white;color:#0f3d2e;border:none;padding:6px 15px;border-radius:20px;font-weight:bold">⬅️ ড্যাশবোর্ড</button>
   </div>
-  <div class="card">
-    <button onclick="toggleAdd()" style="width:100%;padding:14px;background:#dcfce7;border:2px dashed #16a34a;border-radius:12px;font-weight:bold">➕ শিক্ষার্থী যোগ করুন - ক্লিক করুন</button>
-    <div id="addForm" style="display:none;margin-top:10px;padding:12px;background:#f0fdf4;border-radius:12px;border:1px solid #16a34a">
-      <input type="text" id="sName" placeholder="শিক্ষার্থীর নাম"><input type="text" id="sRoll" placeholder="রোল নম্বর"><input type="text" id="sMobile" placeholder="মোবাইল 017xxxxxxxx">
-      <div style="display:flex;gap:8px;margin-top:8px"><button onclick="addStudent()" style="flex:1;padding:12px;background:#16a34a;color:white;border:none;border-radius:8px;font-weight:bold">✅ যোগ করুন</button><button onclick="toggleAdd()" style="flex:1;padding:12px;background:#555;color:white;border:none;border-radius:8px">❌ বন্ধ</button></div>
-    </div>
-    <div class="filter-tabs">
-      <button id="tabAll" style="background:#ffcc00" onclick="filterList('all')">📋 সবাই<br><span id="cAll">0</span></button>
-      <button id="tabPresent" style="background:#16a34a;color:white" onclick="filterList('present')">✅ উপস্থিত<br><span id="cPresent">0</span></button>
-      <button id="tabAbsent" style="background:#ef4444;color:white" onclick="filterList('absent')">❌ অনুপস্থিত<br><span id="cAbsent">0</span></button>
-      <button id="tabMonthly" style="background:#2563eb;color:white" onclick="filterList('monthly')">📅 মাসিক</button>
-      <button id="tabResult" style="background:#7c3aed;color:white" onclick="filterList('result')">🏆 ফলাফল ১৩ বিষয়</button>
-    </div>
-    <div id="studentList"></div>
-    <div id="monthlyDiv" style="display:none;overflow:auto;margin-top:10px;border:2px dashed #2563eb;border-radius:12px;padding:10px"></div>
-    <div id="resultDiv" style="display:none;overflow:auto;margin-top:10px;border:2px solid #7c3aed;border-radius:12px;padding:10px;background:#f5f3ff"></div>
+  <div class="page3-title">শিক্ষার্থীর তালিকা</div>
+  <button class="back-btn" onclick="showPage('page2')">⬅️ ড্যাশবোর্ড</button>
+  <div class="add-box" onclick="addStudent()">+ শিক্ষার্থী যোগ করুন - ক্লিক করুন</div>
+  <div class="tabs">
+    <button id="tabAll" class="bg-yellow tab-active" onclick="filterTab('all')" style="color:#000">📋 সবাই<br><span id="tabAllCount">4</span></button>
+    <button id="tabPresent" class="bg-green" onclick="filterTab('present')">✅ উপস্থিত<br><span id="tabPresentCount">4</span></button>
+    <button id="tabAbsent" class="bg-orange" style="background:#ef4444" onclick="filterTab('absent')">❌ অনুপস্থিত<br><span id="tabAbsentCount">0</span></button>
+    <button class="bg-green" style="background:#2563eb" onclick="alert('মাসিক রিপোর্ট')">📅 মাসিক</button>
   </div>
+  <button class="result-btn" onclick="alert('১৩ বিষয়ের ফলাফল')">🏆 ফলাফল ১৩ বিষয়</button>
+  <div id="studentList" style="background:#fff;margin:0 12px;border-radius:12px;overflow:hidden"></div>
 </div>
-
+<input type="file" id="logoInput" accept="image/*" hidden>
 <script>
-let students = JSON.parse(localStorage.getItem('students9')||'[]');
-let attendance = JSON.parse(localStorage.getItem('att9')||'{}');
-let results = JSON.parse(localStorage.getItem('results9')||'{}');
-let subNames = JSON.parse(localStorage.getItem('subNames9')||'["বাংলা","ইংরেজি","গণিত","বিজ্ঞান","সমাজ","ধর্ম","ICT","কৃষি","শারীরিক","কর্মমুখী","আরবি","কম্পিউটার","ফিন্যান্স"]');
-let currentFilter='all';
-
-function saveBox(){
-  let info={nameBn:boxNameBn.innerText.trim(),nameEn:boxNameEn.innerText.trim(),eiin:boxEIIN.innerText.trim(),ins:boxIns.innerText.trim(),logo:boxLogo.src};
-  localStorage.setItem('collegeInfo',JSON.stringify(info));
-  boxStatus.innerText="✅ অটো সেভ"; setTimeout(()=>boxStatus.innerText="",1200);
-  boxNameBn3.innerText=info.nameBn; boxNameEn3.innerText=info.nameEn;
-  boxEIIN3.innerText="EIIN: "+info.eiin; boxIns3.innerText="Code: "+info.ins;
-  boxLogo3.src=info.logo;
-}
-function changeBoxLogo(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{boxLogo.src=e.target.result;saveBox();};r.readAsDataURL(f);}
-function loadBox(){let info=JSON.parse(localStorage.getItem('collegeInfo')||'{}');if(info.nameBn)boxNameBn.innerText=info.nameBn;if(info.nameEn)boxNameEn.innerText=info.nameEn;if(info.eiin)boxEIIN.innerText=info.eiin;if(info.ins)boxIns.innerText=info.ins;if(info.logo){boxLogo.src=info.logo;boxLogo3.src=info.logo;}boxNameBn3.innerText=info.nameBn||boxNameBn.innerText;boxNameEn3.innerText=info.nameEn||boxNameEn.innerText;boxEIIN3.innerText="EIIN: "+(info.eiin||boxEIIN.innerText);boxIns3.innerText="Code: "+(info.ins||boxIns.innerText);if(info.logo)boxLogo3.src=info.logo; if(!boxLogo.src) boxLogo.src="https://via.placeholder.com/65";}
-
-function doLogin(){let c=loginClass.value,p=loginPass.value;if(!c)return alert('শ্রেণি সিলেক্ট করুন');if(p!='1234')return alert('পাসওয়ার্ড 1234');showClass.innerText=c;loginPage.style.display='none';topLogo.style.display='none';firstPage.classList.add('active');document.body.style.background='#f0f2f5';loadBox();updateCounts();}
-function openStudentPage(){firstPage.classList.remove('active');secondPage.classList.add('active');loadBox();filterList('all');}
-function goFirst(){secondPage.classList.remove('active');firstPage.classList.add('active');updateCounts();}
-function toggleAdd(){let f=document.getElementById('addForm');f.style.display=f.style.display=='none'?'block':'none';}
-function addStudent(){let n=sName.value.trim(),r=sRoll.value.trim(),m=sMobile.value.trim();if(!n||!r)return alert('নাম ও রোল দিন');if(!m)return alert('মোবাইল দিন মামা, না হলে SMS যাবে না');students.push({name:n,roll:r,mobile:m});localStorage.setItem('students9',JSON.stringify(students));sName.value='';sRoll.value='';sMobile.value='';document.getElementById('addForm').style.display='none';filterList('all');}
-function filterList(type){currentFilter=type;document.querySelectorAll('.filter-tabs button').forEach(b=>b.classList.remove('btn-active'));let el=document.getElementById('tab'+type.charAt(0).toUpperCase()+type.slice(1));if(el)el.classList.add('btn-active');studentList.style.display='none';monthlyDiv.style.display='none';resultDiv.style.display='none';if(type=='monthly'){monthlyDiv.style.display='block';renderMonthly3();}else if(type=='result'){resultDiv.style.display='block';renderResult();}else{studentList.style.display='block';render();}}
-function render(){students.sort((a,b)=>parseInt(a.roll)-parseInt(b.roll));let list=document.getElementById('studentList');list.innerHTML='';let filtered=students.map((s,i)=>({...s,idx:i})).filter(s=>{if(currentFilter=='present')return attendance[s.idx]!=='absent';if(currentFilter=='absent')return attendance[s.idx]=='absent';return true;});if(filtered.length==0)list.innerHTML='<p style="text-align:center;color:gray">তালিকা খালি</p>';filtered.forEach(s=>{let i=s.idx;let checked=attendance[i]=='absent'?'':'checked';list.innerHTML+=`<div class="student-row"><div><input type="checkbox" ${checked} onchange="toggleAtt(${i},this.checked)"> <b>${s.name}</b> (${s.roll})<br><small>${s.mobile}</small></div><div><button onclick="editS(${i})">✏️</button><button onclick="delS(${i})">🗑️</button></div></div>`;});updateCounts();}
-function renderMonthly3(){let monthName=new Date().toLocaleString('bn-BD',{month:'long',year:'numeric'});let div=document.getElementById('monthlyDiv');let html=`<h4>📅 মাসিক হাজিরা - ${monthName}</h4><table border="1" cellpadding="6" style="border-collapse:collapse;width:100%;font-size:12px"><tr><th>মাস</th><th>নাম (রোল)</th><th>অবস্থা</th></tr>`;students.forEach((s,i)=>{let isP=attendance[i]!=='absent';html+=`<tr><td>${monthName}</td><td>${s.name} (${s.roll})</td><td style="color:${isP?'green':'red'};font-weight:bold">${isP?'P - উপস্থিত':'A - অনুপস্থিত'}</td></tr>`;});html+=`</table>`;div.innerHTML=html;}
-function renderResult(){let h=`<h4>🏆 ফলাফল শীট - ১৩ বিষয় (বিষয়ের নামে ক্লিক করে চেঞ্জ করুন)</h4><div style="overflow:auto"><table border="1" cellpadding="4" style="border-collapse:collapse;font-size:11px;min-width:900px"><tr style="background:#fde047"><th>ক্রমিক</th><th>নাম</th><th>রোল</th>`;for(let i=0;i<13;i++)h+=`<th><input value="${subNames[i]}" onchange="subNames[${i}]=this.value;localStorage.setItem('subNames9',JSON.stringify(subNames))" style="width:60px;border:none;background:#fde047;font-weight:bold;text-align:center"></th>`;h+=`<th style="background:#a7f3d0">মোট</th><th style="background:#a7f3d0">GPA</th></tr>`;students.forEach((s,idx)=>{let r=results[idx]||{};h+=`<tr><td>${idx+1}</td><td>${s.name}</td><td>${s.roll}</td>`;for(let i=0;i<13;i++){let v=r['s'+i]||'';h+=`<td><input type="number" value="${v}" oninput="saveRes(${idx},${i},this.value)" style="width:50px;text-align:center;padding:4px;border-radius:6px"></td>`;}let tot=0;for(let i=0;i<13;i++)tot+=parseInt(r['s'+i]||0);let avg=tot/13;let gpa=avg>=80?5:avg>=70?4:avg>=60?3.5:avg>=50?3:avg>=40?2:0;h+=`<td style="background:#ecfdf5;text-align:center;font-weight:bold">${tot}</td><td style="background:#ecfdf5;text-align:center;font-weight:bold">${gpa.toFixed(2)}</td></tr>`;});h+=`</table></div><button onclick="expRes()" style="width:100%;padding:12px;background:#7c3aed;color:white;border:none;border-radius:10px;margin-top:10px;font-weight:bold">⬇️ ফলাফল Excel ডাউনলোড</button>`;resultDiv.innerHTML=h;}
-function saveRes(stu,sub,val){if(!results[stu])results[stu]={};results[stu]['s'+sub]=val;localStorage.setItem('results9',JSON.stringify(results));}
-function expRes(){let data=[];students.forEach((s,idx)=>{let r=results[idx]||{};let row={ক্রমিক:idx+1,নাম:s.name,রোল:s.roll};let tot=0;for(let i=0;i<13;i++){let nm=subNames[i]||`বিষয় ${i+1}`;let v=parseInt(r['s'+i]||0);row[nm]=v;tot+=v;}let avg=tot/13;let gpa=avg>=80?5:avg>=70?4:avg>=60?3.5:avg>=50?3:avg>=40?2:0;row["মোট"]=tot;row["GPA"]=gpa.toFixed(2);data.push(row);});let ws=XLSX.utils.json_to_sheet(data),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Result");XLSX.writeFile(wb,`Result_13_Sub.xlsx`);}
-function monthlyReport2(){let div=document.getElementById('monthlyDiv2');if(div.style.display=='block'){div.style.display='none';return;}div.style.display='block';let monthName=new Date().toLocaleString('bn-BD',{month:'long',year:'numeric'});let html=`<h4>📊 মাসিক রিপোর্ট - ${monthName}</h4><table border="1" cellpadding="6" style="border-collapse:collapse;width:100%;font-size:12px"><tr><th>রোল</th><th>নাম</th><th>মোবাইল</th><th>অবস্থা</th></tr>`;students.forEach((s,i)=>{let isP=attendance[i]!=='absent';html+=`<tr><td>${s.roll}</td><td>${s.name}</td><td>${s.mobile}</td><td style="color:${isP?'green':'red'};font-weight:bold">${isP?'উপস্থিত':'অনুপস্থিত'}</td></tr>`;});html+=`</table><br><button onclick="exportExcel()" style="width:100%;padding:10px;background:#16a34a;color:white;border:none;border-radius:8px">⬇️ ${monthName} Excel ডাউনলোড</button><button onclick="document.getElementById('monthlyDiv2').style.display='none'" style="width:100%;margin-top:6px;padding:8px;background:#555;color:white;border:none;border-radius:8px">বন্ধ করুন</button>`;div.innerHTML=html;div.scrollIntoView({behavior:'smooth'});}
-function toggleAtt(i,isP){attendance[i]=isP?'present':'absent';localStorage.setItem('att9',JSON.stringify(attendance));render();updateCounts();}
-function updateCounts(){let p=0;students.forEach((_,i)=>{if(attendance[i]!=='absent')p++;});let tot=students.length;let ab=tot-p;document.getElementById('total').innerText=tot;document.getElementById('present').innerText=p;document.getElementById('absent').innerText=ab;document.getElementById('cAll').innerText=tot;document.getElementById('cPresent').innerText=p;document.getElementById('cAbsent').innerText=ab;}
-function sendSMS(type){let notice=document.getElementById('noticeText').value.trim();if(type=='notice'&&!notice)return alert('নোটিশ বোর্ডে আগে নোটিশ লিখুন মামা');let targets=students.filter((s,i)=>{if(!s.mobile)return false;let isP=attendance[i]!=='absent';if(type=='present')return isP;if(type=='absent')return!isP;return true;});if(targets.length==0)return alert(type=='present'?'উপস্থিত তালিকায় নাম্বার নেই':type=='absent'?'অনুপস্থিত তালিকায় নাম্বার নেই':'কোনো নাম্বার নেই');let monthName=new Date().toLocaleString('bn-BD',{month:'long',year:'numeric'});let date=new Date().toLocaleDateString('bn-BD');let msg=type=='present'?`মমতাজউদ্দিন কলেজ (${monthName}): আপনার সন্তান ${date} উপস্থিত আছে।`:type=='absent'?`মমতাজউদ্দিন কলেজ (${monthName}): আপনার সন্তান ${date} অনুপস্থিত।`:`মমতাজউদ্দিন কলেজ নোটিশ (${monthName}): ${notice} - ${date}`;let numbers=targets.map(t=>t.mobile).join(',');window.location.href=`sms:${numbers}?body=${encodeURIComponent(msg)}`;}
-function delS(i){if(confirm('ডিলিট করবে?')){students.splice(i,1);delete attendance[i];localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));filterList(currentFilter);}}
-function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null)return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile);students[i]={name:n,roll:r,mobile:m};localStorage.setItem('students9',JSON.stringify(students));render();}
-function exportExcel(){let monthName=new Date().toLocaleString('bn-BD',{month:'long',year:'numeric'});if(students.length==0)return alert('খালি');let data=students.map((s,i)=>({মাস:monthName,নাম:s.name,রোল:s.roll,মোবাইল:s.mobile,অবস্থা:attendance[i]!=='absent'?'উপস্থিত':'অনুপস্থিত'}));let ws=XLSX.utils.json_to_sheet(data);let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,monthName);XLSX.writeFile(wb,`Monthly_${monthName}.xlsx`);}
-window.onload=loadBox;
+let students=[{id:101,name:'Kalam',present:true},{id:102,name:'Rohim',present:true},{id:201,name:'কমল',present:true},{id:202,name:'Sakib',present:true}];
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');syncCollegeBox();}
+function syncCollegeBox(){document.getElementById('bnName3').innerText=document.getElementById('bnName').innerText;document.getElementById('enName3').innerText=document.getElementById('enName').innerText;document.getElementById('eiin3').innerText=document.getElementById('eiin').innerText;document.getElementById('code3').innerText=document.getElementById('code').innerText;document.getElementById('logo3').src=document.getElementById('logo2').src;}
+['bnName','enName','eiin','code'].forEach(id=>{document.getElementById(id).addEventListener('blur',()=>{localStorage.setItem(id,document.getElementById(id).innerText);syncCollegeBox();});});
+window.addEventListener('load',()=>{['bnName','enName','eiin','code'].forEach(id=>{const saved=localStorage.getItem(id);if(saved) document.getElementById(id).innerText=saved;});const savedLogo=localStorage.getItem('collegeLogo');if(savedLogo){document.getElementById('logo2').src=savedLogo;document.getElementById('logo3').src=savedLogo;}syncCollegeBox();renderStudents('all');updateCounts();});
+document.getElementById('logoInput').addEventListener('change',e=>{const file=e.target.files[0];if(!file) return;const reader=new FileReader();reader.onload=ev=>{document.getElementById('logo2').src=ev.target.result;document.getElementById('logo3').src=ev.target.result;localStorage.setItem('collegeLogo',ev.target.result);};reader.readAsDataURL(file);});
+function renderStudents(filter){const list=document.getElementById('studentList');list.innerHTML='';let filtered=students;if(filter==='present') filtered=students.filter(s=>s.present);if(filter==='absent') filtered=students.filter(s=>!s.present);filtered.forEach(s=>{const row=document.createElement('div');row.className='student-row';row.innerHTML=`<div style="display:flex;align-items:center;gap:10px"><input type="checkbox" ${s.present?'checked':''} onchange="togglePresent(${s.id})"><b>${s.name} (${s.id})</b></div><div class="stu-actions"><button class="icon-btn">✏️</button><button class="icon-btn" onclick="deleteStu(${s.id})">🗑️</button></div>`;list.appendChild(row);});}
+function filterTab(type){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('tab-active'));if(type==='all') document.getElementById('tabAll').classList.add('tab-active');if(type==='present') document.getElementById('tabPresent').classList.add('tab-active');if(type==='absent') document.getElementById('tabAbsent').classList.add('tab-active');renderStudents(type);}
+function togglePresent(id){const s=students.find(x=>x.id===id);if(s) s.present=!s.present;updateCounts();renderStudents('all');}
+function updateCounts(){const total=students.length;const present=students.filter(s=>s.present).length;const absent=total-present;document.getElementById('totalCount').innerText=total;document.getElementById('presentCount').innerText=present;document.getElementById('absentCount').innerText=absent;document.getElementById('tabAllCount').innerText=total;document.getElementById('tabPresentCount').innerText=present;document.getElementById('tabAbsentCount').innerText=absent;}
+function addStudent(){const name=prompt('শিক্ষার্থীর নাম লিখুন:');if(!name) return;const id=prompt('রোল লিখুন:')||Math.floor(Math.random()*900+100);students.push({id:parseInt(id),name:name,present:true});updateCounts();renderStudents('all');}
+function deleteStu(id){if(confirm('ডিলিট করবেন?')){students=students.filter(s=>s.id!==id);updateCounts();renderStudents('all');}}
 </script>
 </body>
 </html>
