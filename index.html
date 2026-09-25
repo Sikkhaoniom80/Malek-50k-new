@@ -2,40 +2,38 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Final - No College Info</title>
+<title>1st Page - Only Need</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-*{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
-body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
-.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;background:#0a2342}
-.card{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 10px 25px rgba(0,0,0,.3)}
-input,select{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;margin:6px 0;font-size:14px}
-button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin-top:8px}
-.hide{display:none;margin-top:8px;border:2px dashed #0f3d2e;border-radius:10px;padding:8px;max-height:350px;overflow:auto;background:#f8fafc}
-.tv{width:100%;background:#000;color:#0f0;border-radius:12px;padding:8px;text-align:center;font-family:monospace;font-size:11px;border:2px solid #333;margin-top:6px}
+*{box-sizing:border-box;font-family:'Hind Siliguri'}
+body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;padding:12px;min-height:100vh}
+.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700}
+.card{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px;margin-top:14px}
+input,select{width:100%;padding:13px;border-radius:12px;border:1.5px solid #ccc;margin:7px 0;font-size:15px}
+button{width:100%;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin-top:8px}
+.hide{display:none;margin-top:10px;border:2px dashed #0f3d2e;border-radius:12px;padding:10px;max-height:380px;overflow:auto;background:#f8fafc}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);justify-content:center;align-items:center;z-index:99}
 .mbox{background:#fff;padding:20px;border-radius:18px;width:90%;max-width:350px;text-align:center}
 </style>
 </head>
 <body>
 
-<!-- ১। এক ভাগের তিন - আপনার ছবি সহ মনোগ্রাম -->
-<img class="logo" src="logo.jpg" alt="College Logo">
+<img class="logo" src="logo.jpg" alt="Logo">
 
-<!-- ২। ৮ ডিজিট পাসওয়ার্ড + TV + লগইন -->
 <div class="card">
-<h3 style="text-align:center;margin:0 0 8px">🔐 ৮ ডিজিট পাসওয়ার্ড ও ক্লাস</h3>
-<input id="pass8" type="text" readonly style="letter-spacing:4px;font-size:22px;text-align:center;background:#000;color:#0f0">
-<div class="tv" id="tvScreen">📺 TV: PASS: -- | CLASS: -- | OTP: -- | MOB: 01912427294</div>
-<button onclick="openOTP()" style="background:#0f2d5a;color:white">🔑 পাসওয়ার্ড পরিবর্তন - OTP 01912427294</button>
+<h3 style="text-align:center;margin:0 0 8px">🔐 শ্রেণি ও পাসওয়ার্ড</h3>
 
-<h3 style="text-align:center;margin:14px 0 0">🔐 শিক্ষক লগইন</h3>
+<!-- শ্রেণি ১ম থেকে দ্বাদশ -->
 <select id="cls">
 <option value="">শ্রেণি সিলেক্ট করুন</option>
 <option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option>
 <option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option>
 <option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>একাদশ</option><option>দ্বাদশ</option>
 </select>
-<input id="pass" type="password" placeholder="৮ ডিজিট পাসওয়ার্ড দিন">
-<button onclick="doLogin()" style="background:#0a2342;color:#ffd700">🔐 
+
+<!-- ৮ ডিজিটের পাসওয়ার্ড - আপনি বসাবেন -->
+<input id="pass" type="password" placeholder="৮ ডিজিটের পাসওয়ার্ড">
+<p style="text-align:center;font-size:12px;margin:2px 0;color:gray">বর্তমান পাস: <b id="showPass">--------</b></p>
+
+<button onclick="openOTP()" style="background:#0f2d5a;color:white;font-size:12px">🔑 পাসওয়ার্ড রিসেট - OTP 01912427294</button>
+<button onclick="doLogin()" style="background:#0a2342;color:#ffd700;margin
