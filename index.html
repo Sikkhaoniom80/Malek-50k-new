@@ -1,75 +1,122 @@
 <!DOCTYPE html>
-<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Malek Attendance - Malik Login</title>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>মালিক প্যানেল</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#0a2342;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px;font-family:sans-serif}
-.logo{width:360px;max-width:92%;border-radius:20px;border:3px solid #ffd700;box-shadow:0 0 25px gold;overflow:hidden}
-.logo img{width:100%;display:block}
-.card{background:#fff;width:100%;max-width:400px;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.input{width:100%;padding:14px;border:2px solid #0a2342;border-radius:12px;font-size:16px;outline:none}
-.btn{width:100%;padding:14px;background:#0a2342;color:#fff;border:none;border-radius:12px;font-weight:bold;margin-top:12px;font-size:17px;cursor:pointer}
-.stat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.stat div{background:#e8f0ff;padding:10px;border-radius:10px;font-size:13px}
-</style></head><body>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a1931;font-family:'Hind Siliguri';display:flex;justify-content:center;padding:10px}
+.w{max-width:500px;width:100%}
+.top{border:3px solid #ffcc00;border-radius:22px;overflow:hidden;box-shadow:0 0 20px rgba(255,204,0,.5)}
+.top img{width:100%;display:block}
+.card{background:#fff;border-radius:22px;padding:18px;margin-top:14px}
+h2{text-align:center;font-size:24px}
+.sub{text-align:center;color:#666;margin:4px 0 12px}
+input{width:100%;padding:14px;border:2px solid #0a1931;border-radius:14px;font-family:'Hind Siliguri';font-size:18px;outline:none;text-align:center;margin-top:10px}
+.btn{width:100%;padding:14px;background:#0a1931;color:#fff;border:none;border-radius:14px;font-weight:800;font-size:18px;font-family:'Hind Siliguri';cursor:pointer;margin-top:12px}
+.btn2{width:100%;padding:12px;background:#fff;border:2px dashed #0a1931;border-radius:14px;font-weight:700;font-family:'Hind Siliguri';cursor:pointer;margin-top:10px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.sbox{background:#eef0ff;border-radius:14px;padding:12px;font-weight:800;font-size:15px}
+.inst{background:#f8f9ff;border:1px solid #c5ccff;border-radius:14px;padding:12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+.online{color:#0e8a3c;font-weight:800}.offline{color:#c62828;font-weight:800}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px;color:#fff}
+</style>
+</head>
+<body>
+<div class="w">
 
-<div class="logo"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg"></div>
-
-<div class="card">
-<h3 style="text-align:center">🔐 মালিক লগইন</h3>
-<p style="text-align:center;font-size:13px;margin:8px 0;color:#555">পাসওয়ার্ড দিন</p>
-<input id="p" class="input" type="password" placeholder="••••">
-<button class="btn" onclick="login()">🔐 লগইন করুন</button>
-<button onclick="resetP()" style="width:100%;margin-top:10px;padding:10px;background:#fff;border:1.5px dashed #0a2342;border-radius:10px;font-size:13px;cursor:pointer">🔑 পাসওয়ার্ড পরিবর্তন / রিসেট</button>
-
-<h4 style="margin-top:16px;font-size:14px">📊 ড্যাশবোর্ড পরিসংখ্যান</h4>
-<div class="stat">
-<div>🏢 মোট প্রতিষ্ঠান:<br><b id="totalIns">০ টা</b></div>
-<div>👤 আজ লগইন:<br><b id="todayLogin">০ টা</b></div>
-<div>📶 অফলাইন:<br><b id="offline">০ টা</b></div>
-<div>💰 পেমেন্ট বাকি:<br><b id="due">০ টা</b></div>
+<div class="top">
+<img src="https://i.ibb.co/3Y0Z9kXj/malek-logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2232/2232688.png'">
 </div>
 
-<p style="text-align:center;color:gray;font-size:10px;margin-top:12px">Engineered by Mohammad Abdul Malek<br>01912427294 | sikkhaoniom80.github.io<br>বর্তমান পাস: <b id="sp"></b></p>
+<div class="card">
+<h2>🔐 মালিক লগইন</h2>
+<div class="sub">পাসওয়ার্ড দিন</div>
+<input id="pass" type="password" placeholder="••••">
+<button class="btn" onclick="login()">🔓 লগইন করুন</button>
+<button class="btn2" onclick="changePass()">🔑 পাসওয়ার্ড পরিবর্তন / রিসেট</button>
+
+<div style="margin-top:16px;font-weight:800;font-size:18px">📊 ড্যাশবোর্ড পরিসংখ্যান</div>
+<div class="stats">
+<div class="sbox">🏢 মোট প্রতিষ্ঠান:<br><span id="totalC">0 টা</span></div>
+<div class="sbox">👤 আজ লগইন:<br><span id="todayL">0 টা</span></div>
+<div class="sbox">📶 অফলাইন:<br><span id="offlineC">0 টা</span></div>
+<div class="sbox">💰 পেমেন্ট বাকি:<br><span id="dueC">0 টা</span></div>
+</div>
+
+<div style="margin-top:18px;font-weight:800;font-size:18px">🏫 কোন কোন প্রতিষ্ঠান লগইন করছে</div>
+<div id="instList"></div>
+
+<div style="text-align:center;margin-top:16px;color:#666;font-size:13px;line-height:1.4">
+Engineered by Mohammad Abdul Malek<br>
+01912427294 | sikkhaoniom80.github.io<br>
+বর্তমান পাস: <span id="showPass">1234</span>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:12px">
+<button onclick="location.href='login.html'" style="flex:1;padding:12px;background:#0bb34a;color:#fff;border:none;border-radius:12px;font-weight:800;font-family:'Hind Siliguri'">২য় পেজ → কলেজ লগইন</button>
+</div>
+
+</div>
 </div>
 
 <script>
-if(!localStorage.getItem('mp')) localStorage.setItem('mp','1234');
-document.getElementById('sp').innerText=localStorage.getItem('mp');
+let ownerPass=localStorage.getItem('ownerPass')||'1234';
+document.getElementById('showPass').innerText=ownerPass;
 
-function updateStats(){
- let all = JSON.parse(localStorage.getItem('allColleges')||'{}');
- let total = Object.keys(all).length;
- let todayData = JSON.parse(localStorage.getItem('todayLogins')||'null');
- let loginCount = 0;
- let todayStr = new Date().toDateString();
- if(todayData && todayData.date === todayStr){
-   loginCount = todayData.list ? todayData.list.length : 0;
- }
- let offline = total - loginCount;
- if(offline < 0) offline = 0;
-
- document.getElementById('totalIns').innerText = total + ' টা';
- document.getElementById('todayLogin').innerText = loginCount + ' টা';
- document.getElementById('offline').innerText = offline + ' টা';
- document.getElementById('due').innerText = '৫ টা';
+function loadDashboard(){
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
+let keys=Object.keys(all);
+let total=keys.length;
+let today=new Date().toISOString().slice(0,10);
+let todayLogin=0, offline=0, due=0;
+let html='';
+keys.forEach(k=>{
+let c=all[k];
+let last=c.lastLogin||'কখনো না';
+let isToday=last.startsWith(today);
+if(isToday) todayLogin++;
+let isOnline = c.isOnline || isToday;
+if(!isOnline) offline++;
+if(c.due!==false) due++;
+let status=isOnline?`<span class="online">● অনলাইন</span>`:`<span class="offline">● অফলাইন</span>`;
+let badge=isOnline?`<span class="badge" style="background:#0e8a3c">ON</span>`:`<span class="badge" style="background:#c62828">OFF</span>`;
+html+=`
+<div class="inst">
+<div>
+<div style="font-weight:800;font-size:15px">${c.bn||c.nameBN||k}</div>
+<div style="font-size:12px;color:#666">Code:${c.code||k} | EIIN:${c.eiin||''}</div>
+<div style="font-size:12px;margin-top:2px">⏰ শেষ লগইন: ${last}</div>
+<div>${status}</div>
+</div>
+<div>${badge}</div>
+</div>`;
+});
+document.getElementById('totalC').innerText=total+' টা';
+document.getElementById('todayL').innerText=todayLogin+' টা';
+document.getElementById('offlineC').innerText=offline+' টা';
+document.getElementById('dueC').innerText=due+' টা';
+document.getElementById('instList').innerHTML=html||'<div style="padding:12px;text-align:center;color:#888;border:1px dashed #ccc;border-radius:12px;margin-top:10px">এখনো কোনো প্রতিষ্ঠান যোগ হয়নি</div>';
 }
-updateStats();
+loadDashboard();
 
 function login(){
- if(document.getElementById('p').value.trim() !== localStorage.getItem('mp')){
-   alert('ভুল পাসওয়ার্ড! বর্তমান: '+localStorage.getItem('mp'));return;
- }
- location.href='class.html';
+let p=document.getElementById('pass').value;
+if(p===ownerPass){
+alert('✅ মালিক লগইন সফল!');
+localStorage.setItem('ownerLogged','true');
+location.href='login.html';
+}else{alert('❌ ভুল পাসওয়ার্ড!');}
 }
-function resetP(){
- let o=prompt('পুরাতন পাসওয়ার্ড দিন:'); 
- if(o===null) return;
- if(o!==localStorage.getItem('mp')){alert('পুরাতন পাসওয়ার্ড মিলেনি!');return;}
- let n=prompt('নতুন পাসওয়ার্ড দিন (কমপক্ষে ৪ সংখ্যা):'); 
- if(!n||n.length<4){alert('৪ সংখ্যা দিন');return;}
- localStorage.setItem('mp',n.trim()); 
- document.getElementById('sp').innerText=n.trim(); 
- alert('✅ পাসওয়ার্ড পরিবর্তন হয়েছে!');
+function changePass(){
+let np=prompt('নতুন পাসওয়ার্ড দিন:',ownerPass);
+if(np){localStorage.setItem('ownerPass',np);ownerPass=np;document.getElementById('showPass').innerText=np;alert('✅ পাসওয়ার্ড পরিবর্তন হয়েছে: '+np);}
 }
+
+// ২য় পেজে লগইন করলে এই পেজে টাইম আপডেট হবে
+setInterval(loadDashboard,2000);
 </script>
-</body></html>
+</body>
+</html>
