@@ -1,20 +1,61 @@
 <!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>৩য় পেজ - রিপোর্ট</title>
+<title>ডাইনামিক রিপোর্ট - ফিক্সড বাদ</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}.wrap{max-width:440px;width:100%;background:#fdfaf3;min-height:100vh;padding-bottom:20px}.top{background:#0f2f1f;color:#fff;padding:12px;text-align:center}.pad{background:#fff8dc;border:1px solid #d6c28f;margin:10px;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center}.pad img{width:50px;height:50px;border-radius:50%}.box{background:#fff;margin:10px;border-radius:12px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.06)}.row{display:flex;gap:8px;margin-top:8px}.btn{flex:1;padding:11px;border:none;border-radius:10px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer}.btn-g{background:#0e8a3c;color:#fff}.btn-y{background:#ffcc00}.btn-d{background:#0a2342;color:#fff}</style>
-</head><body><div class="wrap">
-<div class="top"><h3 id="cN">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</h3><small>কোড: <span id="cC">50017</span></small></div>
-<div class="pad"><img id="cL" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png"><div><b id="bN">মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</b><br><small>স্থাপিত: ২০০৫ • EIIN: 132332 • সীতাকুণ্ড, চট্টগ্রাম</small></div></div>
-<div class="box"><h4>📊 উপস্থিতি রিপোর্ট</h4><p>মোট: <b id="tS">55</b> • উপস্থিত: <b id="pS">48</b> • অনুপস্থিত: <b id="aS">7</b></p>
-<div class="row"><button class="btn btn-g" onclick="wa()">🟢 WhatsApp</button><button class="btn btn-y" onclick="window.print()">🖨️ প্রিন্ট</button></div>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}.w{max-width:460px;width:100%;background:#fdfaf3;min-height:100vh}
+.h{background:#0a2e1a;color:#fff;padding:14px;text-align:center}
+.info{background:#fff8d6;border:2px solid #e6c200;border-radius:16px;margin:12px;padding:12px;display:flex;gap:10px}
+.box{background:#fff;margin:10px 12px;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.grid{display:flex;gap:10px;margin-top:10px}
+.col{flex:1;background:#f8faf8;border-radius:10px;padding:8px;min-height:80px;border:1px solid #ddd}
+.col b{display:block;text-align:center;padding:4px;border-radius:6px;margin-bottom:6px}.p b{background:#d4edda;color:#155724}.a b{background:#f8d7da;color:#721c24}
+.notice{background:#fff8d6;border:2px dashed #e6c200;border-radius:14px;margin:12px;padding:12px;text-align:center;font-weight:700;min-height:50px;outline:none}
+.btn{width:100%;padding:13px;border:none;border-radius:14px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer;margin:6px 0;font-size:15px}.g{background:#0e8a3c;color:#fff}.y{background:#ffcc00}.b{background:#1a5fbe;color:#fff}.o{background:#e65c00;color:#fff}.d{background:#0a2342;color:#fff}
+.edit{outline:none;border:1px dashed transparent;border-radius:4px}.edit:focus{background:#ffffcc;border-color:#0e8a3c}
+</style></head><body><div class="w">
+
+<div class="h">
+<div id="hBn" class="edit" contenteditable="true" oninput="saveHead()">মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
+<div>কোড: <span id="hCode" class="edit" contenteditable="true" oninput="saveHead()">50017</span></div>
 </div>
-<!-- নিচে নেভিগেশন - লগআউট বাদ -->
-<div class="row" style="padding:10px">
-<button class="btn btn-d" onclick="location.href='class.html'">← ২য় পেজ</button>
-<button class="btn btn-y" onclick="location.href='students.html'">৪র্থ পেজ →</button>
+
+<div class="info">
+<img id="logo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" style="width:56px;height:56px;border-radius:50%">
+<div style="flex:1"><div id="iBn" class="edit" contenteditable="true" style="font-weight:800">মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div><div style="font-size:13px">EIIN: <span id="eiin" class="edit" contenteditable="true">132332</span></div></div>
 </div>
+
+<div class="box">
+<div style="font-weight:800;font-size:17px">📊 উপস্থিতি রিপোর্ট (অটো)</div>
+<div style="margin-top:6px;font-weight:700;background:#fff3cd;padding:6px;border-radius:8px;text-align:center">মোট: <span id="total">0</span> • উপস্থিত: <span id="present">0</span> • অনুপস্থিত: <span id="absent">0</span></div>
+
+<!-- এখানে ডাইনামিক লিস্ট আসবে -->
+<div class="grid">
+<div class="col p"><b>✅ উপস্থিত - <span id="pCount">0</span> জন</b><div id="pList" style="font-size:13px;line-height:1.7">কেউ নেই</div></div>
+<div class="col a"><b>❌ অনুপস্থিত - <span id="aCount">0</span> জন</b><div id="aList" style="font-size:13px;line-height:1.7">কেউ নেই</div></div>
+</div>
+</div>
+
+<div class="notice edit" id="notice" contenteditable="true" oninput="saveHead()">📢 নোটিশ: আজ ক্লাস টেস্ট হবে</div>
+
+<div style="padding:0 12px 12px">
+<button class="btn g" onclick="share()">🟢 WhatsApp এ পাঠান</button>
+<button class="btn y" onclick="window.print()">🖨️ প্রিন্ট করুন / PDF</button>
+<button class="btn b" onclick="excel()">📊 Excel ডাউনলোড</button>
+<button class="btn g" onclick="sms('present')">📞 Present SMS পাঠান</button>
+<button class="btn o" onclick="sms('absent')">📩 Absent SMS পাঠান</button>
+<div style="display:flex;gap:10px"><button class="btn d" style="flex:1" onclick="location.href='class.html'">← ২য় পেজ</button><button class="btn" style="flex:1;background:#fff;border:2px solid #0a2342" onclick="location.href='student.html'">৪র্থ পেজ →</button></div>
+</div>
+
 </div>
 <script>
-let CODE=localStorage.getItem('loggedCollege')||'50017';let all=JSON.parse(localStorage.getItem('allColleges')||'{}');if(all[CODE]){document.getElementById('bN').innerText=all[CODE].nameBN;document.getElementById('cN').innerText=all[CODE].nameBN;document.getElementById('cL').src=all[CODE].logo;document.getElementById('cC').innerText=CODE;let s=JSON.parse(localStorage.getItem('students_'+CODE)||'[]');if(s.length>0)document.getElementById('tS').innerText=s.length;}
-function wa(){let txt=`*${document.getElementById('bN').innerText}*%0Aমোট: ${document.getElementById('tS').innerText} জন%0A`;window.open('https://wa.me/?text='+txt,'_blank');}
-</script></body></html>
+function getStudents(){
+let code=localStorage.getItem('loggedCollege')||'50017';
+let keys=['students_'+code,'allStudents_'+code,'students','allStudents','studentList'];
+for(let k of keys){let d=localStorage.getItem(k);if(d){try{let arr=JSON.parse(d);if(Array.isArray(arr)&&arr.length>0)return arr; if(arr[code]&&Array.isArray(arr[code]))return arr[code];}catch(e){}}}
+return [];
+}
+function load(){
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');let c=localStorage.getItem('loggedCollege')||Object.keys(all)[0]||'50017';
+if(all[c]){document.getElementById('hBn').innerText=all[c].bn||all[c].nameBN||'';document.getElementById('iBn').innerText=all[c].bn||all[c].nameBN||'';document.getElementById('hCode').innerText=all[c].code||c;document.getElementById('eiin').innerText=all[c].eiin||'';if(all[c].logo)document.getElementById('logo').src=all[c].logo;document.getElementById('notice').innerText=all[c].notice||'📢 নোটিশ: আজ ক্লাস টেস্ট হবে';}
+let studs=getStudents();
+let total=studs.length;
+let presentList
