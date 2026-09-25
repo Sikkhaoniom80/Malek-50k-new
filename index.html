@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Final - 1+2+3+4 - Malek</title>
+<title>Final - No College Info</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
@@ -10,7 +10,7 @@
 body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
 .logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;background:#0a2342}
 .card{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 10px 25px rgba(0,0,0,.3)}
-input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;margin:6px 0;font-size:14px}
+input,select{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;margin:6px 0;font-size:14px}
 button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin-top:8px}
 .hide{display:none;margin-top:8px;border:2px dashed #0f3d2e;border-radius:10px;padding:8px;max-height:350px;overflow:auto;background:#f8fafc}
 .tv{width:100%;background:#000;color:#0f0;border-radius:12px;padding:8px;text-align:center;font-family:monospace;font-size:11px;border:2px solid #333;margin-top:6px}
@@ -20,47 +20,17 @@ button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:700;cu
 </head>
 <body>
 
-<!-- ১। এক ভাগের তিন - আপনার ছবি (লোগো ফিক্সড) -->
+<!-- ১। এক ভাগের তিন - আপনার ছবি সহ মনোগ্রাম -->
 <img class="logo" src="logo.jpg" alt="College Logo">
 
-<!-- ২। ৮ ডিজিট পাসওয়ার্ড + TV + কলেজ তথ্য একসাথে -->
+<!-- ২। ৮ ডিজিট পাসওয়ার্ড + TV + লগইন -->
 <div class="card">
-<h3 style="text-align:center;margin:0 0 10px">🏫 কলেজ সংক্রান্ত তথ্য</h3>
-<input id="cName" placeholder="কলেজ নাম" value="মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ">
-<div style="display:flex;gap:6px">
-<input id="cEIIN" placeholder="EIIN" value="132332">
-<input id="cCode" placeholder="কোড" value="50017">
-</div>
-<textarea id="cAddr" rows="2" placeholder="ঠিকানা">শিবগঞ্জ, বগুড়া</textarea>
-<input id="cPrin" placeholder="অধ্যক্ষ" value="মো: আব্দুল মালেক">
-<input id="cMob" placeholder="মোবাইল" value="01912427294">
-<input id="cEmail" placeholder="ইমেইল" value="college@gmail.com">
-
-<!-- ৮ ডিজিট পাসওয়ার্ড + TV স্ক্রিন -->
-<div style="background:#f1f5f9;border-radius:12px;padding:10px;margin-top:10px;border:2px solid #0f2d5a">
-<small style="font-weight:700">🔑 ৮ ডিজিট পাসওয়ার্ড + ক্লাস চেঞ্জ (ডেমো TV)</small>
-<input id="pass8" type="text" readonly style="letter-spacing:4px;font-size:20px;text-align:center;background:#000;color:#0f0">
+<h3 style="text-align:center;margin:0 0 8px">🔐 ৮ ডিজিট পাসওয়ার্ড ও ক্লাস</h3>
+<input id="pass8" type="text" readonly style="letter-spacing:4px;font-size:22px;text-align:center;background:#000;color:#0f0">
 <div class="tv" id="tvScreen">📺 TV: PASS: -- | CLASS: -- | OTP: -- | MOB: 01912427294</div>
-<button onclick="openOTP()" style="background:#0f2d5a;color:white;font-size:12px">🔑 পাসওয়ার্ড পরিবর্তন - OTP 01912427294</button>
-</div>
+<button onclick="openOTP()" style="background:#0f2d5a;color:white">🔑 পাসওয়ার্ড পরিবর্তন - OTP 01912427294</button>
 
-<button onclick="saveCollege()" style="background:#16a34a;color:white">💾 কলেজ তথ্য সেভ করুন</button>
-
-<!-- ৩। প্রতিষ্ঠানের তালিকা -->
-<button onclick="toggleList()" style="background:#0f3d2e;color:white">🏫 প্রতিষ্ঠানের তালিকা দেখুন / হাইড (২য় পেজে লগইন)</button>
-<div id="listDiv" class="hide"></div>
-
-<!-- ৪। মোট কয়টি প্রতিষ্ঠান + কয়টি লগইন -->
-<div style="display:flex;gap:6px;margin-top:10px">
-<div style="flex:1;text-align:center;background:#e0f2fe;border-radius:12px;padding:10px;border:2px solid #0284c7"><small>মোট প্রতিষ্ঠান</small><br><b id="a1" style="font-size:20px">0</b><br><small>টি</small></div>
-<div style="flex:1;text-align:center;background:#dcfce7;border-radius:12px;padding:10px;border:2px solid #16a34a"><small>লগইন আছে</small><br><b id="a2" style="font-size:20px">0</b><br><small>টি</small></div>
-<div style="flex:1;text-align:center;background:#fef3c7;border-radius:12px;padding:10px;border:2px solid #d97706"><small>চালু</small><br><b id="a3" style="font-size:20px">0</b><br><small>টি</small></div>
-</div>
-</div>
-
-<!-- লগইন কার্ড -->
-<div class="card">
-<h3 style="text-align:center">🔐 শিক্ষক লগইন - ২য় পেজে যাবে</h3>
+<h3 style="text-align:center;margin:14px 0 0">🔐 শিক্ষক লগইন</h3>
 <select id="cls">
 <option value="">শ্রেণি সিলেক্ট করুন</option>
 <option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option>
@@ -68,90 +38,4 @@ button{width:100%;padding:12px;border:none;border-radius:12px;font-weight:700;cu
 <option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>একাদশ</option><option>দ্বাদশ</option>
 </select>
 <input id="pass" type="password" placeholder="৮ ডিজিট পাসওয়ার্ড দিন">
-<button onclick="doLogin()" style="background:#0f2d5a;color:white">🔐 লগইন করুন</button>
-<p style="text-align:center;font-size:11px;color:gray">বর্তমান পাস: <span id="showPass">12345678</span></p>
-</div>
-
-<!-- OTP Modal -->
-<div id="otpModal" class="modal"><div class="mbox">
-<h3>🔐 OTP - 01912427294</h3>
-<div class="tv" id="tvOtp" style="font-size:16px">OTP: ------</div>
-<input id="otpInput" placeholder="OTP দিন - 6 ডিজিট">
-<input id="newPass" placeholder="নতুন ৮ ডিজিট পাসওয়ার্ড" maxlength="8">
-<select id="newClassM"><option value="">ক্লাস চেঞ্জ (ডেমো)</option><option>একাদশ</option><option>দ্বাদশ</option><option>৯ম</option><option>১০ম</option></select>
-<button onclick="verifyOTP()" style="background:#16a34a;color:white">✅ যাচাই করে পরিবর্তন</button>
-<button onclick="closeM()" style="background:#eee">❌ বন্ধ</button>
-</div></div>
-
-<script>
-let list=JSON.parse(localStorage.getItem('instituteList')||'[]');
-let currentOTP="";
-function getPass(){return localStorage.getItem('teacherPass')||'12345678';}
-function getClass(){return localStorage.getItem('savedClass')||'--';}
-
-function saveCollege(){
-  let d={name:cName.value,eiin:cEIIN.value,code:cCode.value,addr:cAddr.value,prin:cPrin.value,mob:cMob.value,email:cEmail.value};
-  localStorage.setItem('collegeInfo',JSON.stringify(d));
-  let today=new Date().toLocaleDateString('bn-BD');
-  list.push({name:d.name,eiin:d.eiin,cls:getClass(),date:today,last:Date.now(),time:new Date().toLocaleString('bn-BD')});
-  localStorage.setItem('instituteList',JSON.stringify(list));
-  update(); alert('✅ কলেজ তথ্য সেভ হলো');
-}
-function update(){
-  let today=new Date().toLocaleDateString('bn-BD');
-  a1.innerText=list.length;
-  a2.innerText=list.filter(x=>x.date==today).length;
-  a3.innerText=list.filter(x=>Date.now()-x.last<86400000).length;
-  showPass.innerText=getPass();
-  pass8.value=getPass();
-  tvScreen.innerText=`📺 TV: PASS: ${getPass()} | CLASS: ${getClass()} | OTP: ${currentOTP||'--'} | MOB: 01912427294`;
-}
-function toggleList(){
-  let d=listDiv; d.style.display=d.style.display=='block'?'none':'block';
-  if(d.style.display=='block'){
-    if(list.length==0){d.innerHTML='<p style="text-align:center">এখনো কেউ ২য় পেজে লগইন করেনি</p>'; return;}
-    let h='<table border=1 cellpadding=4 style="width:100%;border-collapse:collapse;font-size:11px"><tr style="background:#0f3d2e;color:#fff"><th>কলেজ</th><th>EIIN</th><th>ক্লাস</th><th>সময়</th></tr>';
-    list.forEach(x=>h+=`<tr><td>${x.name}</td><td>${x.eiin}</td><td>${x.cls}</td><td style="font-size:9px">${x.time}</td></tr>`);
-    h+='</table><button onclick="exportExcel()" style="background:#16a34a;color:#fff;margin-top:6px">⬇️ Excel নামান</button>';
-    d.innerHTML=h;
-  }
-}
-function exportExcel(){
-  let ws=XLSX.utils.json_to_sheet(list.map((x,i)=>({ক্রমিক:i+1,কলেজ:x.name,EIIN:x.eiin,ক্লাস:x.cls,সময়:x.time})));
-  let wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'List'); XLSX.writeFile(wb,'College_List.xlsx');
-}
-function openOTP(){
-  currentOTP=Math.floor(100000+Math.random()*900000).toString();
-  document.getElementById('tvOtp').innerText='OTP: '+currentOTP;
-  update();
-  otpModal.style.display='flex';
-  alert('DEMO OTP (01912427294): '+currentOTP+'\nTV স্ক্রিনে দেখুন মামা');
-}
-function closeM(){otpModal.style.display='none';}
-function verifyOTP(){
-  if(otpInput.value!=currentOTP) return alert('OTP ভুল! '+currentOTP+' দিন');
-  let np=newPass.value.trim();
-  if(np.length!=8 || !/^\d+$/.test(np)) return alert('৮ ডিজিট সংখ্যা দিন, যেমন 87654321');
-  localStorage.setItem('teacherPass',np);
-  if(newClassM.value) localStorage.setItem('savedClass',newClassM.value);
-  closeM(); update();
-  alert('✅ চেঞ্জ হলো - PASS: '+np+' CLASS: '+(newClassM.value||getClass()));
-}
-function doLogin(){
-  if(!cls.value) return alert('শ্রেণি সিলেক্ট করুন');
-  if(pass.value!=getPass()) return alert('পাসওয়ার্ড ভুল! '+getPass());
-  localStorage.setItem('savedClass',cls.value);
-  // ২য় পেজে লগইন করলে তালিকায় যোগ
-  let today=new Date().toLocaleDateString('bn-BD');
-  list.push({name:cName.value,eiin:cEIIN.value,cls:cls.value,date:today,last:Date.now(),time:new Date().toLocaleString('bn-BD')});
-  localStorage.setItem('instituteList',JSON.stringify(list));
-  location.href='dashboard.html';
-}
-window.onload=()=>{
-  let d=JSON.parse(localStorage.getItem('collegeInfo')||'{}');
-  if(d.name){cName.value=d.name;cEIIN.value=d.eiin;cCode.value=d.code;cAddr.value=d.addr;cPrin.value=d.prin;cMob.value=d.mob;cEmail.value=d.email;}
-  update();
-}
-</script>
-</body>
-</html>
+<button onclick="doLogin()" style="background:#0a2342;color:#ffd700">🔐 
