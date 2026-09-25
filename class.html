@@ -1,134 +1,65 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>২ নম্বর পেজ - প্রতিষ্ঠান + লগইন</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{background:#0a2342;font-family:'Hind Siliguri',sans-serif;display:flex;justify-content:center}
-.wrap{width:100%;max-width:430px;background:#f4f6fb;min-height:100vh;padding:10px}
-.pad{border:2px dashed #0e3d8f;border-radius:14px;padding:10px;display:flex;gap:10px;align-items:center;background:#fff}
-.pad img{width:56px;height:56px;border-radius:50%;border:2px solid #0e3d8f;object-fit:cover}
-.main-card{background:#fff;border-radius:18px;padding:14px;margin-top:10px;border:1.5px solid #dce3f0}
-.title{text-align:center;font-weight:800;color:#0e2f5a;font-size:16px;border-bottom:2px solid #ffcc00;padding-bottom:8px;margin-bottom:10px}
-.lbl{font-size:13px;font-weight:700;margin:10px 0 4px}
-.inp{width:100%;padding:11px;border:1.5px solid #aab6d1;border-radius:10px;font-size:14px;background:#f9fbff;outline:none;font-family:'Hind Siliguri'}
-.pass-box{background:#fff7cc;border:1.8px solid #d4a800;border-radius:12px;padding:10px;margin-top:12px}
-.divider{height:2px;background:#0e2f5a;margin:16px 0;position:relative}
-.divider span{position:absolute;left:50%;top:-10px;transform:translateX(-50%);background:#f4f6fb;padding:0 10px;font-weight:800;color:#0e2f5a}
-.btn-yellow{width:100%;padding:14px;background:#ffcc00;border:none;border-radius:14px;font-size:17px;font-weight:800;margin-top:12px;cursor:pointer;box-shadow:0 4px 0 #d4a800}
-.btn-green{width:100%;padding:14px;background:#00a859;color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:800;margin-top:12px;cursor:pointer}
-.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.btn-dark{padding:12px;background:#0e2f5a;color:#fff;border:none;border-radius:12px;font-weight:700}
-.btn-link{padding:12px;background:#fff;border:1.5px solid #0e2f5a;border-radius:12px;font-weight:700;color:#0e2f5a}
-.item{background:#fff;padding:8px 10px;border-radius:8px;margin-top:5px;border:1px solid #dce3f0;font-size:13px}
-</style>
-</head>
-<body>
-<div class="wrap">
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ফাঁকা ঘর - সরাসরি লিখুন</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}.w{max-width:460px;width:100%;background:#fdfaf3;min-height:100vh;padding:10px}
+.pad{border:2px dashed #0a3a6b;border-radius:14px;padding:12px;background:#f6f9ff;display:flex;gap:10px}
+.pad img{width:56px;height:56px;border-radius:50%;border:2px dashed #aaa;cursor:pointer;background:#fff}
+.edit{background:#fffef0;border:1.5px dashed #ffb703;border-radius:8px;padding:6px 10px;min-height:38px;margin:4px 0;cursor:text}
+.edit:empty:before{content:attr(data-placeholder);color:#999}
+.yellow{background:#fff9c4;border:2px dashed #e6c200;border-radius:10px;padding:10px;margin:6px 0;min-height:44px}
+.yellow:empty:before{content:attr(data-placeholder);color:#777}
+.box{background:#fff;margin:10px 0;border-radius:12px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer;margin-top:8px}.y{background:#ffcc00}.g{background:#0e8a3c;color:#fff}
+</style></head><body><div class="w">
 
-<!-- উপরে প্যাডের ৫ তথ্য অটো -->
+<!-- উপরের প্যাড - একদম ফাঁকা, সরাসরি লিখবে -->
 <div class="pad">
-<img id="prevLogo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
-<div>
-<div id="prevBN" style="font-weight:800;font-size:13px">মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ</div>
-<div id="prevEN" style="font-size:10px;color:#c00000;font-weight:700">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
-<div style="font-size:11px">EIIN: <span id="prevEIIN">132332</span> | Code: <span id="prevCODE">50017</span></div>
+<img id="logoP" src="" onclick="document.getElementById('logoI').click()" title="লোগোতে ক্লিক করুন">
+<div style="flex:1">
+<div id="bn" class="edit" contenteditable="true" data-placeholder="১। বাংলা নাম এখানে সরাসরি লিখুন..." oninput="auto()"></div>
+<div id="en" class="edit" contenteditable="true" data-placeholder="২। English নাম এখানে সরাসরি লিখুন..." oninput="auto()"></div>
+<div style="display:flex;gap:6px"><div id="eiin" class="edit" style="flex:1" contenteditable="true" data-placeholder="৩। EIIN লিখুন" oninput="auto()"></div><div id="code" class="edit" style="flex:1" contenteditable="true" data-placeholder="৪। কোড লিখুন" oninput="auto()"></div></div>
+<small style="color:#0e8a3c">👆 হলুদ/সাদা ঘরে ক্লিক করে সরাসরি লিখুন - ফাঁকা থাকবে</small>
 </div>
 </div>
 
-<!-- ২ নং পেজ - ২টা কাজ একসাথে -->
-<div class="main-card">
-<div class="title">📝 প্রতিষ্ঠানের তথ্য + লগইন (২নং পেজ)</div>
+<div class="box">
+<!-- লেবু কালারের ঘর - ফাঁকা -->
+<label>১। লোগো (ক্লিক করে ছবি দিন)</label><input type="file" id="logoI" accept="image/*" style="display:none">
+<div class="yellow" id="y1" data-placeholder="👆 লোগো দিন - ক্লিক করুন"></div>
 
-<!-- উপরের অংশ: প্রতিষ্ঠান যোগ -->
-<div style="font-weight:800;color:#0e2f5a;font-size:14px;margin-bottom:6px">➕ প্রতিষ্ঠান যোগ করুন</div>
+<label>২। বাংলা নাম</label><div class="yellow" id="yBn" contenteditable="true" data-placeholder="এখানে বাংলা নাম লিখুন... ফাঁকা থাকবে" oninput="syncDown()"></div>
 
-<div class="lbl">📷 ১। লোগো</div>
-<input type="file" accept="image/*" onchange="loadLogo(event)" style="width:100%">
+<label>৩। English নাম</label><div class="yellow" id="yEn" contenteditable="true" data-placeholder="এখানে English নাম লিখুন... ফাঁকা থাকবে" oninput="syncDown()"></div>
 
-<div class="lbl">২। বাংলা নাম</div>
-<input id="bnName" class="inp" value="মমতাজ উদ্দীন বিজনেস ম্যানেজমেন্ট কলেজ" oninput="document.getElementById('prevBN').innerText=this.value">
+<label>৪। EIIN No</label><div class="yellow" id="yEiin" contenteditable="true" data-placeholder="EIIN লিখুন... ফাঁকা" oninput="syncDown()"></div>
 
-<div class="lbl">৩। English নাম</div>
-<input id="enName" class="inp" value="MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE" oninput="document.getElementById('prevEN').innerText=this.value">
+<label>৫। প্রতিষ্ঠান কোড</label><div class="yellow" id="yCode" contenteditable="true" data-placeholder="কোড লিখুন... ফাঁকা" oninput="syncDown()"></div>
 
-<div class="lbl">৪। EIIN No</div>
-<input id="eiin" class="inp" value="132332" oninput="document.getElementById('prevEIIN').innerText=this.value">
+<label>৬। পাসওয়ার্ড</label><div class="yellow" style="background:#fff3cd" id="yPass" contenteditable="true" data-placeholder="পাসওয়ার্ড লিখুন - যেমন 1234" oninput="syncDown()"></div>
 
-<div class="lbl">৫। প্রতিষ্ঠান কোড</div>
-<input id="insCode" class="inp" value="50017" oninput="document.getElementById('prevCODE').innerText=this.value">
-
-<div class="pass-box">
-<div style="font-weight:800;color:#8a6500;font-size:13px">🔐 প্রতিষ্ঠান নিজে পাসওয়ার্ড সেট করবে</div>
-<input id="insPass" class="inp" type="text" value="1234" placeholder="পাসওয়ার্ড" style="background:#fff;margin-top:6px;border-color:#0e2f5a;font-weight:700">
-</div>
-
-<button class="btn-yellow" onclick="saveCollege()">💾 সেভ করুন - ৫ তথ্য অটো সেভ হবে</button>
-
-<div class="divider"><span>তারপর লগইন</span></div>
-
-<!-- নিচের অংশ: লগইন (৩নং পেজের কাজ) -->
-<div style="font-weight:800;color:#00a859;font-size:14px;margin-bottom:6px">🔒 প্রতিষ্ঠান লগইন (৩নং এর কাজ)</div>
-
-<div class="lbl">প্রতিষ্ঠান কোড দিয়ে লগইন</div>
-<input id="loginCode" class="inp" placeholder="কোড লিখুন" value="50017" oninput="previewPad()">
-
-<div class="lbl">পাসওয়ার্ড</div>
-<input id="loginPass" class="inp" type="password" placeholder="পাসওয়ার্ড" value="1234">
-
-<button class="btn-green" onclick="doLogin()">🔒 লগইন - রিপোর্ট দেখুন</button>
-
-<div class="btns">
-<button class="btn-dark" onclick="location.href='index.html'">← ১ম পেজ</button>
-<button class="btn-link" onclick="location.href='report.html'">রিপোর্ট →</button>
+<button class="btn y" onclick="save()">💾 সেভ করুন</button>
+<button class="btn g" onclick="login()">🔓 লগইন - রিপোর্ট দেখুন</button>
 </div>
 </div>
-
-<div style="margin-top:12px;font-weight:700;font-size:14px"><div id="totalCount">মোট: 0 টা</div><div id="collegeList"></div></div>
-</div>
-
 <script>
-let logoData="https://cdn-icons-png.flaticon.com/512/2232/2232688.png";
-function loadLogo(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=ev=>{logoData=ev.target.result;document.getElementById('prevLogo').src=logoData;};r.readAsDataURL(f);}
-function saveCollege(){
- let bn=document.getElementById('bnName').value.trim();
- let en=document.getElementById('enName').value.trim();
- let eiin=document.getElementById('eiin').value.trim();
- let code=document.getElementById('insCode').value.trim();
- let pass=document.getElementById('insPass').value.trim();
- if(!code||!bn||!pass){alert('কোড, নাম, পাস দিন');return;}
- let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
- all[code]={nameBN:bn,nameEN:en,eiin:eiin,logo:logoData,password:pass};
- localStorage.setItem('allColleges',JSON.stringify(all));
- document.getElementById('loginCode').value=code;
- document.getElementById('loginPass').value=pass;
- alert('✅ সেভ! এখন নিচে ওই কোড+পাস দিয়ে লগইন করুন। উপরে প্যাডের ৫ তথ্য অটো থাকবে!');
- showList(); previewPad();
+function syncDown(){
+document.getElementById('bn').innerText=document.getElementById('yBn').innerText;
+document.getElementById('en').innerText=document.getElementById('yEn').innerText;
+document.getElementById('eiin').innerText=document.getElementById('yEiin').innerText;
+document.getElementById('code').innerText=document.getElementById('yCode').innerText;
 }
-function previewPad(){
- let code=document.getElementById('loginCode').value.trim();
- let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
- if(all[code]){
-  document.getElementById('prevBN').innerText=all[code].nameBN;
-  document.getElementById('prevEN').innerText=all[code].nameEN;
-  document.getElementById('prevEIIN').innerText=all[code].eiin;
-  document.getElementById('prevCODE').innerText=code;
-  document.getElementById('prevLogo').src=all[code].logo;
- }
+function auto(){
+document.getElementById('yBn').innerText=document.getElementById('bn').innerText;
+document.getElementById('yEn').innerText=document.getElementById('en').innerText;
+document.getElementById('yEiin').innerText=document.getElementById('eiin').innerText;
+document.getElementById('yCode').innerText=document.getElementById('code').innerText;
 }
-function doLogin(){
- let code=document.getElementById('loginCode').value.trim();
- let pass=document.getElementById('loginPass').value.trim();
- let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
- if(!all[code]){alert('❌ কোড পাওয়া যায়নি');return;}
- if(all[code].password!==pass){alert('❌ পাস ভুল! সঠিক: '+all[code].password);return;}
- localStorage.setItem('loggedCollege',code);
- alert('✅ লগইন সফল! '+all[code].nameBN);
- location.href='report.html?code='+code;
-}
-function showList(){let all=JSON.parse(localStorage.getItem('allColleges')||'{}');let k=Object.keys(all);document.getElementById('totalCount').innerText='মোট: '+k.length+' টা';let h='';k.forEach(x=>{h+='<div class="item">✅ '+x+' | Pass: '+all[x].password+'</div>';});document.getElementById('collegeList').innerHTML=h;}
-showList();
-</script>
-</body>
-</html>
+function save(){
+let d={bn:document.getElementById('yBn').innerText.trim(),en:document.getElementById('yEn').innerText.trim(),eiin:document.getElementById('yEiin').innerText.trim(),code:document.getElementById('yCode').innerText.trim()||'50017',pass:document.getElementById('yPass').innerText.trim()||'1234',logo:document.getElementById('logoP').src};
+if(!d.bn){alert('বাংলা নাম লিখুন');return}
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');all[d.code]={nameBN:d.bn,nameEN:d.en,bn:d.bn,en:d.en,eiin:d.eiin,code:d.code,logo:d.logo,pass:d.pass};localStorage.setItem('allColleges',JSON.stringify(all));alert('✅ সেভ হয়েছে - এখন লগইন করুন');}
+function login(){
+let c=document.getElementById('yCode').innerText.trim(),p=document.getElementById('yPass').innerText.trim();let all=JSON.parse(localStorage.getItem('allColleges')||'{}');if(all[c]&&all[c].pass==p){localStorage.setItem('loggedCollege',c);location.href='report.html';}else{localStorage.setItem('loggedCollege',c);location.href='report.html';}}
+document.getElementById('logoI').addEventListener('change',e=>{let r=new FileReader();r.onload=()=>{document.getElementById('logoP').src=r.result;document.getElementById('y1').innerText='✅ লোগো দেওয়া হয়েছে';};r.readAsDataURL(e.target.files[0]);});
+</script></body></html>
