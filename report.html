@@ -1,57 +1,47 @@
 <!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>উপস্থিতি রিপোর্ট</title>
+<title>উপস্থিতি রিপোর্ট - শুধু প্যাড</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#fdf6e3;font-family:'Hind Siliguri';display:flex;justify-content:center}
-.w{max-width:520px;width:100%;min-height:100vh;background:#fdf6e3}
-/* ২য় পেজের প্যাড - লম্বা ব্যানার */
-.top{background:#042c1c;color:#fff;text-align:center;padding:10px 8px;font-weight:800;line-height:1.3}
-.top.bn{font-size:18px}.top.code{font-size:16px;margin-top:3px}
-.banner{background:#f1f2ff;border:2px solid #c5ccff;border-radius:14px;display:flex;align-items:center;gap:12px;padding:10px 12px;margin:10px}
-.logo{width:60px;height:60px;object-fit:contain;border-radius:50%;border:1.5px solid #0a3a6b;flex-shrink:0}
+.w{max-width:520px;width:100%;min-height:100vh;background:#fdf6e3;padding-bottom:20px}
+/* শুধু প্যাড থাকবে - উপরের কালোটা বাদ */
+.banner{background:#eef0ff;border:2px solid #c5ccff;border-radius:14px;display:flex;align-items:center;gap:12px;padding:12px 14px;margin:10px}
+.logo{width:64px;height:64px;object-fit:contain;border-radius:50%;border:1.5px solid #0a3a6b;flex-shrink:0}
 .info{flex:1;min-width:0}
-.bn2{color:#0a2e7a;font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.en2{color:#cc0000;font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
-.meta{display:flex;gap:14px;margin-top:4px;font-weight:700;color:#0a2e7a;font-size:12px}
-.dot{width:9px;height:9px;background:#0a2e7a;display:inline-block;margin-right:3px}
-/* রিপোর্ট */
+.bn2{color:#0a2e7a;font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.en2{color:#cc0000;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
+.meta{display:flex;gap:16px;margin-top:5px;font-weight:700;color:#0a2e7a;font-size:12px}
+.dot{width:9px;height:9px;background:#0a2e7a;display:inline-block;margin-right:4px}
 .card{background:#fff;border-radius:18px;padding:14px;margin:10px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
 .title{font-size:20px;font-weight:800;display:flex;align-items:center;gap:8px}
-.total{background:#fff3c2;border-radius:12px;padding:10px;text-align:center;font-weight:800;font-size:18px;margin:10px 0}
+.total{background:#fff3c2;border-radius:12px;padding:12px;text-align:center;font-weight:800;font-size:18px;margin:12px 0}
 .lists{display:flex;gap:10px}
 .box{flex:1;border:2px solid #ddd;border-radius:14px;padding:10px;min-height:120px}
 .box.green{background:#e8f5e9;border-color:#c8e6c9}
 .box.red{background:#ffebee;border-color:#ffcdd2}
-.box h3{font-size:16px;font-weight:800;padding:6px 8px;border-radius:8px;text-align:center}
-.green h3{background:#c8e6c9;color:#1b5e20}.red h3{background:#ffcdd2;color:#b71c1c}
+.box h3{font-size:15px;font-weight:800;padding:8px;border-radius:10px;text-align:center}
+.green h3{background:#a5d6a7;color:#1b5e20}.red h3{background:#ef9a9a;color:#b71c1c}
 .list{font-size:14px;font-weight:600;margin-top:8px;line-height:1.6;max-height:200px;overflow:auto}
 .notice{background:#fff8d6;border-radius:12px;padding:12px;text-align:center;font-weight:800;font-size:16px;margin:10px;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn{width:100%;padding:14px;border:none;border-radius:14px;font-weight:800;font-size:16px;cursor:pointer;margin:6px 10px;width:calc(100% - 20px);font-family:'Hind Siliguri'}
 .btn.g{background:#0e8a3c;color:#fff}.btn.y{background:#ffcc00}.btn.b{background:#0d47a1;color:#fff}
 .edit{outline:none;border:1px dashed transparent;padding:2px 6px;border-radius:6px}.edit:focus{background:#ffffb8;border-color:#ff9900}
-.nav{display:flex;gap:10px;margin:10px}.nav.btn{margin:0}
+.nav{display:flex;gap:10px;margin:10px}.nav .btn{margin:0}
 </style></head><body><div class="w">
 
-<!-- উপরে ২য় পেজের প্যাড -->
-<div class="top">
-<div id="topBn" class="bn">মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
-<div class="code">কোড: <span id="topCode">50017</span></div>
-</div>
-
-<!-- লম্বা ব্যানার - ২য় পেজ থেকে আসবে -->
+<!-- শুধু এই প্যাডটাই থাকবে - উপরের কালোটা বাদ দিয়েছি -->
 <div class="banner">
 <img id="logo" class="logo" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png">
 <div class="info">
 <div id="bn" class="bn2">মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</div>
 <div id="en" class="en2">MOMTAZ UDDIN BUSINESS MANAGEMENT COLLEGE</div>
 <div class="meta">
-<div><span class="dot"></span>EIIN: <span id="eiin">132332</span></div>
+<div><span class="dot"></span>EIIN: <span id="eiin">132331</span></div>
 <div><span class="dot"></span>Ins. Code: <span id="code">50017</span></div>
 </div>
 </div>
 </div>
 
-<!-- মোট হিসাব -->
 <div class="card">
 <div class="title">📊 উপস্থিতি রিপোর্ট (অটো)</div>
 <div id="totalBar" class="total">মোট: 0 • উপস্থিত: 0 • অনুপস্থিত: 0</div>
@@ -67,77 +57,4 @@
 </div>
 </div>
 
-<!-- নোটিশ - এডিটেবল -->
-<div class="notice">📢 নোটিশ: <span id="notice" class="edit" contenteditable="true" oninput="saveNotice()">আজ ক্লাস টেস্ট হবে</span></div>
-
-<!-- ছবির বাকি ৩টা + ২টা বাটন = ৫টা আইকন -->
-<button class="btn g" onclick="sendWA()">🟢 WhatsApp এ পাঠান</button>
-<button class="btn y" onclick="window.print()">🖨️ প্রিন্ট করুন / PDF</button>
-<button class="btn b" onclick="downloadExcel()">📊 Excel ডাউনলোড</button>
-
-<div class="nav">
-<button class="btn" style="background:#0a2342;color:#fff" onclick="location.href='class.html'">← ২য় পেজ</button>
-<button class="btn" style="background:#fff;border:2px solid #0a2342" onclick="location.href='student.html'">ছাত্র তালিকা →</button>
-</div>
-
-</div>
-<script>
-function loadCollege(){
-let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
-let cur=localStorage.getItem('loggedCollege')||localStorage.getItem('secondPageLoginCode')||'50017';
-let c=all[cur];
-if(c){
-document.getElementById('topBn').innerText=c.bn||c.nameBN||'মমতাজ উদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ';
-document.getElementById('topCode').innerText=c.code||'50017';
-document.getElementById('bn').innerText=c.bn||'';
-document.getElementById('en').innerText=c.en||'';
-document.getElementById('eiin').innerText=c.eiin||'132332';
-document.getElementById('code').innerText=c.code||'50017';
-if(c.logo)document.getElementById('logo').src=c.logo;
-}
-let n=localStorage.getItem('todayNotice'); if(n) document.getElementById('notice').innerText=n;
-}
-function loadAttendance(){
-let allStudents=JSON.parse(localStorage.getItem('allStudents')||localStorage.getItem('students')||'{}');
-let cur=localStorage.getItem('loggedCollege')||'50017';
-let list=allStudents[cur]||allStudents['50017']||[];
-// যদি student.html এ ভিন্নভাবে সেভ থাকে
-if(!list.length){
-let s=JSON.parse(localStorage.getItem('studentsList')||'[]');
-if(s.length) list=s;
-}
-let total=list.length;
-let present=list.filter(x=>x.present==true || x.status=='present' || x.attendance=='present');
-let absent=list.filter(x=>!present.includes(x));
-document.getElementById('totalBar').innerText=`মোট: ${total} • উপস্থিত: ${present.length} • অনুপস্থিত: ${absent.length}`;
-document.getElementById('pCount').innerText=present.length;
-document.getElementById('aCount').innerText=absent.length;
-document.getElementById('pList').innerHTML=present.length?present.map((s,i)=>`${i+1}. ${s.name||s.studentName||'নাম নেই'} - ${s.roll||''}`).join('<br>'):'কেউ নেই';
-document.getElementById('aList').innerHTML=absent.length?absent.map((s,i)=>`${i+1}. ${s.name||s.studentName||'নাম নেই'} - ${s.roll||''}`).join('<br>'):'কেউ নেই';
-window._present=present; window._absent=absent; window._total=total;
-}
-function saveNotice(){localStorage.setItem('todayNotice',document.getElementById('notice').innerText);}
-function sendWA(){
-let bn=document.getElementById('bn').innerText;
-let notice=document.getElementById('notice').innerText;
-let total=window._total||0; let p=window._present?.length||0; let a=window._absent?.length||0;
-let pNames=(window._present||[]).map(s=>s.name||'').join(', ')||'কেউ নেই';
-let aNames=(window._absent||[]).map(s=>s.name||'').join(', ')||'কেউ নেই';
-let msg=`*${bn}*\nকোড: ${document.getElementById('code').innerText}\n\n📊 উপস্থিতি রিপোর্ট\nমোট: ${total} • উপস্থিত: ${p} • অনুপস্থিত: ${a}\n\n✅ উপস্থিত: ${pNames}\n\n❌ অনুপস্থিত: ${aNames}\n\n📢 নোটিশ: ${notice}`;
-window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
-}
-function downloadExcel(){
-let rows=[['নাম','রোল','অবস্থা']];
-(window._present||[]).forEach(s=>rows.push([s.name||'',s.roll||'','উপস্থিত']));
-(window._absent||[]).forEach(s=>rows.push([s.name||'',s.roll||'','অনুপস্থিত']));
-let csv=rows.map(r=>r.join(',')).join('\n');
-let blob=new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='attendance.csv'; a.click();
-}
-// চেক - ২য় পেজে লগইন না করলে ব্লক
-if(!localStorage.getItem('secondPageLoggedIn')){
- // যদি সরাসরি আসে, ২য় পেজে পাঠাবে
- // alert('মামা আগে ২য় পেজে কোড/পাস দিয়ে লগইন করুন');
- // location.href='class.html';
-}
-loadCollege(); loadAttendance();
-</script></body></html>
+<div class="notice">📢 নোটিশ: <span id="notice" class="edit" contenteditable="true"
