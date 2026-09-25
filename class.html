@@ -1,65 +1,69 @@
 <!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ফাঁকা ঘর - সরাসরি লিখুন</title>
+<title>সরাসরি উপরে লিখুন - 12345 বাদ</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>*{box-sizing:border-box;margin:0;padding:0}body{background:#efe8d9;font-family:'Hind Siliguri';display:flex;justify-content:center}.w{max-width:460px;width:100%;background:#fdfaf3;min-height:100vh;padding:10px}
-.pad{border:2px dashed #0a3a6b;border-radius:14px;padding:12px;background:#f6f9ff;display:flex;gap:10px}
-.pad img{width:56px;height:56px;border-radius:50%;border:2px dashed #aaa;cursor:pointer;background:#fff}
-.edit{background:#fffef0;border:1.5px dashed #ffb703;border-radius:8px;padding:6px 10px;min-height:38px;margin:4px 0;cursor:text}
-.edit:empty:before{content:attr(data-placeholder);color:#999}
-.yellow{background:#fff9c4;border:2px dashed #e6c200;border-radius:10px;padding:10px;margin:6px 0;min-height:44px}
-.yellow:empty:before{content:attr(data-placeholder);color:#777}
-.box{background:#fff;margin:10px 0;border-radius:12px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer;margin-top:8px}.y{background:#ffcc00}.g{background:#0e8a3c;color:#fff}
+.top{border:3px dashed #0a3a6b;border-radius:16px;padding:14px;background:#fff;display:flex;gap:12px;align-items:flex-start}
+.top img{width:64px;height:64px;border-radius:50%;border:2px solid #0a3a6b;cursor:pointer}
+.edit{border:1.5px dashed #ffb703;background:#fffef0;border-radius:8px;padding:8px 10px;margin:5px 0;min-height:42px;outline:none;font-weight:700}
+.edit:empty:before{content:attr(data-ph);color:#888;font-weight:400}
+.edit:focus{background:#ffffcc;border-color:#0e8a3c}
+.box{background:#fff;margin:12px 0;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:800;font-family:'Hind Siliguri';cursor:pointer;margin-top:10px;font-size:15px}.y{background:#ffcc00}.g{background:#0e8a3c;color:#fff}.d{background:#0a2342;color:#fff}
 </style></head><body><div class="w">
 
-<!-- উপরের প্যাড - একদম ফাঁকা, সরাসরি লিখবে -->
-<div class="pad">
-<img id="logoP" src="" onclick="document.getElementById('logoI').click()" title="লোগোতে ক্লিক করুন">
+<!-- উপরে সরাসরি এড করার জায়গা - 12345 বাদ -->
+<div class="top">
+<img id="L" src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" onclick="document.getElementById('file').click()">
 <div style="flex:1">
-<div id="bn" class="edit" contenteditable="true" data-placeholder="১। বাংলা নাম এখানে সরাসরি লিখুন..." oninput="auto()"></div>
-<div id="en" class="edit" contenteditable="true" data-placeholder="২। English নাম এখানে সরাসরি লিখুন..." oninput="auto()"></div>
-<div style="display:flex;gap:6px"><div id="eiin" class="edit" style="flex:1" contenteditable="true" data-placeholder="৩। EIIN লিখুন" oninput="auto()"></div><div id="code" class="edit" style="flex:1" contenteditable="true" data-placeholder="৪। কোড লিখুন" oninput="auto()"></div></div>
-<small style="color:#0e8a3c">👆 হলুদ/সাদা ঘরে ক্লিক করে সরাসরি লিখুন - ফাঁকা থাকবে</small>
+<div id="bn" class="edit" contenteditable="true" data-ph="১। বাংলা নাম এখানে লিখুন (মমতাজ উদ্দীন...)" oninput="saveAuto()"></div>
+<div id="en" class="edit" contenteditable="true" data-ph="২। English নাম এখানে লিখুন" oninput="saveAuto()"></div>
+<div style="display:flex;gap:6px"><div id="eiin" class="edit" style="flex:1" contenteditable="true" data-ph="৩। EIIN No" oninput="saveAuto()"></div><div id="code" class="edit" style="flex:1" contenteditable="true" data-ph="৪। Code: 50017" oninput="saveAuto()"></div></div>
+<small style="color:#0e8a3c;font-weight:700">👆 এখানে ক্লিক করে সরাসরি লিখুন - অটো সেভ</small>
 </div>
 </div>
+
+<input type="file" id="file" accept="image/*" style="display:none">
 
 <div class="box">
-<!-- লেবু কালারের ঘর - ফাঁকা -->
-<label>১। লোগো (ক্লিক করে ছবি দিন)</label><input type="file" id="logoI" accept="image/*" style="display:none">
-<div class="yellow" id="y1" data-placeholder="👆 লোগো দিন - ক্লিক করুন"></div>
-
-<label>২। বাংলা নাম</label><div class="yellow" id="yBn" contenteditable="true" data-placeholder="এখানে বাংলা নাম লিখুন... ফাঁকা থাকবে" oninput="syncDown()"></div>
-
-<label>৩। English নাম</label><div class="yellow" id="yEn" contenteditable="true" data-placeholder="এখানে English নাম লিখুন... ফাঁকা থাকবে" oninput="syncDown()"></div>
-
-<label>৪। EIIN No</label><div class="yellow" id="yEiin" contenteditable="true" data-placeholder="EIIN লিখুন... ফাঁকা" oninput="syncDown()"></div>
-
-<label>৫। প্রতিষ্ঠান কোড</label><div class="yellow" id="yCode" contenteditable="true" data-placeholder="কোড লিখুন... ফাঁকা" oninput="syncDown()"></div>
-
-<label>৬। পাসওয়ার্ড</label><div class="yellow" style="background:#fff3cd" id="yPass" contenteditable="true" data-placeholder="পাসওয়ার্ড লিখুন - যেমন 1234" oninput="syncDown()"></div>
-
-<button class="btn y" onclick="save()">💾 সেভ করুন</button>
-<button class="btn g" onclick="login()">🔓 লগইন - রিপোর্ট দেখুন</button>
+<h3 style="text-align:center;margin-bottom:8px">📝 প্রতিষ্ঠানের তথ্য</h3>
+<p style="text-align:center;color:#666;font-size:13px">উপরে সরাসরি লিখুন, নিচে শুধু সেভ বাটন</p>
+<button class="btn y" onclick="saveFinal()">💾 সেভ করুন</button>
+<button class="btn g" onclick="go()">➡️ ৩য় পেজে যান - রিপোর্ট</button>
+<div style="display:flex;gap:8px;margin-top:8px"><button class="btn d" onclick="location.href='index.html'">← ১ম পেজ</button><button class="btn" style="border:2px solid #0a2342;background:#fff" onclick="location.href='report.html'">রিপোর্ট →</button></div>
 </div>
+
+<div id="msg" style="text-align:center;padding:10px;color:#0e8a3c;font-weight:800"></div>
+
 </div>
 <script>
-function syncDown(){
-document.getElementById('bn').innerText=document.getElementById('yBn').innerText;
-document.getElementById('en').innerText=document.getElementById('yEn').innerText;
-document.getElementById('eiin').innerText=document.getElementById('yEiin').innerText;
-document.getElementById('code').innerText=document.getElementById('yCode').innerText;
+let all=JSON.parse(localStorage.getItem('allColleges')||'{}');
+function load(){
+let c=localStorage.getItem('loggedCollege')||Object.keys(all)[0];
+if(c && all[c]){
+document.getElementById('bn').innerText=all[c].bn||all[c].nameBN||'';
+document.getElementById('en').innerText=all[c].en||all[c].nameEN||'';
+document.getElementById('eiin').innerText=all[c].eiin||'';
+document.getElementById('code').innerText=all[c].code||'';
+document.getElementById('L').src=all[c].logo||'https://cdn-icons-png.flaticon.com/512/2232/2232688.png';
 }
-function auto(){
-document.getElementById('yBn').innerText=document.getElementById('bn').innerText;
-document.getElementById('yEn').innerText=document.getElementById('en').innerText;
-document.getElementById('yEiin').innerText=document.getElementById('eiin').innerText;
-document.getElementById('yCode').innerText=document.getElementById('code').innerText;
 }
-function save(){
-let d={bn:document.getElementById('yBn').innerText.trim(),en:document.getElementById('yEn').innerText.trim(),eiin:document.getElementById('yEiin').innerText.trim(),code:document.getElementById('yCode').innerText.trim()||'50017',pass:document.getElementById('yPass').innerText.trim()||'1234',logo:document.getElementById('logoP').src};
-if(!d.bn){alert('বাংলা নাম লিখুন');return}
-let all=JSON.parse(localStorage.getItem('allColleges')||'{}');all[d.code]={nameBN:d.bn,nameEN:d.en,bn:d.bn,en:d.en,eiin:d.eiin,code:d.code,logo:d.logo,pass:d.pass};localStorage.setItem('allColleges',JSON.stringify(all));alert('✅ সেভ হয়েছে - এখন লগইন করুন');}
-function login(){
-let c=document.getElementById('yCode').innerText.trim(),p=document.getElementById('yPass').innerText.trim();let all=JSON.parse(localStorage.getItem('allColleges')||'{}');if(all[c]&&all[c].pass==p){localStorage.setItem('loggedCollege',c);location.href='report.html';}else{localStorage.setItem('loggedCollege',c);location.href='report.html';}}
-document.getElementById('logoI').addEventListener('change',e=>{let r=new FileReader();r.onload=()=>{document.getElementById('logoP').src=r.result;document.getElementById('y1').innerText='✅ লোগো দেওয়া হয়েছে';};r.readAsDataURL(e.target.files[0]);});
+function saveAuto(){
+let bn=document.getElementById('bn').innerText.trim();
+let en=document.getElementById('en').innerText.trim();
+let eiin=document.getElementById('eiin').innerText.trim();
+let code=document.getElementById('code').innerText.trim()||'50017';
+let logo=document.getElementById('L').src;
+let obj={bn:bn,en:en,nameBN:bn,nameEN:en,eiin:eiin,code:code,logo:logo,pass:'1234'};
+let a=JSON.parse(localStorage.getItem('allColleges')||'{}');
+a[code]=obj;
+localStorage.setItem('allColleges',JSON.stringify(a));
+localStorage.setItem('loggedCollege',code);
+document.getElementById('msg').innerText='✅ অটো সেভ হয়েছে: '+bn;
+}
+function saveFinal(){saveAuto();alert('✅ সেভ হয়েছে! এখন রিপোর্টে যান');}
+function go(){saveAuto();location.href='report.html';}
+document.getElementById('file').addEventListener('change',e=>{
+let r=new FileReader();r.onload=()=>{document.getElementById('L').src=r.result;saveAuto();};r.readAsDataURL(e.target.files[0]);
+});
+load();
 </script></body></html>
