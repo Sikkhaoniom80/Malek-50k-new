@@ -9,69 +9,52 @@
 *{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
 body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
 .logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;margin-top:10px}
-#loginWrapper{width:100%;display:flex;flex-direction:column;align-items:center}
 .lbox{background:#fff;width:100%;max-width:380px;border-radius:16px;margin-top:10px;overflow:hidden;border:2px solid #e6d8a0}
-.lhead{padding:16px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:17px;min-height:60px;background:#fff}
-.lbody{display:none;padding:15px;border-top:2px solid #eee;background:#fffdf5}
-.lbox.open .lbody{display:block}
+.lhead{padding:14px 16px;font-weight:700;font-size:17px;background:#fffdf5;border-bottom:2px solid #eee}
+.lbody{padding:15px;background:#fff}
 select,input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #ccc;font-size:16px;margin:6px 0;background:white}
-.btn{background:#0f3d2e;color:#fff;width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer}
+.btn{background:#0f3d2e;color:#fff;width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-top:6px}
 </style>
 </head>
 <body>
-<div id="loginWrapper">
 <img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" onerror="this.style.display='none'">
 
-<div class="lbox open" id="lb1">
-<div class="lhead" onclick="toggleBox('lb1')">➕ নতুন প্রতিষ্ঠান যোগ করুন <span>⬇️</span></div>
+<div class="lbox">
+<div class="lhead">➕ নতুন প্রতিষ্ঠান যোগ করুন</div>
 <div class="lbody">
-<input id="nNameBn" placeholder="প্রতিষ্ঠানের নাম (বাংলা) *">
-<input id="nCode" placeholder="প্রতিষ্ঠান কোড *">
-<input id="nMobile" placeholder="মোবাইল নম্বর *">
-<input id="nPass" type="password" placeholder="পাসওয়ার্ড *">
-<button class="btn" onclick="alert('সেভ হয়েছে')">✅ যোগ দিন</button>
+<input placeholder="প্রতিষ্ঠানের নাম (বাংলা) *">
+<input placeholder="Name (English)">
+<input placeholder="EIIN">
+<input placeholder="প্রতিষ্ঠান কোড *">
+<input placeholder="মোবাইল নম্বর *">
+<input type="password" placeholder="পাসওয়ার্ড *">
+<button class="btn">✅ যোগ দিন</button>
 </div>
 </div>
 
-<div class="lbox" id="lb2">
-<div class="lhead" onclick="toggleBox('lb2')">🎓 শ্রেণী সিলেক্ট করুন <span>⬇️</span></div>
+<div class="lbox">
+<div class="lhead">🎓 শ্রেণী সিলেক্ট করুন</div>
 <div class="lbody">
-<select id="loginClass">
-<option value="">শ্রেণি সিলেক্ট করুন</option>
-<option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option>
-<option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option>
-<option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option>
-<option>১০ম শ্রেণি</option>
-</select>
+<select><option>শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
 </div>
 </div>
 
-<div class="lbox" id="lb3">
-<div class="lhead" onclick="toggleBox('lb3')">🔑 প্রতিষ্ঠান লগইন <span>⬇️</span></div>
+<div class="lbox">
+<div class="lhead">🔑 প্রতিষ্ঠান লগইন</div>
 <div class="lbody">
-<input id="loginCode" placeholder="প্রতিষ্ঠান কোড">
-<input id="loginPass" type="password" placeholder="পাসওয়ার্ড">
-<button class="btn">লগইন</button>
+<input placeholder="প্রতিষ্ঠান কোড">
+<input type="password" placeholder="পাসওয়ার্ড">
+<button class="btn">লগইন করুন</button>
 </div>
 </div>
 
-<div class="lbox" id="lb4">
-<div class="lhead" onclick="toggleBox('lb4')">🏫 প্রতিষ্ঠানের তালিকা দেখুন <span>⬇️</span></div>
+<div class="lbox">
+<div class="lhead">🏫 প্রতিষ্ঠানের তালিকা দেখুন</div>
 <div class="lbody">
 <input type="password" placeholder="PIN (1234)">
 <button class="btn">তালিকা দেখুন</button>
 </div>
 </div>
 
-</div>
-
-<script>
-function toggleBox(id){
-var el=document.getElementById(id);
-var was=el.classList.contains('open');
-document.querySelectorAll('.lbox').forEach(b=>b.classList.remove('open'));
-if(!was) el.classList.add('open');
-}
-</script>
 </body>
 </html>
