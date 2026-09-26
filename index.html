@@ -27,6 +27,8 @@ select,input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #ccc;
 #monthlyDivFirst{display:none}
 #studentList{display:none!important} #studentList.show{display:block!important}
 #resultDiv{display:none}
+/* ড্যাশবোর্ডের জন্য শুধু এইটুকু নতুন */
+.hideBox{display:none;margin-top:10px;border:2px dashed #0f3d2e;border-radius:12px;padding:10px;max-height:400px;overflow:auto;background:#f8fafc}
 </style>
 </head>
 <body>
@@ -45,11 +47,24 @@ select,input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #ccc;
     <p style="margin:8px 0 0;font-weight:700">শ্রেণী: <span id="showClass"></span></p>
   </div>
   <div class="card">
-    <button class="yellow-btn" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা দেখুন</button>
+    <!-- ✅ ড্যাশবোর্ড - নতুন - শ্রেণি/সময় ছাড়া -->
+    <div style="border:2px solid #0f3d2e;border-radius:16px;padding:12px;margin-bottom:14px;background:#fffbe6">
+      <h3 style="text-align:center;margin:0 0 10px">📊 ড্যাশবোর্ড</h3>
+      <button onclick="toggleInstitute()" style="width:100%;padding:12px;background:#0f3d2e;color:white;border:none;border-radius:10px;font-weight:bold">🏫 ১। প্রতিষ্ঠানের তালিকা (হাইড) - ক্লিকে দেখুন</button>
+      <div id="instituteDiv" class="hideBox"></div>
+      <div style="margin-top:10px;border:2px solid #0284c7;border-radius:12px;padding:10px">
+        <p style="text-align:center;margin:0 0 6px;font-weight:700">২। লগইন / লগআউট স্ট্যাটাস</p>
+        <div style="display:flex;gap:6px">
+          <div style="flex:1;text-align:center;background:#dcfce7;border:2px solid #16a34a;border-radius:10px;padding:8px"><small>🟢 লগইন</small><br><b id="loginCount">0</b></div>
+          <div style="flex:1;text-align:center;background:#fee2e2;border:2px solid #dc2626;border-radius:10px;padding:8px"><small>🔴 লগআউট</small><br><b id="logoutCount">0</b></div>
+          <div style="flex:1;text-align:center;background:#e0f2fe;border:2px solid #0284c7;border-radius:10px;padding:8px"><small>🏫 মোট</small><br><b id="totalInst">0</b></div>
+        </div>
+      </div>
+    </div>
 
+    <button class="yellow-btn" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা দেখুন</button>
     <button onclick="toggleMonthlyFirst()" style="width:100%;margin-top:12px;padding:14px;background:#fff;border:2px dashed #2563eb;border-radius:12px;font-weight:bold;color:#2563eb">📅 মাসিক হাজিরা দেখুন - চাপ দিন (১ জন ১ লাইন ১-৩১)</button>
     <div id="monthlyDivFirst" style="overflow:auto;margin-top:10px;border:2px dashed #2563eb;border-radius:12px;padding:10px;background:#f8fafc"></div>
-
     <h3 style="margin-top:15px">📢 নোটিশ বোর্ড</h3><input type="text" id="noticeText" placeholder="এখানে নোটিশ লিখুন...">
     <h3>💬 SMS পাঠান</h3>
     <div class="sms-btns"><button class="green" onclick="sendSMS('present')">Present SMS</button><button class="orange" onclick="sendSMS('absent')">Absent SMS</button><button class="yellow" onclick="sendSMS('notice')">Notice SMS</button></div>
@@ -79,14 +94,53 @@ let attendance=JSON.parse(localStorage.getItem('att9')||'{}');
 let attMonthly=JSON.parse(localStorage.getItem('attMonthly9')||'{}');
 let results=JSON.parse(localStorage.getItem('results9')||'{}');
 let subNames=JSON.parse(localStorage.getItem('subNames9')||'["বাংলা","ইংরেজি","গণিত","বিজ্ঞান","সমাজ","ধর্ম","ICT","কৃষি","শারীরিক","কর্মমুখী","আরবি","কম্পিউটার","ফিন্যান্স"]');
+let instituteList=JSON.parse(localStorage.getItem('instituteList')||'[]');
 let currentFilter='all';
 function getMonthInfo(){let d=new Date();let y=d.getFullYear(),m=d.getMonth(),monthName=d.toLocaleString('bn-BD',{month:'long',year:'numeric'}),days=new Date(y,m+1,0).getDate(),key=y+'-'+m;if(!attMonthly[key])attMonthly[key]={};return{monthName,days,key,today:d.getDate(),fullDate:d.toLocaleDateString('bn-BD')};}
 function saveBox(){let info={nameBn:boxNameBn.innerText.trim(),nameEn:boxNameEn.innerText.trim(),eiin:boxEIIN.innerText.trim(),ins:boxIns.innerText.trim(),logo:boxLogo.src};localStorage.setItem('collegeInfo',JSON.stringify(info));boxStatus.innerText="✅ অটো সেভ";setTimeout(()=>boxStatus.innerText="",1200);boxNameBn3.innerText=info.nameBn;boxNameEn3.innerText=info.nameEn;boxEIIN3.innerText="EIIN: "+info.eiin;boxIns3.innerText="Code: "+info.ins;boxLogo3.src=info.logo;}
 function changeBoxLogo(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{boxLogo.src=e.target.result;saveBox();};r.readAsDataURL(f);}
 function loadBox(){let info=JSON.parse(localStorage.getItem('collegeInfo')||'{}');if(info.nameBn)boxNameBn.innerText=info.nameBn;if(info.nameEn)boxNameEn.innerText=info.nameEn;if(info.eiin)boxEIIN.innerText=info.eiin;if(info.ins)boxIns.innerText=info.ins;if(info.logo){boxLogo.src=info.logo;boxLogo3.src=info.logo;}boxNameBn3.innerText=info.nameBn||boxNameBn.innerText;boxNameEn3.innerText=info.nameEn||boxNameEn.innerText;boxEIIN3.innerText="EIIN: "+(info.eiin||boxEIIN.innerText);boxIns3.innerText="Code: "+(info.ins||boxIns.innerText);if(info.logo)boxLogo3.src=info.logo; if(!boxLogo.src) boxLogo.src="https://via.placeholder.com/65";}
-function doLogin(){let c=loginClass.value,p=loginPass.value;if(!c)return alert('শ্রেণি সিলেক্ট করুন');if(p!='1234')return alert('পাসওয়ার্ড 1234');localStorage.setItem('savedClass',c);showClass.innerText=c;showClass3.innerText=c;loginPage.style.display='none';topLogo.style.display='none';firstPage.classList.add('active');document.body.style.background='#f0f2f5';loadBox();}
+// ✅ মমতাজ উদ্দিন ১২ বার লগইন করলেও ১ বারই এন্ট্রি হবে - দিনে ১ বার
+function doLogin(){
+  let c=loginClass.value,p=loginPass.value;
+  if(!c)return alert('শ্রেণি সিলেক্ট করুন');
+  if(p!='1234')return alert('পাসওয়ার্ড 1234');
+  localStorage.setItem('savedClass',c);
+  showClass.innerText=c;showClass3.innerText=c;
+  loginPage.style.display='none';topLogo.style.display='none';
+  firstPage.classList.add('active');
+  document.body.style.background='#f0f2f5';
+  loadBox();
+  let colName=(document.getElementById('boxNameBn')?.innerText||'মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ').trim();
+  if(!instituteList.find(x=>x.name.trim()===colName)){
+    instituteList.push({name:colName,status:'login'});
+    localStorage.setItem('instituteList',JSON.stringify(instituteList));
+  }
+  updateDashboard();
+}
+function updateDashboard(){
+  let total=instituteList.length;
+  let login=instituteList.filter(x=>x.status==='login').length;
+  document.getElementById('totalInst').innerText=total;
+  document.getElementById('loginCount').innerText=login;
+  document.getElementById('logoutCount').innerText=total-login;
+}
+function toggleInstitute(){
+  let d=document.getElementById('instituteDiv');
+  d.style.display=d.style.display=='block'?'none':'block';
+  if(d.style.display=='block'){
+    if(instituteList.length==0){d.innerHTML='<p style="text-align:center">এখনো কোন প্রতিষ্ঠান এড হয়নি</p>';return;}
+    let h='<table border=1 cellpadding=8 style="width:100%;border-collapse:collapse;font-size:13px"><tr style="background:#0f3d2e;color:#fff"><th>প্রতিষ্ঠান</th><th>স্ট্যাটাস</th></tr>';
+    instituteList.forEach(x=>{
+      let st=x.status==='login'?'<span style="color:green;font-weight:700">🟢 লগইন</span>':'<span style="color:red">🔴 লগআউট</span>';
+      h+='<tr><td>'+(x.name||'মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ')+'</td><td style="text-align:center">'+st+'</td></tr>';
+    });
+    h+='</table>';
+    d.innerHTML=h;
+  }
+}
 function openStudentPage(){let saved=localStorage.getItem('savedClass')||showClass.innerText;showClass3.innerText=saved;showClass.innerText=saved;firstPage.classList.remove('active');secondPage.classList.add('active');loadBox();studentList.style.display='none';studentList.classList.remove('show');resultDiv.style.display='none';updateCounts();}
-function goFirst(){secondPage.classList.remove('active');firstPage.classList.add('active');monthlyDivFirst.style.display='none';}
+function goFirst(){secondPage.classList.remove('active');firstPage.classList.add('active');monthlyDivFirst.style.display='none';updateDashboard();}
 function toggleAdd(){let f=document.getElementById('addForm');f.style.display=f.style.display=='none'?'block':'none';}
 function addStudent(){let n=sName.value.trim(),r=sRoll.value.trim(),m=sMobile.value.trim();if(!n||!r)return alert('নাম ও রোল দিন');students.push({name:n,roll:r,mobile:m});localStorage.setItem('students9',JSON.stringify(students));sName.value='';sRoll.value='';sMobile.value='';addForm.style.display='none';filterList('all');}
 function toggleAtt(i,isP){attendance[i]=isP?'present':'absent';localStorage.setItem('att9',JSON.stringify(attendance));let {key,today}=getMonthInfo();if(!attMonthly[key])attMonthly[key]={};if(!attMonthly[key][i])attMonthly[key][i]={};attMonthly[key][i][today]=isP?'P':'A';localStorage.setItem('attMonthly9',JSON.stringify(attMonthly));if(studentList.classList.contains('show'))render();updateCounts();if(monthlyDivFirst.style.display=='block')renderMonthlyFirst();}
@@ -103,7 +157,7 @@ function expRes(){let data=[];students.forEach((s,idx)=>{let r=results[idx]||{};
 function sendSMS(type){let notice=noticeText.value.trim();if(type=='notice'&&!notice)return alert('নোটিশ লিখুন');let targets=students.filter((s,i)=>{if(!s.mobile)return false;let isP=attendance[i]!=='absent';if(type=='present')return isP;if(type=='absent')return!isP;return true;});if(targets.length==0)return alert('নাম্বার নেই');let cls=showClass.innerText;let {monthName,fullDate}=getMonthInfo();let msg=type=='present'?`${cls} (${monthName} ${fullDate}): উপস্থিত`:type=='absent'?`${cls} (${monthName} ${fullDate}): অনুপস্থিত`:`${cls} নোটিশ: ${notice}`;let numbers=targets.map(t=>t.mobile).join(',');window.location.href=`sms:${numbers}?body=${encodeURIComponent(msg)}`;}
 function delS(i){if(confirm('ডিলিট করবে?')){students.splice(i,1);delete attendance[i];Object.keys(attMonthly).forEach(k=>{delete attMonthly[k][i];});localStorage.setItem('attMonthly9',JSON.stringify(attMonthly));localStorage.setItem('students9',JSON.stringify(students));localStorage.setItem('att9',JSON.stringify(attendance));filterList(currentFilter);if(monthlyDivFirst.style.display=='block')renderMonthlyFirst();}}
 function editS(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null)return;let r=prompt('রোল:',s.roll);let m=prompt('মোবাইল:',s.mobile);students[i]={name:n,roll:r,mobile:m};localStorage.setItem('students9',JSON.stringify(students));render();if(monthlyDivFirst.style.display=='block')renderMonthlyFirst();}
-window.onload=()=>{loadBox();let saved=localStorage.getItem('savedClass');if(saved){showClass.innerText=saved;showClass3.innerText=saved;}};
+window.onload=()=>{loadBox();updateDashboard();let saved=localStorage.getItem('savedClass');if(saved){showClass.innerText=saved;showClass3.innerText=saved;}};
 </script>
 </body>
 </html>
