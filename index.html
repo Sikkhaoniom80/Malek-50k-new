@@ -1,53 +1,106 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek - Login + Dashboard</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MALEK 50K - Final 3 Page</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
-body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
-.logo{width:200px;max-width:65%;border-radius:18px;border:2px solid #ffd700;margin-top:8px}
-.card-login{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px 16px;margin-top:12px}
+*{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif;margin:0;padding:0}
+body{background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
+.logo{width:200px;max-width:62%;border-radius:18px;border:2px solid #ffd700;margin-top:10px}
+.card-login{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px 16px;margin-top:10px}
+.page{display:none;width:100%;max-width:480px;min-height:100vh;position:fixed;top:0;left:0;z-index:99;background:#f5f7f6;overflow:auto;padding-bottom:70px;flex-direction:column;align-items:center}
+.page.active{display:flex}
+.header{background:#0f3d2e;color:#fff;padding:18px 15px 35px;text-align:center;border-radius:0 0 22px 22px;width:100%}
+.card{background:#fff;margin:-20px 12px 15px;border-radius:18px;padding:14px;width:calc(100% - 24px)}
 .dash-mini{border:1.5px solid #0f3d2e;border-radius:12px;padding:8px;background:#fffbe6;width:100%;max-width:380px;margin-top:10px}
-.hideBox{display:none;margin-top:6px;border:1.5px dashed #0f3d2e;border-radius:8px;padding:8px;background:#f8fafc;font-size:12px;max-height:200px;overflow:auto}
-select,input{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;font-size:15px;margin:5px 0}
+.hideBox{display:none;margin-top:6px;border:1.5px dashed #0f3d2e;border-radius:8px;padding:8px;background:#f8fafc;font-size:12px;max-height:250px;overflow:auto}
+.yellow-btn{background:#ffcc00;width:100%;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin:8px 0}
+select,input,textarea{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;font-size:15px;margin:5px 0}
+.stat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.stat div{background:#fff;padding:10px;border-radius:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.sms{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:10px}
+.sms button{padding:10px;border:none;border-radius:10px;font-weight:700;color:#fff}
+.list-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee}
 </style>
 </head>
 <body>
-<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" onerror="this.style.display='none'">
 
-<!-- ড্যাশবোর্ড এখন লগইন পেজেই -->
+<img class="logo" id="topLogo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" onerror="this.style.display='none'">
+
+<!-- ১ম পেজ - আপনার এখনকার পারফেক্ট পেজ -->
+<div id="page1">
 <div class="dash-mini">
-  <h4 style="text-align:center;margin:0 0 6px;font-size:12px">📊 ড্যাশবোর্ড</h4>
-  <button onclick="let d=document.getElementById('instituteDiv');d.style.display=d.style.display=='block'?'none':'block';if(d.style.display=='block'){let list=JSON.parse(localStorage.getItem('instituteList')||'[]');if(list.length==0)d.innerHTML='খালি';else{let h='<table border=1 cellpadding=6 style=width:100%;border-collapse:collapse><tr style=background:#0f3d2e;color:#fff><th>প্রতিষ্ঠান</th><th>স্ট্যাটাস</th></tr>';list.forEach(x=>h+=`<tr><td>${x.name}</td><td style=text-align:center;color:green>🟢 লগইন</td></tr>`);d.innerHTML=h+'</table>';}}" style="width:100%;padding:7px;background:#0f3d2e;color:white;border:none;border-radius:7px;font-size:11px;font-weight:bold">🏫 প্রতিষ্ঠানের তালিকা দেখুন</button>
+  <h4 style="text-align:center;font-size:12px;margin-bottom:6px">📊 ড্যাশবোর্ড</h4>
+  <button onclick="toggleInstitute()" style="width:100%;padding:7px;background:#0f3d2e;color:#fff;border:none;border-radius:7px;font-size:11px;font-weight:bold">🏫 প্রতিষ্ঠানের তালিকা দেখুন</button>
   <div id="instituteDiv" class="hideBox"></div>
   <div style="display:flex;gap:4px;margin-top:6px">
-    <div style="flex:1;text-align:center;background:#dcfce7;border:1.5px solid #16a34a;border-radius:7px;padding:4px"><small style="font-size:9px">🟢 লগইন</small><br><b id="loginCount" style="font-size:13px">0</b></div>
-    <div style="flex:1;text-align:center;background:#fee2e2;border:1.5px solid #dc2626;border-radius:7px;padding:4px"><small style="font-size:9px">🔴 লগআউট</small><br><b id="logoutCount" style="font-size:13px">0</b></div>
-    <div style="flex:1;text-align:center;background:#e0f2fe;border:1.5px solid #0284c7;border-radius:7px;padding:4px"><small style="font-size:9px">🏫 মোট</small><br><b id="totalInst" style="font-size:13px">0</b></div>
+    <div style="flex:1;text-align:center;background:#dcfce7;border:1.5px solid #16a34a;border-radius:7px;padding:4px"><small style="font-size:9px">🟢 লগইন</small><br><b id="loginCount">1</b></div>
+    <div style="flex:1;text-align:center;background:#fee2e2;border:1.5px solid #dc2626;border-radius:7px;padding:4px"><small style="font-size:9px">🔴 লগআউট</small><br><b id="logoutCount">0</b></div>
+    <div style="flex:1;text-align:center;background:#e0f2fe;border:1.5px solid #0284c7;border-radius:7px;padding:4px"><small style="font-size:9px">🏫 মোট</small><br><b id="totalInst">1</b></div>
   </div>
 </div>
 
-<div id="loginPage" class="card-login">
-<h3 style="text-align:center;margin:5px 0">🔐 শিক্ষক লগইন</h3>
+<div class="card-login" style="margin-top:12px">
+<h3 style="text-align:center;margin-bottom:8px">🔐 শিক্ষক লগইন</h3>
 <select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
 <input id="loginPass" type="password" placeholder="পাসওয়ার্ড: 1234">
 <button style="width:100%;padding:12px;border:none;border-radius:12px;background:#0f2d5a;color:white;font-weight:700;margin-top:6px" onclick="doLogin()">🔐 লগইন করুন</button>
 </div>
+</div>
+
+<!-- ২য় পেজ - হাজিরা ড্যাশবোর্ড -->
+<div id="page2" class="page">
+<div class="header"><h2>মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ</h2><div style="color:#ffcc00;margin-top:6px">শ্রেণী: <span id="showClass2"></span></div></div>
+<div class="card">
+<button class="yellow-btn" onclick="goPage3()">👥 শিক্ষার্থীর তালিকা (সম্পূর্ণ তালিকা দেখুন - শিক্ষার্থী যোগ করুন)</button>
+<div style="margin-top:10px"><b>📅 উপস্থিতি</b></div>
+<div class="stat"><div><small>মোট</small><h2 id="tTotal">0</h2></div><div><small>উপস্থিত</small><h2 id="tPresent" style="color:#16a34a">0</h2></div><div><small>অনুপস্থিত</small><h2 id="tAbsent" style="color:#ef4444">0</h2></div></div>
+<div style="margin-top:14px"><b>📢 নোটিশ বোর্ড</b><textarea id="noticeText" placeholder="এখানে নোটিশ লিখুন..."></textarea></div>
+<div style="margin-top:12px"><b>💬 SMS পাঠান</b><div class="sms"><button style="background:#16a34a" onclick="sendSMS('present')">Present SMS</button><button style="background:#ea580c" onclick="sendSMS('absent')">Absent SMS</button><button style="background:#eab308;color:#000" onclick="sendSMS('notice')">Notice SMS</button></div></div>
+<button style="width:100%;margin-top:14px;padding:10px;background:#555;color:#fff;border:none;border-radius:8px" onclick="location.reload()">⬅️ লগআউট</button>
+</div>
+</div>
+
+<!-- ৩য় পেজ - শিক্ষার্থীর তালিকা -->
+<div id="page3" class="page">
+<div class="header"><h2>শিক্ষার্থীর তালিকা</h2><button onclick="goPage2()" style="background:#fff;color:#0f3d2e;border:none;padding:6px 14px;border-radius:20px;margin-top:8px;font-weight:700">⬅️ দ্বিতীয় পেজ</button></div>
+<div class="card">
+<button class="yellow-btn">📋 সম্পূর্ণ তালিকা দেখুন</button>
+<button class="yellow-btn" style="background:#d1fae5" onclick="addStudent()">➕ শিক্ষার্থী যোগ করুন</button>
+<h3 style="margin:12px 0;font-size:14px">সম্পূর্ণ তালিকা - এডিট/ডিলিট সহ</h3>
+<div id="list3"></div>
+</div>
+</div>
 
 <script>
-let instituteList=JSON.parse(localStorage.getItem('instituteList')||'[]');
-function updateDashboard(){let t=instituteList.length,l=instituteList.filter(x=>x.status==='login').length;document.getElementById('totalInst').innerText=t;document.getElementById('loginCount').innerText=l;document.getElementById('logoutCount').innerText=t-l;}
+function cleanList(list){let m=new Map();list.forEach(i=>m.set(i.name.trim(),i));return Array.from(m.values())}
+let instituteList=cleanList(JSON.parse(localStorage.getItem('instituteList')||'[{"name":"মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ","status":"login"}]'));
+let students=JSON.parse(localStorage.getItem('malek_final')||'[]');
+let attendance=JSON.parse(localStorage.getItem('malek_att')||'{}');
+let currentClass='';
+
+function updateDashboard(){instituteList=cleanList(instituteList);localStorage.setItem('instituteList',JSON.stringify(instituteList));let t=instituteList.length;let l=instituteList.filter(x=>x.status==='login').length;document.getElementById('totalInst').innerText=t;document.getElementById('loginCount').innerText=l;document.getElementById('logoutCount').innerText=t-l;}
+function toggleInstitute(){let d=document.getElementById('instituteDiv');d.style.display=d.style.display=='block'?'none':'block';if(d.style.display=='block'){let h='<table border=1 cellpadding=6 style="width:100%;border-collapse:collapse"><tr style="background:#0f3d2e;color:#fff"><th>প্রতিষ্ঠান</th><th>স্ট্যাটাস</th></tr>';instituteList.forEach(x=>h+=`<tr><td>${x.name}</td><td style="text-align:center;color:green">🟢 লগইন</td></tr>`);d.innerHTML=h+'</table>';}}
 function doLogin(){
-  let c=document.getElementById('loginClass').value,p=document.getElementById('loginPass').value;
-  if(!c)return alert('শ্রেণি সিলেক্ট করুন');if(p!='1234')return alert('পাসওয়ার্ড 1234');
-  let colName="মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ";
-  if(!instituteList.find(x=>x.name.trim()===colName)){instituteList.push({name:colName,status:'login'});localStorage.setItem('instituteList',JSON.stringify(instituteList));}
-  localStorage.setItem('savedClass',c);
-  location.href="dashboard.html"; // বা আপনার প্রথম পেজের লিংক
-  // যদি একই ফাইলে ১ম পেজ থাকে তাহলে এখানে firstPage active করবেন
+ let c=document.getElementById('loginClass').value,p=document.getElementById('loginPass').value;
+ if(!c)return alert('শ্রেণি সিলেক্ট করুন');if(p!='1234')return alert('পাসওয়ার্ড 1234');
+ currentClass=c;document.getElementById('showClass2').innerText=c;
+ instituteList=[{name:'মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ',status:'login'}];
+ localStorage.setItem('instituteList',JSON.stringify(instituteList));
+ localStorage.setItem('savedClass',c);
+ document.getElementById('page1').style.display='none';document.getElementById('topLogo').style.display='none';
+ document.getElementById('page2').classList.add('active');document.body.style.background='#f5f7f6';render();
 }
+function goPage3(){document.getElementById('page2').classList.remove('active');document.getElementById('page3').classList.add('active');render3();}
+function goPage2(){document.getElementById('page3').classList.remove('active');document.getElementById('page2').classList.add('active');render();}
+function getStatus(i){let d=new Date().toISOString().split('T')[0];return (attendance[d]&&attendance[d][i])||''}
+function render(){let all=students.filter(s=>s.class==currentClass||!s.class);document.getElementById('tTotal').innerText=all.length;let p=all.filter((s,i)=>getStatus(i)=='P').length;document.getElementById('tPresent').innerText=p;document.getElementById('tAbsent').innerText=all.length-p;}
+function render3(){let all=students.filter(s=>s.class==currentClass||!s.class);if(all.length==0)all=[{name:'কালাম',roll:'02',idx:0},{name:'রহিম',roll:'03',idx:1}];let div=document.getElementById('list3');div.innerHTML='';all.forEach((s,idx)=>{div.innerHTML+=`<div class="list-item"><div><b>${s.name}</b> (রোল:${s.roll||idx+1})</div><div><button style="background:#0ea5e9;color:#fff;border:none;padding:6px 8px;border-radius:6px" onclick="editS(${idx})">✏️</button> <button style="background:#ef4444;color:#fff;border:none;padding:6px 8px;border-radius:6px" onclick="delS(${idx})">🗑️</button></div></div>`;});}
+function addStudent(){let n=prompt('নাম:');if(!n)return;let r=prompt('রোল:');let m=prompt('মোবাইল:');students.push({class:currentClass,name:n,roll:r,mobile:m});localStorage.setItem('malek_final',JSON.stringify(students));render();render3();}
+function delS(i){if(confirm('ডিলিট?')){students.splice(i,1);localStorage.setItem('malek_final',JSON.stringify(students));render3();render();}}
+function editS(i){let n=prompt('নতুন নাম:',students[i].name);if(n){students[i].name=n;localStorage.setItem('malek_final',JSON.stringify(students));render3();}}
+function sendSMS(type){let notice=document.getElementById('noticeText').value;let all=students.filter(s=>s.class==currentClass);if(all.length==0)return alert('ছাত্র নেই');let nums=all.map(s=>s.mobile).filter(Boolean);if(nums.length==0)return alert('মোবাইল নেই');let msg=`${type} - ${notice}`;window.location.href=`sms:${nums.join(';')}?body=${encodeURIComponent(msg)}`;}
 updateDashboard();
 </script>
 </body>
