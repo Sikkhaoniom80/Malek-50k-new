@@ -1,78 +1,25 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek Dashboard - Final</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;font-family:'Hind Siliguri'}
-body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;padding:12px;min-height:100vh}
-.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;background:#fff}
-.card{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
-input,select{width:100%;padding:13px;border-radius:12px;border:1.5px solid #ccc;margin:7px 0;font-size:15px}
-button{width:100%;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer;margin-top:8px}
-.hide{display:none;margin-top:10px;border:2px dashed #0f3d2e;border-radius:12px;padding:10px;max-height:400px;overflow:auto;background:#f8fafc}
-.dash{display:flex;gap:8px;margin-top:10px}
-.box{flex:1;text-align:center;border-radius:14px;padding:14px}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);justify-content:center;align-items:center;z-index:99}
-.mbox{background:#fff;padding:20px;border-radius:18px;width:90%;max-width:350px;text-align:center}
-</style>
-</head>
-<body>
-
-<!-- লোগো - আপনার বর্তমানটা -->
-<img class="logo" src="logo.jpg" alt="Logo">
-
-<!-- লগইন -->
-<div class="card">
-<h3 style="text-align:center;margin:0 0 8px">🔐 শিক্ষক লগইন</h3>
-<select id="cls">
-<option value="">শ্রেণি সিলেক্ট করুন</option>
-<option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option>
-<option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option>
-<option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option><option>একাদশ</option><option>দ্বাদশ</option>
-</select>
-<input id="pass" type="password" placeholder="৮ ডিজিট পাসওয়ার্ড">
-<p style="text-align:center;font-size:11px;color:gray">বর্তমান: <b id="showPass">সেট হয়নি</b></p>
-<button onclick="openOTP()" style="background:#0f2d5a;color:white;font-size:12px">🔑 পাসওয়ার্ড রিসেট - OTP 01912427294</button>
-<button onclick="doLogin()" style="background:#0a2342;color:#ffd700">🔐 লগইন করুন - ২য় পেজে যান</button>
-</div>
-
-<!-- ড্যাশবোর্ড - ২ টা ঘর -->
+<!-- 📊 ড্যাশবোর্ড - শুধু এইটা বসান -->
 <div class="card">
 <h3 style="text-align:center;margin:0 0 10px">📊 ড্যাশবোর্ড</h3>
 
-<!-- ঘর ১ -->
-<button onclick="toggleList()" style="background:#0f3d2e;color:white">🏫 ১। প্রতিষ্ঠানের তালিকা (হাইড) - ক্লিকে দেখুন</button>
-<div id="listDiv" class="hide"></div>
+<!-- ১। প্রতিষ্ঠানের তালিকা - ভিতরে শ্রেণি নাই -->
+<button onclick="toggleList()" style="background:#0f3d2e;color:white;width:100%;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer">🏫 ১। প্রতিষ্ঠানের তালিকা (হাইড) - ক্লিকে দেখুন</button>
+<div id="listDiv" class="hide" style="display:none;margin-top:10px;border:2px dashed #0f3d2e;border-radius:12px;padding:10px;max-height:400px;overflow:auto;background:#f8fafc"></div>
 
-<!-- ঘর ২ -->
+<!-- ২। লগইন / লগআউট -->
 <div style="margin-top:12px;border:2px solid #0284c7;border-radius:14px;padding:12px">
 <p style="text-align:center;margin:0 0 8px;font-weight:700">২। লগইন / লগআউট স্ট্যাটাস</p>
-<div class="dash">
-<div class="box" style="background:#dcfce7;border:2px solid #16a34a"><small>🟢 লগইন আছে</small><br><b id="loginCount" style="font-size:26px">0</b><br><small>টি</small></div>
-<div class="box" style="background:#fee2e2;border:2px solid #dc2626"><small>🔴 লগআউট</small><br><b id="logoutCount" style="font-size:26px">0</b><br><small>টি</small></div>
-<div class="box" style="background:#e0f2fe;border:2px solid #0284c7"><small>🏫 মোট প্রতিষ্ঠান</small><br><b id="total" style="font-size:26px">0</b><br><small>টি</small></div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;text-align:center;background:#dcfce7;border:2px solid #16a34a;border-radius:14px;padding:14px"><small>🟢 লগইন আছে</small><br><b id="loginCount" style="font-size:26px">0</b><br><small>টি</small></div>
+<div style="flex:1;text-align:center;background:#fee2e2;border:2px solid #dc2626;border-radius:14px;padding:14px"><small>🔴 লগআউট</small><br><b id="logoutCount" style="font-size:26px">0</b><br><small>টি</small></div>
+<div style="flex:1;text-align:center;background:#e0f2fe;border:2px solid #0284c7;border-radius:14px;padding:14px"><small>🏫 মোট প্রতিষ্ঠান</small><br><b id="total" style="font-size:26px">0</b><br><small>টি</small></div>
 </div>
 </div>
 </div>
-
-<!-- OTP Modal -->
-<div id="otpModal" class="modal"><div class="mbox">
-<h3>OTP যাচাই - 01912427294</h3>
-<p>OTP: <b id="otpShow" style="font-size:22px;color:red;letter-spacing:3px"></b></p>
-<input id="otpInput" placeholder="OTP দিন">
-<input id="newPass" placeholder="নতুন ৮ ডিজিট পাসওয়ার্ড" maxlength="8">
-<button onclick="verifyOTP()" style="background:#16a34a;color:white">✅ যাচাই</button>
-<button onclick="closeM()" style="background:#eee">❌ বন্ধ</button>
-</div></div>
 
 <script>
 let list = JSON.parse(localStorage.getItem('instituteList')||'[]');
-let currentOTP="";
-function getPass(){return localStorage.getItem('mainPass8')||"";}
 function updateDash(){
-  let p=getPass(); document.getElementById('showPass').innerText=p?p:"সেট হয়নি";
   let total=list.length;
   let login = list.filter(x=> x.status==='login').length;
   let logout = total - login;
@@ -80,47 +27,20 @@ function updateDash(){
   document.getElementById('loginCount').innerText=login;
   document.getElementById('logoutCount').innerText=logout;
 }
-function openOTP(){
-  currentOTP=Math.floor(100000+Math.random()*900000).toString();
-  document.getElementById('otpShow').innerText=currentOTP;
-  document.getElementById('otpModal').style.display='flex';
-  alert('DEMO OTP (01912427294): '+currentOTP);
-}
-function closeM(){document.getElementById('otpModal').style.display='none';}
-function verifyOTP(){
-  if(document.getElementById('otpInput').value!=currentOTP) return alert('OTP ভুল! '+currentOTP);
-  let np=document.getElementById('newPass').value.trim();
-  if(!/^\d{8}$/.test(np)) return alert('৮ ডিজিট সংখ্যা দিন, যেমন 12345678');
-  localStorage.setItem('mainPass8',np);closeM();updateDash();alert('✅ পাসওয়ার্ড সেট: '+np);
-}
-function doLogin(){
-  let cls=document.getElementById('cls').value;
-  let pw=document.getElementById('pass').value;
-  if(!cls) return alert('শ্রেণি ১ম-দ্বাদশ সিলেক্ট করুন');
-  let sp=getPass(); if(!sp) return alert('আগে OTP দিয়ে ৮ ডিজিট পাসওয়ার্ড সেট করুন');
-  if(pw!=sp) return alert('পাসওয়ার্ড ভুল! বর্তমান: '+sp);
-  localStorage.setItem('savedClass',cls);
-  // ২য় পেজ থেকে আসা নাম অটো সেভ - ডেমোতে এখানে সেভ
-  let collegeName = localStorage.getItem('lastCollegeName') || 'মমতাজউদ্দিন কলেজ';
-  list.push({name:collegeName, cls:cls, status:'login', last:Date.now(), time:new Date().toLocaleString('bn-BD')});
-  localStorage.setItem('instituteList',JSON.stringify(list));
-  location.href='dashboard.html';
-}
 function toggleList(){
   let d=document.getElementById('listDiv');
   d.style.display=d.style.display=='block'?'none':'block';
   if(d.style.display=='block'){
-    if(list.length==0){d.innerHTML='<p style="text-align:center">এখনো কোন প্রতিষ্ঠান ২য় পেজে এড হয়নি</p>';return;}
-    let h='<table border=1 cellpadding=5 style="width:100%;border-collapse:collapse;font-size:11px"><tr style="background:#0f3d2e;color:#fff"><th>প্রতিষ্ঠান</th><th>শ্রেণি</th><th>স্ট্যাটাস</th><th>সময়</th></tr>';
-    list.forEach(x=>{ 
+    if(list.length==0){d.innerHTML='<p style="text-align:center">এখনো কোন প্রতিষ্ঠান এড হয়নি</p>';return;}
+    // শ্রেণি বাদ - শুধু প্রতিষ্ঠান, স্ট্যাটাস, সময়
+    let h='<table border=1 cellpadding=6 style="width:100%;border-collapse:collapse;font-size:12px"><tr style="background:#0f3d2e;color:#fff"><th>প্রতিষ্ঠান</th><th>স্ট্যাটাস</th><th>সময়</th></tr>';
+    list.forEach(x=>{
       let st = x.status==='login' ? '<span style="color:green">🟢 লগইন</span>' : '<span style="color:red">🔴 লগআউট</span>';
-      h+='<tr><td>'+x.name+'</td><td>'+x.cls+'</td><td>'+st+'</td><td style="font-size:9px">'+x.time+'</td></tr>'; 
+      let name = x.name || x.college || 'মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ';
+      h+='<tr><td>'+name+'</td><td>'+st+'</td><td style="font-size:10px">'+(x.time||'')+'</td></tr>';
     });
-    h+='</table>';
-    d.innerHTML=h;
+    h+='</table>'; d.innerHTML=h;
   }
 }
 window.onload=updateDash;
 </script>
-</body>
-</html>
