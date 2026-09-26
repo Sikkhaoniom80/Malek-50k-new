@@ -2,33 +2,26 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek - Login + Dashboard</title>
+<title>Malek - Final Fixed</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
 body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
-.logo{width:200px;max-width:65%;border-radius:18px;border:2px solid #ffd700;margin-top:8px}
-.card-login{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:18px 16px;margin-top:12px}
-.dash-mini{border:1.5px solid #0f3d2e;border-radius:12px;padding:8px;background:#fffbe6;width:100%;max-width:380px;margin-top:10px}
-.hideBox{display:none;margin-top:6px;border:1.5px dashed #0f3d2e;border-radius:8px;padding:8px;background:#f8fafc;font-size:12px;max-height:200px;overflow:auto}
+.logo{width:200px;max-width:60%;border-radius:18px;border:2px solid #ffd700;margin-top:10px}
+.card-login{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:22px 16px;margin-top:14px}
+.page{display:none;width:100%;max-width:480px}.page.active{display:flex;flex-direction:column;align-items:center;width:100%}
+.header{background:#0f3d2e;color:white;padding:15px 15px 40px;text-align:center;border-radius:0 0 22px 22px;width:100%}
+.card{background:white;margin:-22px 10px 15px;border-radius:18px;padding:14px;width:100%}
+.dash-mini{border:1.5px solid #0f3d2e;border-radius:12px;padding:8px;background:#fffbe6;width:100%}
+.hideBox{display:none;margin-top:6px;border:1.5px dashed #0f3d2e;border-radius:8px;padding:8px;background:#f8fafc;font-size:12px;max-height:250px;overflow:auto}
 select,input{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;font-size:15px;margin:5px 0}
+.yellow-btn{background:#ffcc00;width:100%;padding:12px;border:none;border-radius:10px;font-weight:bold}
 </style>
 </head>
 <body>
-<img class="logo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" onerror="this.style.display='none'">
+<img class="logo" id="topLogo" src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg" onerror="this.style.display='none'">
 
-<!-- ড্যাশবোর্ড এখন লগইন পেজেই -->
-<div class="dash-mini">
-  <h4 style="text-align:center;margin:0 0 6px;font-size:12px">📊 ড্যাশবোর্ড</h4>
-  <button onclick="let d=document.getElementById('instituteDiv');d.style.display=d.style.display=='block'?'none':'block';if(d.style.display=='block'){let list=JSON.parse(localStorage.getItem('instituteList')||'[]');if(list.length==0)d.innerHTML='খালি';else{let h='<table border=1 cellpadding=6 style=width:100%;border-collapse:collapse><tr style=background:#0f3d2e;color:#fff><th>প্রতিষ্ঠান</th><th>স্ট্যাটাস</th></tr>';list.forEach(x=>h+=`<tr><td>${x.name}</td><td style=text-align:center;color:green>🟢 লগইন</td></tr>`);d.innerHTML=h+'</table>';}}" style="width:100%;padding:7px;background:#0f3d2e;color:white;border:none;border-radius:7px;font-size:11px;font-weight:bold">🏫 প্রতিষ্ঠানের তালিকা দেখুন</button>
-  <div id="instituteDiv" class="hideBox"></div>
-  <div style="display:flex;gap:4px;margin-top:6px">
-    <div style="flex:1;text-align:center;background:#dcfce7;border:1.5px solid #16a34a;border-radius:7px;padding:4px"><small style="font-size:9px">🟢 লগইন</small><br><b id="loginCount" style="font-size:13px">0</b></div>
-    <div style="flex:1;text-align:center;background:#fee2e2;border:1.5px solid #dc2626;border-radius:7px;padding:4px"><small style="font-size:9px">🔴 লগআউট</small><br><b id="logoutCount" style="font-size:13px">0</b></div>
-    <div style="flex:1;text-align:center;background:#e0f2fe;border:1.5px solid #0284c7;border-radius:7px;padding:4px"><small style="font-size:9px">🏫 মোট</small><br><b id="totalInst" style="font-size:13px">0</b></div>
-  </div>
-</div>
-
+<!-- লগইন পেজ - এখানে ড্যাশবোর্ড নাই -->
 <div id="loginPage" class="card-login">
 <h3 style="text-align:center;margin:5px 0">🔐 শিক্ষক লগইন</h3>
 <select id="loginClass"><option value="">শ্রেণি সিলেক্ট করুন</option><option>১ম শ্রেণি</option><option>২য় শ্রেণি</option><option>৩য় শ্রেণি</option><option>৪র্থ শ্রেণি</option><option>৫ম শ্রেণি</option><option>৬ষ্ঠ শ্রেণি</option><option>৭ম শ্রেণি</option><option>৮ম শ্রেণি</option><option>৯ম শ্রেণি</option><option>১০ম শ্রেণি</option></select>
@@ -36,18 +29,83 @@ select,input{width:100%;padding:12px;border-radius:12px;border:1.5px solid #ccc;
 <button style="width:100%;padding:12px;border:none;border-radius:12px;background:#0f2d5a;color:white;font-weight:700;margin-top:6px" onclick="doLogin()">🔐 লগইন করুন</button>
 </div>
 
+<!-- ১ম পেজ - লগইনের পরে ড্যাশবোর্ড এখানে -->
+<div id="firstPage" class="page">
+  <div class="header">
+    <p style="margin:0;font-weight:700">শ্রেণী: <span id="showClass"></span></p>
+  </div>
+  <div class="card">
+    <div class="dash-mini">
+      <h4 style="text-align:center;margin:0 0 6px;font-size:12px">📊 ড্যাশবোর্ড</h4>
+      <button onclick="toggleInstitute()" style="width:100%;padding:7px;background:#0f3d2e;color:white;border:none;border-radius:7px;font-size:11px;font-weight:bold">🏫 প্রতিষ্ঠানের তালিকা দেখুন</button>
+      <div id="instituteDiv" class="hideBox"></div>
+      <div style="display:flex;gap:4px;margin-top:6px">
+        <div style="flex:1;text-align:center;background:#dcfce7;border:1.5px solid #16a34a;border-radius:7px;padding:4px"><small style="font-size:9px">🟢 লগইন</small><br><b id="loginCount" style="font-size:13px">0</b></div>
+        <div style="flex:1;text-align:center;background:#fee2e2;border:1.5px solid #dc2626;border-radius:7px;padding:4px"><small style="font-size:9px">🔴 লগআউট</small><br><b id="logoutCount" style="font-size:13px">0</b></div>
+        <div style="flex:1;text-align:center;background:#e0f2fe;border:1.5px solid #0284c7;border-radius:7px;padding:4px"><small style="font-size:9px">🏫 মোট</small><br><b id="totalInst" style="font-size:13px">0</b></div>
+      </div>
+    </div>
+    <button class="yellow-btn" style="margin-top:12px" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা দেখুন</button>
+    <button onclick="location.reload()" style="width:100%;margin-top:10px;padding:9px;background:#555;color:white;border:none;border-radius:8px;font-size:12px">⬅️ লগআউট</button>
+  </div>
+</div>
+
+<div id="secondPage" class="page">
+  <div class="header"><h3>শিক্ষার্থীর তালিকা</h3><button onclick="goFirst()" style="background:white;color:#0f3d2e;border:none;padding:5px 12px;border-radius:20px;font-weight:bold;font-size:12px">⬅️ ড্যাশবোর্ডে ফিরুন</button></div>
+  <div class="card"><p style="text-align:center">শিক্ষার্থীর লিস্ট এখানে থাকবে</p></div>
+</div>
+
 <script>
-let instituteList=JSON.parse(localStorage.getItem('instituteList')||'[]');
-function updateDashboard(){let t=instituteList.length,l=instituteList.filter(x=>x.status==='login').length;document.getElementById('totalInst').innerText=t;document.getElementById('loginCount').innerText=l;document.getElementById('logoutCount').innerText=t-l;}
-function doLogin(){
-  let c=document.getElementById('loginClass').value,p=document.getElementById('loginPass').value;
-  if(!c)return alert('শ্রেণি সিলেক্ট করুন');if(p!='1234')return alert('পাসওয়ার্ড 1234');
-  let colName="মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ";
-  if(!instituteList.find(x=>x.name.trim()===colName)){instituteList.push({name:colName,status:'login'});localStorage.setItem('instituteList',JSON.stringify(instituteList));}
-  localStorage.setItem('savedClass',c);
-  location.href="dashboard.html"; // বা আপনার প্রথম পেজের লিংক
-  // যদি একই ফাইলে ১ম পেজ থাকে তাহলে এখানে firstPage active করবেন
+// ডুপ্লিকেট ঠিক করার ফাংশন
+function cleanInstituteList(list){
+  let map = new Map();
+  list.forEach(item=>{
+    let key = item.name.trim();
+    map.set(key, item); // একই নাম হলে শেষেরটাই থাকবে, ২ বার হবে না
+  });
+  return Array.from(map.values());
 }
+let instituteList = cleanInstituteList(JSON.parse(localStorage.getItem('instituteList')||'[]'));
+localStorage.setItem('instituteList', JSON.stringify(instituteList));
+
+function updateDashboard(){
+  instituteList = cleanInstituteList(instituteList);
+  let total = instituteList.length;
+  let login = instituteList.filter(x=>x.status==='login').length;
+  document.getElementById('totalInst').innerText = total;
+  document.getElementById('loginCount').innerText = login;
+  document.getElementById('logoutCount').innerText = total - login;
+}
+function toggleInstitute(){
+  let d=document.getElementById('instituteDiv');
+  d.style.display=d.style.display=='block'?'none':'block';
+  if(d.style.display=='block'){
+    instituteList = cleanInstituteList(instituteList);
+    if(instituteList.length==0){d.innerHTML='খালি';return;}
+    let h='<table border=1 cellpadding=6 style="width:100%;border-collapse:collapse"><tr style="background:#0f3d2e;color:#fff"><th>প্রতিষ্ঠান</th><th>স্ট্যাটাস</th></tr>';
+    instituteList.forEach(x=>h+=`<tr><td>${x.name}</td><td style="text-align:center;color:green">🟢 লগইন</td></tr>`);
+    d.innerHTML=h+'</table>';
+  }
+}
+function doLogin(){
+  let c=document.getElementById('loginClass').value;
+  let p=document.getElementById('loginPass').value;
+  if(!c)return alert('শ্রেণি সিলেক্ট করুন');
+  if(p!='1234')return alert('পাসওয়ার্ড 1234');
+  // একটাই প্রতিষ্ঠান থাকবে, ডুপ্লিকেট হবে না
+  let name = 'মমতাজউদ্দিন বিজনেস ম্যানেজমেন্ট কলেজ';
+  instituteList = [{name:name, status:'login'}];
+  localStorage.setItem('instituteList', JSON.stringify(instituteList));
+  localStorage.setItem('savedClass', c);
+  document.getElementById('showClass').innerText = c;
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('topLogo').style.display='none';
+  document.getElementById('firstPage').classList.add('active');
+  document.body.style.background='#f0f2f5';
+  updateDashboard();
+}
+function openStudentPage(){document.getElementById('firstPage').classList.remove('active');document.getElementById('secondPage').classList.add('active');}
+function goFirst(){document.getElementById('secondPage').classList.remove('active');document.getElementById('firstPage').classList.add('active');updateDashboard();}
 updateDashboard();
 </script>
 </body>
