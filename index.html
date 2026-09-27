@@ -123,7 +123,7 @@ function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remo
 /* ===== প্রতিষ্ঠান ম্যানেজমেন্ট ===== */
 let users=JSON.parse(localStorage.getItem('takrim_users')||'{}');
 let insts=JSON.parse(localStorage.getItem('takrim_insts')||'[]');
-const LCLASSES=['১ম শ্রেণি','২য় শ্রেণি','৩য় শ্রেণি','৪র্থ শ্রেণি','৫ম শ্রেণি','৬ষ্ঠ শ্রেণি','৭ম শ্রেণি','৮ম শ্রেণি','৯ম শ্রেণি','১০ম শ্রেণি'];
+const LCLASSES=['১ম শ্রেণি','২য় শ্রেণি','৩য় শ্রেণি','৪র্থ শ্রেণি','৫ম শ্রেণি','৬ষ্ঠ শ্রেণি','৭ম শ্রেণি','৮ম শ্রেণি','৯ম শ্রেণি','১০ম শ্রেণি','একাদশ শ্রেণি','দ্বাদশ শ্রেণি'];
 l_cls.innerHTML='<option value="">শ্রেণি সিলেক্ট করুন</option>'+LCLASSES.map(c=>'<option value="'+c+'">'+c+'</option>').join('');
 let npLogoData='';
 function npLogoChg(inp){let f=inp.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{npLogoData=e.target.result;document.getElementById('npLogo').src=e.target.result;};r.readAsDataURL(f);}
@@ -195,7 +195,7 @@ function getMonthInfo(){let d=new Date();let y=d.getFullYear(),m=d.getMonth();re
 function saveBox(){let info={nameBn:boxNameBn.innerText.trim(),nameEn:boxNameEn.innerText.trim(),eiin:boxEIIN.innerText.trim(),ins:boxIns.innerText.trim(),logo:boxLogo.src};localStorage.setItem('collegeInfo',JSON.stringify(info));boxStatus.innerText="✅ সেভ হয়েছে";setTimeout(()=>boxStatus.innerText="",1200);boxNameBn3.innerText=info.nameBn;boxNameEn3.innerText=info.nameEn;boxEIIN3.innerText="EIIN: "+info.eiin;boxIns3.innerText="Code: "+info.ins;boxLogo3.src=info.logo;}
 function changeBoxLogo(i){let f=i.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{boxLogo.src=e.target.result;saveBox();};r.readAsDataURL(f);}
 function loadBox(){let info=JSON.parse(localStorage.getItem('collegeInfo')||'{}');if(info.nameBn)boxNameBn.innerText=info.nameBn;if(info.nameEn)boxNameEn.innerText=info.nameEn;if(info.eiin)boxEIIN.innerText=info.eiin;if(info.ins)boxIns.innerText=info.ins;if(info.logo){boxLogo.src=info.logo;boxLogo3.src=info.logo;}boxNameBn3.innerText=info.nameBn||boxNameBn.innerText;boxNameEn3.innerText=info.nameEn||boxNameEn.innerText;boxEIIN3.innerText="EIIN: "+(info.eiin||boxEIIN.innerText);boxIns3.innerText="Code: "+(info.ins||boxIns.innerText);}
-function openStudentPage(){show('secondPage');loadBox();updateCounts();document.getElementById('studentList').style.display='none';document.getElementById('studentList').classList.remove('show');document.getElementById('studentList').classList.remove('show');document.getElementById('resultDiv').style.display='none';currentFilter='none';}
+function openStudentPage(){show('secondPage');loadBox();updateCounts();document.getElementById('studentList').style.display='none';document.getElementById('studentList').classList.remove('show');document.getElementById('resultDiv').style.display='none';currentFilter='none';}
 function toggleAdd(){let f=document.getElementById('addForm');f.style.display=f.style.display=='none'?'block':'none';}
 function addStudent(){if(!sName.value.trim())return alert('নাম দিন');students.push({name:sName.value.trim(),roll:sRoll.value.trim(),mobile:sMobile.value.trim()});saveAll();document.getElementById('addForm').style.display='none';sName.value='';sRoll.value='';sMobile.value='';filterList('all');}
 function toggleAtt(i,isP){attendance[i]=isP?'present':'absent';let {key:mk,today}=getMonthInfo();if(!attMonthly[mk])attMonthly[mk]={};if(!attMonthly[mk][i])attMonthly[mk][i]={};attMonthly[mk][i][today]=isP?'P':'A';saveAll();render();updateCounts();}
