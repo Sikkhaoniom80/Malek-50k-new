@@ -20,10 +20,10 @@
 <button class="btn blue" onclick="primaryLogin()">🔒 প্রবেশ করুন</button><p id="loginMsg" style="color:red;text-align:center"></p>
 </div>
 
-<!-- ✅ ৪ নম্বর নতুন কাউন্টার ঘর - শুধু এটাই যোগ করা হয়েছে -->
-<div class="menu" style="background:#0fa3b1;cursor:default;display:flex;gap:8px;justify-content:center;padding:12px">
-<span style="flex:1;text-align:center">মোট প্রতিষ্ঠান: <b id="totalInst">০</b></span>
-<span style="flex:1;text-align:center">মোট লগইন: <b id="totalLoginCount">০</b></span>
+<!-- ✅ ফিক্সড: ২ নম্বর ছবির মতো - কালো পিলে হলুদ লেখা -->
+<div class="menu" style="background:#0fa3b1;cursor:default;display:flex;gap:10px;justify-content:center;padding:12px">
+<span style="flex:1;text-align:center;background:#000;color:#ffcc00;border:2px solid #ffcc00;padding:10px 6px;border-radius:30px;font-size:15px">মোট প্রতিষ্ঠান: <b id="totalInst" style="color:#ffcc00">০</b></span>
+<span style="flex:1;text-align:center;background:#000;color:#ffcc00;border:2px solid #ffcc00;padding:10px 6px;border-radius:30px;font-size:15px">মোট লগইন: <b id="totalLoginCount" style="color:#ffcc00">০</b></span>
 </div>
 
 <div class="menu" style="background:#ef4444" onclick="document.getElementById('listBox').classList.toggle('hidden')"><span>🔒 তালিকা ▼</span></div>
@@ -32,7 +32,6 @@
 <script>
 let rawInsts=JSON.parse(localStorage.getItem('takrim_primary_insts')||'[]');let mapDedup=new Map();rawInsts.forEach(x=>{let k=(x.bnName||'').trim();if(k&&!mapDedup.has(k))mapDedup.set(k,x);});let insts=[...mapDedup.values()];localStorage.setItem('takrim_primary_insts',JSON.stringify(insts));
 let tempLogo=localStorage.getItem('takrim_temp_logo')||'';
-// ✅ কাউন্টার ফাংশন
 function toBn(n){return n.toString().replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);}
 function updateCounter(){let a=JSON.parse(localStorage.getItem('takrim_primary_insts')||'[]');let b=JSON.parse(localStorage.getItem('takrim_login_logs')||'[]');document.getElementById('totalInst').innerText=toBn(a.length);document.getElementById('totalLoginCount').innerText=toBn(b.length);}
 updateCounter();
