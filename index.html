@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FINAL - School College Hazira</title>
+<title>School College Hazira - FINAL</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -53,7 +53,7 @@ input,select{width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;ma
 <body>
 
 <div id="firstPageWrap" style="width:100%;display:flex;flex-direction:column;align-items:center">
-<div class="main-banner"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg"></div>
+<div class="main-banner"><img src="badge.jpg"></div>
 <div class="green-box"><span>স্কুল কলেজ হাজিরা</span></div>
 
 <button id="btnForm" class="menu" onclick="document.getElementById('formBox').classList.toggle('hidden')"><span>🏫 প্রতিষ্ঠান ফরম ▼</span></button>
@@ -70,7 +70,7 @@ input,select{width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;ma
 <input id="instCodeLogin" placeholder="🏫 প্রতিষ্ঠান কোড / EIIN" oninput="findInstByCode()"><div id="foundInstName" style="text-align:center;font-weight:700;min-height:18px;color:green"></div>
 <div class="fifty"><select id="tradeSel"></select><select id="branchSel"><option>ক শাখা</option><option>খ শাখা</option></select></div>
 <div class="fifty"><select id="semesterSel"></select><select id="sessionSel"></select></div>
-<input id="loginPass" type="password" placeholder="🔑 পাসওয়ার্ড (কোডের নিচে)"><button class="btn blue" onclick="primaryLogin()">🔒 প্রবেশ করুন</button>
+<input id="loginPass" type="password" placeholder="🔑 পাসওয়ার্ড"><button class="btn blue" onclick="primaryLogin()">🔒 প্রবেশ করুন</button>
 <p id="loginMsg" style="color:red;text-align:center"></p>
 <div class="fifty"><button class="btn" style="background:#16a34a" onclick="editTrade()">🔧 গ্রুপ এডিট (৫টা)</button><button class="btn" style="background:#ff7a00" onclick="editSession()">📅 সেশন এডিট (৪টা)</button></div>
 </div>
