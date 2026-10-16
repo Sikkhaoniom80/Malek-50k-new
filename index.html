@@ -1,238 +1,129 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Malek 50K - Final 3 Page Class Wise</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FINAL - School College Hazira</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
-body{margin:0;background:#0a2342;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:12px}
-.logo{width:360px;max-width:92%;border-radius:22px;border:3px solid #ffd700;margin-top:10px}
-.menu-btn{display:block;width:100%;max-width:380px;background:#fff;border:3px solid #ffd700;border-radius:18px;padding:16px;font-size:19px;font-weight:bold;color:#111;margin-top:14px;cursor:pointer;text-align:center}
-.page{display:none;width:100%;max-width:480px}.page.active{display:flex;flex-direction:column;align-items:center;width:100%}
-.header{background:#0f3d2e;color:white;padding:25px 15px 50px;text-align:center;border-radius:0 0 25px 25px;width:100%}
-.card{background:white;margin:-25px 12px 15px;border-radius:18px;padding:15px;width:100%}
-.yellow-btn{background:#ffcc00;width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;cursor:pointer}
-.sms-btns{display:flex;gap:8px}.sms-btns button{flex:1;padding:12px;border:none;border-radius:10px;color:white;font-weight:bold}
-.green{background:#16a34a}.orange{background:#ea580c}.yellow{background:#eab308;color:#000!important}
-.student-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee}
-.filter-tabs{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}.filter-tabs button{flex:1;min-width:70px;padding:10px 6px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:13px}
-select,input{width:100%;padding:14px;border-radius:14px;border:1.5px solid #ccc;font-size:16px;margin:6px 0;background:white}
-.college-pad{background:#fff!important;border-radius:14px!important;padding:8px 12px!important;display:flex!important;align-items:center!important;gap:10px!important;box-shadow:0 3px 10px rgba(0,0,0,.2)!important;width:100%}
-.college-pad img{width:56px!important;height:56px!important;border-radius:50%!important;border:3px solid #ffcc00!important;object-fit:cover!important;flex-shrink:0;background:white}
-.pad-bn{font-size:11.5px!important;font-weight:700!important;color:#0f2d5a!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-.pad-en{font-size:9px!important;font-weight:700!important;color:#cc0000!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-#monthlyDivFirst{display:none}
-#studentList{display:none!important} #studentList.show{display:block!important}
-#resultDiv{display:none}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;width:100%}
-.topbar button{background:#ffcc00;border:none;border-radius:10px;padding:8px 14px;font-weight:bold;cursor:pointer}
-.btn{width:100%;padding:13px;background:linear-gradient(135deg,#ffcc00,#ffb300);border:none;border-radius:12px;font-size:17px;font-weight:bold;color:#0f2d5a;margin-top:10px;cursor:pointer}
-.btn-blue{background:linear-gradient(135deg,#0f3d2e,#1a6b4f);color:#fff}
-.pa{padding:8px 14px;border-radius:10px;border:none;font-weight:bold;cursor:pointer}
-.a-on{background:#f44336;color:#fff}
+body{margin:0;background:#082a1e;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:10px}
+.main-banner{width:380px;max-width:95%;border:4px solid #ffcc00;border-radius:22px;overflow:hidden;margin-top:10px;background:#000;line-height:0}
+.main-banner img{width:100%;display:block}
+.green-box{width:380px;max-width:95%;background:#16a34a;border-radius:16px;padding:12px;margin-top:20px;text-align:center;border:3px solid #ffcc00}
+.green-box span{background:#000;color:#fff;display:inline-block;padding:8px 22px;border-radius:30px;font-weight:700;font-size:18px}
+.card{background:#fff;margin-top:12px;border-radius:24px;padding:16px;width:100%;max-width:430px}
+.menu{width:100%;max-width:430px;background:#fff;border:none;border-radius:16px;padding:16px;font-weight:700;color:#0d5bff;margin-top:12px;display:flex;justify-content:space-between;cursor:pointer}
+.hidden{display:none!important}
+.btn{width:100%;padding:14px;border:none;border-radius:14px;font-weight:700;cursor:pointer;margin-top:8px}
+.green{background:#0a7a42;color:#fff}.blue{background:#0d5bff;color:#fff}.red{background:#d61f1f;color:#fff}
+input,select{width:100%;padding:12px;border-radius:12px;border:1px solid #ccc;margin:5px 0}
+.acc{margin-bottom:8px;border-radius:12px;overflow:hidden;background:#fff;width:100%;max-width:430px}
+.acc-h-normal{background:#1976d2;color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:bold;border-radius:12px 12px 0 0}
+.acc-b-normal{display:none;padding:8px;background:#fafafa}.acc-b-normal.on{display:block}
+.acc-b{display:none;padding:8px;background:#fafafa}.acc-b.show{display:block}
+.fifty{display:flex;gap:6px}.fifty>*{flex:1}
+#logoPreview{width:95px;height:95px;border-radius:50%;border:3px solid #ffcc00;object-fit:cover;background:#fff;display:none;margin:0 auto}
+.header3{display:flex;gap:6px;width:100%}.hbox{flex:1;padding:14px 2px;border-radius:14px;text-align:center;font-weight:bold;font-size:13px;cursor:pointer;border:3px solid transparent}.hbox.active{border-color:yellow}
+.boxPresent{background:#2e7d32;color:#fff}.boxAbsent{background:#c62828;color:#fff}.boxNotice{background:#ef6c00;color:#fff}
+.subName{width:90px;padding:8px 6px;border-radius:6px;border:1.5px solid #0f5d1a;background:#e8f5e9;text-align:center;font-weight:700}
+.subFull{width:70px;padding:7px;border-radius:6px;border:1.5px solid #b7791f;background:#fffbeb;text-align:center;font-weight:700}
+.markGol{width:70px;height:38px;border-radius:6px;border:1.5px solid #94a3b8;background:#fff;text-align:center;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;text-align:center;background:#fff}.tbl th{background:#0f5d1a;color:#fff;padding:10px 4px}.tbl td{padding:4px;border:1px solid #e2e8f0}
+#institutePadFull{width:100%;max-width:800px;background:#fff;border:1px solid #ccc;overflow:hidden}
+.padTop{display:flex;align-items:center;gap:10px;padding:6px 12px;background:#fff}
+.padLogo{width:95px;height:95px;border-radius:50%;border:3px solid #0a2a7a;object-fit:cover;flex-shrink:0;background:#fff}
+.padText{flex:1;text-align:center;line-height:1.2;overflow:hidden;min-width:0}
+.bnName{font-weight:700;color:#1a237e;font-size:17px;white-space:nowrap;display:block;width:100%;overflow:hidden}
+.enName{font-weight:700;color:#b71c1c;font-size:13.5px;white-space:nowrap;display:block;width:100%;overflow:hidden;text-transform:uppercase}
+.bnAddr{font-size:13px;color:#000;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.line4{font-size:11px;color:#000;white-space:nowrap}.line5{font-size:11px;color:#000;white-space:nowrap}
+.blueLine{width:100%;height:2px;background:#0d2a7a}
+.classPillWrap{width:100%;display:flex;justify-content:center;padding:5px 0 8px 0;background:#fff}
+.classPill{background:#0d2a7a;color:#fff;padding:5px 18px;border-radius:0 0 12px 12px;font-size:12px;font-weight:700}
+#btnForm{ background:#0d8bf2 !important; border:3px solid #ffcc00; justify-content:center; color:#fff; }
+#btnLogin{ background:#7c3aed !important; border:3px solid #ffcc00; justify-content:center; color:#fff; }
+#btnList{ background:#dc2626 !important; border:3px solid #ffcc00; justify-content:center; color:#fff; }
+#btnForm span, #btnLogin span, #btnList span{ background:#000; color:#fff; padding:8px 22px; border-radius:30px; display:inline-block; }
 </style>
 </head>
 <body>
 
-<!-- 🏠 ১ম পাতা: লোগো + ৩টা মেনু -->
-<div id="home" class="page active">
-<img class="logo" src="logo.jpg" onerror="this.onerror=null;this.src='Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg'">
-<button class="menu-btn" onclick="show('newInstScr')">➕ নতুন প্রতিষ্ঠান যোগ করুন</button>
-<button class="menu-btn" onclick="show('loginScr')">🔑 প্রতিষ্ঠান লগইন</button>
-<button class="menu-btn" onclick="adminGate()">🏫 প্রতিষ্ঠানের তালিকা দেখুন</button>
+<div id="firstPageWrap" style="width:100%;display:flex;flex-direction:column;align-items:center">
+<div class="main-banner"><img src="Messenger_creation_6639862D-BADD-430F-AF32-6A63408727C3.jpeg"></div>
+<div class="green-box"><span>স্কুল কলেজ হাজিরা</span></div>
+
+<button id="btnForm" class="menu" onclick="document.getElementById('formBox').classList.toggle('hidden')"><span>🏫 প্রতিষ্ঠান ফরম ▼</span></button>
+<div id="formBox" class="card hidden" style="text-align:center">
+<img id="logoPreview"><label for="logoInput" style="background:#ffcc00;padding:7px 18px;border-radius:20px;cursor:pointer;font-weight:700">🖼️ লোগো চেঞ্জ ৯৫x৯৫ গোল</label><input type="file" id="logoInput" accept="image/*" style="position:absolute;left:-9999px;opacity:0">
+<input id="bnName" placeholder="প্রতিষ্ঠানের নাম"><input id="enName" placeholder="English Name"><input id="address" placeholder="ঠিকানা">
+<div class="fifty"><input id="eiin" placeholder="EIIN"><input id="schoolCode" placeholder="প্রতিষ্ঠান কোড"></div>
+<div class="fifty"><input id="mobile" placeholder="মোবাইল"><input id="email" placeholder="Email"></div>
+<input id="pass1" type="password" placeholder="পাসওয়ার্ড"><button class="btn green" onclick="savePrimary()">সেভ করুন ✅</button>
 </div>
 
-<!-- ➕ নতুন প্রতিষ্ঠান -->
-<div id="newInstScr" class="page">
-<div class="topbar"><button onclick="show('home')">⬅ ফিরুন</button><h2 style="color:#fff;margin:0">➕ নতুন প্রতিষ্ঠান</h2><span></span></div>
-<div class="card">
-<div style="border:2px solid #ffcc00;border-radius:22px;padding:18px;margin-bottom:12px">
-<div style="display:flex;gap:14px;align-items:center">
-<div style="text-align:center;min-width:90px">
-<label for="npLogoInp" style="cursor:pointer;display:block">
-<img id="npLogo" src="data:image/gif;base64,[STRIPPED]" style="width:80px;height:80px;border-radius:50%;border:5px solid #ffcc00;object-fit:cover;background:#f5f5f5;display:block;margin:0 auto">
-<div style="color:#1a3aed;font-weight:bold;margin-top:6px;font-size:14px">লোগো চেঞ্জ</div>
-</label>
-<input type="file" id="npLogoInp" accept="image/*" onchange="npLogoChg(this)" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-</div>
-<div style="flex:1">
-<input id="npBn" placeholder="বাংলা নাম" style="text-align:center;font-weight:bold">
-<input id="npEn" placeholder="English Name" style="text-align:center">
-<div style="display:flex;gap:8px">
-<input id="npEi" placeholder="EIIN" style="text-align:center;margin:0">
-<input id="npCd" placeholder="Code" style="text-align:center;margin:0">
-</div></div></div></div>
-<label style="font-weight:bold">🔑 পাসওয়ার্ড</label><input id="npPass" type="password" placeholder="পাসওয়ার্ড দিন">
-<button class="btn btn-blue" onclick="saveNewInst()">সেভ করুন ✔️</button>
-</div></div>
-
-<!-- 🔑 প্রতিষ্ঠান লগইন -->
-<div id="loginScr" class="page">
-<div class="topbar"><button onclick="show('home')">⬅ ফিরুন</button><span></span><span></span></div>
-<div class="card" style="text-align:center;border:3px solid #ffcc00;margin-top:0">
-<div style="font-size:50px">🔐</div><h2>প্রতিষ্ঠান লগইন</h2>
-<label style="text-align:left;font-weight:bold">🏫 প্রতিষ্ঠান কোড</label><input id="l_code" placeholder="যেমন: 50018">
-<label style="text-align:left;font-weight:bold">🔑 পাসওয়ার্ড</label><input id="l_pass" type="password" placeholder="পাসওয়ার্ড দিন">
-<label style="text-align:left;font-weight:bold">🎓 শ্রেণি</label><select id="l_cls"></select>
-<button class="btn" onclick="teacherLogin()">প্রবেশ করুন ➜</button>
-<p id="l_msg" style="color:red;font-size:14px;margin-top:8px"></p>
-</div></div>
-
-<!-- 🏫 তালিকা -->
-<div id="listScr" class="page">
-<div class="topbar"><button onclick="show('home')">⬅ ফিরুন</button><h2 style="color:#fff;margin:0">🏫 তালিকা</h2><span></span></div>
-<div class="card"><div id="instList"></div></div>
+<button id="btnLogin" class="menu" onclick="document.getElementById('loginBox').classList.toggle('hidden')"><span>🔐 লগইন ▼</span></button>
+<div id="loginBox" class="card hidden">
+<input id="instCodeLogin" placeholder="🏫 প্রতিষ্ঠান কোড / EIIN" oninput="findInstByCode()"><div id="foundInstName" style="text-align:center;font-weight:700;min-height:18px;color:green"></div>
+<div class="fifty"><select id="tradeSel"></select><select id="branchSel"><option>ক শাখা</option><option>খ শাখা</option></select></div>
+<div class="fifty"><select id="semesterSel"></select><select id="sessionSel"></select></div>
+<input id="loginPass" type="password" placeholder="🔑 পাসওয়ার্ড (কোডের নিচে)"><button class="btn blue" onclick="primaryLogin()">🔒 প্রবেশ করুন</button>
+<p id="loginMsg" style="color:red;text-align:center"></p>
+<div class="fifty"><button class="btn" style="background:#16a34a" onclick="editTrade()">🔧 গ্রুপ এডিট (৫টা)</button><button class="btn" style="background:#ff7a00" onclick="editSession()">📅 সেশন এডিট (৪টা)</button></div>
 </div>
 
-<!-- ২য় পাতা: হাজিরা ড্যাশবোর্ড -->
-<div id="firstPage" class="page">
-<div class="header" style="padding:10px 10px 35px">
-<div class="college-pad"><div onclick="logoInput.click()" style="cursor:pointer;text-align:center;min-width:60px"><img id="boxLogo" src="https://via.placeholder.com/65"><div style="font-size:9px;color:blue">লোগো চেঞ্জ</div><input type="file" id="logoInput" accept="image/*" style="display:none" onchange="changeBoxLogo(this)"></div>
-<div style="flex:1;overflow:hidden"><div id="boxNameBn" class="pad-bn" contenteditable="true" onblur="saveBox()">মালেকে বানু উচ্চ বিদ্যালয়</div><div id="boxNameEn" class="pad-en" contenteditable="true" onblur="saveBox()">Mallika banu Uchch vidyalay</div><div style="display:flex;gap:10px;margin-top:2px;font-size:10px;color:#333"><span>EIIN: <b><span id="boxEIIN" contenteditable="true" onblur="saveBox()">132322</span></b></span><span>Code: <b><span id="boxIns" contenteditable="true" onblur="saveBox()">50018</span></b></span></div></div></div>
-<p id="boxStatus" style="color:#ffcc00;font-size:12px;height:12px;margin:5px 0 0"></p>
-<p style="margin:8px 0 0;font-weight:700">শ্রেণী: <span id="showClass"></span></p></div>
-<div class="card">
-<button class="yellow-btn" onclick="openStudentPage()">👥 শিক্ষার্থীর তালিকা দেখুন</button>
-<button onclick="toggleMonthlyFirst()" style="width:100%;margin-top:12px;padding:14px;background:#fff;border:2px dashed #2563eb;border-radius:12px;font-weight:bold;color:#2563eb">📋 মাসিক হাজিরা দেখুন</button>
-<div id="monthlyDivFirst" style="overflow:auto;margin-top:10px;border:2px dashed #2563eb;border-radius:10px;padding:10px;background:#f8fafc"></div>
-<h3>📢 নোটিশ বোর্ড</h3><input type="text" id="noticeText" placeholder="নোটিশ লিখুন...">
-<h3>💬 SMS পাঠান</h3><div class="sms-btns"><button class="green" onclick="sendDirectSMS('present')">✅ উপস্থিত</button><button class="orange" onclick="sendDirectSMS('absent')">❌ অনুপস্থিত</button><button class="yellow" onclick="sendDirectSMS('notice')">📢 নোটিশ</button></div>
-<h3>📲 WhatsApp-এ পাঠান</h3><div class="sms-btns"><button class="green" onclick="sendWA('present')">✅ উপস্থিত</button><button class="orange" onclick="sendWA('absent')">❌ অনুপস্থিত</button><button class="yellow" onclick="sendWA('notice')">📢 নোটিশ</button></div>
-<button onclick="shareReport()" style="width:100%;margin-top:10px;padding:14px;background:#25D366;color:white;border:none;border-radius:12px;font-weight:bold">📊 হাজিরা রিপোর্ট WhatsApp গ্রুপে দিন</button>
-<button onclick="location.reload()" style="width:100%;margin-top:12px;padding:10px;background:#555;color:white;border:none;border-radius:10px">⬅️ লগআউট</button>
-</div></div>
+<button id="btnList" class="menu" onclick="document.getElementById('listBox').classList.toggle('hidden')"><span>🔒 তালিকা ▼</span></button>
+<div id="listBox" class="card hidden"><button class="btn red" onclick="openListSecure()">🔓 তালিকা খুলুন (এডমিন)</button><div id="instList"></div></div>
+</div>
 
-<!-- ৩য় পাতা: শিক্ষার্থীর তালিকা -->
-<div id="secondPage" class="page">
-<div class="header" style="padding-bottom:20px"><div class="college-pad"><img id="boxLogo3"><div style="flex:1;overflow:hidden"><div id="boxNameBn3" class="pad-bn"></div><div id="boxNameEn3" class="pad-en"></div><div style="font-size:10px;color:#333"><span id="boxEIIN3"></span> | <span id="boxIns3"></span></div></div></div>
-<h2 style="margin:10px 0 0">শিক্ষার্থীর তালিকা</h2><div style="color:#ffcc00;font-size:13px;margin-top:6px;font-weight:700">শ্রেণী: <span id="showClass3"></span></div>
-<button onclick="show('firstPage')" style="margin-top:10px;background:white;color:#0f3d2e;border:none;padding:6px 15px;border-radius:20px;font-weight:bold">⬅️ ড্যাশবোর্ড</button></div>
-<div class="card">
-<button onclick="toggleAdd()" style="width:100%;padding:14px;background:#dcfce7;border:2px dashed #16a34a;border-radius:12px;font-weight:bold">➕ শিক্ষার্থী যোগ করুন</button>
-<div id="addForm" style="display:none;margin-top:10px;padding:12px;background:#f0fdf4;border-radius:12px;border:1px solid #16a34a"><input type="text" id="sName" placeholder="নাম"><input type="text" id="sRoll" placeholder="রোল"><input type="text" id="sMobile" placeholder="মোবাইল"><div style="display:flex;gap:8px"><button onclick="addStudent()" style="flex:1;padding:12px;background:#16a34a;color:white;border:none;border-radius:8px">✅ যোগ</button><button onclick="toggleAdd()" style="flex:1;padding:12px;background:#555;color:white;border:none;border-radius:8px">❌ বন্ধ</button></div></div>
-<div class="filter-tabs"><button style="background:#ffcc00" onclick="filterList('all')">📋 সবাই<br><span id="cAll">0</span></button><button style="background:#16a34a;color:white" onclick="filterList('present')">✅ উপস্থিত<br><span id="cPresent">0</span></button><button style="background:#ef4444;color:white" onclick="filterList('absent')">❌ অনুপস্থিত<br><span id="cAbsent">0</span></button><button style="background:#7c3aed;color:white" onclick="filterList('result')">🏆 ফলাফল</button></div>
-<div id="studentList"></div><div id="resultDiv" style="overflow:auto;margin-top:10px;border:2px solid #7c3aed;border-radius:12px;padding:10px;background:#f5f3ff"></div>
-</div></div>
+<div id="secondPageWrap" class="hidden" style="width:100%;display:flex;flex-direction:column;align-items:center">
+<div id="institutePadFull">
+  <div class="padTop"><img id="padLogo" class="padLogo"><div class="padText"><div id="instName" class="bnName"></div><div id="instEng" class="enName"></div><div id="instAddr" class="bnAddr"></div><div class="line4">EIIN: <span id="padEiin"></span> | Code: <span id="padCode"></span></div><div class="line5">Mobile: <span id="padMobile"></span> | Email: <span id="padEmail"></span></div></div></div>
+  <div class="blueLine"></div>
+  <div class="classPillWrap"><div class="classPill">গ্রুপ: <span id="pillTrade"></span> | শ্রেণী: <span id="pillSemester"></span> | সেশন: <span id="pillSession"></span> | শাখা: <span id="pillBranch"></span></div></div>
+</div>
+<div style="text-align:center;margin-top:8px"><button onclick="logout()" style="background:#d61f1f;color:#fff;border:none;padding:6px 14px;border-radius:8px">🚪 লগআউট</button></div>
+<div id="acc" style="width:100%;max-width:430px;margin-top:10px"></div>
+</div>
 
 <script>
-/* ===== পেজ নেভিগেশন ===== */
-function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-
-/* ===== প্রতিষ্ঠান ম্যানেজমেন্ট ===== */
-let users=JSON.parse(localStorage.getItem('takrim_users')||'{}');
-let insts=JSON.parse(localStorage.getItem('takrim_insts')||'[]');
-const LCLASSES=['১ম শ্রেণি','২য় শ্রেণি','৩য় শ্রেণি','৪র্থ শ্রেণি','৫ম শ্রেণি','৬ষ্ঠ শ্রেণি','৭ম শ্রেণি','৮ম শ্রেণি','৯ম শ্রেণি','১০ম শ্রেণি','একাদশ শ্রেণি','দ্বাদশ শ্রেণি'];
-l_cls.innerHTML='<option value="">শ্রেণি সিলেক্ট করুন</option>'+LCLASSES.map(c=>'<option value="'+c+'">'+c+'</option>').join('');
-let npLogoData='';
-function npLogoChg(inp){let f=inp.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{npLogoData=e.target.result;document.getElementById('npLogo').src=e.target.result;};r.readAsDataURL(f);}
-function saveNewInst(){let bn=npBn.value.trim();if(!bn){alert('প্রতিষ্ঠানের নাম দিন');return;}
-insts.push({name:bn,en:npEn.value.trim(),eiin:npEi.value.trim(),code:npCd.value.trim(),logo:npLogoData,pass:npPass.value});
-localStorage.setItem('takrim_insts',JSON.stringify(insts));
-if(npCd.value.trim()&&npPass.value){users[npCd.value.trim()]=npPass.value;localStorage.setItem('takrim_users',JSON.stringify(users));}
-npBn.value='';npEn.value='';npEi.value='';npCd.value='';npPass.value='';npLogoData='';npLogo.src='data:image/gif;base64,[STRIPPED]';
-alert('✔️ প্রতিষ্ঠান যোগ হয়েছে');show('home');}
-function teacherLogin(){let c=l_code.value.trim(),p=l_pass.value,cl=l_cls.value;
-if(!c||!p){l_msg.textContent='কোড ও পাসওয়ার্ড দিন';return;}
-if(!cl){l_msg.textContent='শ্রেণি সিলেক্ট করুন';return;}
-let i=insts.findIndex(s=>((s.code||'').trim()===c));
-let ok=(users[c]&&users[c]===p);
-if(!ok&&i>=0&&(insts[i].pass||'')===p)ok=true;
-if(!ok){l_msg.textContent='❌ ভুল কোড বা পাসওয়ার্ড!';return;}
-l_msg.textContent='';l_code.value='';l_pass.value='';l_cls.value='';
-let s=insts[i>=0?i:0]||{};
-localStorage.setItem('collegeInfo',JSON.stringify({nameBn:s.name||'',nameEn:s.en||'',eiin:s.eiin||'',ins:s.code||'',logo:s.logo||''}));
-currentClass=cl;loadClassData();showClass.innerText=currentClass;showClass3.innerText=currentClass;
-loadBox();fixDateBug();show('firstPage');}
-
-/* ===== adminGate (স্পেস-সেফ + রিসেট ছাড়া কড়া ভার্সন) ===== */
-function adminGate(){
-let ap=localStorage.getItem('takrim_admin_pass');
-if(!ap){let np=prompt('প্রথমবার: এডমিন পাসওয়ার্ড সেট করুন\n(এডমিন আইডি: takrim)');
-np=(np||'').trim();if(!np)return;localStorage.setItem('takrim_admin_pass',np);alert('✔️ এডমিন পাসওয়ার্ড সেট হয়েছে');openListScr();return;}
-let id=prompt('🔐 এডমিন আইডি দিন');
-if((id||'').trim()!=='takrim'){alert('❌ অনুমতি নেই!');return;}
-let pw=prompt('🔐 এডমিন পাসওয়ার্ড দিন');
-if((pw||'').trim()!==ap){alert('❌ ভুল পাসওয়ার্ড!');return;}
-openListScr();}
-
-function openListScr(){show('listScr');
-let seen={},uniq=[];
-insts.forEach((s,i)=>{let k=(s.eiin&&s.eiin.trim()?s.eiin.trim():'')||(s.name||'').trim().toLowerCase();
-if(!seen[k]){seen[k]=1;uniq.push(i);}});
-instList.innerHTML=uniq.length?uniq.map(i=>{let s=insts[i];
-return '<div class="card" style="display:flex;align-items:center;gap:10px;padding:10px;margin:0 0 10px">'+(s.logo?'<img src="'+s.logo+'" style="width:45px;height:45px;border-radius:50%;object-fit:cover">':'🏫')+'<div style="flex:1"><b>'+s.name+'</b><br><small>EIIN: '+(s.eiin||'-')+' | Code: '+(s.code||'-')+'<br>🔑 পাসওয়ার্ড: <span id="pw_'+i+'" style="font-weight:bold;color:#0f2d5a">'+(s.pass||'-')+'</span> <button class="pa" style="padding:2px 8px;font-size:14px" onclick="togglePw('+i+')">👁️</button></small></div><button class="pa a-on" style="font-size:18px" onclick="delInst('+i+')">🗑️</button></div>';}).join(''):'<p style="text-align:center;color:#888">এখনো কোনো প্রতিষ্ঠান নেই</p>';}
-function togglePw(i){let el=document.getElementById('pw_'+i);
-if(el.dataset.hide==='1'){el.textContent=insts[i].pass||'-';el.dataset.hide='';}
-else{el.dataset.hide='1';el.textContent='••••••';}}
-function delInst(idx){
-if(!confirm('এই প্রতিষ্ঠান ডিলিট করবেন?'))return;
-let s=insts[idx];
-if(s.code&&users[s.code]){delete users[s.code];localStorage.setItem('takrim_users',JSON.stringify(users));}
-insts.splice(idx,1);localStorage.setItem('takrim_insts',JSON.stringify(insts));
-alert('✔️ প্রতিষ্ঠান ডিলিট হয়েছে');openListScr();}
-
-/* ===== হাজিরা সিস্টেম ===== */
-let currentClass="";
-let students=[],attendance={},attMonthly={},results={};
-let subNames=["বিষয় 1","বিষয় 2","বিষয় 3","বিষয় 4","বিষয় 5","বিষয় 6","বিষয় 7","বিষয় 8","বিষয় 9","বিষয় 10","বিষয় 11","বিষয় 12","বিষয় 13"];
-let currentFilter='none';
-function key(n){return n+'_'+currentClass;}
-function loadClassData(){
-  students=JSON.parse(localStorage.getItem(key('students'))||'[]');
-  attendance=JSON.parse(localStorage.getItem(key('att'))||'{}');
-  attMonthly=JSON.parse(localStorage.getItem(key('attMonthly'))||'{}');
-  results=JSON.parse(localStorage.getItem(key('results'))||'{}');
-  subNames=JSON.parse(localStorage.getItem(key('subNames'))||'["বিষয় 1","বিষয় 2","বিষয় 3","বিষয় 4","বিষয় 5","বিষয় 6","বিষয় 7","বিষয় 8","বিষয় 9","বিষয় 10","বিষয় 11","বিষয় 12","বিষয় 13"]');
-}
-function saveAll(){
-  if(!currentClass)return;
-  localStorage.setItem(key('students'),JSON.stringify(students));
-  localStorage.setItem(key('att'),JSON.stringify(attendance));
-  localStorage.setItem(key('attMonthly'),JSON.stringify(attMonthly));
-  localStorage.setItem(key('results'),JSON.stringify(results));
-  localStorage.setItem(key('subNames'),JSON.stringify(subNames));
-}
-function getMonthInfo(){let d=new Date();let y=d.getFullYear(),m=d.getMonth();return{monthName:d.toLocaleString('bn-BD',{month:'long',year:'numeric'}),days:new Date(y,m+1,0).getDate(),key:y+'-'+m,today:d.getDate()};}
-function saveBox(){let info={nameBn:boxNameBn.innerText.trim(),nameEn:boxNameEn.innerText.trim(),eiin:boxEIIN.innerText.trim(),ins:boxIns.innerText.trim(),logo:boxLogo.src};localStorage.setItem('collegeInfo',JSON.stringify(info));boxStatus.innerText="✅ সেভ হয়েছে";setTimeout(()=>boxStatus.innerText="",1200);boxNameBn3.innerText=info.nameBn;boxNameEn3.innerText=info.nameEn;boxEIIN3.innerText="EIIN: "+info.eiin;boxIns3.innerText="Code: "+info.ins;boxLogo3.src=info.logo;}
-function changeBoxLogo(i){let f=i.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{boxLogo.src=e.target.result;saveBox();};r.readAsDataURL(f);}
-function loadBox(){let info=JSON.parse(localStorage.getItem('collegeInfo')||'{}');if(info.nameBn)boxNameBn.innerText=info.nameBn;if(info.nameEn)boxNameEn.innerText=info.nameEn;if(info.eiin)boxEIIN.innerText=info.eiin;if(info.ins)boxIns.innerText=info.ins;if(info.logo){boxLogo.src=info.logo;boxLogo3.src=info.logo;}boxNameBn3.innerText=info.nameBn||boxNameBn.innerText;boxNameEn3.innerText=info.nameEn||boxNameEn.innerText;boxEIIN3.innerText="EIIN: "+(info.eiin||boxEIIN.innerText);boxIns3.innerText="Code: "+(info.ins||boxIns.innerText);}
-function openStudentPage(){show('secondPage');loadBox();updateCounts();document.getElementById('studentList').style.display='none';document.getElementById('studentList').classList.remove('show');document.getElementById('resultDiv').style.display='none';currentFilter='none';}
-function toggleAdd(){let f=document.getElementById('addForm');f.style.display=f.style.display=='none'?'block':'none';}
-function addStudent(){if(!sName.value.trim())return alert('নাম দিন');students.push({name:sName.value.trim(),roll:sRoll.value.trim(),mobile:sMobile.value.trim()});saveAll();document.getElementById('addForm').style.display='none';sName.value='';sRoll.value='';sMobile.value='';filterList('all');}
-function toggleAtt(i,isP){attendance[i]=isP?'present':'absent';let {key:mk,today}=getMonthInfo();if(!attMonthly[mk])attMonthly[mk]={};if(!attMonthly[mk][i])attMonthly[mk][i]={};attMonthly[mk][i][today]=isP?'P':'A';saveAll();render();updateCounts();}
-function updateCounts(){let p=0;students.forEach((_,i)=>{if(attendance[i]!=='absent')p++;});document.getElementById('cAll').innerText=students.length;document.getElementById('cPresent').innerText=p;document.getElementById('cAbsent').innerText=students.length-p;}
-function filterList(t){currentFilter=t;let sl=document.getElementById('studentList'),rd=document.getElementById('resultDiv');sl.style.display='none';rd.style.display='none';sl.classList.remove('show');if(t=='result'){rd.style.display='block';renderResult();}else{sl.style.display='block';sl.classList.add('show');render();}}
-function render(){let sl=document.getElementById('studentList');sl.innerHTML='';students.forEach((s,i)=>{if(currentFilter=='present'&&attendance[i]=='absent')return;if(currentFilter=='absent'&&attendance[i]!=='absent')return;sl.innerHTML+=`<div class="student-row"><div><input type="checkbox" ${attendance[i]=='absent'?'':'checked'} onchange="toggleAtt(${i},this.checked)"> <b>${s.name}</b> (${s.roll})</div><div style="display:flex;gap:6px"><button onclick="editStudent(${i})" style="padding:6px 10px;border:none;border-radius:8px;background:#eab308;font-weight:bold">✏️</button><button onclick="deleteStudent(${i})" style="padding:6px 10px;border:none;border-radius:8px;background:#fee2e2">🗑️</button></div></div>`;});updateCounts();}
-function deleteStudent(i){if(!confirm('ডিলিট করবেন?'))return;students.splice(i,1);saveAll();render();}
-function editStudent(i){let s=students[i];let n=prompt('নাম:',s.name);if(n===null)return;let r=prompt('রোল:',s.roll);if(r===null)return;let m=prompt('মোবাইল:',s.mobile||'');if(m===null)return;students[i]={name:n.trim(),roll:r.trim(),mobile:m.trim()};saveAll();render();if(document.getElementById('monthlyDivFirst').style.display=='block')refreshMonthly();}
-function toggleMonthAtt(idx,d){let {key:mk,today}=getMonthInfo();if(!attMonthly[mk])attMonthly[mk]={};if(!attMonthly[mk][idx])attMonthly[mk][idx]={};attMonthly[mk][idx][d]=attMonthly[mk][idx][d]=='P'?'A':'P';if(d==today){attendance[idx]=attMonthly[mk][idx][d]=='P'?'present':'absent';}saveAll();refreshMonthly();}
-function refreshMonthly(){let div=document.getElementById('monthlyDivFirst');let {days,key:mk,today,monthName}=getMonthInfo();let h=`<h4 style="text-align:center;margin:5px 0">📅 ${monthName} - ${currentClass} - আজ ${today} তারিখ</h4><div style="overflow:auto;border:2px solid #2563eb;border-radius:10px"><table border="1" cellpadding="4" style="border-collapse:collapse;min-width:1400px;font-size:11px;text-align:center"><tr style="background:#0f3d2e;color:white"><th>নাম</th><th>রোল</th>`;for(let d=1;d<=days;d++)h+=`<th style="${d==today?'background:#ffcc00;color:#000':''}">${d}</th>`;h+=`<th>P</th><th>A</th></tr>`;students.forEach((s,idx)=>{if(!attMonthly[mk])attMonthly[mk]={};if(!attMonthly[mk][idx])attMonthly[mk][idx]={};let p=0,a=0;for(let d=1;d<=days;d++){if(attMonthly[mk][idx][d]=='P')p++;if(attMonthly[mk][idx][d]=='A')a++;}h+=`<tr><td style="text-align:left">${s.name}</td><td>${s.roll}</td>`;for(let d=1;d<=days;d++){let st=attMonthly[mk][idx][d]||'-';h+=`<td onclick="toggleMonthAtt(${idx},${d})" style="cursor:pointer;${d==today?'background:#fef9c3;font-weight:bold':''}">${st}</td>`;}h+=`<td>${p}</td><td>${a}</td></tr>`;});h+=`</table></div><button onclick="exportMonthlyFull()" style="width:100%;padding:12px;background:#16a34a;color:white;border:none;border-radius:10px;margin-top:8px;font-weight:bold">⬇️ Excel ডাউনলোড (${currentClass})</button>`;div.innerHTML=h;}
-function toggleMonthlyFirst(){let div=document.getElementById('monthlyDivFirst');if(div.style.display=='block'){div.style.display='none';return;}div.style.display='block';refreshMonthly();}
-function exportMonthlyFull(){let {monthName,days,key:mk}=getMonthInfo();let header=["ক্রমিক","নাম","রোল"];for(let d=1;d<=days;d++)header.push(d+" তারিখ");header.push("মোট P","মোট A");let data=students.map((s,idx)=>{let row={"ক্রমিক":idx+1,"নাম":s.name,"রোল":s.roll};let p=0,a=0;for(let d=1;d<=days;d++){let st=(attMonthly[mk][idx]&&attMonthly[mk][idx][d])||'';row[d+" তারিখ"]=st;if(st=='P')p++;if(st=='A')a++;}row["মোট P"]=p;row["মোট A"]=a;return row;});let ws=XLSX.utils.json_to_sheet(data,{header:header});let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,monthName);XLSX.writeFile(wb,`Hazira_${currentClass}_${monthName}.xlsx`);}
-function renderResult(){let h=`<div style="overflow:auto"><table border="1" cellpadding="4" style="border-collapse:collapse;min-width:1600px;font-size:11px;text-align:center"><tr style="background:#0f3d2e;color:white"><th>ক্রম</th><th>নাম</th><th>রোল</th>`;for(let i=0;i<13;i++){let v=subNames[i].startsWith('বিষয়')?'':subNames[i];h+=`<th><input value="${v}" placeholder="বিষয় ${i+1}" oninput="subNames[${i}]=this.value||'বিষয় '+( ${i}+1 );saveAll()" style="width:80px;padding:4px;border-radius:6px;border:1px solid #ccc;text-align:center;font-weight:bold"></th>`;}h+=`<th style="background:#ffcc00;color:#000">মোট</th><th style="background:#16a34a;color:#fff">জিপিএ</th></tr>`;students.forEach((s,idx)=>{let r=results[idx]||{};h+=`<tr><td>${idx+1}</td><td style="text-align:left">${s.name}</td><td>${s.roll}</td>`;for(let i=0;i<13;i++)h+=`<td><input type="number" min="0" max="100" value="${r['s'+i]||''}" oninput="if(!results[${idx}])results[${idx}]={};results[${idx}]['s'+${i}]=this.value;saveAll();renderResult()" style="width:55px;padding:4px;text-align:center"></td>`;let t=0,c=0;for(let i=0;i<13;i++){let mv=(results[idx]||{})['s'+i];if(mv!==''&&mv!==undefined){t+=parseInt(mv);c++;}}let gpa=c?Math.min(5,(t/c/20)).toFixed(2):'0.00';h+=`<td style="font-weight:bold;background:#fef9c3">${t}</td><td style="font-weight:bold;background:#dcfce7">${gpa}</td></tr>`;});h+=`</table></div><button onclick="exportResult()" style="width:100%;margin-top:10px;padding:12px;background:#16a34a;color:white;border:none;border-radius:10px;font-weight:bold">⬇️ রেজাল্ট Excel ডাউনলোড</button>`;document.getElementById('resultDiv').innerHTML=h;}
-function exportResult(){let header=["ক্রম","নাম","রোল"];for(let i=0;i<13;i++)header.push(subNames[i].startsWith('বিষয়')?'বিষয় '+(i+1):subNames[i]);header.push("মোট","জিপিএ");let data=students.map((s,idx)=>{let r=results[idx]||{};let row={"ক্রম":idx+1,"নাম":s.name,"রোল":s.roll};let t=0,c=0;for(let i=0;i<13;i++){let v=r['s'+i]||'';row[header[3+i]]=v;if(v!==''){t+=parseInt(v);c++;}}row["মোট"]=t;row["জিপিএ"]=c?Math.min(5,(t/c/20)).toFixed(2):'0.00';return row;});let ws=XLSX.utils.json_to_sheet(data,{header:header});let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Result");XLSX.writeFile(wb,`Result_${currentClass}.xlsx`);}
-function sendDirectSMS(type){let {monthName,today}=getMonthInfo();let date=`${today} ${monthName}`;let school=document.getElementById('boxNameBn').innerText.trim();let numbers=[];let msg="";students.forEach((s,i)=>{let absent=attendance[i]=='absent';if(type=='present'&&!absent&&s.mobile)numbers.push(s.mobile);if(type=='absent'&&absent&&s.mobile)numbers.push(s.mobile);if(type=='notice'&&s.mobile)numbers.push(s.mobile);});if(type=='notice'){let n=document.getElementById('noticeText').value||'নোটিশ';msg=`📢 ${school} (${currentClass}): ${n}`;window.location.href=`sms:?body=${encodeURIComponent(msg)}`;return;}if(!numbers.length)return alert('নাম্বার নেই!');if(type=='present')msg=`আপনার সন্তান আজ ${date} ${school} এ উপস্থিত আছে।`;if(type=='absent')msg=`আপনার সন্তান আজ ${date} ${school} এ অনুপস্থিত আছে।`;window.location.href=`sms:${numbers.join(',')}?body=${encodeURIComponent(msg)}`;}
-/* ===== WhatsApp-এ পাঠান ===== */
-function sendWA(type){
-  let {monthName,today}=getMonthInfo();
-  let date=`${today} ${monthName}`;
-  let school=document.getElementById('boxNameBn').innerText.trim();
-  if(type=='notice'){
-    let n=document.getElementById('noticeText').value||'নোটিশ';
-    window.open(`https://wa.me/?text=${encodeURIComponent(`📢 ${school} (${currentClass}): ${n}`)}`,'_blank');
-    return;
-  }
-  let list=students.filter((s,i)=> type=='present'? attendance[i]!=='absent' : attendance[i]=='absent');
-  if(!list.length) return alert(type=='present'?'উপস্থিত কেউ নেই!':'অনুপস্থিত কেউ নেই!');
-  let e=type=='present'?'✅':'❌', l=type=='present'?'উপস্থিত':'অনুপস্থিত';
-  let msg=`${e} *${l} তালিকা*\n🏫 ${school}\n📚 ${currentClass} | ${date}\n\n${list.map(s=>'• '+s.name+' ('+s.roll+')').join('\n')}`;
-  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
-}
-function shareReport(){let {monthName,today}=getMonthInfo();let present=students.filter((s,i)=>attendance[i]!=='absent');let absent=students.filter((s,i)=>attendance[i]=='absent');let msg=`📊 *হাজিরা রিপোর্ট*\n🏫 ${document.getElementById('boxNameBn').innerText}\n📚 ${currentClass} | ${today} ${monthName}\n\n✅ উপস্থিত (${present.length} জন):\n${present.map(s=>'• '+s.name).join('\n')}\n\n❌ অনুপস্থিত (${absent.length} জন):\n${absent.length?absent.map(s=>'• '+s.name).join('\n'):'কেউ না'}`;window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');}
-function fixDateBug(){let {key:mk,today}=getMonthInfo();if(!attMonthly[mk])return;Object.keys(attMonthly[mk]).forEach(idx=>{let d=attMonthly[mk][idx];if(d[1]&&!d[today]){d[today]=d[1];delete d[1];}});saveAll();}
-window.onload=()=>{loadBox();};
+let trades=JSON.parse(localStorage.getItem('takrim_trades_school')||'null')||["জেনারেল ইলেকট্রিক্যাল ওয়ার্কস","আইটি সাপোর্ট","মানবিক","কমার্স","সাইন্স"];
+let sessions=JSON.parse(localStorage.getItem('takrim_sessions')||'null')||["2022-23","2023-24","2024-25","2025-26"];
+let semesters=["প্রথম শ্রেণী","দ্বিতীয় শ্রেণী","তৃতীয় শ্রেণী","চতুর্থ শ্রেণী","পঞ্চম শ্রেণী","ষষ্ঠ শ্রেণী","সপ্তম শ্রেণী","অষ্টম শ্রেণী","নবম শ্রেণী","দশম শ্রেণী","একাদশ শ্রেণী","দ্বাদশ শ্রেণী"];
+let insts=JSON.parse(localStorage.getItem('takrim_primary_insts')||'[]');
+let students=JSON.parse(localStorage.getItem('students_v2')||'[]');
+let activeTab='',tempLogo=localStorage.getItem('takrim_temp_logo')||'',currentInst=null;
+function loadLoginSelects(){document.getElementById('tradeSel').innerHTML=trades.map(t=>`<option>${t}</option>`).join('');document.getElementById('semesterSel').innerHTML=semesters.map(s=>`<option>${s}</option>`).join('');document.getElementById('sessionSel').innerHTML=sessions.map(s=>`<option>${s}</option>`).join('');}
+loadLoginSelects();
+document.getElementById('logoInput').addEventListener('change',function(){if(!this.files[0])return;let r=new FileReader();r.onload=e=>{let img=new Image();img.onload=()=>{let c=document.createElement('canvas');c.width=600;c.height=600;let ctx=c.getContext('2d');let size=Math.min(img.width,img.height),sx=(img.width-size)/2,sy=(img.height-size)/2;ctx.fillStyle='#fff';ctx.fillRect(0,0,600,600);ctx.drawImage(img,sx,sy,size,size,0,0,600,600);tempLogo=c.toDataURL('image/png');let p=document.getElementById('logoPreview');p.src=tempLogo;p.style.display='block';localStorage.setItem('takrim_temp_logo',tempLogo);};img.src=e.target.result;};r.readAsDataURL(this.files[0]);});
+function savePrimary(){let bn=document.getElementById('bnName').value.trim(),pass=document.getElementById('pass1').value.trim();if(!bn)return alert('প্রতিষ্ঠানের নাম দিন');if(!pass)return alert('পাসওয়ার্ড দিন');let o={bnName:bn,enName:document.getElementById('enName').value.trim(),addr:document.getElementById('address').value.trim(),eiin:document.getElementById('eiin').value.trim(),schoolCode:document.getElementById('schoolCode').value.trim(),mobile:document.getElementById('mobile').value.trim(),email:document.getElementById('email').value.trim(),pass:pass,logo:tempLogo||''};insts.push(o);localStorage.setItem('takrim_primary_insts',JSON.stringify(insts));localStorage.setItem('takrim_temp_logo','');alert('✅ সেভ');location.reload();}
+function findInstByCode(){let code=document.getElementById('instCodeLogin').value.trim();currentInst=insts.find(x=>x.schoolCode==code||x.eiin==code);let el=document.getElementById('foundInstName');if(currentInst){el.innerText='✅ '+currentInst.bnName;el.style.color='green';}else{el.innerText=code?'❌ কোড পাওয়া যায়নি':'';el.style.color='red';}}
+function primaryLogin(){if(!currentInst)return document.getElementById('loginMsg').textContent='❌ কোড দিন';if(document.getElementById('loginPass').value!==currentInst.pass)return document.getElementById('loginMsg').textContent='❌ ভুল পাস';localStorage.setItem('takrim_session',JSON.stringify({inst:currentInst,trade:document.getElementById('tradeSel').value,semester:document.getElementById('semesterSel').value,session:document.getElementById('sessionSel').value,branch:document.getElementById('branchSel').value}));showSecondPage();}
+function autoFit(id,max,min){let el=document.getElementById(id);if(!el)return;let s=max;el.style.fontSize=s+'px';while(el.scrollWidth>el.parentElement.clientWidth&&s>min){s-=0.5;el.style.fontSize=s+'px';}}
+function showSecondPage(){let sess=JSON.parse(localStorage.getItem('takrim_session')||'null');if(!sess)return;document.getElementById('firstPageWrap').classList.add('hidden');document.getElementById('secondPageWrap').classList.remove('hidden');document.body.style.background='#f0f4f8';document.getElementById('instName').innerText=sess.inst.bnName||'';document.getElementById('instEng').innerText=sess.inst.enName||'';document.getElementById('instAddr').innerText=sess.inst.addr||'';document.getElementById('padLogo').src=sess.inst.logo||'';document.getElementById('padEiin').innerText=sess.inst.eiin||'';document.getElementById('padCode').innerText=sess.inst.schoolCode||'';document.getElementById('padMobile').innerText=sess.inst.mobile||'';document.getElementById('padEmail').innerText=sess.inst.email||'';document.getElementById('pillTrade').innerText=sess.trade;document.getElementById('pillSemester').innerText=sess.semester;document.getElementById('pillSession').innerText=sess.session;document.getElementById('pillBranch').innerText=sess.branch;buildAcc();showStu();renderHeaderCounts();setTimeout(()=>{autoFit('instName',17,8);autoFit('instEng',13.5,7);},120);}
+function openListSecure(){let a=prompt('এডমিন নাম'),p=prompt('পাসওয়ার্ড');if(a!=='malek'||p!=='takrim2022')return alert('ভুল এডমিন');document.getElementById('instList').innerHTML=insts.map((s,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #eee"><span>${s.bnName} (${s.schoolCode})</span><b style="color:red">${s.pass}</b></div>`).join('');}
+function logout(){if(confirm('লগআউট?')){localStorage.removeItem('takrim_session');location.reload();}}
+function buildAcc(){document.getElementById('acc').innerHTML=`<div class="acc"><div class="acc-h-normal" onclick="togN(1)"><span>1️⃣ শিক্ষার্থী যোগ</span><span>▼</span></div><div class="acc-b-normal" id="ab1"><input id="sn" placeholder="নাম"><input id="sr" placeholder="রোল"><input id="sm" placeholder="মোবাইল"><button class="btn green" onclick="addStu()">+ যোগ</button></div></div><div class="acc"><div class="acc-h-normal" onclick="togN(2)"><span>2️⃣ তালিকা</span><span>▼</span></div><div class="acc-b-normal" id="ab2"><div id="sList"></div></div></div><div class="acc" style="border:3px solid #0d47a1"><div class="acc-h-normal" style="background:#0d47a1" onclick="togN(3)"><div class="header3"><div id="hb_present" class="hbox boxPresent" onclick="event.stopPropagation();setTab('present')">✅ উপস্থিত<br><span id="hc_present">0</span> জন</div><div id="hb_absent" class="hbox boxAbsent" onclick="event.stopPropagation();setTab('absent')">❌ অনুপস্থিত<br><span id="hc_absent">0</span> জন</div><div id="hb_notice" class="hbox boxNotice" onclick="event.stopPropagation();setTab('notice')">📢 নোটিশ</div></div></div><div class="acc-b" id="ab3"><div id="tabContent"></div></div></div><div class="acc"><div class="acc-h-normal" onclick="togN(4)"><span>4️⃣ মাসিক হাজিরা (১-৩১)</span><span>▼</span></div><div class="acc-b-normal" id="ab4"><input type="month" id="mp" value="${new Date().toISOString().slice(0,7)}" onchange="renderMonth()"><div id="monthTbl" style="margin-top:8px;overflow:auto"></div></div></div><div class="acc"><div class="acc-h-normal" onclick="togN(5)"><span>5️⃣ ফলাফল - আয়তক্ষেত্র + মোট % GPA</span><span>▼</span></div><div class="acc-b-normal" id="ab5"><div class="fifty"><b>বিষয়:</b><button onclick="chSub(-1)">-</button><input id="sc" type="number" value="3" style="text-align:center"><button onclick="chSub(1)">+</button><button onclick="makeSheet()" style="background:#7c4dff;color:#fff;border:none;padding:6px 14px;border-radius:8px">সেট</button><span id="lockB"></span></div><div id="pdfArea" style="margin-top:8px;overflow:auto;background:#fff;padding:8px"><table class="tbl" id="rt"><thead id="rh"></thead><tbody id="rb"></tbody></table></div><div class="fifty" style="margin-top:8px"><button style="background:#2e7d32;color:#fff;padding:10px;border-radius:8px;border:none;flex:1" onclick="saveRes()">💾 সেভ লক</button><button style="background:#ff9800;color:#fff;padding:10px;border-radius:8px;border:none;flex:1" onclick="unlockRes()">✏️ এডিট</button></div><div class="fifty" style="margin-top:8px"><button style="background:#16a34a;color:#fff;padding:10px;border:none;border-radius:8px;flex:1" onclick="expExcel()">⬇️ Excel A4</button><button style="background:#dc2626;color:#fff;padding:10px;border:none;border-radius:8px;flex:1" onclick="downPDF()">⬇️ PDF A4 প্যাড সহ</button></div><p id="st" style="font-size:11px;color:green;font-weight:bold;margin-top:4px"></p></div></div></div>`;}
+function togN(i){let b=document.getElementById('ab'+i);b.classList.toggle(i==3?'show':'on');if(i==2)showStu();if(i==4)renderMonth();if(i==5)makeSheet();}
+function setTab(t){if(activeTab===t){activeTab='';document.querySelectorAll('.hbox').forEach(x=>x.classList.remove('active'));document.getElementById('ab3').classList.remove('show');return;}activeTab=t;document.querySelectorAll('.hbox').forEach(x=>x.classList.remove('active'));document.getElementById('hb_'+t).classList.add('active');document.getElementById('ab3').classList.add('show');renderTab();}
+function renderHeaderCounts(){let p=students.filter(s=>s.present).length;document.getElementById('hc_present').innerText=p;document.getElementById('hc_absent').innerText=students.length-p;}
+function renderTab(){let p=students.filter(s=>s.present),a=students.filter(s=>!s.present),el=document.getElementById('tabContent');if(activeTab=='present'){el.innerHTML=`<div style="padding:10px;background:#e8f5e9;border-radius:12px">${p.map(s=>`✅ ${s.name} (${s.roll})`).join('<br>')||'কেউ নেই'}</div>`;}else if(activeTab=='absent'){el.innerHTML=`<div style="padding:10px;background:#ffebee;border-radius:12px">${a.map(s=>`❌ ${s.name} (${s.roll})`).join('<br>')||'কেউ নেই'}</div>`;}else{el.innerHTML=`<textarea id="notice" rows="3" style="width:100%;padding:10px;border-radius:12px;border:1px solid #ccc">${localStorage.getItem('notice')||''}</textarea><button onclick="localStorage.setItem('notice',document.getElementById('notice').value);alert('✅ সেভ')" style="width:100%;background:#ef6c00;color:#fff;padding:10px;border:none;border-radius:12px;margin-top:8px">💾 নোটিশ সেভ</button>`;}}
+function showStu(){let sDiv=document.getElementById('sList');if(!sDiv)return;sDiv.innerHTML=students.map((s,i)=>`<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #eee"><span>${i+1}. ${s.name} (${s.roll})</span><div><input type="checkbox" ${s.present?'checked':''} onchange="students[${i}].present=this.checked;localStorage.setItem('students_v2',JSON.stringify(students));renderHeaderCounts()"><button onclick="students.splice(${i},1);localStorage.setItem('students_v2',JSON.stringify(students));showStu();renderHeaderCounts()" style="background:#fee2e2;border:none;padding:4px 8px;border-radius:8px">🗑️</button></div></div>`).join('')||'কোন শিক্ষার্থী নেই';}
+function addStu(){let n=document.getElementById('sn').value.trim(),r=document.getElementById('sr').value.trim(),m=document.getElementById('sm').value.trim();if(!n)return alert('নাম দিন');students.push({name:n,roll:r,mobile:m,present:false});localStorage.setItem('students_v2',JSON.stringify(students));document.getElementById('sn').value='';document.getElementById('sr').value='';document.getElementById('sm').value='';showStu();renderHeaderCounts();}
+function renderMonth(){let tbl=document.getElementById('monthTbl');if(!tbl)return;let html='<table class="tbl"><tr><th>নাম</th>';for(let d=1;d<=31;d++)html+=`<th>${d}</th>`;html+='</tr>';students.forEach(s=>{html+=`<tr><td>${s.name}</td>`;for(let d=1;d<=31;d++)html+=`<td><input type="checkbox" style="width:16px;height:16px"></td>`;html+='</tr>';});html+='</table>';tbl.innerHTML=html;}
+function chSub(d){let el=document.getElementById('sc'),v=parseInt(el.value)||3;v+=d;if(v<1)v=1;if(v>10)v=10;el.value=v;}
+function makeSheet(){let n=parseInt(document.getElementById('sc').value)||3,rh=document.getElementById('rh'),rb=document.getElementById('rb'),head='<tr><th>রোল</th><th>নাম</th>';for(let i=1;i<=n;i++)head+=`<th><input class="subName" id="subN${i}" placeholder="বিষয়${i}"><br><input class="subFull" id="subF${i}" placeholder="Full"></th>`;head+='<th>মোট</th><th>%</th><th>GPA</th></tr>';rh.innerHTML=head;let body='';students.forEach((s,i)=>{body+=`<tr><td>${s.roll}</td><td>${s.name}</td>`;for(let j=1;j<=n;j++)body+=`<td><input class="markGol" id="m_${i}_${j}" type="number"></td>`;body+=`<td id="tot_${i}"></td><td id="per_${i}"></td><td id="gpa_${i}"></td></tr>`;});rb.innerHTML=body;rb.querySelectorAll('.markGol').forEach(inp=>inp.addEventListener('input',calcRes));}
+function calcRes(){let n=parseInt(document.getElementById('sc').value)||3;students.forEach((s,i)=>{let sum=0;for(let j=1;j<=n;j++){let el=document.getElementById(`m_${i}_${j}`);sum+=parseFloat(el?.value)||0;}document.getElementById(`tot_${i}`).innerText=sum;let full=0;for(let j=1;j<=n;j++)full+=parseFloat(document.getElementById(`subF${j}`)?.value)||100;let per=full?(sum/full*100):0;document.getElementById(`per_${i}`).innerText=per.toFixed(1)+'%';document.getElementById(`gpa_${i}`).innerText=per>=80?5:per>=70?4:per>=60?3.5:per>=50?3:per>=40?2:0;});}
+function saveRes(){let data={sc:document.getElementById('sc').value,subs:[],marks:[]},n=parseInt(data.sc)||3;for(let i=1;i<=n;i++)data.subs.push({name:document.getElementById(`subN${i}`)?.value||'',full:document.getElementById(`subF${i}`)?.value||''});students.forEach((s,i)=>{let row=[];for(let j=1;j<=n;j++)row.push(document.getElementById(`m_${i}_${j}`)?.value||'');data.marks.push(row);});localStorage.setItem('fullResultSheet',JSON.stringify(data));document.getElementById('st').innerText='✅ সেভ হয়েছে';}
+function unlockRes(){let d=JSON.parse(localStorage.getItem('fullResultSheet')||'null');if(!d)return;document.getElementById('sc').value=d.sc;makeSheet();setTimeout(()=>{d.subs.forEach((sb,i)=>{document.getElementById(`subN${i+1}`).value=sb.name;document.getElementById(`subF${i+1}`).value=sb.full;});d.marks.forEach((row,i)=>{row.forEach((v,j)=>{document.getElementById(`m_${i}_${j+1}`).value=v;});});calcRes();},200);}
+function expExcel(){let tbl=document.getElementById('rt');let wb=XLSX.utils.table_to_book(tbl);XLSX.writeFile(wb,'Result_A4.xlsx');}
+function downPDF(){let pad=document.getElementById('institutePadFull'),area=document.getElementById('pdfArea');html2canvas(pad).then(c1=>{html2canvas(area).then(c2=>{let {jsPDF}=window.jspdf, pdf=new jsPDF('p','mm','a4');pdf.addImage(c1.toDataURL('image/png'),'PNG',10,10,190,30);pdf.addImage(c2.toDataURL('image/png'),'PNG',10,45,190,200);pdf.save('Result_A4_Pad.pdf');});});}
+function editTrade(){let inp=prompt('৫টা গ্রুপ কমা দিয়ে:',trades.join(', '));if(!inp)return;trades=inp.split(',').map(s=>s.trim()).filter(s=>s).slice(0,5);localStorage.setItem('takrim_trades_school',JSON.stringify(trades));loadLoginSelects();}
+function editSession(){let inp=prompt('৪টা সেশন কমা দিয়ে:',sessions.join(', '));if(!inp)return;sessions=inp.split(',').map(s=>s.trim()).filter(s=>s).slice(0,4);localStorage.setItem('takrim_sessions',JSON.stringify(sessions));loadLoginSelects();}
+let _sess=JSON.parse(localStorage.getItem('takrim_session')||'null');if(_sess){currentInst=_sess.inst;showSecondPage();}
 </script>
 </body>
 </html>
