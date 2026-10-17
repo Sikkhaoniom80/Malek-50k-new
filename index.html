@@ -33,5 +33,29 @@ updateCounter();
 document.getElementById('logoInput').addEventListener('change',function(){if(!this.files[0])return;let r=new FileReader();r.onload=e=>{let img=new Image();img.onload=()=>{let c=document.createElement('canvas');c.width=600;c.height=600;let ctx=c.getContext('2d');let size=Math.min(img.width,img.height),sx=(img.width-size)/2,sy=(img.height-size)/2;ctx.fillStyle='#fff';ctx.fillRect(0,0,600,600);ctx.drawImage(img,sx,sy,size,size,0,0,600,600);tempLogo=c.toDataURL('image/png');let p=document.getElementById('logoPreview');p.src=tempLogo;p.style.display='block';localStorage.setItem('takrim_temp_logo',tempLogo);};img.src=e.target.result;};r.readAsDataURL(this.files[0]);});
 function savePrimary(){let bn=document.getElementById('bnName').value.trim();let pass=document.getElementById('pass1').value.trim();if(!bn)return alert('নাম দিন');if(!pass)return alert('পাসওয়ার্ড দিন');if(insts.some(x=>x.bnName.trim()===bn))return alert('আগেই আছে');let o={bnName:bn,enName:document.getElementById('enName').value.trim(),addr:document.getElementById('address').value.trim(),eiin:document.getElementById('eiin').value.trim(),schoolCode:document.getElementById('schoolCode').value.trim(),mobile:document.getElementById('mobile').value.trim(),email:document.getElementById('email').value.trim(),pass:pass,logo:tempLogo||''};insts.push(o);localStorage.setItem('takrim_primary_insts',JSON.stringify(insts));localStorage.setItem('takrim_temp_logo','');updateCounter();alert('✅ সেভ');location.reload();}
 function primaryLogin(){let code=document.getElementById('loginCode').value.trim();let pass=document.getElementById('loginPass').value.trim();if(!code)return document.getElementById('loginMsg').textContent='কোড দিন';if(!pass)return document.getElementById('loginMsg').textContent='পাসওয়ার্ড দিন';let found=insts.find(x=> (x.eiin&&x.eiin===code)||(x.schoolCode&&x.schoolCode===code));if(!found)return document.getElementById('loginMsg').textContent='❌ কোড ভুল';if(found.pass!==pass)return document.getElementById('loginMsg').textContent='❌ পাসওয়ার্ড ভুল';let logs=JSON.parse(localStorage.getItem('takrim_login_logs')||'[]');if(!logs.some(l=>l.code===code)){logs.push({code:code,time:new Date().toISOString(),name:found.bnName});localStorage.setItem('takrim_login_logs',JSON.stringify(logs));}let trade=document.getElementById('trade').value;let shift=document.getElementById('shift').value;let cls=document.getElementById('cls').value;let sec=document.getElementById('section').value;localStorage.setItem('takrim_session',JSON.stringify({inst:found,cls:cls,shift:shift,section:sec,trade:trade,loginCode:code}));window.location.href='dashboard.html?v=school_final';}
-function openListSecure(){let a=prompt('এডমিন নাম'),p=prompt('পাসওয়ার্ড');if(a!=='malek'||p!=='takrim2022')return alert('ভুল');let listDiv=document.getElementById('instList');listDiv.innerHTML=insts.map((s,i)=>'<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #eee"><div><b>'+s.bnName+'</b><br>Code: '+(s.eiin||s.schoolCode)+'<br>🔑 '+s.pass+'</div><button onclick="insts.splice('+i+',1);localStorage.setItem(\'takrim_primary_insts\',JSON.stringify(insts));location.reload();">🗑️</button></div>').join('');}
+function openListSecure(){
+  let a=prompt('এডমিন নাম'),p=prompt('পাসওয়ার্ড');
+  if(a!=='malek'||p!=='takrim2022')return alert('ভুল');
+  let listDiv=document.getElementById('instList');
+  if(insts.length===0){
+    listDiv.innerHTML='<div style="text-align:center;padding:15px">কোনো প্রতিষ্ঠান নাই</div>';
+    return;
+  }
+  listDiv.innerHTML=insts.map((s,i)=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #eee;background:#fff;border-radius:12px;margin:8px 0">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="${s.logo||'badge.jpg'}" style="width:50px;height:50px;border-radius:50%;border:2px solid #ffcc00;object-fit:cover;background:#fff">
+        <div style="text-align:left;line-height:1.3">
+          <b style="font-size:14px">${s.bnName}</b><br>
+          <span style="font-size:12px">Code: ${s.eiin||s.schoolCode||''}</span><br>
+          <span style="font-size:12px;color:#d61f1f;font-weight:800">🔑 ${s.pass}</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button onclick="navigator.clipboard.writeText('Code:${s.eiin||s.schoolCode} Pass:${s.pass}');alert('✅ কপি হয়েছে')" style="background:#dbeafe;border:none;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:16px">📋</button>
+        <button onclick="if(confirm('ডিলিট করবে? ${s.bnName}')){insts.splice(${i},1);localStorage.setItem('takrim_primary_insts',JSON.stringify(insts));let logs=JSON.parse(localStorage.getItem('takrim_login_logs')||'[]');let c='${s.eiin||s.schoolCode}';logs=logs.filter(x=>x.code!==c);localStorage.setItem('takrim_login_logs',JSON.stringify(logs));updateCounter();openListSecure();}" style="background:#fee2e2;border:none;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:16px">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
 </script></body></html>
