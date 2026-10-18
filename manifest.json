@@ -1,7 +1,7 @@
 {
   "name": "School College Hazira",
-  "short_name": "SCH",
-  "start_url": "./index.html",
+  "short_name": "School College",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#082a1e",
   "theme_color": "#082a1e",
